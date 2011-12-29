@@ -1,5 +1,5 @@
 
-h2. Setup
+h2. Usage
 
 * @/@
 ** used for storing scripts / rough data
@@ -13,13 +13,28 @@ cd view
 thin start
 </pre>
 
+h2. Requirments
 
-h2. d3.js
+@thin@, @sinatra@. @Gemfile@ provided.
+
+@bundle install@
+
+h2. Contents
+
+h3. html5boilerplate
+
+* 2.0 Aug 10th
+
+
+h3. d3.js
+
 * v1.7.0
 
-h2. coffee-script.js
+h3. coffee-script.js
+
 * v1.2.0
 
-h2. jQuery
+h3. jQuery
+
 * v1.6.2
 
