@@ -1,4 +1,19 @@
 
+h2. Setup
+
+* @/@
+** used for storing scripts / rough data
+* @view/@
+** main vis area
+
+h2. Run
+
+<pre>
+cd view
+thin start
+</pre>
+
+
 h2. d3.js
 * v1.7.0
 
