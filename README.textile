@@ -1,0 +1,10 @@
+
+h2. d3.js
+* v1.7.0
+
+h2. coffee-script.js
+* v1.2.0
+
+h2. jQuery
+* v1.6.2
+
