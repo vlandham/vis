@@ -1,10 +1,25 @@
-
 h2. Usage
+
+<pre>
+git clone git@github.com:vlandham/vis.git
+cd vis
+git checkout -b interesting_new_bar_chart
+# ... code away
+</pre>
+
+
+h2. Contents
 
 * @/@
 ** used for storing scripts / rough data
 * @view/@
 ** main vis area
+* @view/coffee/@
+** coffeescript files. Example @vis.coffee@ setup
+* @view/data/@
+** data dump for @.csv@ and @.json@ files
+* @view/js/@
+** javascript goes here. most in @libs@ directory
 
 h2. Run
 
