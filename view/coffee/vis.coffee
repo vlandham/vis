@@ -25,7 +25,7 @@ $ ->
   max_circle_radius = w
 
   radial_projection = (d, r = max_circle_radius) ->
-    a = (d.x - 90) / 180 * Math.PI
+    a = ((90 - d.angle) - 90) / 180 * Math.PI
     out = [r * Math.cos(a), h + r * Math.sin(a)]
     out
 
@@ -36,14 +36,27 @@ $ ->
   radial_y = (d, r = max_circle_radius) ->
     radial_projection(d,r)[1]
 
+  process_data = (csv) ->
+    angle_counts = {}
+    csv.forEach (d) ->
+      angle = Math.round(d.angle)
+      angle_counts[angle] ?= 0
+      angle_counts[angle] += 1
+    p_data = d3.entries(angle_counts).map (d) ->
+      {angle: d.key, count: d.value}
+    # console.log(p_data)
+    p_data
+
+
+
   # function that creates visualization
   # called below on data load
   render_vis = (csv) ->
-    data = csv
+    data = process_data(csv)
 
     vis = d3.select("#vis")
       .append("svg")
-      .attr("id", "vis-svg")
+      .attr("class", "vis-svg")
       .attr("width", w + (pl + pr))
       .attr("height", h + (pt + pb))
 
@@ -74,8 +87,7 @@ $ ->
 
     # group containing all points
     points_g = vis.append("g")
-      .attr("transform", "translate(#{pr}, #{pb})")
-
+      .attr("transform", "translate(#{pr}, #{pt})")
 
     # group for each line of points
     points = points_g.selectAll(".points")
@@ -87,9 +99,9 @@ $ ->
     points.each (d) ->
       # y is used as count
       # create an array of counts
-      num_points = (num for num in [1..d.y])
+      num_points = (num for num in [1..d.count])
       # create data points incorporating this count
-      point_data = num_points.map (e) -> {x: d.x, count: e}
+      point_data = num_points.map (e) -> {angle: d.angle, count: e}
       # create new point from point_data
       # positioning code could be its own function
       d3.select(this).selectAll(".point")
@@ -129,11 +141,15 @@ $ ->
       .data(x_scale.ticks(10))
     .enter().append("line")
       .attr("x1", 0)
-      .attr("x2", (d) -> radial_x({x:d}))
+      .attr("x2", (d) -> radial_x({angle:d}))
       .attr("y1", h)
-      .attr("y2", (d) -> radial_y({x:d}))
+      .attr("y2", (d) -> radial_y({angle:d}))
       .attr("stroke", "#333")
-      .attr("stroke-width", 0)
+      .attr("stroke-width", 1)
 
   # load csv and call render_vis
-  d3.csv "data/test.csv", render_vis
+  d3.csv "data/ana_control1.csv", render_vis
+  d3.csv "data/ana_control2.csv", render_vis
+  d3.csv "data/meta_control1.csv", render_vis
+  d3.csv "data/meta_control2.csv", render_vis
+
