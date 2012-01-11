@@ -28,6 +28,10 @@
 
     </header>
     <div id="main" role="main">
+      <div id="sortings">
+        <a id="gross">gross</a>
+        <a id="budget" class="active">budget</a>
+      </div>
       <div id="vis"></div>
     </div>
     <footer>
@@ -51,6 +55,10 @@
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
     $(document).ready(function() {
+        $('#sortings a').click(function() {
+          var typeId = $(this).attr("id");
+          sort_by(typeId);
+        });
     });
   </script>
 
