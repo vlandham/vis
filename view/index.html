@@ -15,6 +15,7 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
@@ -28,12 +29,40 @@
 
     </header>
     <div id="main" role="main">
-      <div id="sortings">
-        <a id="gross">gross</a>
-        <a id="budget" class="active">budget</a>
+      <div class="container">
+        <div class="row">
+          <div class="span-one-third">d</div>
+          <div class="span-one-third">
+            <div id="sortings">
+              <a id="gross">gross</a>
+              <a id="budget">budget</a>
+            </div>
+          </div>
+          <div class="span-one-third"></div>
+        </div>
+          <div id="vis"></div>
+          <div class="row">
+            <div class="span-one-third">
+              <div id="years">
+                <a id="all">All</a>
+                <a id="2011">2011</a>
+                <a id="2010">2010</a>
+                <a id="2009">2009</a>
+                <a id="2008">2008</a>
+                <a id="2007">2007</a>
+              </div>
+            </div>
+            <div class="span-one-third">d</div>
+            <div class="span-one-third">
+              <div id="limit">
+                <a id="descending-5">5</a>
+                <a id="descending-15">15</a>
+                <a id="descending-25">25</a>
+                <a id="descending-50">50</a>
+              </div>
+            </div>
+        </div>
       </div>
-      <div id="vis"></div>
-    </div>
     <footer>
 
     </footer>
@@ -58,6 +87,16 @@
         $('#sortings a').click(function() {
           var typeId = $(this).attr("id");
           sort_by(typeId);
+          });
+
+        $('#years a').click(function() {
+          var yearID = $(this).attr("id");
+          set_year(yearID);
+        });
+        $('#limit a').click(function() {
+          var order_limit = $(this).attr("id").split("-");
+          set_order_limit(order_limit[0], order_limit[1])
+
         });
     });
   </script>

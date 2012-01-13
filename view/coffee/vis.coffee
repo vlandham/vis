@@ -3,55 +3,83 @@ root = exports ? this
 
 $ ->
 
-  w = 800
+  w = 920
   h = 600
-  r = 3
+  r = 5
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
-  options = {limit: 5, genre: "all", year: "2010", sort:"budget"}
+  root.options = {limit: 10, order: "descending", genre: "all", year: "all", sort:"budget"}
+
+  root.genres = [
+    "all"
+  ]
 
   data = null
+  all_data = null
   vis = null
   body = null
 
-  x_scale = d3.scale.linear()
-  gross_scale = d3.scale.linear()
-  budget_scale = d3.scale.linear()
-  ratings_scale = d3.scale.linear()
+  x_scale = d3.scale.linear().range([0, w])
+  y_scale = d3.scale.linear().range([0, h])
   color = d3.scale.category20()
 
+ 
   pre_filter = (data) ->
     data = data.filter (d) -> d["Budget"] and d["Worldwide Gross"] and d["Rotten Tomatoes"]
     data
 
-  sort_data = (sort_type) =>
+  sort_data = (sort_type, sort_order) =>
     if sort_type == "budget"
       data = data.sort (a,b) ->
         b1 = parseFloat(a["Budget"]) ? 0
         b2 = parseFloat(b["Budget"]) ? 0
-        b1 - b2
+        if sort_order == "descending" then b1 - b2 else b2 - b1
     else if sort_type == "gross"
       data = data.sort (a,b) ->
         b1 = parseFloat(a["Worldwide Gross"]) ? 0
         b2 = parseFloat(b["Worldwide Gross"]) ? 0
-        b1 - b2
+        if sort_order == "descending" then b1 - b2 else b2 - b1
 
-  move_movies = () ->
-    movies = body.selectAll(".movie")
-      .data(data, (d) -> d["id"])
+  filter_year = (year) ->
+    data = data.filter (d) -> if year == "all" then true else d.year == year
 
-    movies.transition()
-      .duration(1000)
-      .attr("transform", (d,i) -> "translate(#{x_scale(i)},0)")
+  filter_limit = (limit) ->
+    data = data[0..limit]
+
+  update_data = () =>
+    data = all_data
+    filter_year(root.options.year)
+    sort_data(root.options.sort, root.options.order)
+    filter_limit(root.options.limit)
 
   draw_movies = () ->
     movies = body.selectAll(".movie")
-      .data(data, (d) -> d["id"])
-      .enter().append("circle")
-      .attr("cx", (d) -> budget_scale(d["Budget"]))
-      .attr("cy", (d) -> ratings_scale(d["Rotten Tomatoes"]))
+      .data(data, (d) -> d.id)
+
+    movies.enter().append("g")
+      .attr("class", "movie")
+      .transition()
+      .duration(1000)
+      .attr("transform", (d) -> "translate(#{x_scale(d["Budget"])},#{y_scale(d["Rotten Tomatoes"])})")
+
+      movies.append("circle")
       .attr("r", r)
       .attr("fill", (d) -> color(d["Genre"]))
+
+    movies.transition()
+      .duration(1000)
+      .attr("transform", (d) -> "translate(#{x_scale(d["Budget"])},#{y_scale(d["Rotten Tomatoes"])})")
+
+    #movies.exit().selectAll('circle').each( (d) -> console.log(this))
+
+    movies.exit().transition()
+      .duration(1000)
+      .attr("transform", (d) -> "translate(#{0},#{0})")
+    .remove()
+
+    # movies.exit().selectAll("circle").transition()
+      # .duration(1000)
+      # .attr("opacity", 0.2)
 
 
     # .enter().append("g")
@@ -87,9 +115,8 @@ $ ->
     #   .attr("stroke", "#444")
 
   render_vis = (csv) ->
-    data = pre_filter(csv)
-
-    sort_data(options.sort)
+    all_data = pre_filter(csv)
+    update_data()
 
     max_gross = d3.max data, (d) -> parseFloat(d["Worldwide Gross"])
     min_gross = 0
@@ -100,44 +127,46 @@ $ ->
     max_rating = d3.max data, (d) -> parseFloat(d["Rotten Tomatoes"])
     min_rating = d3.min data, (d) -> parseFloat(d["Rotten Tomatoes"])
 
-    x_scale = d3.scale.linear()
-      .domain([0, data.length])
-      .range([0, w])
+    x_scale.domain([min_budget, max_budget])
 
-    gross_scale = d3.scale.linear()
-      .domain([min_gross, max_gross])
-      .range([0, h])
-
-    budget_scale = d3.scale.linear()
-      .domain([min_budget, max_budget])
-      .range([0, w] )
-
-
-    ratings_scale = d3.scale.linear()
-      .domain([min_rating, max_rating])
-      .range([0, h])
+    y_scale.domain([min_rating, max_rating])
 
     vis = d3.select("#vis")
       .append("svg")
-      .attr("width", w + 10 )
-      .attr("height", h + 10)
+      .attr("width", w + (pl + pr) )
+      .attr("height", h + (pt + pb) )
       .attr("id", "vis-svg")
     .append("g")
-      .attr("transform", "translate(#{0},#{h})scale(1,-1)")
+      .attr("transform", "translate(#{0},#{h + (pt + pb)})scale(1,-1)")
    
     vis.append("rect")
-      .attr("width", w + 10)
-      .attr("height", h + 10)
+      .attr("width", w + (pl + pr) )
+      .attr("height", h + (pt + pb) )
       .attr("fill", "#ddd")
       .attr("pointer-events","all")
 
     body = vis.append("g")
-      .attr("transform", "translate(#{5},#{-5})")
+      .attr("transform", "translate(#{pr},#{pt})")
+
 
     body.append("line")
       .attr("x1", 0)
       .attr("y1", h)
       .attr("x2", w)
+      .attr("y2", h)
+      .attr("stroke", "#444")
+
+    body.append("line")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", w)
+      .attr("y2", 0)
+      .attr("stroke", "#444")
+ 
+    body.append("line")
+      .attr("x1", 0)
+      .attr("y1", 0)
+      .attr("x2", 0)
       .attr("y2", h)
       .attr("stroke", "#444")
 
@@ -166,11 +195,28 @@ $ ->
         .attr("stroke-opacity", 0.8)
 
 
-  d3.csv "data/movies2010.csv", render_vis
+  d3.csv "data/movies_all.csv", render_vis
+
+  update = () =>
+    update_data()
+    draw_movies()
 
   root.sort_by = (type) =>
-    sort_data(type)
-    move_movies()
+    root.options.sort = type
+    update()
+
+  root.set_year = (year) =>
+    root.options.year = year
+    update()
+
+  root.set_order_limit = (order, limit) =>
+    root.options.order = order
+    root.options.limit = parseInt(limit)
+    console.log(root.options)
+    update()
+
+
+
 
 
 
