@@ -14,7 +14,7 @@ $ ->
   r = 5
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
-  root.options = {top: 5, bottom: 0, order: "descending", genres: null, year: "all", story: "all", sort:"rating"}
+  root.options = {top: 5, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
 
   data = null
   all_data = null
@@ -42,6 +42,10 @@ $ ->
   filter_genres = (genres) =>
     if genres
       data = data.filter (d) -> $.inArray(d["Genre"], genres) != -1
+
+  filter_stories = (stories) =>
+    if stories
+      data = data.filter (d) -> $.inArray(d["Story"], stories) != -1
 
   filter_number = (top, bottom) ->
     bottom_start_index = data.length - bottom
@@ -71,6 +75,7 @@ $ ->
     data = all_data
     filter_year(root.options.year)
     filter_genres(root.options.genres)
+    filter_stories(root.options.stories)
     sort_data(root.options.sort)
     filter_number(root.options.top, root.options.bottom)
     update_scales()

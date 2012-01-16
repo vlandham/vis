@@ -95,7 +95,7 @@
             <h3>Top</h3>
             <div class="control-links">
             <a id="top-0">0</a> | 
-            <a id="top-5">5</a> | 
+            <a id="top-5" class="active">5</a> | 
             <a id="top-15">15</a> | 
             <a id="top-25">25</a> | 
             <a id="top-50">50</a>
@@ -107,7 +107,7 @@
           <div id="bottom" class="control">
             <h3>Bottom</h3>
             <div class="control-links">
-              <a id="bottom-0">0</a> | 
+              <a id="bottom-0" class="active">0</a> | 
               <a id="bottom-5">5</a> | 
               <a id="bottom-15">15</a> | 
               <a id="bottom-25">25</a> | 
@@ -140,6 +140,10 @@
       <script type="text/javascript">
         $(document).ready(function() {
             $(".chzn-select").chosen();
+            $('.control-links a').click(function() {
+              $(this).siblings().removeClass('active');
+              $(this).addClass('active');
+              });
             $('#years a').click(function() {
               var new_options = {"year": $(this).attr("id")};
               update_options(new_options);
@@ -155,9 +159,13 @@
               update_options(new_options);
               });
             $("#genre-select").change(function() {
-              console.log($(this).val());
               var genres = $(this).val();
               var new_options = {"genres": genres};
+              update_options(new_options);
+              });
+            $("#story-select").change(function() {
+              var stories = $(this).val();
+              var new_options = {"stories": stories};
               update_options(new_options);
               });
             });
