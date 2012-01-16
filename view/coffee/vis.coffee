@@ -12,9 +12,9 @@ $ ->
   w = 920
   h = 500
   r = 5
-  [pt, pr, pb, pl] = [10, 10, 10, 10]
+  [pt, pr, pb, pl] = [20, 20, 40, 40]
 
-  root.options = {top: 5, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
+  root.options = {top: 15, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
 
   data = null
   all_data = null
@@ -23,9 +23,12 @@ $ ->
 
   x_scale = d3.scale.linear().range([0, w])
   y_scale = d3.scale.linear().range([0, h])
+# set domain manually for r scale
+  r_scale = d3.scale.linear().range([4, 12]).domain([0,310])
   color = d3.scale.category20()
 
- 
+
+  # TODO: remove and filter data manually
   pre_filter = (data) ->
     data = data.filter (d) -> d["Budget"] and d["Worldwide Gross"] and d["Rotten Tomatoes"] and d["Profit"]
     data
@@ -93,57 +96,19 @@ $ ->
       .attr("transform", (d) -> "translate(#{x_scale(d["Budget"])},#{y_scale(d["Rotten Tomatoes"])})")
 
       movies.append("circle")
-      .attr("r", r)
+      .attr("r", (d) -> r_scale(parseFloat(d["Budget"])))
+      .attr("fill-opacity", 0.8)
       .attr("fill", (d) -> color(d["Genre"]))
 
     movies.transition()
       .duration(1000)
       .attr("transform", (d) -> "translate(#{x_scale(d["Budget"])},#{y_scale(d["Rotten Tomatoes"])})")
 
-    #movies.exit().selectAll('circle').each( (d) -> console.log(this))
-
     movies.exit().transition()
       .duration(1000)
       .attr("transform", (d) -> "translate(#{0},#{0})")
     .remove()
-
-    # movies.exit().selectAll("circle").transition()
-      # .duration(1000)
-      # .attr("opacity", 0.2)
-
-
-    # .enter().append("g")
-    #   .attr("class", "movie")
-    #   .attr("transform", (d,i) -> "translate(#{x_scale(i)},0)")
-    #   .on("mouseover", show_details)
-    #   .on("mouseout", hide_details)
-
-
-    # gross_g = movies.append("g")
-      # .attr("transform", "translate(#{0},#{h/2})")
-
-    # gross = gross_g.append("circle")
-    #   .attr("cy", (d) -> gross_scale(d["Worldwide Gross"]))
-    #   .attr("r", r)
-    #   .attr("fill", (d) -> color(d["Genre"]))
-
-
-    # gross_g.append("line")
-    #   .attr("y2", (d) -> gross_scale(d["Worldwide Gross"]))
-    #   .attr("stroke", "#444")
-
-    # other_g = movies.append("g")
-    #   .attr("transform", "translate(#{0},#{h/2}) scale(1,-1)")
-
-    # other = other_g.append("circle")
-    #   .attr("cy", (d) -> budget_scale(d["Budget"]))
-    #   .attr("r", r)
-    #   .attr("fill", (d) -> color(d["Story"]))
-
-    # other_g.append("line")
-    #   .attr("y2", (d) -> budget_scale(d["Budget"]))
-    #   .attr("stroke", "#444")
-
+  
   render_vis = (csv) ->
     all_data = pre_filter(csv)
     update_data()
@@ -159,12 +124,11 @@ $ ->
     vis.append("rect")
       .attr("width", w + (pl + pr) )
       .attr("height", h + (pt + pb) )
-      .attr("fill", "#ddd")
+      .attr("fill", "#ffffff")
       .attr("pointer-events","all")
 
     body = vis.append("g")
-      .attr("transform", "translate(#{pr},#{pt})")
-
+      .attr("transform", "translate(#{pl},#{pb})")
 
     body.append("line")
       .attr("x1", 0)
@@ -192,16 +156,16 @@ $ ->
   show_details = (movie_data) ->
     movies = body.selectAll(".movie")
 
-    # unselected_movies = movies.selectAll("g")
-    #   .filter( (d) -> d.id != movie_data.id)
-    # .selectAll("circle")
-    #   .transition()
-    #     .duration(100)
-    #     .attr("stroke", "#555")
-    #     .attr("stroke-opacity", 0.2)
+    unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
+    .selectAll("circle")
+      .attr("opacity",  0.3)
 
   hide_details = (movie_data) ->
     movies = body.selectAll(".movie")
+
+    unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
+    .selectAll("circle")
+      .attr("opacity", 0.8)
 
     # unselected_movies = movies.selectAll("g")
     #   .filter( (d) -> d.id != movie_data.id)
