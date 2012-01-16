@@ -3,23 +3,63 @@ body {
   background: #ffffff url('../img/white_plaster.png');
 }
 
+header {
+}
+
 #main-container {
   margin-top: 10px;
   padding: 10px 15px 10px 15px;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
+  background-color: #F7FAFF;
+  /* background-color: #F2BE5C; */
   border: 15px solid #ffffff;
+  -webkit-border-radius: 7px;
+  -moz-border-radius: 7px;
+  border-radius: 7px;
 }
 
-h1 {
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 600;
+h1, h2 {
+  font-family: 'Josefin Slab', serif;
+  /* font-family: 'Arvo', serif; */
+  /* font-family: 'Droid Serif', Georgia, 'Times New Roman', serif; */
+  font-weight: 700;
   text-align: center;
-  color: #1E1A11;
+
+  margin-bottom: 10px;
+  font-size: 2.75em;
+	letter-spacing: .2em;
+  line-height: 1.1em;
+  text-transform: uppercase;
+  /* color: #1E1A11; */
+  color: #222;
+  /* text-shadow: 0px 2px 3px #555; */
+}
+
+h3 {
+  line-height: 1;
+}
+
+#title-love, #sub-title-love {
+  color: #DB3039;
+}
+
+#title-money {
+  /* color: #36604D; */
+  color: #337147;
+}
+
+#sub-title-hate {
+  color: #4F95C4;
 }
 
 #vis-svg {
   margin-top: 10px;
-  background: #ffffff url('../img/groovepaper.png');
+  /* background: #ffffff url('../img/groovepaper.png'); */
+  background: #ffffff;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
   /* border: 2px solid #ddd; */
 }
 
@@ -43,11 +83,11 @@ font-family: Arial, sans-serif;
 }
 
 div.control-links a.active {
-  color: #BD551E;
+  color: #FF9C5E;
 }
 
 div.control-links a.active:hover {
-  color: #BD551E;
+  color: #FF9C5E;
   text-decoration:none;
 }
 
@@ -64,6 +104,13 @@ div.control-links a.active:hover {
   font-size: 1.2em;
 }
 
+#details {
+  padding-left: 15px;
+}
+
+.movie-detail {
+  padding-bottom: 5px;
+}
 
 path.line {
   fill: none;
@@ -75,20 +122,13 @@ path.area {
   fill: #e7e7e7;
 }
 
-.axis {
+.x_axis, .y_axis {
   shape-rendering: crispEdges;
 }
 
-.x_axis line {
-  stroke: #fff;
-}
-
-.x_axis .minor {
-  stroke-opacity: .5;
-}
-
-.x_axis path {
-  display: none;
+.x_axis line, .x_axis path {
+  fill: none;
+  stroke: #000;
 }
 
 .y_axis line, .y_axis path {

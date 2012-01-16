@@ -13,7 +13,7 @@ $ ->
   h = 450
   [pt, pr, pb, pl] = [20, 20, 50, 60]
 
-  root.options = {top: 15, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
+  root.options = {top: 25, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
 
   data = null
   all_data = null
@@ -25,13 +25,14 @@ $ ->
   y_scale = d3.scale.linear().range([0, h])
   y_scale_reverse = d3.scale.linear().range([0, h])
   # set domain manually for r scale
-  r_scale = d3.scale.linear().range([4, 12]).domain([0,310])
+  r_scale = d3.scale.linear().range([4, 27]).domain([0,310])
 
   xAxis = d3.svg.axis().scale(x_scale).tickSize(5).tickSubdivide(true)
   yAxis = d3.svg.axis().scale(y_scale_reverse).ticks(5).orient("left")
 
 
-  color = d3.scale.category20()
+  color = d3.scale.category10()
+  color = d3.scale.ordinal().range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf", "#078B78", "#5C1509", "#CECECE", "#FFEA0A"])
 
   # TODO: remove and filter data manually
   pre_filter = (data) ->
@@ -114,7 +115,7 @@ $ ->
       .on("mouseout", hide_details)
     .append("circle")
       .attr("r", (d) -> r_scale(parseFloat(d["Budget"])))
-      .attr("fill-opacity", 0.8)
+      .attr("fill-opacity", 0.85)
       .attr("fill", (d) -> color(d["Genre"]))
 
     movies.transition()
@@ -133,7 +134,41 @@ $ ->
       .duration(1000)
       .attr("transform", (d) -> "translate(#{0},#{0})")
     .remove()
-  
+
+  draw_movie_details = (detail_div) ->
+    detail_div.enter().append("div")
+      .attr("class", "movie-detail")
+      .attr("id", (d) -> "movie-detail-#{d.id}")
+    .append("h3")
+      .text((d) -> d["Film"])
+
+    detail_div.exit().remove()
+ 
+  draw_details = () ->
+    if root.options.top == 0
+      $("#detail-love").hide()
+    else
+      $("#detail-love").show()
+
+    if root.options.bottom == 0
+      $("#detail-hate").hide()
+    else
+      $("#detail-hate").show()
+
+    top_data = data[0...root.options.top]
+
+    detail_top = d3.select("#detail-love").selectAll(".movie-detail")
+      .data(top_data, (d) -> d.id)
+
+    draw_movie_details(detail_top)
+
+    bottom_data = data[root.options.top..-1].reverse()
+
+    detail_bottom = d3.select("#detail-hate").selectAll(".movie-detail")
+      .data(bottom_data, (d) -> d.id)
+
+    draw_movie_details(detail_bottom)
+
   render_vis = (csv) ->
     all_data = pre_filter(csv)
     update_data()
@@ -144,6 +179,13 @@ $ ->
       .attr("height", h + (pt + pb) )
       .attr("id", "vis-svg")
 
+    base_vis.append("rect")
+      .attr("width", w + (pl + pr) )
+      .attr("height", h + (pt + pb) )
+      .attr("fill", "#ffffff")
+      .attr("opacity", 0.0)
+      .attr("pointer-events","all")
+
     base_vis.append("g")
       .attr("class", "x_axis")
       .attr("transform", "translate(#{pl},#{h + pt})")
@@ -151,7 +193,7 @@ $ ->
 
     base_vis.append("text")
       .attr("x", w/2)
-      .attr("y", h + (pt + pb) - 5)
+      .attr("y", h + (pt + pb) - 10)
       .attr("text-anchor", "middle")
       .attr("class", "axisTitle")
       .attr("transform", "translate(#{pl},0)")
@@ -172,19 +214,15 @@ $ ->
       .attr("text-anchor", "middle")
       .attr("class", "axisTitle")
       .attr("transform", "rotate(270)scale(-1,1)translate(#{pb},#{0})")
-      .text("Rating (Rotten Tomatoes)")
+      .text("Rating (Rotten Tomatoes %)")
    
-    vis.append("rect")
-      .attr("width", w + (pl + pr) )
-      .attr("height", h + (pt + pb) )
-      .attr("fill", "#ffffff")
-      .attr("opacity", 0)
-      .attr("pointer-events","all")
 
     body = vis.append("g")
       .attr("transform", "translate(#{pl},#{pb})")
 
     draw_movies()
+
+    draw_details()
 
   show_details = (movie_data) ->
     movies = body.selectAll(".movie")
@@ -205,6 +243,8 @@ $ ->
   update = () =>
     update_data()
     draw_movies()
+    draw_details()
+
 
   root.update_options = (new_options) =>
     root.options = $.extend({}, root.options, new_options)

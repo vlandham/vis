@@ -14,7 +14,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
-  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600' rel='stylesheet' type='text/css'>
+  <!-- <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:700|Josefin+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/chosen.css">
@@ -26,7 +27,7 @@
 <body>
   <div class="container" id="main-container">
     <header>
-    <h1>How Much Do The Movies<br/> We <span id="title-love">Love</span> <span id="title-hate">(And Hate)</span><br/>Make?</h1>
+    <h1 id="title-top">How Much <span id="title-money">Money</span> Do The<br/>Movies We <span id="title-love">Love</span><br/>Make?</h1>
     </header>
     <div id="main" role="main">
       <div class="row">
@@ -96,8 +97,8 @@
             <div class="control-links">
             <a id="top-0">0</a> | 
             <a id="top-5">5</a> | 
-            <a id="top-15" class="active">15</a> | 
-            <a id="top-25">25</a> | 
+            <a id="top-15">15</a> | 
+            <a id="top-25" class="active">25</a> | 
             <a id="top-50">50</a>
           </div>
             <h3>Rated</h3>
@@ -116,6 +117,23 @@
             <h3>Rated</h3>
           </div>
         </div>
+        <div id="details">
+        <h2>Details</h2>
+        <div class="row">
+          <div class="span6 offset1">
+            <p></p>
+            <div id="detail-love">
+              <h2>Most <span id="sub-title-love">Loved</span></h2>
+            </div>
+          </div>
+          <div class="span6 offset2">
+            <p></p>
+            <div id="detail-hate">
+              <h2>Most <span id="sub-title-hate">Hated</span></h2>
+            </div>
+          </div>
+        </div>
+      </div>
       </div>
       <footer>
 
