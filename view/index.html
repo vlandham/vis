@@ -26,6 +26,33 @@
 </head>
 <body>
   <div class="container" id="main-container">
+    <div id="top-nav">
+      <ul>
+        <li><a data-controls-modal="about-modal" data-backdrop="true" data-keyboard="true" href="">About</a></li>
+      </ul>
+    </div>
+    <div id="about-modal" class="modal hide fade">
+      <div class="modal-header">
+        <a href="#" class="close">&times;</a>
+        <h3>They're In The Money!</h3>
+      </div>
+      <div class="modal-body">
+        <h4>About</h4>
+        <p>How much does a good movie make? How about a bad one?</p>
+        <p>This visualization lets you explore the connections between movie ratings, budgets, and profits.</p>
+        <p>The x axis shows the film's profit margin while the y axis gives a range of review scores from Rotten Tomatoes. Each dot in the visualization represents a movie. Hover over the dot to get the specifics on that film.</p>
+        <h4>Filters</h4>
+        <p>Use the Filters above to select specific Genres or Story Types.</p>
+        <p>With the controls below, specify the year to look at, and the number of faves and flops to see at one time.</p>
+        <h4>Data</h4>
+        <p>Data provided by the <a href="http://www.informationisbeautifulawards.com/2012/01/challenge-of-the-stars/">informationisbeautifulawards.com</a> Hollywood Budgets visualization challenge</p>
+        <h4>Viewing</h4>
+        <p>Best viewed in <a href="">Google Chrome</a> or <a href="">Safari</a></p>
+      </div>
+      <div class="modal-footer">
+        <a href="#" class="btn primary">Ok</a>
+      </div>
+    </div>
     <header>
     <h1 id="title-top">How Much <span id="title-money">Money</span> Do The<br/>Movies We <span id="title-love">Love</span><br/>Make?</h1>
     </header>
@@ -147,6 +174,7 @@
 
       <script defer src="js/plugins.js"></script>
       <script defer src="js/script.js"></script>
+      <script src="js/libs/bootstrap-modal.js"></script>
       <script src="js/libs/chosen.jquery.min.js"></script>
       <script src="js/libs/coffee-script.js"></script>
       <script src="js/libs/d3.js"></script>

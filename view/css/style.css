@@ -6,6 +6,29 @@ body {
 header {
 }
 
+#top-nav {
+  float:right;
+}
+
+#top-nav ul { 
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+}
+
+#top-nav li {
+  float:left;
+}
+
+#top-nav a {
+  display: block;
+  height: 15px;
+  text-align: center;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-right: 5px;
+}
+
 #main-container {
   margin-top: 10px;
   padding: 10px 15px 10px 15px;
