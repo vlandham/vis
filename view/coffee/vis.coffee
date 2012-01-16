@@ -9,7 +9,7 @@ $ ->
     rating: "Rotten Tomatoes"
   }
 
-  w = 880
+  w = 860
   h = 450
   [pt, pr, pb, pl] = [20, 20, 50, 60]
 
@@ -63,18 +63,34 @@ $ ->
       data = data
     else
       top_data = data[0...top]
-      bottom_data = data[bottom_start_index + 1..-1]
+      bottom_data = data[bottom_start_index..-1]
       data = d3.merge([top_data, bottom_data])
 
   update_scales = () =>
+    min_y_padding = 3
+    min_x_padding = 5
+
     [min_x, max_x] = d3.extent data, (d) -> parseFloat(d["Profit"])
     min_x = if min_x > 0 then 0 else min_x
 
     [min_y, max_y] = d3.extent data, (d) -> parseFloat(d[data_key["rating"]])
-    # max_y = 100
-    # min_y = 0
+    y_padding = parseInt(Math.abs(max_y - min_y) / 5)
+    y_padding = if y_padding > min_y_padding then y_padding else min_y_padding
+
+    min_y = min_y - y_padding
+    min_y = if min_y < 0 then 0 else min_y
+    max_y = max_y + y_padding
+    max_y = if max_y > 100 then 100 else max_y
     
+    x_padding = parseInt(Math.abs(max_x - min_x) / 12)
+    x_padding = if x_padding > min_x_padding then x_padding else min_x_padding
+    console.log(x_padding)
+
+    min_x = min_x - x_padding
+    max_x = max_x + x_padding
+
     x_scale.domain([min_x, max_x])
+    console.log(x_scale.domain())
     y_scale.domain([min_y, max_y])
     y_scale_reverse.domain([max_y, min_y])
 
@@ -168,34 +184,6 @@ $ ->
     body = vis.append("g")
       .attr("transform", "translate(#{pl},#{pb})")
 
-    body.append("line")
-      .attr("x1", 0)
-      .attr("y1", h)
-      .attr("x2", w)
-      .attr("y2", h)
-      .attr("stroke", "#444")
-
-    body.append("line")
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", w)
-      .attr("y2", 0)
-      .attr("stroke", "#444")
- 
-    body.append("line")
-      .attr("x1", 0)
-      .attr("y1", 0)
-      .attr("x2", 0)
-      .attr("y2", h)
-      .attr("stroke", "#444")
-
-    body.append("line")
-      .attr("x1", w)
-      .attr("y1", 0)
-      .attr("x2", w)
-      .attr("y2", h)
-      .attr("stroke", "#444")
-
     draw_movies()
 
   show_details = (movie_data) ->
@@ -221,9 +209,4 @@ $ ->
   root.update_options = (new_options) =>
     root.options = $.extend({}, root.options, new_options)
     update()
-
-
-
-
-
 
