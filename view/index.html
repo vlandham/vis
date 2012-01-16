@@ -14,106 +14,168 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/chosen.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
-
 <body>
-
-  <div id="container">
+  <div class="container">
     <header>
-
+    <h1>How Much Do The Movies We Love<br/>(And Hate) Make?</h1>
     </header>
     <div id="main" role="main">
-      <div class="container">
-        <div class="row">
-          <div class="span-one-third">d</div>
-          <div class="span-one-third">
-            <div id="sortings">
-              <a id="gross">gross</a>
-              <a id="budget">budget</a>
-            </div>
-          </div>
-          <div class="span-one-third"></div>
+      <div class="row">
+        <div class="span8">
+          <select data-placeholder="Choose a Genre..." class="chzn-select" id="genre-select" multiple style="width:280px;" tabindex="4">
+            <option value=""></option> 
+            <option value="Action">Action</option> 
+            <option value="Adventure">Adventure</option> 
+            <option value="Animation">Animation</option> 
+            <option value="Biography">Biography</option> 
+            <option value="Comedy">Comedy</option> 
+            <option value="Crime">Crime</option> 
+            <option value="Documentary">Documentary</option> 
+            <option value="Drama">Drama</option> 
+            <option value="Horror">Horror</option> 
+            <option value="Mystery">Mystery</option> 
+            <option value="Romance">Romance</option> 
+            <option value="Thriller">Thriller</option> 
+          </select>
         </div>
-          <div id="vis"></div>
-          <div class="row">
-            <div class="span-one-third">
-              <div id="years">
-                <a id="all">All</a>
-                <a id="2011">2011</a>
-                <a id="2010">2010</a>
-                <a id="2009">2009</a>
-                <a id="2008">2008</a>
-                <a id="2007">2007</a>
-              </div>
-            </div>
-            <div class="span-one-third">d</div>
-            <div class="span-one-third">
-              <div id="limit">
-                <a id="descending-5">5</a>
-                <a id="descending-15">15</a>
-                <a id="descending-25">25</a>
-                <a id="descending-50">50</a>
-              </div>
-            </div>
+        <div class="span5 offset3">
+          <select data-placeholder="Choose a Story Type..." class="chzn-select" id="story-select" multiple style="width:280px;" tabindex="4">
+            <option value=""></option>
+            <option value="Comedy">Comedy</option>
+            <option value="Discovery">Discovery</option>
+            <option value="Escape">Escape</option>
+            <option value="Fish Out Of Water">Fish Out Of Water</option>
+            <option value="Journey And Return">Journey And Return</option>
+            <option value="Love">Love</option>
+            <option value="Maturation">Maturation</option>
+            <option value="Metamorphosis">Metamorphosis</option>
+            <option value="Monster Force">Monster Force</option>
+            <option value="Pursuit">Pursuit</option>
+            <option value="Quest">Quest</option>
+            <option value="Rags To Riches">Rags To Riches</option>
+            <option value="Rescue">Rescue</option>
+            <option value="Revenge">Revenge</option>
+            <option value="Rivalry">Rivalry</option>
+            <option value="Sacrifice">Sacrifice</option>
+            <option value="Temptation">Temptation</option>
+            <option value="The Riddle">The Riddle</option>
+            <option value="Tragedy">Tragedy</option>
+            <option value="Transformation">Transformation</option>
+            <option value="Underdog">Underdog</option>
+            <option value="Wretched Excess">Wretched Excess</option>
+          </select>
         </div>
       </div>
-    <footer>
+      <div id="vis"></div>
+      <div class="row">
+        <div class="span5">
+          <div id="years" class="control">
+            <h3>Year</h3>
+            <div class="control-links">
+            <a id="all" class="active">All</a> | 
+            <a id="2011">2011</a> | 
+            <a id="2010">2010</a> | 
+            <a id="2009">2009</a> | 
+            <a id="2008">2008</a> | 
+            <a id="2007">2007</a>
+          </div>
+          </div>
+        </div>
+        <div class="span3 offset5">
+          <div id="top" class="control">
+            <h3>Top</h3>
+            <div class="control-links">
+            <a id="top-0">0</a> | 
+            <a id="top-5">5</a> | 
+            <a id="top-15">15</a> | 
+            <a id="top-25">25</a> | 
+            <a id="top-50">50</a>
+          </div>
+            <h3>Rated</h3>
+          </div>
+        </div>
+        <div class="span3">
+          <div id="bottom" class="control">
+            <h3>Bottom</h3>
+            <div class="control-links">
+              <a id="bottom-0">0</a> | 
+              <a id="bottom-5">5</a> | 
+              <a id="bottom-15">15</a> | 
+              <a id="bottom-25">25</a> | 
+              <a id="bottom-50">50</a>
+            </div>
+            <h3>Rated</h3>
+          </div>
+        </div>
+      </div>
+      <footer>
 
-    </footer>
-  </div> <!--! end of #container -->
+      </footer>
+    </div> <!--! end of .container -->
 
 
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+    <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
 
-  <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
-  <script src="js/libs/coffee-script.js"></script>
-  <script src="js/libs/d3.js"></script>
-  <script src="js/libs/d3.csv.js"></script>
-  <script src="js/libs/d3.layout.js"></script>
-  <script src="js/libs/d3.geom.js"></script>
-  <script src="js/libs/d3.chart.js"></script>
-  <script type="text/coffeescript" src="coffee/vis.coffee"></script>
-  <script type="text/javascript">
-    $(document).ready(function() {
-        $('#sortings a').click(function() {
-          var typeId = $(this).attr("id");
-          sort_by(typeId);
-          });
+      <script defer src="js/plugins.js"></script>
+      <script defer src="js/script.js"></script>
+      <script src="js/libs/chosen.jquery.min.js"></script>
+      <script src="js/libs/coffee-script.js"></script>
+      <script src="js/libs/d3.js"></script>
+      <script src="js/libs/d3.csv.js"></script>
+      <script src="js/libs/d3.layout.js"></script>
+      <script src="js/libs/d3.geom.js"></script>
+      <script src="js/libs/d3.chart.js"></script>
+      <script type="text/coffeescript" src="coffee/vis.coffee"></script>
+      <script type="text/javascript">
+        $(document).ready(function() {
+            $(".chzn-select").chosen();
+            $('#years a').click(function() {
+              var new_options = {"year": $(this).attr("id")};
+              update_options(new_options);
+              });
+            $('#top a').click(function() {
+              var top_limit = $(this).attr("id").split("-");
+              var new_options = {"top": parseInt(top_limit[1])};
+              update_options(new_options);
+              });
+            $('#bottom a').click(function() {
+              var bottom_limit = $(this).attr("id").split("-");
+              var new_options = {"bottom": parseInt(bottom_limit[1])};
+              update_options(new_options);
+              });
+            $("#genre-select").change(function() {
+              console.log($(this).val());
+              var genres = $(this).val();
+              var new_options = {"genres": genres};
+              update_options(new_options);
+              });
+            });
+          </script>
 
-        $('#years a').click(function() {
-          var yearID = $(this).attr("id");
-          set_year(yearID);
-        });
-        $('#limit a').click(function() {
-          var order_limit = $(this).attr("id").split("-");
-          set_order_limit(order_limit[0], order_limit[1])
 
-        });
-    });
-  </script>
+<script> // Change UA-XXXXX-X to be your site's ID
+  window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+  Modernizr.load({
+    load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+  });
+</script>
 
 
-  <script> // Change UA-XXXXX-X to be your site's ID
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-  </script>
+<!--[if lt IE 7 ]>
+<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+<script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+<![endif]-->
 
-
-  <!--[if lt IE 7 ]>
-    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
-    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
-  <![endif]-->
-  
 </body>
 </html>

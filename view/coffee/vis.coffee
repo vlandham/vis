@@ -3,16 +3,18 @@ root = exports ? this
 
 $ ->
 
+  data_key = {
+    budget: "Budget",
+    gross: "Worldwide Gross",
+    rating: "Rotten Tomatoes"
+  }
+
   w = 920
-  h = 600
+  h = 500
   r = 5
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
-  root.options = {limit: 10, order: "descending", genre: "all", year: "all", sort:"budget"}
-
-  root.genres = [
-    "all"
-  ]
+  root.options = {top: 5, bottom: 0, order: "descending", genres: null, year: "all", story: "all", sort:"rating"}
 
   data = null
   all_data = null
@@ -25,32 +27,53 @@ $ ->
 
  
   pre_filter = (data) ->
-    data = data.filter (d) -> d["Budget"] and d["Worldwide Gross"] and d["Rotten Tomatoes"]
+    data = data.filter (d) -> d["Budget"] and d["Worldwide Gross"] and d["Rotten Tomatoes"] and d["Profit"]
     data
 
-  sort_data = (sort_type, sort_order) =>
-    if sort_type == "budget"
-      data = data.sort (a,b) ->
-        b1 = parseFloat(a["Budget"]) ? 0
-        b2 = parseFloat(b["Budget"]) ? 0
-        if sort_order == "descending" then b1 - b2 else b2 - b1
-    else if sort_type == "gross"
-      data = data.sort (a,b) ->
-        b1 = parseFloat(a["Worldwide Gross"]) ? 0
-        b2 = parseFloat(b["Worldwide Gross"]) ? 0
-        if sort_order == "descending" then b1 - b2 else b2 - b1
+  sort_data = (sort_type) =>
+    data = data.sort (a,b) ->
+      b1 = parseFloat(a[data_key[sort_type]]) ? 0
+      b2 = parseFloat(b[data_key[sort_type]]) ? 0
+      b2 - b1
 
   filter_year = (year) ->
     data = data.filter (d) -> if year == "all" then true else d.year == year
 
-  filter_limit = (limit) ->
-    data = data[0..limit]
+  filter_genres = (genres) =>
+    if genres
+      data = data.filter (d) -> $.inArray(d["Genre"], genres) != -1
+
+  filter_number = (top, bottom) ->
+    bottom_start_index = data.length - bottom
+    bottom_start_index = 0 if bottom_start_index < 0
+
+    if top >= bottom_start_index
+      data = data
+    else
+      top_data = data[0...top]
+      bottom_data = data[bottom_start_index + 1..-1]
+      data = d3.merge([top_data, bottom_data])
+
+  update_scales = () =>
+    max_budget = d3.max data, (d) -> parseFloat(d["Budget"])
+    min_budget = 0
+
+    #max_y = d3.max data, (d) -> parseFloat(d[data_key[y_key]])
+    # min_rating = d3.min data, (d) -> parseFloat(d["Rotten Tomatoes"])
+    max_y = 100
+    min_y = 0
+    
+    x_scale.domain([min_budget, max_budget])
+    y_scale.domain([min_y, max_y])
+
 
   update_data = () =>
     data = all_data
     filter_year(root.options.year)
-    sort_data(root.options.sort, root.options.order)
-    filter_limit(root.options.limit)
+    filter_genres(root.options.genres)
+    sort_data(root.options.sort)
+    filter_number(root.options.top, root.options.bottom)
+    update_scales()
 
   draw_movies = () ->
     movies = body.selectAll(".movie")
@@ -58,6 +81,8 @@ $ ->
 
     movies.enter().append("g")
       .attr("class", "movie")
+      .on("mouseover", show_details)
+      .on("mouseout", hide_details)
       .transition()
       .duration(1000)
       .attr("transform", (d) -> "translate(#{x_scale(d["Budget"])},#{y_scale(d["Rotten Tomatoes"])})")
@@ -118,19 +143,6 @@ $ ->
     all_data = pre_filter(csv)
     update_data()
 
-    max_gross = d3.max data, (d) -> parseFloat(d["Worldwide Gross"])
-    min_gross = 0
-
-    max_budget = d3.max data, (d) -> parseFloat(d["Budget"])
-    min_budget = 0
-
-    max_rating = d3.max data, (d) -> parseFloat(d["Rotten Tomatoes"])
-    min_rating = d3.min data, (d) -> parseFloat(d["Rotten Tomatoes"])
-
-    x_scale.domain([min_budget, max_budget])
-
-    y_scale.domain([min_rating, max_rating])
-
     vis = d3.select("#vis")
       .append("svg")
       .attr("width", w + (pl + pr) )
@@ -175,24 +187,24 @@ $ ->
   show_details = (movie_data) ->
     movies = body.selectAll(".movie")
 
-    unselected_movies = movies.selectAll("g")
-      .filter( (d) -> d.id != movie_data.id)
-    .selectAll("circle")
-      .transition()
-        .duration(100)
-        .attr("stroke", "#555")
-        .attr("stroke-opacity", 0.2)
+    # unselected_movies = movies.selectAll("g")
+    #   .filter( (d) -> d.id != movie_data.id)
+    # .selectAll("circle")
+    #   .transition()
+    #     .duration(100)
+    #     .attr("stroke", "#555")
+    #     .attr("stroke-opacity", 0.2)
 
   hide_details = (movie_data) ->
     movies = body.selectAll(".movie")
 
-    unselected_movies = movies.selectAll("g")
-      .filter( (d) -> d.id != movie_data.id)
-    .selectAll("line")
-      .transition()
-        .duration(100)
-        .attr("stroke", "#333")
-        .attr("stroke-opacity", 0.8)
+    # unselected_movies = movies.selectAll("g")
+    #   .filter( (d) -> d.id != movie_data.id)
+    # .selectAll("line")
+    #   .transition()
+    #     .duration(100)
+    #     .attr("stroke", "#333")
+    #     .attr("stroke-opacity", 0.8)
 
 
   d3.csv "data/movies_all.csv", render_vis
@@ -201,17 +213,8 @@ $ ->
     update_data()
     draw_movies()
 
-  root.sort_by = (type) =>
-    root.options.sort = type
-    update()
-
-  root.set_year = (year) =>
-    root.options.year = year
-    update()
-
-  root.set_order_limit = (order, limit) =>
-    root.options.order = order
-    root.options.limit = parseInt(limit)
+  root.update_options = (new_options) =>
+    root.options = $.extend({}, root.options, new_options)
     console.log(root.options)
     update()
 
