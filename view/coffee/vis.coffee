@@ -11,7 +11,7 @@ $ ->
 
   w = 880
   h = 450
-  [pt, pr, pb, pl] = [20, 20, 40, 40]
+  [pt, pr, pb, pl] = [20, 20, 50, 60]
 
   root.options = {top: 15, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
 
@@ -23,11 +23,13 @@ $ ->
 
   x_scale = d3.scale.linear().range([0, w])
   y_scale = d3.scale.linear().range([0, h])
+  y_scale_reverse = d3.scale.linear().range([0, h])
   # set domain manually for r scale
   r_scale = d3.scale.linear().range([4, 12]).domain([0,310])
 
   xAxis = d3.svg.axis().scale(x_scale).tickSize(5).tickSubdivide(true)
-  yAxis = d3.svg.axis().scale(y_scale).ticks(4).orient("left")
+  yAxis = d3.svg.axis().scale(y_scale_reverse).ticks(5).orient("left")
+
 
   color = d3.scale.category20()
 
@@ -65,21 +67,16 @@ $ ->
       data = d3.merge([top_data, bottom_data])
 
   update_scales = () =>
-    # max_budget = d3.max data, (d) -> parseFloat(d["Budget"])
-    # min_budget = d3.min data, (d) -> parseFloat(d["Budget"])
     [min_x, max_x] = d3.extent data, (d) -> parseFloat(d["Profit"])
-    console.log(min_x)
-    console.log(max_x)
     min_x = if min_x > 0 then 0 else min_x
 
-    # max_y = d3.max data, (d) -> parseFloat(d[data_key[y_key]])
-    # min_rating = d3.min data, (d) -> parseFloat(d["Rotten Tomatoes"])
-
-    max_y = 100
-    min_y = 0
+    [min_y, max_y] = d3.extent data, (d) -> parseFloat(d[data_key["rating"]])
+    # max_y = 100
+    # min_y = 0
     
     x_scale.domain([min_x, max_x])
     y_scale.domain([min_y, max_y])
+    y_scale_reverse.domain([max_y, min_y])
 
 
   update_data = () =>
@@ -112,6 +109,10 @@ $ ->
       .duration(1000)
       .select(".x_axis").call(xAxis)
 
+    base_vis.transition()
+      .duration(1000)
+      .select(".y_axis").call(yAxis)
+
     movies.exit().transition()
       .duration(1000)
       .attr("transform", (d) -> "translate(#{0},#{0})")
@@ -132,14 +133,30 @@ $ ->
       .attr("transform", "translate(#{pl},#{h + pt})")
       .call(xAxis)
 
+    base_vis.append("text")
+      .attr("x", w/2)
+      .attr("y", h + (pt + pb) - 5)
+      .attr("text-anchor", "middle")
+      .attr("class", "axisTitle")
+      .attr("transform", "translate(#{pl},0)")
+      .text("Profit ($ mil)")
+
     base_vis.append("g")
       .attr("class", "y_axis")
       .attr("transform", "translate(#{pl},#{pt})")
       .call(yAxis)
 
+
     vis = base_vis.append("g")
       .attr("transform", "translate(#{0},#{h + (pt + pb)})scale(1,-1)")
 
+    vis.append("text")
+      .attr("x", h/2)
+      .attr("y", 20)
+      .attr("text-anchor", "middle")
+      .attr("class", "axisTitle")
+      .attr("transform", "rotate(270)scale(-1,1)translate(#{pb},#{0})")
+      .text("Rating (Rotten Tomatoes)")
    
     vis.append("rect")
       .attr("width", w + (pl + pr) )
