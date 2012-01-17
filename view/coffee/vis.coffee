@@ -11,6 +11,8 @@ $ ->
 
   w = 860
   h = 450
+  key_h = 150
+  [key_pt, key_pr, key_pb, key_pl] = [10, 10, 10, 60]
   [pt, pr, pb, pl] = [20, 20, 50, 60]
 
   root.options = {top: 25, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
@@ -169,6 +171,66 @@ $ ->
 
     draw_movie_details(detail_bottom)
 
+  render_key = () ->
+    genres = {}
+    all_data.forEach (d) -> genres[d["Genre"]] = 1
+    key_r = 10
+
+    key = d3.select("#key")
+      .append("svg")
+      .attr("id", "key-svg")
+      .attr("width", w + (pl + pr) )
+      .attr("height", key_h + key_pb + key_pt)
+
+    key.append("rect")
+      .attr("width", w + (pl + pr))
+      .attr("height", key_h + key_pb + key_pt)
+      .attr("fill", "#ffffff")
+      .attr("opacity", 0.0)
+
+    key = key.append("g")
+      .attr("transform", "translate(#{key_pl},#{key_pt})")
+
+    key_group = key.selectAll(".key-group")
+      .data(d3.keys(genres))
+      .enter().append("g")
+        .attr("class", "key-group")
+        .attr("transform", (d,i) -> "translate(#{if i*25 >= key_h then 140 else 0},#{i*25 % key_h})")
+
+    key_group.append("circle")
+        .attr("r", key_r)
+        .attr("fill", (d) -> color(d))
+        .attr("transform", (d) -> "translate(#{key_r}, #{key_r})")
+
+    key_group.append("text")
+        .attr("class", "key-text")
+        .attr("dy", 15)
+        .attr("dx", key_r * 2 + 6)
+        .text((d) -> d)
+
+    key_demo_group = key.append("g")
+      .attr("transform", "translate(#{300},0)")
+
+    key_demo_group.append("circle")
+      .attr("r", 20)
+      .attr("fill", color("Comedy"))
+      .attr("transform", (d) -> "translate(#{20}, #{20})")
+      .attr("cx", 230)
+      .attr("cy", 40)
+
+    key_demo_group.append("line")
+      .attr("x1", 230)
+      .attr("x2", 230 + 40)
+      .attr("y1", 40 + 40 + 4)
+      .attr("y2", 40 + 40 + 4)
+      .attr("stroke", "#333")
+      .attr("stroke-width", 2)
+
+    key_demo_group.append("text")
+      .attr("dx", 230 + 40 + 4 )
+      .attr("dy", 40 + 40 + 6)
+      .text("Budget")
+
   render_vis = (csv) ->
     all_data = pre_filter(csv)
     update_data()
@@ -204,7 +266,6 @@ $ ->
       .attr("transform", "translate(#{pl},#{pt})")
       .call(yAxis)
 
-
     vis = base_vis.append("g")
       .attr("transform", "translate(#{0},#{h + (pt + pb)})scale(1,-1)")
 
@@ -221,12 +282,11 @@ $ ->
       .attr("transform", "translate(#{pl},#{pb})")
 
     draw_movies()
-
     draw_details()
+    render_key()
 
   show_details = (movie_data, index, element) ->
     movies = body.selectAll(".movie")
-
 
     # selected_movie = movies.filter( (d) -> d.id == movie_data.id)
     bBox = element.getBBox()

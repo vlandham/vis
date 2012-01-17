@@ -94,6 +94,18 @@ h3 {
   /* border: 2px solid #ddd; */
 }
 
+#key-svg {
+  margin-top: 10px;
+  background: #ffffff url('../img/bg/groovepaper.png');
+  /* background: #ffffff; */
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+
+  position: relative;
+  /* border: 2px solid #ddd; */
+}
+
 div.control-links {
   margin: auto;
   text-align: center;
@@ -165,6 +177,10 @@ path.area {
 .y_axis line, .y_axis path {
   fill: none;
   stroke: #000;
+}
+
+.key-text {
+  font-size: 1.2em;
 }
 
 #tooltip {
