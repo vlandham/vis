@@ -1,6 +1,6 @@
 body {
   font-family: 'Josefin Sans', sans-serif;
-  background: #ffffff url('../img/white_plaster.png');
+  background: #000000 url('../img/bg/dark_wood.png');
 }
 
 header {
@@ -30,11 +30,15 @@ header {
 }
 
 #main-container {
+  position:relative;
   margin-top: 10px;
   padding: 10px 15px 10px 15px;
+  /* background: #ffffff url('../img/bg/white_plaster.png'); */
   /* background-color: #ffffff; */
-  background-color: #F7FAFF;
+  /* background-color: #F7FAFF; */
+  /* background: -webkit-radial-gradient(circle, #F98727, #ffffff); */
   /* background-color: #F2BE5C; */
+  background-color: #F4E7D3;
   border: 15px solid #ffffff;
   -webkit-border-radius: 7px;
   -moz-border-radius: 7px;
@@ -75,14 +79,18 @@ h3 {
   color: #4F95C4;
 }
 
+#vis {
+}
+
 #vis-svg {
   margin-top: 10px;
-  /* background: #ffffff url('../img/groovepaper.png'); */
-  background: #ffffff;
+  background: #ffffff url('../img/bg/groovepaper.png');
+  /* background: #ffffff; */
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
 
+  position: relative;
   /* border: 2px solid #ddd; */
 }
 
@@ -159,5 +167,81 @@ path.area {
   stroke: #000;
 }
 
+#tooltip {
+    position: absolute;
+    /* left: 100px; */
+    /* top: 300px; */
+    width: 220px;
+    background: url(../img/black80.png);
+    z-index: 1338;
+    padding: 7px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    color: white;
+    -moz-box-shadow: 1px 1px 1px #666;
+    -webkit-box-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 1px #666;
+    pointer-events: none;
+}
+ 
+#tooltip.hidden {
+    display: none;
+}
+ 
+#tooltip .tri {
+    position: absolute;
+    bottom: -9px;
+    left: 100px;
+    width: 17px;
+    height: 9px;
+    background: url(../img/blacktri80c-down.png) no-repeat;
+}
+ 
+#tooltip .title {
+    font-size: 16px;
+    line-height: 18px;
+    margin-bottom: 9px;
+    text-align:center;
+}
+ 
+#tooltip .detail {
+    font-size: 12px;
+    line-height: 14px;
+    color: white;
+}
+ 
+#tooltip table {
+    width: 100%;
+    font-size: 12px;
+    line-height: 14px;
+    color: white;
+}
+ 
+#tooltip th, #tooltip td {
+    text-align: left;
+    border-top: 1px solid #666;
+    padding: 2px 0;
+}
+ 
+#tooltip table tr:first-child th {
+    border-top: none;
+    font-size: 12px;
+    line-height: 14px;
+}
+ 
+#tooltip table td.r {
+    text-align: right;
+}
 
+#box {
+    position: absolute;
+    background: gray;
+    opacity: 0.25;
+    pointer-events: none;
+    display: none;
+}
+ 
+#box.hidden {
+    display: none;
+}
 

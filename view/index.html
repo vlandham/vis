@@ -103,7 +103,15 @@
           </select>
         </div>
       </div>
-      <div id="vis"></div>
+      <div id="vis">
+
+      <div id="tooltip" class="hidden">
+        <div class="content"></div>
+        <div class="tri"></div>
+      </div>
+      <div id="box" class="hidden"></div>
+      </div>
+
       <div class="row">
         <div class="span5">
           <div id="years" class="control">
@@ -133,7 +141,7 @@
         </div>
         <div class="span3">
           <div id="bottom" class="control">
-            <h3>Bottom</h3>
+            <h3>Lowest</h3>
             <div class="control-links">
               <a id="bottom-0" class="active">0</a> | 
               <a id="bottom-5">5</a> | 
@@ -179,9 +187,7 @@
       <script src="js/libs/coffee-script.js"></script>
       <script src="js/libs/d3.js"></script>
       <script src="js/libs/d3.csv.js"></script>
-      <script src="js/libs/d3.layout.js"></script>
       <script src="js/libs/d3.geom.js"></script>
-      <script src="js/libs/d3.chart.js"></script>
       <script type="text/coffeescript" src="coffee/vis.coffee"></script>
       <script type="text/javascript">
         $(document).ready(function() {

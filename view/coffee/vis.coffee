@@ -111,7 +111,7 @@ $ ->
 
     movies.enter().append("g")
       .attr("class", "movie")
-      .on("mouseover", show_details)
+      .on("mouseover", (d, i) -> show_details(d,i,this))
       .on("mouseout", hide_details)
     .append("circle")
       .attr("r", (d) -> r_scale(parseFloat(d["Budget"])))
@@ -224,14 +224,51 @@ $ ->
 
     draw_details()
 
-  show_details = (movie_data) ->
+  show_details = (movie_data, index, element) ->
     movies = body.selectAll(".movie")
+
+
+    # selected_movie = movies.filter( (d) -> d.id == movie_data.id)
+    bBox = element.getBBox()
+    box = { "height": Math.round(bBox.height), "width": Math.round(bBox.width), "x": w + bBox.x, "y" : h + bBox.y}
+    box.x = Math.round(x_scale(movie_data["Profit"]))  - (pr+122) + r_scale(movie_data["Budget"])
+    box.y = Math.round(y_scale_reverse(movie_data["Rotten Tomatoes"])) - (r_scale(movie_data["Budget"]) + pt + -60)
+
+    console.log(box)
+
+    tooltipWidth = parseInt(d3.select('#tooltip').style('width').split('px').join(''))
+
+    msg = '<p class="title">' + movie_data["Film"] + '</p>'
+    msg += '<table>'
+#+ movie_data["Audience Score"] + 
+    msg += '<tr><td>Rating:</td><td>' +  movie_data["Rotten Tomatoes"] + '%</td></tr>'
+    msg += '<tr><td>Budget:</td><td>' +  movie_data["Budget"] + ' mil</td></tr>'
+    msg += '<tr><td>Worldwide Gross:</td><td>' +  movie_data["Worldwide Gross"] + ' mil</td></tr>'
+    msg += '<tr><td>Story:</td><td>' +  movie_data["Story"] + '</td></tr>'
+    # if personal_links
+      # msg += '<tr><td>' +  personal_links[0].length + ' connections' + '</td></tr>'
+    msg += '</table>'
+
+    d3.select('#tooltip').classed('hidden', false)
+    d3.select('#tooltip .content').html(msg)
+    d3.select('#tooltip')
+      .style('left', "#{(box.x + (tooltipWidth / 2)) - box.width / 2}px")
+      .style('top', "#{(box.y) }px")
+
+    # d3.select('#box')
+    #   .style('left', box.x + 'px')
+    #   .style('top', box.y  + 'px')
+    #   .style('width', box.width + 'px')
+    #   .style('height', box.height + 'px')
+    #   .classed('hidden', false)
 
     unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
     .selectAll("circle")
       .attr("opacity",  0.3)
 
   hide_details = (movie_data) ->
+    d3.select('#tooltip').classed('hidden', true)
+
     movies = body.selectAll(".movie")
 
     unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
