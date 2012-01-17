@@ -1,14 +1,17 @@
 
-
-#container {
-  width: 960px;
-  padding: 5px 0 10px 0;
-  margin: auto;
-}
-
 path {
   stroke-width: 3px;
   fill: none;
+}
+
+.x_axis, .y_axis {
+  /* shape-rendering: crispEdges; */
+}
+
+.x_axis line, .x_axis path, .y_axis line, .y_axis path {
+  fill:none;
+  stroke: #4e4e4e;
+  stroke-width: 1px;
 }
 
 

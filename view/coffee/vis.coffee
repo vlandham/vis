@@ -2,10 +2,10 @@
 root = exports ? this
 
 $ ->
-  w = 940
+  w = 910
   h = 400
   r = 5
-  [pt, pr, pb, pl] = [10, 10, 40, 10]
+  [pt, pr, pb, pl] = [10, 10, 40, 20]
 
   data = null
   vis = null
@@ -19,6 +19,8 @@ $ ->
   y_scale = d3.scale.linear()
     .domain([0, 7])
     .range([h, 0])
+
+  y_axis = d3.svg.axis().scale(y_scale).ticks(5).orient("left")
 
   line_path = d3.svg.line()
     .x((d) -> x_scale(format.parse(d.time)))
@@ -140,6 +142,7 @@ $ ->
 
     time_ticks_g = vis.append("g")
 
+
     time_ticks = time_ticks_g.selectAll(".time_rule")
       .data(x_scale.ticks(10))
       .enter().append("g")
@@ -155,6 +158,18 @@ $ ->
       .attr("y", h + pb / 2)
       .attr("text-anchor", "middle")
       .text((d) -> time_tick_format(d))
+
+    time_ticks_g.append("line")
+      .attr("y1", h + pt)
+      .attr("y2", h + pt)
+      .attr("x1", pl)
+      .attr("x2", w)
+      .attr("stroke", "#4e4e4e")
+
+    y_axis_g = vis.append("g")
+      .attr("class", "y_axis")
+      .attr("transform", "translate(#{pl},#{pt})")
+      .call(y_axis)
 
     records_g = vis.append("g")
       .attr("transform", "translate(#{pl},#{pt})")
