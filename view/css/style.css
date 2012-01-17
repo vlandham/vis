@@ -6,3 +6,9 @@
   margin: auto;
 }
 
+path {
+  stroke-width: 3px;
+  fill: none;
+}
+
+

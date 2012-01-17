@@ -15,6 +15,7 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
@@ -23,12 +24,22 @@
 
 <body>
 
-  <div id="container">
+  <div id="container" class="container">
     <header>
-
+      <h1>Matlab License Usage</h1>
     </header>
     <div id="main" role="main">
       <div id="vis"></div>
+      <div class="row">
+        <div class="span8">
+          <h2>Users</h2>
+          <div id="users"></div>
+        </div>
+        <div class="span8">
+          <h2>Stats</h2>
+          <div id="stats"></div>
+        </div>
+      </div>
     </div>
     <footer>
 
@@ -47,6 +58,7 @@
   <script src="js/libs/d3.csv.js"></script>
   <script src="js/libs/d3.layout.js"></script>
   <script src="js/libs/d3.geom.js"></script>
+  <script src="js/libs/d3.time.js"></script>
   <script src="js/libs/d3.chart.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
