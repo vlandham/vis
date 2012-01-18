@@ -12,7 +12,8 @@ $ ->
   w = 860
   h = 450
   key_h = 150
-  [key_pt, key_pr, key_pb, key_pl] = [10, 10, 10, 60]
+  key_w = 400
+  [key_pt, key_pr, key_pb, key_pl] = [10, 10, 10, 15]
   [pt, pr, pb, pl] = [20, 20, 50, 60]
 
   root.options = {top: 25, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
@@ -87,13 +88,11 @@ $ ->
     
     x_padding = parseInt(Math.abs(max_x - min_x) / 12)
     x_padding = if x_padding > min_x_padding then x_padding else min_x_padding
-    console.log(x_padding)
 
     min_x = min_x - x_padding
     max_x = max_x + x_padding
 
     x_scale.domain([min_x, max_x])
-    console.log(x_scale.domain())
     y_scale.domain([min_y, max_y])
     y_scale_reverse.domain([max_y, min_y])
 
@@ -179,11 +178,11 @@ $ ->
     key = d3.select("#key")
       .append("svg")
       .attr("id", "key-svg")
-      .attr("width", w + (pl + pr) )
+      .attr("width", key_w )
       .attr("height", key_h + key_pb + key_pt)
 
     key.append("rect")
-      .attr("width", w + (pl + pr))
+      .attr("width", key_w)
       .attr("height", key_h + key_pb + key_pt)
       .attr("fill", "#ffffff")
       .attr("opacity", 0.0)
@@ -209,26 +208,36 @@ $ ->
         .text((d) -> d)
 
     key_demo_group = key.append("g")
-      .attr("transform", "translate(#{300},0)")
+      .attr("transform", "translate(#{0},0)")
+
+    example_x = 280
+    example_r = 20
+    example_y = key_h / 2 - example_r
 
     key_demo_group.append("circle")
-      .attr("r", 20)
+      .attr("r", example_r)
       .attr("fill", color("Comedy"))
-      .attr("transform", (d) -> "translate(#{20}, #{20})")
-      .attr("cx", 230)
-      .attr("cy", 40)
+      .attr("transform", (d) -> "translate(#{example_r}, #{example_r})")
+      .attr("cx", example_x)
+      .attr("cy", example_y)
 
     key_demo_group.append("line")
-      .attr("x1", 230)
-      .attr("x2", 230 + 40)
-      .attr("y1", 40 + 40 + 4)
-      .attr("y2", 40 + 40 + 4)
+      .attr("x1", example_x)
+      .attr("x2", example_x + example_r * 2)
+      .attr("y1", example_y + example_r)
+      .attr("y2", example_y + example_r)
       .attr("stroke", "#333")
+      .attr("stroke-dasharray", "3")
       .attr("stroke-width", 2)
 
     key_demo_group.append("text")
-      .attr("dx", 230 + 40 + 4 )
-      .attr("dy", 40 + 40 + 6)
+      .attr("dx", example_x + (example_r * 2) + 4 )
+      .attr("dy", example_y + example_r - 8)
+      .text("Film's")
+
+    key_demo_group.append("text")
+      .attr("dx", example_x + (example_r * 2) + 4 )
+      .attr("dy", example_y + example_r + 6)
       .text("Budget")
 
   render_vis = (csv) ->
@@ -241,12 +250,12 @@ $ ->
       .attr("height", h + (pt + pb) )
       .attr("id", "vis-svg")
 
-    base_vis.append("rect")
-      .attr("width", w + (pl + pr) )
-      .attr("height", h + (pt + pb) )
-      .attr("fill", "#ffffff")
-      .attr("opacity", 0.0)
-      .attr("pointer-events","all")
+    # base_vis.append("rect")
+    #   .attr("width", w + (pl + pr) )
+    #   .attr("height", h + (pt + pb) )
+    #   .attr("fill", "#ffffff")
+    #   .attr("opacity", 0.0)
+    #   .attr("pointer-events","all")
 
     base_vis.append("g")
       .attr("class", "x_axis")
@@ -277,7 +286,6 @@ $ ->
       .attr("transform", "rotate(270)scale(-1,1)translate(#{pb},#{0})")
       .text("Rating (Rotten Tomatoes %)")
    
-
     body = vis.append("g")
       .attr("transform", "translate(#{pl},#{pb})")
 
@@ -288,25 +296,19 @@ $ ->
   show_details = (movie_data, index, element) ->
     movies = body.selectAll(".movie")
 
-    # selected_movie = movies.filter( (d) -> d.id == movie_data.id)
     bBox = element.getBBox()
     box = { "height": Math.round(bBox.height), "width": Math.round(bBox.width), "x": w + bBox.x, "y" : h + bBox.y}
-    box.x = Math.round(x_scale(movie_data["Profit"]))  - (pr+122) + r_scale(movie_data["Budget"])
-    box.y = Math.round(y_scale_reverse(movie_data["Rotten Tomatoes"])) - (r_scale(movie_data["Budget"]) + pt + -60)
-
-    console.log(box)
+    box.x = Math.round(x_scale(movie_data["Profit"]))  - (pr+110) + r_scale(movie_data["Budget"])
+    box.y = Math.round(y_scale_reverse(movie_data["Rotten Tomatoes"])) - (r_scale(movie_data["Budget"]) + pt + -75)
 
     tooltipWidth = parseInt(d3.select('#tooltip').style('width').split('px').join(''))
 
     msg = '<p class="title">' + movie_data["Film"] + '</p>'
     msg += '<table>'
-#+ movie_data["Audience Score"] + 
     msg += '<tr><td>Rating:</td><td>' +  movie_data["Rotten Tomatoes"] + '%</td></tr>'
     msg += '<tr><td>Budget:</td><td>' +  movie_data["Budget"] + ' mil</td></tr>'
     msg += '<tr><td>Worldwide Gross:</td><td>' +  movie_data["Worldwide Gross"] + ' mil</td></tr>'
     msg += '<tr><td>Story:</td><td>' +  movie_data["Story"] + '</td></tr>'
-    # if personal_links
-      # msg += '<tr><td>' +  personal_links[0].length + ' connections' + '</td></tr>'
     msg += '</table>'
 
     d3.select('#tooltip').classed('hidden', false)
@@ -315,25 +317,18 @@ $ ->
       .style('left', "#{(box.x + (tooltipWidth / 2)) - box.width / 2}px")
       .style('top', "#{(box.y) }px")
 
-    # d3.select('#box')
-    #   .style('left', box.x + 'px')
-    #   .style('top', box.y  + 'px')
-    #   .style('width', box.width + 'px')
-    #   .style('height', box.height + 'px')
-    #   .classed('hidden', false)
+    selected_movie = d3.select(element)
+    selected_movie.attr("fill-opacity", 1.0)
 
     unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
     .selectAll("circle")
-      .attr("opacity",  0.3)
+      .attr("fill-opacity",  0.3)
 
   hide_details = (movie_data) ->
     d3.select('#tooltip').classed('hidden', true)
 
-    movies = body.selectAll(".movie")
-
-    unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
-    .selectAll("circle")
-      .attr("opacity", 0.8)
+    movies = body.selectAll(".movie").selectAll("circle")
+      .attr("fill-opacity", 0.85)
 
   d3.csv "data/movies_all.csv", render_vis
 
@@ -341,7 +336,6 @@ $ ->
     update_data()
     draw_movies()
     draw_details()
-
 
   root.update_options = (new_options) =>
     root.options = $.extend({}, root.options, new_options)

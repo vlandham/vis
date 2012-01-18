@@ -28,7 +28,7 @@
   <div class="container" id="main-container">
     <div id="top-nav">
       <ul>
-        <li><a data-controls-modal="about-modal" data-backdrop="true" data-keyboard="true" href="">About</a></li>
+        <li><a data-controls-modal="about-modal" data-backdrop="true" data-keyboard="true" href="javascript:void(0)">About</a></li>
       </ul>
     </div>
     <div id="about-modal" class="modal hide fade">
@@ -40,14 +40,14 @@
         <h4>About</h4>
         <p>How much does a good movie make? How about a bad one?</p>
         <p>This visualization lets you explore the connections between movie ratings, budgets, and profits.</p>
-        <p>The x axis shows the film's profit margin while the y axis gives a range of review scores from Rotten Tomatoes. Each dot in the visualization represents a movie. Hover over the dot to get the specifics on that film.</p>
+        <p>The <strong>x-axis</strong> shows the film's profit margin while the <strong>y-axis</strong> gives the Rotten Tomatoes review percentage (the % of critics that give a positive review to the movie). Each <strong>dot</strong> in the visualization represents a movie. Hover over the dot to get the specifics on that film.</p>
         <h4>Filters</h4>
-        <p>Use the Filters above to select specific Genres or Story Types.</p>
+        <p>Use the filters above to select specific Genres or Story Types.</p>
         <p>With the controls below, specify the year to look at, and the number of faves and flops to see at one time.</p>
         <h4>Data</h4>
         <p>Data provided by the <a href="http://www.informationisbeautifulawards.com/2012/01/challenge-of-the-stars/">informationisbeautifulawards.com</a> Hollywood Budgets visualization challenge</p>
-        <h4>Viewing</h4>
-        <p>Best viewed in <a href="">Google Chrome</a> or <a href="">Safari</a></p>
+        <h4>Visualization</h4>
+        <p>Created Using <a href="http://mbostock.github.com/d3/">d3.js</a>. Best viewed in <a href="">Google Chrome</a> or <a href="">Safari</a></p>
       </div>
       <div class="modal-footer">
         <a href="#" class="btn primary">Ok</a>
@@ -108,8 +108,6 @@
         <div class="content"></div>
         <div class="tri"></div>
       </div>
-
-      <div id="key"></div>
       <div class="row">
         <div class="span5">
           <div id="years" class="control">
@@ -150,27 +148,74 @@
             <h3>Rated</h3>
           </div>
         </div>
-        <div id="details">
-        <h2>Details</h2>
-        <div class="row">
-          <div class="span6 offset1">
-            <p></p>
-            <div id="detail-love">
-              <h2>Most <span id="sub-title-love">Loved</span></h2>
+      </div>
+      <div class="row">
+        <div class="span4"><a id="key-link" href="javascript:void(0)">Key</a></div>
+        <div class="span4 offset8"><a id="story-link" href="javascript:void(0)">Stories</a></div>
+      </div>
+      <div class="row">
+        <div class="span7">
+          <div id="key" style="display:none;"></div>
+          <p></p>
+        </div>
+        <div class="span9">
+          <div id="stories-section" style="display:none;">
+            <div id="stories"> 
+              <div id="story-list">
+                <ul>
+                  <li><a href="javascript:void(0)">Comedy</a></li>
+                  <li><a href="javascript:void(0)">Discovery</a></li>
+                  <li><a href="javascript:void(0)">Fish Out Of Water</a></li>
+                  <li><a href="javascript:void(0)">Journey And Return</a></li>
+                  <li><a href="javascript:void(0)">Love</a></li>
+                  <li><a href="javascript:void(0)">Escape</a></li>
+                  <li><a href="javascript:void(0)">Maturation</a></li>
+                  <li><a href="javascript:void(0)">Metamorphosis</a></li>
+                </ul>
+                <ul>
+                  <li><a href="javascript:void(0)">Pursuit</a></li>
+                  <li><a href="javascript:void(0)">Quest</a></li>
+                  <li><a href="javascript:void(0)">Monster Force</a></li>
+                  <li><a href="javascript:void(0)">Rags To Riches</a></li>
+                  <li><a href="javascript:void(0)">Rescue</a></li>
+                  <li><a href="javascript:void(0)">Revenge</a></li>
+                  <li><a href="javascript:void(0)">Rivalry</a></li>
+                  <li><a href="javascript:void(0)">Sacrifice</a></li>
+                </ul>
+                <ul>
+                  <li><a href="javascript:void(0)">Temptation</a></li>
+                  <li><a href="javascript:void(0)">The Riddle</a></li>
+                  <li><a href="javascript:void(0)">Tragedy</a></li>
+                  <li><a href="javascript:void(0)">Transformation</a></li>
+                  <li><a href="javascript:void(0)">Wretched Excess</a></li>
+                  <li><a href="javascript:void(0)">Underdog</a></li>
+                </ul>
+              </div>
+            </div>
+            <div id="story-detail">
+              <p></p>
             </div>
           </div>
-          <div class="span6 offset2">
-            <p></p>
-            <div id="detail-hate">
+        </div>
+      </div>
+    </div>
+    <div id="details">
+      <h2>Details</h2>
+      <div class="row">
+        <div class="span6 offset1">
+          <p></p>
+          <div id="detail-love">
+            <h2>Most <span id="sub-title-love">Loved</span></h2>
+          </div>
+        </div>
+        <div class="span6 offset2">
+          <p></p>
+          <div id="detail-hate">
               <h2>Most <span id="sub-title-hate">Hated</span></h2>
             </div>
           </div>
         </div>
       </div>
-      </div>
-      <footer>
-
-      </footer>
     </div> <!--! end of .container -->
 
 
@@ -218,6 +263,48 @@
               var new_options = {"stories": stories};
               update_options(new_options);
               });
+            $('#key-link').click(function() {
+                $("#key").slideToggle();
+                return false;
+              });
+            $('#story-link').click(function() {
+                $("#stories-section").slideToggle();
+                return false;
+                });
+
+            var stories = {"Comedy": "A series of complications leads the protagonist into ridiculous situations.",
+              "Discovery": "Through a major upheaval, the protagonist discovers a truth about themselves and a better understanding of life.",
+              "Fish Out Of Water": "The protagonist tries to cope in a completely different place / time / world.",
+              "Journey And Return": "The protagonist goes on a physical journey and returns changed.",
+              "Love": "A couple meet and overcome obstacles to discover true love. Or – tragically – don’t.",
+              "Escape": "The protagonist, trapped by antagonistic forces and must escape. Pronto.",
+              "Maturation": "The protagonist has an experience that matures them or starts a new stage of life, often adulthood.",
+              "Metamorphosis": "The protagonist literally changes into something else (i.e. a werewolf, hulk, giant cockroach).",
+              "Pursuit": "The protagonist has to chase somebody or something, usually in a hide-and-seek fashion.",
+              "Quest": "The protagonist searches for a person, place or thing, overcoming a number of challenges.",
+              "Monster Force": "A monster / alien / something scary and supernatural must be fought and overcome.",
+              "Rags To Riches": "The protagonist is poor, then rich.",
+              "Rescue": "The protagonist must save someone who is trapped physically or emotionally.",
+              "Revenge": "The protagonist retaliates against another for a real or imagined injury.",
+              "Rivalry": "The protagonist must triumph over a adversary to attain an object or goal.",
+              "Sacrifice": "The protagonist must make a difficult choice between pleasing themselves or a higher purpose (e.g. love, honour).",
+              "Temptation": "The protagonist has to make a moral choice between right and wrong.",
+              "The Riddle": "The protagonist has to solve a puzzle or a crime.",
+              "Tragedy": "The protagonist is brought down by a fatal flaw in their character or by forces out of their control.",
+              "Transformation": "The protagonist lives through a series of events that change them as a person.",
+              "Wretched Excess": "The protagonist pushes the limits of acceptable behaviour, destroying themselves in the process.",
+              "Underdog": "Total loser faces overwhelming odds but wins in the end."
+            };
+
+            $('#story-list a').mouseover(function() {
+                var key = $(this).text();
+                var story = stories[key];
+                $("#story-detail p").html(story);
+                return false;
+                });
+
+
+
             });
           </script>
 
