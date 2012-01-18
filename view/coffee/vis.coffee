@@ -4,7 +4,7 @@ root = exports ? this
 $ ->
   w = 910
   h = 400
-  r = 5
+  r = 4
   [pt, pr, pb, pl] = [10, 10, 40, 20]
 
   data = null
@@ -37,14 +37,16 @@ $ ->
     license_stats = {}
     data.forEach (d) ->
       d.status.forEach (s) ->
-        license_stats[s.id] = {used_count:0,used_total:0, count:0,license_max:s.total} unless license_stats[s.id]
+        license_stats[s.id] = {used_count:0,used_total:0, count:0,license_max:s.total, maxed_out:0} unless license_stats[s.id]
         license_stats[s.id].used_count += s.used
         license_stats[s.id].used_total += s.total
+        license_stats[s.id].maxed_out += 1 if s.used == s.total
         license_stats[s.id].count += 1
 
     d3.entries(license_stats).forEach (d) ->
       d.value.used_ratio = (d.value.used_count / d.value.used_total)
       d.value.used_average = (d.value.used_count / d.value.count)
+      d.value.maxed_percent = (d.value.maxed_out / d.value.count)
 
     console.log(license_stats)
 
@@ -66,6 +68,8 @@ $ ->
       .text("Average License Usage")
     stats_header.append("th")
       .text("Total Licenses")
+    stats_header.append("th")
+      .text("Percent Time Maxed")
 
     stats_row = stats_vis.selectAll("tr")
       .data(sort_stats).enter().append("tr")
@@ -76,6 +80,8 @@ $ ->
       .text((d) -> d.value.used_average.toFixed(2))
     stats_row.append("td")
       .text((d) -> d.value.license_max)
+    stats_row.append("td")
+      .text((d) -> d.value.maxed_percent.toFixed(2))
 
   render_users = () ->
     user_counts = {}
@@ -145,7 +151,6 @@ $ ->
 
     time_ticks_g = vis.append("g")
 
-
     time_ticks = time_ticks_g.selectAll(".time_rule")
       .data(x_scale.ticks(10))
       .enter().append("g")
@@ -195,6 +200,8 @@ $ ->
       .enter().append("g")
         .attr("class", "record")
         .attr("transform", (d) -> "translate(#{x_scale(format.parse(d.time))},0)")
+        .on("mouseover",  show_details)
+        .on("mouseout", hide_details)
 
     record_group.selectAll(".license-box")
       .data((d) -> d.status)
@@ -213,13 +220,37 @@ $ ->
         .attr("class", "license")
         .attr("cy", (d) -> y_scale(d.used))
         .attr("r", (d) -> if d.used == 0 then 0 else r)
+        .attr("opacity", (d) -> if d.used == d.total then 1.0 else 0.0)
         .attr("fill", (d) -> if d.used == d.total then "#840522" else "#4e4e4e")
 
     render_users()
     render_stats()
 
-  highlight = (data, index) ->
-    console.log(data)
+  show_details = (data, index) ->
+    detail_w = 200
+    usage = data.status.filter((d) -> d.used > 0).sort((a,b) -> b.used - a.used)
+    detail_g = vis.append("g")
+      .attr("id", "detail-panel")
+      .attr("transform", "translate(#{(w + pl) - detail_w},#{pt * 2})")
+
+    detail_g.append("rect")
+      .attr("class", "detail-background")
+      .attr("width", detail_w)
+      .attr("height", 100)
+      .attr("fill", "#fff")
+      .attr("opacity", 0.8)
+
+    detail_g.selectAll(".detail")
+      .data(usage)
+    .enter().append("text")
+      .attr("class", "detail")
+      .text((d) -> "#{d.id}: #{d.used} / #{d.total}")
+      .attr("x", 10)
+      .attr("y", (d,i) -> (i + 1) * 20)
+
+  hide_details = (data, index) ->
+    vis.select("#detail-panel").remove()
+    # console.log(data)
 
   d3.json "data/matlab.json", render_vis
 
