@@ -52,6 +52,9 @@ $ ->
 
     console.log(sort_stats)
 
+    d3.select("#stats").append("h4")
+      .text("Matlab Average:   #{sort_stats[0].value.used_average.toFixed(2)} / #{sort_stats[0].value.license_max} licenses used")
+
     stats_vis = d3.select("#stats")
       .append("table")
 
