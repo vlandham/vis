@@ -17,7 +17,7 @@ $ ->
     .range([0, w])
   # currently we have 6 network licenses
   y_scale = d3.scale.linear()
-    .domain([0, 7])
+    .domain([0, 6])
     .range([h, 0])
 
   y_axis = d3.svg.axis().scale(y_scale).ticks(5).orient("left")
@@ -46,7 +46,7 @@ $ ->
     d3.entries(license_stats).forEach (d) ->
       d.value.used_ratio = (d.value.used_count / d.value.used_total)
       d.value.used_average = (d.value.used_count / d.value.count)
-      d.value.maxed_percent = (d.value.maxed_out / d.value.count)
+      d.value.maxed_percent = (d.value.maxed_out / d.value.count) * 100
 
     console.log(license_stats)
 
@@ -85,14 +85,16 @@ $ ->
 
   render_users = () ->
     user_counts = {}
+    total = 0
     data.forEach (d) ->
       d.status.forEach (s) ->
         s.users.forEach (u) ->
           user_counts[u.id] = 0 unless user_counts[u.id]
           user_counts[u.id] += 1
+          total += 1
     
     user_scale = d3.scale.linear()
-      .domain([0, d3.max(d3.values(user_counts))])
+      .domain([0, total])
       .range([0, 300])
 
     sort_user_counts = d3.entries(user_counts).sort( (a,b) -> b.value - a.value)
@@ -227,7 +229,8 @@ $ ->
     render_stats()
 
   show_details = (data, index) ->
-    detail_w = 200
+    detail_w = 250
+    detail_h = 100
     usage = data.status.filter((d) -> d.used > 0).sort((a,b) -> b.used - a.used)
     detail_g = vis.append("g")
       .attr("id", "detail-panel")
@@ -244,7 +247,7 @@ $ ->
       .data(usage)
     .enter().append("text")
       .attr("class", "detail")
-      .text((d) -> "#{d.id}: #{d.used} / #{d.total}")
+      .text((d) -> "#{d.id}: #{d.used} / #{d.total}: #{d.users.map((d) -> d.id).join(", ")}")
       .attr("x", 10)
       .attr("y", (d,i) -> (i + 1) * 20)
 
