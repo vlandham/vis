@@ -116,9 +116,11 @@ $ ->
       .on("mouseover", (d, i) -> show_details(d,i,this))
       .on("mouseout", hide_details)
     .append("circle")
-      .attr("r", (d) -> r_scale(parseFloat(d["Budget"])))
       .attr("opacity", 0.85)
       .attr("fill", (d) -> color(d["Genre"]))
+      .attr("stroke", (d) -> d3.hsl(color(d["Genre"])).darker())
+      .attr("stroke-width", 2)
+      .attr("r", (d) -> r_scale(parseFloat(d["Budget"])))
 
     movies.transition()
       .duration(1000)
@@ -136,6 +138,10 @@ $ ->
       .duration(1000)
       .attr("transform", (d) -> "translate(#{0},#{0})")
     .remove()
+
+    movies.exit().selectAll("circle").transition()
+      .duration(1000)
+      .attr("r", 0)
 
   draw_movie_details = (detail_div) ->
     detail_div.enter().append("div")
@@ -313,6 +319,7 @@ $ ->
     msg += '<tr><td>Rating:</td><td>' +  movie_data["Rotten Tomatoes"] + '%</td></tr>'
     msg += '<tr><td>Budget:</td><td>' +  movie_data["Budget"] + ' mil</td></tr>'
     msg += '<tr><td>Worldwide Gross:</td><td>' +  movie_data["Worldwide Gross"] + ' mil</td></tr>'
+    msg += '<tr><td>Profit:</td><td>' +  movie_data["Profit"] + ' mil' + '</td></tr>'
     msg += '<tr><td>Story:</td><td>' +  movie_data["Story"] + '</td></tr>'
     msg += '</table>'
 

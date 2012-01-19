@@ -299,6 +299,7 @@ path.area {
     font-size: 12px;
     line-height: 14px;
     color: white;
+    margin:0;
 }
  
 #tooltip th, #tooltip td {
