@@ -23,12 +23,13 @@ $ ->
   base_vis = null
   vis = null
   body = null
+  movie_body = null
 
   x_scale = d3.scale.linear().range([0, w])
   y_scale = d3.scale.linear().range([0, h])
   y_scale_reverse = d3.scale.linear().range([0, h])
   # set domain manually for r scale
-  r_scale = d3.scale.linear().range([4, 27]).domain([0,310])
+  r_scale = d3.scale.sqrt().range([0, 30]).domain([0,310])
 
   xAxis = d3.svg.axis().scale(x_scale).tickSize(5).tickSubdivide(true)
   yAxis = d3.svg.axis().scale(y_scale_reverse).ticks(5).orient("left")
@@ -107,7 +108,7 @@ $ ->
     update_scales()
 
   draw_movies = () ->
-    movies = body.selectAll(".movie")
+    movies = movie_body.selectAll(".movie")
       .data(data, (d) -> d.id)
 
     movies.enter().append("g")
@@ -116,7 +117,7 @@ $ ->
       .on("mouseout", hide_details)
     .append("circle")
       .attr("r", (d) -> r_scale(parseFloat(d["Budget"])))
-      .attr("fill-opacity", 0.85)
+      .attr("opacity", 0.85)
       .attr("fill", (d) -> color(d["Genre"]))
 
     movies.transition()
@@ -288,6 +289,10 @@ $ ->
    
     body = vis.append("g")
       .attr("transform", "translate(#{pl},#{pb})")
+      .attr("id", "vis-body")
+
+    movie_body = body.append("g")
+      .attr("id", "movies")
 
     draw_movies()
     draw_details()
@@ -317,18 +322,41 @@ $ ->
       .style('left', "#{(box.x + (tooltipWidth / 2)) - box.width / 2}px")
       .style('top', "#{(box.y) }px")
 
+
     selected_movie = d3.select(element)
-    selected_movie.attr("fill-opacity", 1.0)
+    selected_movie.attr("opacity", 1.0)
 
     unselected_movies = movies.filter( (d) -> d.id != movie_data.id)
     .selectAll("circle")
-      .attr("fill-opacity",  0.3)
+      .attr("opacity",  0.3)
+
+    crosshairs_g = body.insert("g", "#movies")
+      .attr("id", "crosshairs")
+
+    crosshairs_g.append("line")
+      .attr("class", "crosshair")
+      .attr("x1", 0)
+      .attr("x2", x_scale(movie_data["Profit"]) - r_scale(movie_data["Budget"]))
+      .attr("y1", y_scale(movie_data["Rotten Tomatoes"]))
+      .attr("y2", y_scale(movie_data["Rotten Tomatoes"]))
+      .attr("stroke-width", 1)
+
+    crosshairs_g.append("line")
+      .attr("class", "crosshair")
+      .attr("x1", x_scale(movie_data["Profit"]))
+      .attr("x2", x_scale(movie_data["Profit"]))
+      .attr("y1", 0)
+      .attr("y2", y_scale(movie_data["Rotten Tomatoes"]) - r_scale(movie_data["Budget"]))
+      .attr("stroke-width", 1)
 
   hide_details = (movie_data) ->
     d3.select('#tooltip').classed('hidden', true)
 
     movies = body.selectAll(".movie").selectAll("circle")
-      .attr("fill-opacity", 0.85)
+      .attr("opacity", 0.85)
+
+    body.select("#crosshairs").remove()
+      
 
   d3.csv "data/movies_all.csv", render_vis
 

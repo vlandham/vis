@@ -228,8 +228,13 @@ path.area {
   fill: #e7e7e7;
 }
 
-.x_axis, .y_axis {
+.x_axis, .y_axis, .crosshair {
   shape-rendering: crispEdges;
+}
+
+#crosshairs line {
+  fill: none;
+  stroke: #ddd;
 }
 
 .x_axis line, .x_axis path {
