@@ -7,14 +7,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>vis</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <title>We're In The Money | Jim Vallandingham</title>
+  <meta name="description" content="Visualization of movie ratings and profits">
+  <meta name="author" content="Jim Vallandingham">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- CSS concatenated and minified via ant build script-->
-  <!-- <link href='http://fonts.googleapis.com/css?family=Josefin+Sans:400,600' rel='stylesheet' type='text/css'> -->
+  <!-- CSS-->
   <link href='http://fonts.googleapis.com/css?family=Josefin+Slab:700|Josefin+Sans' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -34,7 +33,7 @@
     <div id="about-modal" class="modal hide fade">
       <div class="modal-header">
         <a href="#" class="close">&times;</a>
-        <h3>They're In The Money!</h3>
+        <h3>We're In The Money!</h3>
       </div>
       <div class="modal-body">
         <h4>About</h4>
@@ -54,7 +53,7 @@
       </div>
     </div>
     <header>
-    <h1 id="title-top">How Much <span id="title-money">Money</span> Do The<br/>Movies We <span id="title-love">Love</span><br/>Make?</h1>
+    <h1 id="title-top">How Much Do The Movies We Love Make?</h1>
     </header>
     <div id="main" role="main">
       <div class="row">
@@ -129,8 +128,8 @@
             <a id="top-0">0</a> | 
             <a id="top-5">5</a> | 
             <a id="top-15">15</a> | 
-            <a id="top-25" class="active">25</a> | 
-            <a id="top-50">50</a>
+            <a id="top-25">25</a> | 
+            <a id="top-50" class="active">50</a>
           </div>
             <h3>Rated</h3>
           </div>
@@ -218,22 +217,23 @@
       </div>
     </div> <!--! end of .container -->
 
-
     <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
     <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
 
 
       <script defer src="js/plugins.js"></script>
       <script defer src="js/script.js"></script>
+      <script src="js/libs/jquery.lettering-0.6.1.min.js"></script>
       <script src="js/libs/bootstrap-modal.js"></script>
       <script src="js/libs/chosen.jquery.min.js"></script>
       <script src="js/libs/coffee-script.js"></script>
-      <script src="js/libs/d3.js"></script>
-      <script src="js/libs/d3.csv.js"></script>
-      <script src="js/libs/d3.geom.js"></script>
+      <script src="js/libs/d3.min.js"></script>
+      <script src="js/libs/d3.csv.min.js"></script>
       <script type="text/coffeescript" src="coffee/vis.coffee"></script>
+      <!-- <script src="coffee/vis.js"></script> -->
       <script type="text/javascript">
         $(document).ready(function() {
+            $("#title-top").lettering('words');
             $(".chzn-select").chosen();
             $('.control-links a').click(function() {
               $(this).siblings().removeClass('active');
@@ -302,9 +302,6 @@
                 $("#story-detail p").html(story);
                 return false;
                 });
-
-
-
             });
           </script>
 

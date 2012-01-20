@@ -16,7 +16,7 @@ $ ->
   [key_pt, key_pr, key_pb, key_pl] = [10, 10, 10, 15]
   [pt, pr, pb, pl] = [20, 20, 50, 60]
 
-  root.options = {top: 25, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
+  root.options = {top: 50, bottom: 0, genres: null, year: "all", stories: null, sort:"rating"}
 
   data = null
   all_data = null
@@ -24,12 +24,14 @@ $ ->
   vis = null
   body = null
   movie_body = null
+  zero_line = null
+  middle_line = null
 
   x_scale = d3.scale.linear().range([0, w])
   y_scale = d3.scale.linear().range([0, h])
   y_scale_reverse = d3.scale.linear().range([0, h])
   # set domain manually for r scale
-  r_scale = d3.scale.sqrt().range([0, 30]).domain([0,310])
+  r_scale = d3.scale.sqrt().range([0, 29]).domain([0,310])
 
   xAxis = d3.svg.axis().scale(x_scale).tickSize(5).tickSubdivide(true)
   yAxis = d3.svg.axis().scale(y_scale_reverse).ticks(5).orient("left")
@@ -129,6 +131,16 @@ $ ->
     base_vis.transition()
       .duration(1000)
       .select(".x_axis").call(xAxis)
+
+    zero_line.transition()
+      .duration(1000)
+      .attr("x1", x_scale(0))
+      .attr("x2", x_scale(0))
+
+    middle_line.transition()
+      .duration(1000)
+      .attr("y1", y_scale(50.0))
+      .attr("y2", y_scale(50.0))
 
     base_vis.transition()
       .duration(1000)
@@ -285,6 +297,7 @@ $ ->
     vis = base_vis.append("g")
       .attr("transform", "translate(#{0},#{h + (pt + pb)})scale(1,-1)")
 
+
     vis.append("text")
       .attr("x", h/2)
       .attr("y", 20)
@@ -296,6 +309,25 @@ $ ->
     body = vis.append("g")
       .attr("transform", "translate(#{pl},#{pb})")
       .attr("id", "vis-body")
+
+    zero_line = body.append("line")
+      .attr("x1", x_scale(0))
+      .attr("x2", x_scale(0))
+      .attr("y1", 0 + 5)
+      .attr("y2", h - 5)
+      .attr("stroke", "#aaa")
+      .attr("stroke-width", 1)
+      .attr("stroke-dasharray", "2")
+
+    middle_line = body.append("line")
+      .attr("x1", 0 + 5)
+      .attr("x2", w + 5)
+      .attr("y1", y_scale(50.0))
+      .attr("y2", y_scale(50.0))
+      .attr("stroke", "#aaa")
+      .attr("stroke-width", 1)
+      .attr("stroke-dasharray", "2")
+ 
 
     movie_body = body.append("g")
       .attr("id", "movies")
