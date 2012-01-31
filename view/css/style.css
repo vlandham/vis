@@ -1,1 +1,20 @@
+body {
+  padding-top: 30px;
+}
+svg {
+  background: #e1e1e1;
+  width: 960px;
+  height: 500px;
+}
+ 
+#municipios path {
+  stroke: #fff;
+  stroke-width: .25px;
+}
+ 
+#estados path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
 
