@@ -5,28 +5,28 @@ $ ->
 
   w = 940
   h = 600
-  r = 3
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
   data = null
   vis = null
 
-  electores_range = null
-
   color_range = d3.scale.linear().range([3, 8])
 
   projection = d3.geo.albers().scale(2000).origin([-65,6])
-
   path = d3.geo.path().projection(projection)
 
+  # quantize is a function. In coffeescript, this is how functions
+  # are defined. See: http://coffeescript.org/#literals
   quantize = (municipo) ->
     muni_datos = data[municipo.properties["MUNICIPIO"]]
     if(muni_datos)
-      cl = "q" + Math.round(color_range(muni_datos.total_electores)) + "-9"
+      css_class = "q" + Math.round(color_range(muni_datos.total_electores)) + "-9"
     else
+      #TODO: NOT getting data for some municipios. need to correct
+      #names in csv or add a unique id to geojson
       console.log(municipo.properties["MUNICIPIO"])
-      cl = "q" + 1 + "-9"
-    cl
+      css_class = "q" + 1 + "-9"
+    css_class
 
   vis = d3.select("#vis")
     .append("svg")
@@ -56,7 +56,6 @@ $ ->
 
   datos_correctos = (csv) ->
     corr_datos = {}
-
     electores_range = d3.extent(csv, (d) -> parseInt(d.total_electores))
     color_range.domain(electores_range)
 
