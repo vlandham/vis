@@ -10,21 +10,20 @@ git checkout -b interesting_new_bar_chart
 
 h2. Contents
 
-* @/@
+* @/code@
 ** used for storing scripts / rough data
-* @view/@
+* @/@
 ** main vis area
-* @view/coffee/@
+* @/coffee/@
 ** coffeescript files. Example @vis.coffee@ setup
-* @view/data/@
+* @/data/@
 ** data dump for @.csv@ and @.json@ files
-* @view/js/@
+* @/js/@
 ** javascript goes here. most in @libs@ directory
 
 h2. Run
 
 <pre>
-cd view
 thin start
 </pre>
 
@@ -36,10 +35,13 @@ h2. Requirments
 
 h2. Contents
 
+h3. Twitter Bootstrap
+
+* 2.0
+
 h3. html5boilerplate
 
 * 2.0 Aug 10th
-
 
 h3. d3.js
 
