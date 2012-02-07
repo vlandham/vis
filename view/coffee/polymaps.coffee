@@ -1,4 +1,4 @@
-
+# http://stackoverflow.com/questions/4964014/polygons-with-geojson-polymaps
 root = exports ? this
 
 $ ->
