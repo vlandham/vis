@@ -1,8 +1,9 @@
 body {
   padding-top: 30px;
 }
-svg {
-  /* background: #eee; */
+
+#vis {
+  background: #eee;
   /* width: 770px; */
   /* height: 500px; */
 }
@@ -33,5 +34,17 @@ footer {
 
 .deactive p, .deactive h3 {
   color: #ccc;
+}
+
+.candidato h3 {
+  font-size: 0.9em;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 10px;
+}
+
+#details h2 {
+  line-height: 25px;
+  margin-bottom: 10px;
 }
 

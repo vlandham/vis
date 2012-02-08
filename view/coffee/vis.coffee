@@ -10,6 +10,8 @@ $ ->
   data = null
   vis = null
 
+  municipio_candidatos = {}
+
   color_range = d3.scale.linear().range([3, 7])
 
   ##Is clear that this define the projection, scale and origen of the map
@@ -37,9 +39,22 @@ $ ->
   # TODO: use actual candidates data. Right now this just generates fake data with 
   # little differences for each municipio
   candidates_for = (municipio) ->
-    candidate_data = {estado: "EstadoName", municipio: municipio.properties["MUNICIPIO"], candidates: [{ name: "First Candidate", parties: ["party1", "party2"] },
-                      { name: "Second Candidate #{municipio.properties["CODIGO"]}", parties: ["party1", "party3", "party4"]}]}
-    candidate_data
+    m_data = municipio_candidatos[municipio.properties["MUNICIPIO"].toUpperCase()]
+
+    if !m_data
+      console.log(municipio.properties["MUNICIPIO"])
+    m_data
+  
+  parse_candidatos = (csv) ->
+    csv.forEach (d) ->
+      candidato = {name: d["Candidato"], parties: [d["Partido"]]}
+      municipio = municipio_candidatos[d["Municipio"]]
+      if municipio
+        municipio.candidatos.push candidato
+      else
+        municipio = {estado: d["Estado"], municipio: d["Municipio"], candidatos:[candidato]}
+      municipio_candidatos[d["Municipio"]] = municipio
+        
 
   # quantize is a function. In coffeescript, this is how functions
   # are defined. See: http://coffeescript.org/#literals
@@ -68,7 +83,6 @@ $ ->
       ##Yes I will do that. In fact the id of the municipios/estados
       ##Does not match at all. I think I will spend the next few days correcting that
 
-      console.log(municipio.properties["MUNICIPIO"])
       css_class = "missing_data"
     css_class
 
@@ -152,18 +166,20 @@ $ ->
 
   show_details = (municipio, index) ->
     candidate_data = candidates_for(municipio)
+    return unless candidate_data
+
     detail = d3.select("#details")
     detail.classed("deactive", false)
 
-    detail.html "<h3 id=\"detail-municipio\"></h3>"
+    detail.html "<h2 id=\"detail-municipio\"></h2>"
     detail.select("#detail-municipio")
       .text(candidate_data.municipio)
 
-    cands = detail.selectAll(".candidate")
-      .data(candidate_data.candidates)
+    cands = detail.selectAll(".candidato")
+      .data(candidate_data.candidatos)
 
     cand_div = cands.enter().append("div")
-      .attr("class", "candidate")
+      .attr("class", "candidato")
 
     cand_div.append("h3")
       .text((d) -> d.name)
@@ -187,6 +203,7 @@ $ ->
   #     - passing in the Array as its data.
   #     - Same for municipios.json and electores.csv.  So their callback functions
   #     - Are not executed until the data is loaded and ready.
+  d3.csv "data/candidatos.csv", parse_candidatos
   d3.json "data/estados.json", make_estados
   d3.json "data/municipios.json", make_municipios
   d3.csv "data/electores.csv", make_vis
