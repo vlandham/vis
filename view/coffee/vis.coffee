@@ -3,13 +3,12 @@ root = exports ? this
 
 $ ->
 
-  w = 600  ##I Playied with this values and the size doesn't change
+  w = 600
   h = 460
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
-  data = null
+  electores = null
   vis = null
-
   municipio_candidatos = {}
 
   color_range = d3.scale.linear().range([3, 7])
@@ -33,27 +32,38 @@ $ ->
   #     - I don't  have a better way to find the right scale / origin for
   #     - another projection (like mercator).
   projection = d3.geo.albers().scale(2000).origin([-61,6.7])
+  scale = projection.scale()
+  t = projection.translate()
   path = d3.geo.path().projection(projection)
 
+  key_for_geojson = (municipio) ->
+    "#{municipio.properties["ESTADO"].toUpperCase()}#{municipio.properties["CODIGO"]}"
 
-  # TODO: use actual candidates data. Right now this just generates fake data with 
-  # little differences for each municipio
+  key_for_csv = (municipio) ->
+    "#{municipio["estado"].toUpperCase()}#{municipio["codigo_municipio"]}"
+
   candidates_for = (municipio) ->
-    m_data = municipio_candidatos[municipio.properties["MUNICIPIO"].toUpperCase()]
+    key = key_for_geojson(municipio)
+    m_data = municipio_candidatos[key]
 
     if !m_data
-      console.log(municipio.properties["MUNICIPIO"])
+      console.log("NOT FOUND:")
+      console.log("  " + municipio.properties["MUNICIPIO"])
+      console.log("  " + key)
+      m_data = {estado: municipio.properties["ESTADO"], municipio: municipio.properties["MUNICIPIO"], candidatos: [{name:"MISSING", parties:[]}]}
     m_data
   
   parse_candidatos = (csv) ->
     csv.forEach (d) ->
-      candidato = {name: d["Candidato"], parties: [d["Partido"]]}
-      municipio = municipio_candidatos[d["Municipio"]]
+      candidato = {name: d["candidato"], parties: [d["partido"]]}
+      municipio_key = "#{d["estado"]}#{d["codigo_municipio"]}"
+      municipio_key = key_for_csv(d)
+      municipio = municipio_candidatos[municipio_key]
       if municipio
         municipio.candidatos.push candidato
       else
-        municipio = {estado: d["Estado"], municipio: d["Municipio"], candidatos:[candidato]}
-      municipio_candidatos[d["Municipio"]] = municipio
+        municipio = {estado: d["estado"], municipio: d["municipio"], candidatos:[candidato]}
+      municipio_candidatos[municipio_key] = municipio
         
 
   # quantize is a function. In coffeescript, this is how functions
@@ -72,24 +82,23 @@ $ ->
   #
   #     - It gets called when we load up the csv data. in make_vis
   quantize = (municipio) ->
-    muni_datos = data[municipio.properties["MUNICIPIO"]]
+    muni_datos = electores[key_for_geojson(municipio)]
     if(muni_datos)
-     # css_class = "q" + Math.round(color_range(muni_datos.nro_candidatos)) + "-9"
-       css_class = "q" + Math.round(color_range(muni_datos.nro_candidatos)) + "-9"
+      num_candidatos = parseInt(muni_datos.nro_candidatos)
+      # console.log(muni_datos.nro_candidatos)
+      if num_candidatos == 0
+        console.log(muni_datos.nro_candidatos)
+        css_class = "no_electotres"
+      else
+       css_class = "q" + Math.round(color_range(num_candidatos)) + "-9"
     else
-      #TODO: NOT getting data for some municipios. need to correct
-      #names in csv or add a unique id to geojson
-
-      ##Yes I will do that. In fact the id of the municipios/estados
-      ##Does not match at all. I think I will spend the next few days correcting that
-
       css_class = "missing_data"
     css_class
 
   vis = d3.select("#vis")
     .append("svg")
     .attr("id", "vis-svg")
-    .attr("width", w + (pl + pr))  #
+    .attr("width", w + (pl + pr))
     .attr("height", h + (pt + pb))
 
   ## I changed the order of the appends so that I can see the states
@@ -105,16 +114,18 @@ $ ->
     municipios.selectAll("path")
       .data(json.features)
     .enter().append("path")
-      .attr("class", if data then quantize else null)
+      .attr("class", if electores then quantize else null)
       .attr("d", path)
       .on("mouseover", show_details)
       .on("mouseout", hide_details)
+      .call(d3.behavior.zoom().on("zoom", redraw))
 
   make_estados = (json) ->
     estados.selectAll("path")
       .data(json.features)
     .enter().append("path")
       .attr("d", path)
+      .call(d3.behavior.zoom().on("zoom", redraw))
 
   datos_correctos = (csv) ->
     corr_datos = {}
@@ -124,8 +135,9 @@ $ ->
     #
     #  jim - sounds good. I was just doing that to make sure it worked
    # electores_range = d3.extent(csv, (d) -> parseInt(d.nro_candidatos))
-    electores_range = d3.extent(csv, (d) -> d.nro_candidatos)
-    color_range.domain(electores_range)
+    candidatos_extent = d3.extent(csv, (d) -> parseInt(d.nro_candidatos))
+    console.log(candidatos_extent)
+    color_range.domain(candidatos_extent)
 
     ##FANTASTIC WORKAROUND for the annoying Municipio prefix.
     ##But I remove them form the csv file. I think it is better that way
@@ -143,7 +155,7 @@ $ ->
       d.municipio = d.municipio.replace(/CE\.\s/,"")
 
       d.municipio = d.municipio.toUpperCase()
-      corr_datos[d.municipio] = d
+      corr_datos[key_for_csv(d)] = d
     corr_datos
 
   make_vis = (csv) ->
@@ -158,9 +170,8 @@ $ ->
     #
     #     - As a side note, because the data loading happens asyncryously, it
     #     - is possible that the .csv data to be loaded before the .json data.
-    #     - this is why we also call quantize in make_municipios IF the
-    #     - variable 'data' is set.
-    data = datos_correctos(csv)
+    #     - this is why we also call quantize in make_municipios IF the electores is set
+    electores = datos_correctos(csv)
     municipios.selectAll("path")
       .attr("class", quantize)
 
@@ -193,6 +204,16 @@ $ ->
     detail = d3.select("#details")
     detail.classed("deactive", true)
     ddd = 3
+
+  redraw = () ->
+    tx = t[0] * d3.event.scale + d3.event.translate[0]
+    ty = t[1] * d3.event.scale + d3.event.translate[1]
+    projection.translate([tx, ty])
+
+    projection.scale(scale * d3.event.scale)
+
+    municipios.selectAll("path").attr("d", path)
+    estados.selectAll("path").attr("d", path)
 
   ##If I get it right, once all the functions are in place
   ##then they are passed to the d3 library to make everything happen
