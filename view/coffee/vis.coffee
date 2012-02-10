@@ -4,14 +4,17 @@ root = exports ? this
 $ ->
 
   w = 600
-  h = 460
+  h = 480
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
   electores = null
   vis = null
   municipio_candidatos = {}
 
-  color_range = d3.scale.linear().range([3, 7])
+  start_color = d3.rgb(189,222,255)
+  end_color = d3.rgb(8, 48, 107)
+
+  color_range = d3.scale.linear().range([start_color, end_color])
 
   ##Is clear that this define the projection, scale and origen of the map
   ##Albers is the official projection for USA
@@ -47,9 +50,6 @@ $ ->
     m_data = municipio_candidatos[key]
 
     if !m_data
-      console.log("NOT FOUND:")
-      console.log("  " + municipio.properties["MUNICIPIO"])
-      console.log("  " + key)
       m_data = {estado: municipio.properties["ESTADO"], municipio: municipio.properties["MUNICIPIO"], candidatos: [{name:"No se realizarán primarias", parties:[]}]}
     m_data
   
@@ -66,34 +66,16 @@ $ ->
       municipio_candidatos[municipio_key] = municipio
         
 
-  # quantize is a function. In coffeescript, this is how functions
-  # are defined. See: http://coffeescript.org/#literals
-  #
-  # jim - This is the function that makes the coloration of the municipios work
-  #     - It attempts to get the electores.csv data for a particular municipio.
-  #     - If the data is found, it uses the nro_candidatos value to specify a
-  #     - color value. The color_range function scales the possible nro_candidatos
-  #     - to a value between the 'range' of color_range (currently set to be between
-  #     - 3 and 8). This is rounded to an integer and then turned into a string
-  #     - like "q6-9".
-  #     - This string is really just the name of a css class defined in css/colorbrewer.css
-  #     - That is where the actual colors are defined. This function just returns a class
-  #     - name which will be applied to the municipio polygon
-  #
-  #     - It gets called when we load up the csv data. in make_vis
-  quantize = (municipio) ->
+  municipio_fill = (municipio) ->
     muni_datos = electores[key_for_geojson(municipio)]
+    color = "#ddd"
     if(muni_datos)
       num_candidatos = parseInt(muni_datos.nro_candidatos)
-      # console.log(muni_datos.nro_candidatos)
-      if num_candidatos == 0
-        console.log(muni_datos.nro_candidatos)
-        css_class = "no_electotres"
-      else
-       css_class = "q" + Math.round(color_range(num_candidatos)) + "-9"
+      if num_candidatos > 0
+        color = color_range(num_candidatos)
     else
-      css_class = "missing_data"
-    css_class
+      color = red
+    color
 
   vis = d3.select("#vis")
     .append("svg")
@@ -114,7 +96,7 @@ $ ->
     municipios.selectAll("path")
       .data(json.features)
     .enter().append("path")
-      .attr("class", if electores then quantize else null)
+      .attr("fill", if electores then municipio_fill else "#ddd")
       .attr("d", path)
       .on("mouseover", show_details)
       .on("mouseout", hide_details)
@@ -134,9 +116,8 @@ $ ->
     #
     #  jim - sounds good. I was just doing that to make sure it worked
    # electores_range = d3.extent(csv, (d) -> parseInt(d.nro_candidatos))
-    candidatos_extent = d3.extent(csv, (d) -> parseInt(d.nro_candidatos))
-    console.log(candidatos_extent)
-    color_range.domain(candidatos_extent)
+    candidatos_max = d3.max(csv, (d) -> parseInt(d.nro_candidatos))
+    color_range.domain([2,candidatos_max])
 
     ##FANTASTIC WORKAROUND for the annoying Municipio prefix.
     ##But I remove them form the csv file. I think it is better that way
@@ -172,7 +153,7 @@ $ ->
     #     - this is why we also call quantize in make_municipios IF the electores is set
     electores = datos_correctos(csv)
     municipios.selectAll("path")
-      .attr("class", quantize)
+      .attr("fill", municipio_fill)
 
   show_details = (municipio, index) ->
     candidate_data = candidates_for(municipio)

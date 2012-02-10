@@ -13,7 +13,7 @@ body {
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
   border-image: initial;
   width: 620px;
-  height: 480px;
+  height: 500px;
 }
  
 #municipios path {
@@ -25,6 +25,8 @@ body {
   fill: none;
   stroke: #fff;
   stroke-width: 1.5px;
+  pointer-events: none;
+
 }
 
 #municipios .missing_data {
@@ -51,9 +53,16 @@ footer {
   line-height: 10px;
 }
 
-#details h2 {
+#details #detail-municipio {
   line-height: 25px;
   margin-bottom: 10px;
+}
+
+#details #detail-estado {
+  font-size: 0.9em;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  line-height: 17px;
 }
 
 .no_electotres{
