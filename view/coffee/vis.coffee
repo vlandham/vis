@@ -50,7 +50,7 @@ $ ->
       console.log("NOT FOUND:")
       console.log("  " + municipio.properties["MUNICIPIO"])
       console.log("  " + key)
-      m_data = {estado: municipio.properties["ESTADO"], municipio: municipio.properties["MUNICIPIO"], candidatos: [{name:"MISSING", parties:[]}]}
+      m_data = {estado: municipio.properties["ESTADO"], municipio: municipio.properties["MUNICIPIO"], candidatos: [{name:"No se realizarán primarias", parties:[]}]}
     m_data
   
   parse_candidatos = (csv) ->
@@ -125,7 +125,6 @@ $ ->
       .data(json.features)
     .enter().append("path")
       .attr("d", path)
-      .call(d3.behavior.zoom().on("zoom", redraw))
 
   datos_correctos = (csv) ->
     corr_datos = {}
@@ -182,7 +181,9 @@ $ ->
     detail = d3.select("#details")
     detail.classed("deactive", false)
 
-    detail.html "<h2 id=\"detail-municipio\"></h2>"
+    detail.html "<h2 id=\"detail-estado\"></h2><h2 id=\"detail-municipio\"></h2>"
+    detail.select("#detail-estado")
+      .text(candidate_data.estado)
     detail.select("#detail-municipio")
       .text(candidate_data.municipio)
 
