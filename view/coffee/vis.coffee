@@ -156,6 +156,8 @@ $ ->
       .attr("fill", municipio_fill)
 
   show_details = (municipio, index) ->
+    # d3.select(this).attr("fill", "rgb(224, 243, 219)")
+    d3.select(this).attr("fill", "rgb(244,246,137)")
     candidate_data = candidates_for(municipio)
     return unless candidate_data
 
@@ -183,6 +185,7 @@ $ ->
     cands.exit().remove()
 
   hide_details = (municipio, index) ->
+    d3.select(this).attr("fill", (d) -> municipio_fill(d))
     detail = d3.select("#details")
     detail.classed("deactive", true)
     ddd = 3
