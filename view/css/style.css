@@ -3,9 +3,17 @@ body {
 }
 
 #vis {
-  background: #eee;
-  /* width: 770px; */
-  /* height: 500px; */
+  background-color: whiteSmoke;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  border-image: initial;
+  width: 620px;
+  height: 480px;
 }
  
 #municipios path {
