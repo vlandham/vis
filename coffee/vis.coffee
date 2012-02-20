@@ -8,44 +8,47 @@ $ ->
   r = 3
   [pt, pr, pb, pl] = [10, 10, 10, 10]
 
+  proj = d3.geo.albersUsa().translate([-157872.20255447022, 65763.14090791851]).scale(3436985.607117489)
+  path = d3.geo.path().projection(proj)
+  translation = proj.translate()
+  scale = proj.scale()
+
   data = null
   vis = null
+  streets = null
 
-  x_scale = d3.scale.linear()
-    .domain([0, 10])
-    .range([0, w])
+  vis = d3.select("#vis")
+    .append("svg")
+    .attr("id", "vis-svg")
+    .attr("width", w + (pl + pr))
+    .attr("height", h + (pt + pb))
 
-  y_scale = d3.scale.linear()
-    .domain([0, 10])
-    .range([0, h])
+  render_streets = (json) ->
+    data = json
 
-  render_vis = (csv) ->
-    data = csv
-    console.log(data)
+    console.log(json)
 
-    vis = d3.select("#vis")
-      .append("svg")
-      .attr("id", "vis-svg")
-      .attr("width", w + (pl + pr))
-      .attr("height", h + (pt + pb))
-
-    vis.append("rect")
-      .attr("width", w + (pl + pr))
-      .attr("height", h + (pt + pb))
-      .attr("fill", "#ddd")
-      .attr("pointer-events","all")
-
-    points_g = vis.append("g")
+    streets = vis.append("g")
       .attr("transform", "translate(#{pr},#{pt}")
+      .attr("id", "streets")
+
+    streets.selectAll("path")
+      .data(json.features)
+      .enter().append("path")
+      .attr("d", path)
+      .call(d3.behavior.zoom().on("zoom", redraw))
+
+  redraw = () ->
+    tx = translation[0] * d3.event.scale + d3.event.translate[0]
+    ty = translation[1] * d3.event.scale + d3.event.translate[1]
+
+    proj.translate([tx,ty])
+    proj.scale(scale * d3.event.scale)
+    console.log(proj.translate())
+    console.log(proj.scale())
+
+    streets.selectAll("path").attr("d", path)
 
 
-    points = points_g.selectAll(".point")
-      .data(data)
-    .enter().append("circle")
-      .attr("cx", (d) -> x_scale(d.x))
-      .attr("cy", (d) -> y_scale(d.y))
-      .attr("r", r)
-      .attr("fill", "#4e4e4e")
 
-
-  d3.csv "data/test.csv", render_vis
+  d3.json "data/troostwood.geojson", render_streets
