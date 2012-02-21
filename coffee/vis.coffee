@@ -79,6 +79,8 @@ class BubbleChart
       .attr("stroke-width", 2)
       .attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
       .attr("id", (d) -> "bubble_#{d.id}")
+      .on("mouseover", this.show_details)
+      .on("mouseout", this.hide_details)
 
     # Fancy transition to make bubbles appear, ending with the
     # correct radius
@@ -163,6 +165,14 @@ class BubbleChart
   # Method to hide year titiles
   hide_years: () =>
     years = @vis.selectAll(".years").remove()
+
+  show_details: (data, i) ->
+    # d3.select(this).attr("stroke", "black")
+
+
+  hide_details: (data, i) ->
+    # d3.select(this).attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
+
 
 root = exports ? this
 
