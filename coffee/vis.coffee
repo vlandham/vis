@@ -5,6 +5,9 @@ class BubbleChart
     @width = 940
     @height = 600
 
+    # locations the nodes will move towards
+    # depending on which view is currently being
+    # used
     @center = {x: @width / 2, y: @height / 2}
     @year_centers = {
       "2008": {x: @width / 3, y: @height / 2},
@@ -12,15 +15,23 @@ class BubbleChart
       "2010": {x: 2 * @width / 3, y: @height / 2}
     }
 
+    # used when setting up force and
+    # moving around nodes
+    @layout_gravity = -0.01
+    @gravity = 0.1
+
+    # these will be set in create_nodes and create_vis
     @vis = null
     @nodes = []
-    @gravity = 0.1
     @force = null
     @circles = null
+
+    # nice looking colors - no reason to buck the trend
     @fill_color = d3.scale.ordinal()
       .domain(["low", "medium", "high"])
       .range(["#d84b2a", "#beccae", "#7aa25c"])
 
+    # use the max total_amount in the data as the max in the scale's domain
     max_amount = d3.max(@data, (d) -> d.total_amount)
     @radius_scale = d3.scale.pow().exponent(0.5).domain([0, max_amount]).range([1, 10])
     
@@ -41,8 +52,8 @@ class BubbleChart
         org: d.organization
         group: d.group
         year: d.start_year
-        x: Math.random() * 1000
-        y: Math.random() * 900
+        x: Math.random() * 900
+        y: Math.random() * 800
       }
       @nodes.push node
 
@@ -61,6 +72,7 @@ class BubbleChart
       .data(@nodes, (d) -> d.id)
 
     # radius will be set to 0 initially.
+    # see transition below
     @circles.enter().append("circle")
       .attr("r", 0)
       .attr("fill", (d) => @fill_color(d.group))
@@ -68,21 +80,34 @@ class BubbleChart
       .attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
       .attr("id", (d) -> "bubble_#{d.id}")
 
+    # Fancy transition to make bubbles appear, ending with the
+    # correct radius
     @circles.transition().duration(2000).attr("r", (d) -> d.radius)
 
+  # Charge function that is called for each node.
+  # Charge is proportional to the diameter of the
+  # circle (which is stored in the radius attribute
+  # of the circle's associated data.
+  # This is done to allow for accurate collision 
+  # detection with nodes of different sizes.
+  # Charge is negative because we want nodes to 
+  # repel.
+  # Dividing by 8 scales down the charge to be
+  # appropriate for the visualization dimensions.
   charge: (d) ->
-    if (d.value < 0)
-      0
-    else
-      -Math.pow(d.radius, 2.0) / 8
+    -Math.pow(d.radius, 2.0) / 8
 
+  # Starts up the force layout with
+  # the default values
   start: () =>
     @force = d3.layout.force()
       .nodes(@nodes)
       .size([@width, @height])
 
+  # Sets up force layout to display
+  # all nodes in one circle.
   display_group_all: () =>
-    @force.gravity(-0.01)
+    @force.gravity(@layout_gravity)
       .charge(this.charge)
       .friction(0.9)
       .on "tick", (e) =>
@@ -91,15 +116,19 @@ class BubbleChart
           .attr("cy", (d) -> d.y)
     @force.start()
 
-  # moves all circles towards the @center
+    this.hide_years()
+
+  # Moves all circles towards the @center
   # of the visualization
   move_towards_center: (alpha) =>
     (d) =>
       d.x = d.x + (@center.x - d.x) * (@gravity + 0.02) * alpha
       d.y = d.y + (@center.y - d.y) * (@gravity + 0.02) * alpha
 
+  # sets the display of bubbles to be separated
+  # into each year. Does this by calling move_towards_year
   display_by_year: () =>
-    @force.gravity(-0.01)
+    @force.gravity(@layout_gravity)
       .charge(this.charge)
       .friction(0.9)
       .on "tick", (e) =>
@@ -108,12 +137,32 @@ class BubbleChart
           .attr("cy", (d) -> d.y)
     @force.start()
 
+    this.display_years()
+
   # move all circles to their associated @year_centers 
   move_towards_year: (alpha) =>
     (d) =>
       target = @year_centers[d.year]
       d.x = d.x + (target.x - d.x) * (@gravity + 0.02) * alpha * 1.1
       d.y = d.y + (target.y - d.y) * (@gravity + 0.02) * alpha * 1.1
+
+  # Method to display year titles
+  display_years: () =>
+    years_x = {"2008": 160, "2009": @width / 2, "2010": @width - 160}
+    years_data = d3.keys(years_x)
+    years = @vis.selectAll(".years")
+      .data(years_data)
+
+    years.enter().append("text")
+      .attr("class", "years")
+      .attr("x", (d) => years_x[d] )
+      .attr("y", 40)
+      .attr("text-anchor", "middle")
+      .text((d) -> d)
+
+  # Method to hide year titiles
+  hide_years: () =>
+    years = @vis.selectAll(".years").remove()
 
 root = exports ? this
 
