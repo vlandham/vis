@@ -26,20 +26,24 @@
 
   <div id="container" class="container">
     <header>
-
+    <h1>Gates Foundation Educational Spending</h1>
     </header>
     <div id="main" role="main">
+      <div id="view_selection" class="btn-group">
+        <a href="#" id="all" class="btn active">All Grants</a>
+        <a href="#" id="year" class="btn">Grants By Year</a>
+      </div>
       <div id="vis"></div>
     </div>
     <footer>
-
+    <p>A demonstration of animated bubble charts in D3.js</p>
+    <p><a href="">Blog Post</a> | <a href="">Code</a></p>
     </footer>
   </div> <!--! end of #container -->
 
 
   <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
   <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
-
 
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
@@ -52,6 +56,15 @@
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
     $(document).ready(function() {
+        $(document).ready(function() {
+          $('#view_selection a').click(function() {
+            var view_type = $(this).attr('id');
+            $('#view_selection a').removeClass('active');
+            $(this).toggleClass('active');
+            toggle_view(view_type);
+            return false;
+          });
+        });
     });
   </script>
 

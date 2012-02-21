@@ -1,1 +1,19 @@
+a, a:visited, a:active {
+  color: #444;
+}
+
+#vis {
+  width: 940px;
+  height: 600px;
+  clear: both;
+  margin-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+}
+
+#view_selection {
+  margin-top: 10px;
+}
 
