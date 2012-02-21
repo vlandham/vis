@@ -18,7 +18,7 @@ class BubbleChart
     # used when setting up force and
     # moving around nodes
     @layout_gravity = -0.01
-    @gravity = 0.1
+    @damper = 0.1
 
     # these will be set in create_nodes and create_vis
     @vis = null
@@ -122,8 +122,8 @@ class BubbleChart
   # of the visualization
   move_towards_center: (alpha) =>
     (d) =>
-      d.x = d.x + (@center.x - d.x) * (@gravity + 0.02) * alpha
-      d.y = d.y + (@center.y - d.y) * (@gravity + 0.02) * alpha
+      d.x = d.x + (@center.x - d.x) * (@damper + 0.02) * alpha
+      d.y = d.y + (@center.y - d.y) * (@damper + 0.02) * alpha
 
   # sets the display of bubbles to be separated
   # into each year. Does this by calling move_towards_year
@@ -143,8 +143,8 @@ class BubbleChart
   move_towards_year: (alpha) =>
     (d) =>
       target = @year_centers[d.year]
-      d.x = d.x + (target.x - d.x) * (@gravity + 0.02) * alpha * 1.1
-      d.y = d.y + (target.y - d.y) * (@gravity + 0.02) * alpha * 1.1
+      d.x = d.x + (target.x - d.x) * (@damper + 0.02) * alpha * 1.1
+      d.y = d.y + (target.y - d.y) * (@damper + 0.02) * alpha * 1.1
 
   # Method to display year titles
   display_years: () =>
