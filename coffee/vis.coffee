@@ -5,6 +5,8 @@ class BubbleChart
     @width = 940
     @height = 600
 
+    @tooltip = CustomTooltip("gates_tooltip", 240)
+
     # locations the nodes will move towards
     # depending on which view is currently being
     # used
@@ -71,6 +73,10 @@ class BubbleChart
     @circles = @vis.selectAll("circle")
       .data(@nodes, (d) -> d.id)
 
+    # used because we need 'this' in the 
+    # mouse callbacks
+    that = this
+
     # radius will be set to 0 initially.
     # see transition below
     @circles.enter().append("circle")
@@ -79,12 +85,13 @@ class BubbleChart
       .attr("stroke-width", 2)
       .attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
       .attr("id", (d) -> "bubble_#{d.id}")
-      .on("mouseover", this.show_details)
-      .on("mouseout", this.hide_details)
+      .on("mouseover", (d,i) -> that.show_details(d,i,this))
+      .on("mouseout", (d,i) -> that.hide_details(d,i,this))
 
     # Fancy transition to make bubbles appear, ending with the
     # correct radius
     @circles.transition().duration(2000).attr("r", (d) -> d.radius)
+
 
   # Charge function that is called for each node.
   # Charge is proportional to the diameter of the
@@ -166,12 +173,17 @@ class BubbleChart
   hide_years: () =>
     years = @vis.selectAll(".years").remove()
 
-  show_details: (data, i) ->
-    # d3.select(this).attr("stroke", "black")
+  show_details: (data, i, element) =>
+    d3.select(element).attr("stroke", "black")
+    content = "<span class=\"name\">Title:</span><span class=\"value\"> #{data.name}</span><br/>"
+    content +="<span class=\"name\">Amount:</span><span class=\"value\"> $#{addCommas(data.value)}</span><br/>"
+    content +="<span class=\"name\">Year:</span><span class=\"value\"> #{data.year}</span>"
+    @tooltip.showTooltip(content,d3.event)
 
 
-  hide_details: (data, i) ->
-    # d3.select(this).attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
+  hide_details: (data, i, element) =>
+    d3.select(element).attr("stroke", (d) => d3.rgb(@fill_color(d.group)).darker())
+    @tooltip.hideTooltip()
 
 
 root = exports ? this
