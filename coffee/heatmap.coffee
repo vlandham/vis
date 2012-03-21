@@ -27,7 +27,6 @@ heatmapChart = () ->
       yScale.domain(data.map (d) -> d.y)
       zScale.domain(d3.extent(data, (d) -> d.z))
 
-      console.log(data)
       
       # select svg if it exists
       svg = d3.select(this).selectAll("svg").data([data])

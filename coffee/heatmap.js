@@ -49,7 +49,6 @@
         zScale.domain(d3.extent(data, function(d) {
           return d.z;
         }));
-        console.log(data);
         svg = d3.select(this).selectAll("svg").data([data]);
         gEnter = svg.enter().append("svg").append("g");
         svg.attr("width", width + margin.left + margin.right);
