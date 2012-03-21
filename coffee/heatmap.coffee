@@ -6,31 +6,39 @@ heatmapChart = () ->
   height = 800
   xValue = (d) -> d.x
   yValue = (d) -> d.y
-  zValue = (d) -> parseInt(d.z)
+  zValue = (d) -> parseFloat(d.z)
 
   xScale = d3.scale.ordinal().rangeBands([0, width])
   yScale = d3.scale.ordinal().rangeBands([0, height])
-  zScale = d3.scale.linear().range(['blue','red'])
+  zScale = d3.scale.linear().range(['#C6DBEF','#08306B'])
   onClick = (d,i) -> console.log(d)
 
   chart = (selection) ->
     selection.each (data) ->
       data = data.map (d, i) ->
-        [xValue.call(data, d, i), yValue.call(data, d, i), zValue.call(data, d, i)]
+        new_data = d
+        new_data.x = xValue.call(data, d, i)
+        new_data.y = yValue.call(data, d, i)
+        new_data.z = zValue.call(data, d, i)
+        new_data
 
       console.log(data)
-      xScale.domain(data.map (d) -> d[0])
-      yScale.domain(data.map (d) -> d[1])
-      zScale.domain(d3.extent(data, (d) -> d[2]))
+      xScale.domain(data.map (d) -> d.x)
+      yScale.domain(data.map (d) -> d.y)
+      zScale.domain(d3.extent(data, (d) -> d.z))
+
+      console.log(data)
       
       # select svg if it exists
       svg = d3.select(this).selectAll("svg").data([data])
 
+
       # otherwise, create skeletal structure for heatmap
       gEnter = svg.enter().append("svg").append("g")
 
-      svg.attr("width", width)
-      svg.attr("height", height)
+      svg.attr("width", width + margin.left + margin.right)
+      svg.attr("height", height + margin.top + margin.bottom)
+
 
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
@@ -44,7 +52,7 @@ heatmapChart = () ->
         .data(data)
       .enter().append("g")
         .attr("class", "row")
-        .attr("transform", (d,i) -> "translate(#{0},#{yScale(d[1])})")
+        .attr("transform", (d,i) -> "translate(#{0},#{yScale(d.y)})")
         .each(buildRow)
 
       row.append("line")
@@ -57,20 +65,20 @@ heatmapChart = () ->
         .attr("y", yScale.rangeBand() / 2)
         .attr("dy", ".32em")
         .attr("text-anchor", "end")
-        .text((d,i) -> d[1])
+        .text((d,i) -> d.y)
 
       column = g.selectAll(".column")
         .data(data)
       .enter().append("g")
         .attr("class", "column")
-        .attr("transform", (d, i) -> "translate(#{xScale(d[0])}) rotate(#{-90})")
+        .attr("transform", (d, i) -> "translate(#{xScale(d.x)}) rotate(#{-90})")
 
       column.append("text")
         .attr("x", 6)
         .attr("y", xScale.rangeBand() / 2)
         .attr("dy", ".32em")
         .attr("text-anchor", "start")
-        .text( (d,i) -> d[0])
+        .text( (d,i) -> d.x)
 
       column.append("line")
         .attr("x1", -width)
@@ -82,19 +90,20 @@ heatmapChart = () ->
       .data([row])
     .enter().append("rect")
       .attr("class", "cell")
-      .attr("x", (d) -> xScale(d[0]))
+      .attr("x", (d) -> xScale(d.x))
       .attr("width", xScale.rangeBand())
-      .attr("height", xScale.rangeBand())
-      .attr("fill", (d) -> zScale(d[2]))
+      .attr("height", yScale.rangeBand())
+      .attr("fill", (d) -> zScale(d.z))
       .on("mouseover", mouseover)
       .on("mouseout", mouseout)
       .on("click", onClick)
 
-  mouseover = (d,i) ->
-    console.log(d3.event)
+  mouseover = (p,i) ->
+    d3.selectAll(".row text").classed("active", (d, i) -> d.y == p.y)
+    d3.selectAll(".column text").classed("active", (d, i) -> d.x == p.x)
 
-  mouseout = (d,i) ->
-    console.log(d)
+  mouseout = (p,i) ->
+    d3.selectAll("text").classed("active", false)
 
   chart.width = (_) ->
     if !arguments.length
@@ -106,6 +115,12 @@ heatmapChart = () ->
     if !arguments.length
       return height
     height = _
+    chart
+
+  chart.margin = (_) ->
+    if !arguments.length
+      return margin
+    margin = _
     chart
 
   chart.x = (_) ->
@@ -126,10 +141,10 @@ heatmapChart = () ->
     zValue = _
     chart
 
-  chart.margin = (_) ->
+  chart.scale = (_) ->
     if !arguments.length
-      return margin
-    margin = _
+      return zScale
+    zScale = _
     chart
 
   return chart

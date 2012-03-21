@@ -12,3 +12,7 @@ text.active {
   fill: red;
 }
 
+.cell {
+  cursor: pointer;
+}
+

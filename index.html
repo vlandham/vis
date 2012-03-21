@@ -49,7 +49,7 @@
   <script src="coffee/heatmap.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-        var heatmap = heatmapChart();
+        var heatmap = heatmapChart().margin({top:20, bottom:20, left:60, right:20});
 
         d3.csv("data/test.csv", function(data) {
           d3.select("#vis")
