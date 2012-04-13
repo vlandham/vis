@@ -2,50 +2,78 @@
 root = exports ? this
 
 $ ->
+  projection = d3.geo.albersUsa().translate([-900,950]).scale(28000)
+  scale = projection.scale()
+  translation = projection.translate()
+  path = d3.geo.path().projection(projection)
 
-  w = 940
-  h = 600
-  r = 3
-  [pt, pr, pb, pl] = [10, 10, 10, 10]
+  tracts = null
+  locations = null
 
-  data = null
-  vis = null
+  vis = d3.select("#vis")
+    .append("svg")
+    .attr("width", 900)
+    .attr("height", 900)
 
-  x_scale = d3.scale.linear()
-    .domain([0, 10])
-    .range([0, w])
+  display_tracts = (json) ->
+    d3.csv "data/locations.csv", display_locations
+    tracts = vis.append("g")
+      .attr("id", "tracts")
 
-  y_scale = d3.scale.linear()
-    .domain([0, 10])
-    .range([0, h])
+    tracts.selectAll("path")
+      .data(json.features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("fill-opacity", 0.5)
+      .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#B5D9B9" else "#85C3C0")
+      .attr("stroke", "#222")
+      .call(d3.behavior.zoom().on("zoom", redraw))
 
-  render_vis = (csv) ->
-    data = csv
-    console.log(data)
+  display_locations = (location_data) ->
+    positions = []
+    location_data.forEach (loc) ->
+      positions.push projection([+loc.lon, +loc.lat])
 
-    vis = d3.select("#vis")
-      .append("svg")
-      .attr("id", "vis-svg")
-      .attr("width", w + (pl + pr))
-      .attr("height", h + (pt + pb))
+    polygons = d3.geom.voronoi(positions)
 
-    vis.append("rect")
-      .attr("width", w + (pl + pr))
-      .attr("height", h + (pt + pb))
-      .attr("fill", "#ddd")
-      .attr("pointer-events","all")
+    cells = vis.append("g")
+      .attr("class", "cells")
+      .attr("id", "voronoi")
 
-    points_g = vis.append("g")
-      .attr("transform", "translate(#{pr},#{pt}")
+    cell_gs = cells.selectAll("g")
+        .data(location_data)
+      .enter().append("g")
+
+    cell_gs.append("path")
+      .attr("class", "cell")
+      .attr("d", (d,i) -> "M#{polygons[i].join("L")}Z")
 
 
-    points = points_g.selectAll(".point")
-      .data(data)
+    locations = vis.append("g")
+      .attr("class", "locations")
+    locations.selectAll(".location")
+      .data(location_data)
     .enter().append("circle")
-      .attr("cx", (d) -> x_scale(d.x))
-      .attr("cy", (d) -> y_scale(d.y))
-      .attr("r", r)
-      .attr("fill", "#4e4e4e")
+      .attr("class", "location")
+      .attr("cx", (d,i) -> positions[i][0])
+      .attr("cy", (d,i) -> positions[i][1])
+      .attr("r", 3.5)
+      .on "mouseover", (d,i) ->
+        console.log(d)
 
 
-  d3.csv "data/test.csv", render_vis
+  redraw = () ->
+    tx = translation[0] * d3.event.scale + d3.event.translate[0]
+    ty = translation[1] * d3.event.scale + d3.event.translate[1]
+
+    projection.translate([tx, ty])
+    projection.scale(scale * d3.event.scale)
+
+    tracts.selectAll("path").attr("d", path)
+
+    locations.selectAll(".location")
+      .attr("cx", (d,i) -> projection([+d.lon, +d.lat])[0])
+      .attr("cy", (d,i) -> projection([+d.lon, +d.lat])[1])
+
+  d3.json "data/kc_tracts.geojson", display_tracts
+

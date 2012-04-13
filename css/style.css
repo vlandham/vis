@@ -1,1 +1,19 @@
 
+#tracts {
+  pointer-events: all;
+}
+
+#voronoi {
+  pointer-events: none;
+}
+
+circle.location {
+  fill: red;
+}
+
+path.cell {
+  fill: none;
+  pointer-events: none;
+  stroke: brown;
+}
+
