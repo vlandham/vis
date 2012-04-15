@@ -1,1 +1,26 @@
 
+
+
+.A {
+  /* fill: green; */
+  fill: #2BAF06;
+}
+
+.T {
+  /* fill: red; */
+  fill: #FF5A00;
+}
+
+.C {
+  /* fill: blue; */
+  fill: #067FAF;
+}
+
+.G {
+  /* fill: yellow; */
+  fill: #F3FB00;
+}
+
+.highlight {
+  fill: purple;
+}
