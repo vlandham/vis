@@ -1,43 +1,73 @@
+h1. A simple way to get started with data visualizations using d3 and coffeescript
+
 h2. Usage
+
+h3. First Clone the Repository
 
 <pre>
 git clone git@github.com:vlandham/vis.git
 cd vis
-git checkout -b interesting_new_bar_chart
-# ... code away
 </pre>
 
+h3. You might consider creating a new branch for your Vis
 
-h2. Contents
+<pre>
+git checkout -b interesting_new_bar_chart
+</pre>
 
-* @/code@
-** used for storing scripts / rough data
-* @/@
-** main vis area
-* @/coffee/@
-** coffeescript files. Example @vis.coffee@ setup
-* @/data/@
-** data dump for @.csv@ and @.json@ files
-* @/js/@
-** javascript goes here. most in @libs@ directory
+h3. View built in example
 
-h2. Run
+You can start up a local webserver by using python's simple server:
+
+<pre>
+python -m SimpleHTTTPServer -p 3000
+</pre>
+
+or @thin@ in ruby
 
 <pre>
 thin start
+# might have to run 'bundle install' first
 </pre>
+
+Now go to "http://0.0.0.0:3000":http://0.0.0.0:3000/
+
+and you have a basic visualization
+
+h3. Start Coding
+
+Open up @coffee/vis.coffee@ and start modifying the built in visualization to fit your needs.
+
+h2. Folder Organization
+
+* @/@
+** main vis area
+* @/index.html@
+** main page for your visualization. Loads coffeescript and javascript files.
+* @/coffee/@
+** coffeescript files. Example @vis.coffee@.
+* @/data/@
+** data dump for @.csv@ and @.json@ files and other data files your vis uses.
+* @/js/@
+** javascript goes here. JS Libraries in @libs@ directory
+* @/css/@
+** put your stylesheets in here
+* @/img/@
+** put your images in here
+* @/tools/@
+** put your helper scripts / data manipulation tools here
 
 h2. Requirments
 
-@thin@, @sinatra@. @Gemfile@ provided.
+To startup the server, you either need @python@, or a bunch of @ruby@ gems (should be simplified in the future).
 
-@bundle install@
+Run @bundle install@ to get the gems needed. Gems listed in the Gemfile
 
 h2. Contents
 
 h3. Twitter Bootstrap
 
-* 2.0
+* 2.0.2
 
 h3. html5boilerplate
 
@@ -45,13 +75,13 @@ h3. html5boilerplate
 
 h3. d3.js
 
-* v1.7.0
+* v2.9.0
 
 h3. coffee-script.js
 
-* v1.2.0
+* v1.3.1
 
 h3. jQuery
 
-* v1.6.2
+* v1.7.1
 
