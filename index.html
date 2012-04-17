@@ -13,11 +13,38 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <!-- end CSS-->
+  <style type="text/css">
+    body {
+      font: 10px sans-serif;
+      margin: 0;
+    }
+    
+    .axis {
+      shape-rendering: crispEdges;
+    }
+
+    .x.axis line {
+      /* stroke: #fff; */
+    }
+
+    .x.axis .minor {
+      stroke-opacity: .5;
+    }
+
+    .x.axis line, .x.axis path {
+      /* display: none; */
+      fill: none;
+      stroke: #000;
+    }
+
+    .y.axis line, .y.axis path {
+      fill: none;
+      stroke: #000;
+    }
+    </style>
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
@@ -43,22 +70,30 @@
 
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
-  <script src="js/libs/coffee-script.js"></script>
   <script src="js/libs/d3.v2.js"></script>
-  <script type="text/coffeescript" src="coffee/vis.coffee"></script>
+  <script src="js/libs/d3.tsv.min.js"></script>
+  <script src="coffee/ma_plot.js"></script>
   <script type="text/javascript">
+
     $(document).ready(function() {
+        console.log('run');
+        var plot = MaPlot().x(function(d) { return parseFloat(d.A); }).y(function(d) { 
+          if( d.rad == "NA" )
+          {
+          return 0;
+          }
+          else
+          {
+          return parseFloat(d.rad); 
+          }
+          });
+        d3.tsv("data/fit_data.txt", function(data) {
+          d3.select("#vis")
+            .datum(data)
+            .call(plot);
+          });
     });
   </script>
-
-
-  <script> // Change UA-XXXXX-X to be your site's ID
-    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
-    Modernizr.load({
-      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
-    });
-  </script>
-
 
   <!--[if lt IE 7 ]>
     <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
