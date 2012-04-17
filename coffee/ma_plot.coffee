@@ -11,6 +11,11 @@ MaPlot = () ->
   radius = 3
   color = (d) -> if yValue(d) > 0 then "#000" else "#ccc"
 
+  selected_display_element = "#table_display"
+
+  g = null
+  points = null
+
   xScale = d3.scale.linear().range([0,width])
   yScale = d3.scale.linear().range([0,height])
 
@@ -20,17 +25,41 @@ MaPlot = () ->
   xAxis = d3.svg.axis().scale(xScale).orient("bottom")
   yAxis = d3.svg.axis().scale(yScale).orient("left")
 
+  brushStart = (p) ->
+    # points.call(brush.clear())
+    if brush.empty()
+      points.call(brush.clear())
+      points.selectAll("circle").attr("fill", color)
+
+  brushOn = (p) ->
+    e = brush.extent()
+    all_points = points.selectAll("circle")
+    selected_points = all_points
+      .filter (d) ->
+        if e[0][0] <= xValue(d) && xValue(d) <= e[1][0] && e[0][1] <= yValue(d) && yValue(d) <= e[1][1]
+          return true
+        else
+          return false
+      
+    all_points.attr("fill", color)
+    selected_points.attr("fill", "blue")
+    display_selected(selected_points)
+
+  brushEnd = (p) ->
+    if brush.empty()
+      points.selectAll("circle").attr("fill", color)
+
   brush = d3.svg.brush()
     .on("brushstart", brushStart)
-    .on("brush", brush)
+    .on("brush", brushOn)
     .on("brushend", brushEnd)
 
   chart = (selection) ->
     selection.each (data) ->
-      console.log(data)
 
       xScale.domain(xDomain(data))
       yScale.domain(yDomain(data))
+      brush.x(xScale).y(yScale)
 
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
@@ -51,10 +80,10 @@ MaPlot = () ->
         .attr("transform", "translate(#{0},#{0})")
         .call(yAxis)
 
-      pointsG = g.append("g")
+      points = g.append("g")
         .attr("class", "points")
 
-      pointsG.selectAll("circle")
+      points.selectAll("circle")
         .data(data)
       .enter().append("circle")
         .attr("class", "point")
@@ -63,6 +92,17 @@ MaPlot = () ->
         .attr("r", radius)
         .attr("fill", color)
 
+      points.call(brush)
+
+  display_selected = (selected_points) ->
+    ss = []
+    selected_points.each (d) -> ss.push(d)
+    selection = d3.select(selected_display_element).selectAll("p").data(ss, (d) -> d.index)
+
+    selection.exit().remove()
+
+    selection.enter()
+      .append("p").html((d,i) -> "#{i} - #{d.index}")
 
   chart.height = (_) ->
     if !arguments.length
@@ -106,14 +146,6 @@ MaPlot = () ->
     yValue = _
     chart
 
-  brushStart = (p) ->
-    console.log("b")
-
-  brush = (p) ->
-    console.log("b")
-
-  brushEnd = (p) ->
-    console.log("b")
 
   return chart
 

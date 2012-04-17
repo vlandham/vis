@@ -5,7 +5,7 @@
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
   MaPlot = function() {
-    var brush, brushEnd, brushStart, chart, color, height, margin, radius, width, xAxis, xDomain, xScale, xValue, yAxis, yDomain, yScale, yValue;
+    var brush, brushEnd, brushOn, brushStart, chart, color, display_selected, g, height, margin, points, radius, selected_display_element, width, xAxis, xDomain, xScale, xValue, yAxis, yDomain, yScale, yValue;
     width = 600;
     height = 600;
     margin = {
@@ -28,6 +28,9 @@
         return "#ccc";
       }
     };
+    selected_display_element = "#table_display";
+    g = null;
+    points = null;
     xScale = d3.scale.linear().range([0, width]);
     yScale = d3.scale.linear().range([0, height]);
     xDomain = function(data) {
@@ -38,13 +41,39 @@
     };
     xAxis = d3.svg.axis().scale(xScale).orient("bottom");
     yAxis = d3.svg.axis().scale(yScale).orient("left");
-    brush = d3.svg.brush().on("brushstart", brushStart).on("brush", brush).on("brushend", brushEnd);
+    brushStart = function(p) {
+      if (brush.empty()) {
+        points.call(brush.clear());
+        return points.selectAll("circle").attr("fill", color);
+      }
+    };
+    brushOn = function(p) {
+      var all_points, e, selected_points;
+      e = brush.extent();
+      all_points = points.selectAll("circle");
+      selected_points = all_points.filter(function(d) {
+        if (e[0][0] <= xValue(d) && xValue(d) <= e[1][0] && e[0][1] <= yValue(d) && yValue(d) <= e[1][1]) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+      all_points.attr("fill", color);
+      selected_points.attr("fill", "blue");
+      return display_selected(selected_points);
+    };
+    brushEnd = function(p) {
+      if (brush.empty()) {
+        return points.selectAll("circle").attr("fill", color);
+      }
+    };
+    brush = d3.svg.brush().on("brushstart", brushStart).on("brush", brushOn).on("brushend", brushEnd);
     chart = function(selection) {
       return selection.each(function(data) {
-        var g, gEnter, pointsG, svg;
-        console.log(data);
+        var gEnter, svg;
         xScale.domain(xDomain(data));
         yScale.domain(yDomain(data));
+        brush.x(xScale).y(yScale);
         svg = d3.select(this).selectAll("svg").data([data]);
         gEnter = svg.enter().append("svg").append("g");
         svg.attr("width", width + margin.left + margin.right);
@@ -52,12 +81,27 @@
         g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         g.append("g").attr("class", "x axis").attr("transform", "translate(" + 0 + "," + height + ")").call(xAxis);
         g.append("g").attr("class", "y axis").attr("transform", "translate(" + 0 + "," + 0 + ")").call(yAxis);
-        pointsG = g.append("g").attr("class", "points");
-        return pointsG.selectAll("circle").data(data).enter().append("circle").attr("class", "point").attr("cx", function(d) {
+        points = g.append("g").attr("class", "points");
+        points.selectAll("circle").data(data).enter().append("circle").attr("class", "point").attr("cx", function(d) {
           return xScale(xValue(d));
         }).attr("cy", function(d) {
           return yScale(yValue(d));
         }).attr("r", radius).attr("fill", color);
+        return points.call(brush);
+      });
+    };
+    display_selected = function(selected_points) {
+      var selection, ss;
+      ss = [];
+      selected_points.each(function(d) {
+        return ss.push(d);
+      });
+      selection = d3.select(selected_display_element).selectAll("p").data(ss, function(d) {
+        return d.index;
+      });
+      selection.exit().remove();
+      return selection.enter().append("p").html(function(d, i) {
+        return "" + i + " - " + d.index;
       });
     };
     chart.height = function(_) {
@@ -108,15 +152,6 @@
       }
       yValue = _;
       return chart;
-    };
-    brushStart = function(p) {
-      return console.log("b");
-    };
-    brush = function(p) {
-      return console.log("b");
-    };
-    brushEnd = function(p) {
-      return console.log("b");
     };
     return chart;
   };
