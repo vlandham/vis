@@ -5,7 +5,7 @@
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
   MaPlot = function() {
-    var brush, brushEnd, brushOn, brushStart, chart, color, display_selected, g, height, margin, points, radius, selected_display_element, width, xAxis, xDomain, xScale, xValue, yAxis, yDomain, yScale, yValue;
+    var allData, brush, brushEnd, brushOn, brushStart, chart, color, dataTableSelection, displaySelected, filteredData, g, height, id, margin, points, radius, setupSelectedTable, width, xAxis, xDomain, xScale, xValue, yAxis, yCutOff, yDomain, yScale, yValue;
     width = 600;
     height = 600;
     margin = {
@@ -20,17 +20,25 @@
     yValue = function(d) {
       return parseFloat(d.m);
     };
+    id = function(d) {
+      return d.index;
+    };
+    yCutOff = 0.4;
     radius = 3;
     color = function(d) {
-      if (yValue(d) > 0) {
-        return "#000";
+      if (yValue(d) > 1.0) {
+        return "#A21705";
+      } else if (yValue(d) < -1.0) {
+        return "#87A205";
       } else {
         return "#ccc";
       }
     };
-    selected_display_element = "#table_display";
+    dataTableSelection = "#data-list";
     g = null;
     points = null;
+    allData = [];
+    filteredData = [];
     xScale = d3.scale.linear().range([0, width]);
     yScale = d3.scale.linear().range([0, height]);
     xDomain = function(data) {
@@ -60,7 +68,7 @@
       });
       all_points.attr("fill", color);
       selected_points.attr("fill", "blue");
-      return display_selected(selected_points);
+      return displaySelected(selected_points);
     };
     brushEnd = function(p) {
       if (brush.empty()) {
@@ -71,6 +79,7 @@
     chart = function(selection) {
       return selection.each(function(data) {
         var gEnter, svg;
+        allData = data;
         xScale.domain(xDomain(data));
         yScale.domain(yDomain(data));
         brush.x(xScale).y(yScale);
@@ -82,26 +91,47 @@
         g.append("g").attr("class", "x axis").attr("transform", "translate(" + 0 + "," + height + ")").call(xAxis);
         g.append("g").attr("class", "y axis").attr("transform", "translate(" + 0 + "," + 0 + ")").call(yAxis);
         points = g.append("g").attr("class", "points");
-        points.selectAll("circle").data(data).enter().append("circle").attr("class", "point").attr("cx", function(d) {
-          return xScale(xValue(d));
-        }).attr("cy", function(d) {
-          return yScale(yValue(d));
-        }).attr("r", radius).attr("fill", color);
-        return points.call(brush);
+        chart.update();
+        points.call(brush);
+        return setupSelectedTable(d3.keys(data[0]));
       });
     };
-    display_selected = function(selected_points) {
-      var selection, ss;
-      ss = [];
+    chart.update = function() {
+      var newPoints;
+      filteredData = allData.filter(function(d) {
+        return Math.abs(yValue(d)) > yCutOff;
+      });
+      newPoints = points.selectAll("circle").data(filteredData, function(d) {
+        return id(d);
+      });
+      newPoints.exit().remove();
+      return newPoints.enter().append("circle").attr("class", "point").attr("cx", function(d) {
+        return xScale(xValue(d));
+      }).attr("cy", function(d) {
+        return yScale(yValue(d));
+      }).attr("r", radius).attr("fill", color);
+    };
+    setupSelectedTable = function(keys) {
+      var head, table;
+      table = d3.select(dataTableSelection).append("table").attr("class", "table table-condensed table-striped");
+      head = table.append("thead").append("tr");
+      head.selectAll("th").data(keys).enter().append("th").text(function(d) {
+        return d;
+      });
+      return table.append("tbody");
+    };
+    displaySelected = function(selected_points) {
+      var selected_data, selectionRow;
+      selected_data = [];
       selected_points.each(function(d) {
-        return ss.push(d);
+        return selected_data.push(d);
       });
-      selection = d3.select(selected_display_element).selectAll("p").data(ss, function(d) {
-        return d.index;
+      selectionRow = d3.select(dataTableSelection).select("table tbody").selectAll("tr").data(selected_data, function(d) {
+        return id(d);
       });
-      selection.exit().remove();
-      return selection.enter().append("p").html(function(d, i) {
-        return "" + i + " - " + d.index;
+      selectionRow.exit().remove();
+      return selectionRow.enter().append("tr").html(function(d, i) {
+        return "<td>" + d3.values(d).join("</td><td>") + "</td>";
       });
     };
     chart.height = function(_) {
@@ -151,6 +181,20 @@
         return yValue;
       }
       yValue = _;
+      return chart;
+    };
+    chart.cutoff = function(_) {
+      if (!arguments.length) {
+        return yCutOff;
+      }
+      yCutOff = _;
+      return chart;
+    };
+    chart.id = function(_) {
+      if (!arguments.length) {
+        return id;
+      }
+      id = _;
       return chart;
     };
     return chart;

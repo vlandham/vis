@@ -7,14 +7,25 @@ MaPlot = () ->
   margin = {top: 20, right: 20, bottom: 20, left: 40}
   xValue = (d) -> parseFloat(d.a)
   yValue = (d) -> parseFloat(d.m)
+  id = (d) -> d.index
+
+  yCutOff = 0.4
 
   radius = 3
-  color = (d) -> if yValue(d) > 0 then "#000" else "#ccc"
+  color = (d) ->
+    if yValue(d) > 1.0
+      "#A21705"
+    else if yValue(d) < -1.0
+      "#87A205"
+    else
+      "#ccc"
 
-  selected_display_element = "#table_display"
+  dataTableSelection = "#data-list"
 
   g = null
   points = null
+  allData = []
+  filteredData = []
 
   xScale = d3.scale.linear().range([0,width])
   yScale = d3.scale.linear().range([0,height])
@@ -43,7 +54,7 @@ MaPlot = () ->
       
     all_points.attr("fill", color)
     selected_points.attr("fill", "blue")
-    display_selected(selected_points)
+    displaySelected(selected_points)
 
   brushEnd = (p) ->
     if brush.empty()
@@ -56,6 +67,7 @@ MaPlot = () ->
 
   chart = (selection) ->
     selection.each (data) ->
+      allData = data
 
       xScale.domain(xDomain(data))
       yScale.domain(yDomain(data))
@@ -83,26 +95,43 @@ MaPlot = () ->
       points = g.append("g")
         .attr("class", "points")
 
-      points.selectAll("circle")
-        .data(data)
-      .enter().append("circle")
-        .attr("class", "point")
-        .attr("cx", (d) -> xScale(xValue(d)))
-        .attr("cy", (d) -> yScale(yValue(d)))
-        .attr("r", radius)
-        .attr("fill", color)
+      chart.update()
 
       points.call(brush)
+      setupSelectedTable(d3.keys(data[0]))
 
-  display_selected = (selected_points) ->
-    ss = []
-    selected_points.each (d) -> ss.push(d)
-    selection = d3.select(selected_display_element).selectAll("p").data(ss, (d) -> d.index)
+  chart.update = () ->
+    filteredData = allData.filter (d) -> Math.abs(yValue(d)) > yCutOff
+    newPoints = points.selectAll("circle")
+      .data(filteredData, (d) -> id(d))
 
-    selection.exit().remove()
+    newPoints.exit().remove()
 
-    selection.enter()
-      .append("p").html((d,i) -> "#{i} - #{d.index}")
+    newPoints.enter().append("circle")
+      .attr("class", "point")
+      .attr("cx", (d) -> xScale(xValue(d)))
+      .attr("cy", (d) -> yScale(yValue(d)))
+      .attr("r", radius)
+      .attr("fill", color)
+
+  setupSelectedTable = (keys) ->
+    table = d3.select(dataTableSelection).append("table").attr("class", "table table-condensed table-striped")
+    head = table.append("thead").append("tr")
+    head.selectAll("th").data(keys).enter().append("th").text((d) -> d)
+    table.append("tbody")
+
+  displaySelected = (selected_points) ->
+    # selected_points looks to be the svg elements that are selected
+    # first we extract out the data
+    selected_data = []
+    selected_points.each (d) -> selected_data.push(d)
+    selectionRow = d3.select(dataTableSelection).select("table tbody")
+      .selectAll("tr").data(selected_data, (d) -> id(d))
+
+    selectionRow.exit().remove()
+
+    selectionRow.enter()
+      .append("tr").html((d,i) -> "<td>" + d3.values(d).join("</td><td>") + "</td>")
 
   chart.height = (_) ->
     if !arguments.length
@@ -146,6 +175,17 @@ MaPlot = () ->
     yValue = _
     chart
 
+  chart.cutoff = (_) ->
+    if !arguments.length
+      return yCutOff
+    yCutOff = _
+    chart
+
+  chart.id = (_) ->
+    if !arguments.length
+      return id
+    id = _
+    chart
 
   return chart
 

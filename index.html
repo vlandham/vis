@@ -16,12 +16,13 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nouislider.css">
   <style type="text/css">
-    body {
+    #vis {
       font: 10px sans-serif;
       margin: 0;
     }
-    
+
     .axis {
       shape-rendering: crispEdges;
     }
@@ -41,6 +42,26 @@
       fill-opacity: .125;
       stroke: #fff;
     }
+
+    #data-list {
+      min-height: 400px;
+    }
+
+    #sliderTitle {
+      float:left;
+      padding-right: 10px;
+      vertical-align: middle;
+    }
+
+    #slider {
+      float:left;
+    }
+
+    #sliderValue {
+      float:left;
+      padding-left: 10px;
+      vertical-align: middle;
+    }
     
     </style>
 
@@ -51,41 +72,51 @@
 
   <div id="container" class="container">
     <header>
-
+      <h1>MA Plot</h1>
     </header>
     <div id="main" role="main">
       <div id="vis"></div>
-      <div id="table_display"></div>
+      <br/>
+      <div id="sliderTitle">Y Cutoff</div>
+      <div class="sliderbar" id="slider"></div>
+      <div id="sliderValue"></div>
+      <div id="data-list"></div>
     </div>
     <footer>
-
     </footer>
   </div> <!--! end of #container -->
 
-
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
-
-
+  <script src="js/libs/jquery-1.7.2.min.js"></script>
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script src="js/libs/d3.v2.js"></script>
   <script src="js/libs/d3.tsv.min.js"></script>
+  <script src="/js/libs/jquery.nouislider.js"></script>
   <script src="coffee/ma_plot.js"></script>
   <script type="text/javascript">
-
     $(document).ready(function() {
-        var plot = MaPlot().x(function(d) { return parseFloat(d.A); }).y(function(d) { 
-          if( d.rad == "NA" )
-          {
-          return 0;
-          }
-          else
-          {
+
+      var plot = MaPlot()
+        .x(function(d) { return parseFloat(d.A); })
+        .y(function(d) { 
+          if( d.rad == "NA" ) { return 0.0;}
           return parseFloat(d.rad); 
-          }
+        });
+
+          $("#sliderValue").text(plot.cutoff());
+
+          $("#slider").noUiSlider("init", { dontActivate: "lower", scale: [0.0, 3.0], startMax: plot.cutoff(),
+            tracker: function() {
+              $("#sliderValue").text($("#slider").noUiSlider("getValue")[0]);
+            }, 
+            change: function() {
+              var value = $("#slider").noUiSlider("getValue")[0]
+              plot.cutoff(value).update();
+            }
           });
-        d3.tsv("data/test.tsv", function(data) {
+
+        /* d3.tsv("data/test.tsv", function(data) { */
+        d3.tsv("data/fit_data.txt", function(data) {
           d3.select("#vis")
             .datum(data)
             .call(plot);
