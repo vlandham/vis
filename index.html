@@ -21,6 +21,7 @@
     #vis {
       font: 10px sans-serif;
       margin: 0;
+      padding-bottom: 20px;
     }
 
     .axis {
@@ -29,7 +30,7 @@
 
     .axis line {
       stroke: #ddd;
-      stroke-width: 0.5px;
+      stroke-width: 1px;
     }
 
     .axis path {
@@ -47,20 +48,25 @@
       min-height: 400px;
     }
 
-    #sliderTitle {
+    .sliderTitle {
       float:left;
       padding-right: 10px;
+      padding-left: 15px;
       vertical-align: middle;
     }
 
-    #slider {
+    #ySlider {
       float:left;
     }
 
-    #sliderValue {
+    .sliderValue {
       float:left;
       padding-left: 10px;
       vertical-align: middle;
+    }
+
+    #pSlider {
+      float:left;
     }
     
     </style>
@@ -76,10 +82,15 @@
     </header>
     <div id="main" role="main">
       <div id="vis"></div>
-      <br/>
-      <div id="sliderTitle">Y Cutoff</div>
-      <div class="sliderbar" id="slider"></div>
-      <div id="sliderValue"></div>
+      <div class="row">
+        <div class="span6">
+          <div class="sliderTitle">Y Cutoff</div>
+          <div class="sliderbar" id="ySlider"></div>
+          <div class="sliderValue" id="ySliderValue"></div>
+        </div>
+        <div class="span6">
+          <p>Color: <select id="select_color"></select></p>
+        </div>
       <div id="data-list"></div>
     </div>
     <footer>
@@ -94,6 +105,11 @@
   <script src="js/libs/jquery.nouislider.js"></script>
   <script src="coffee/ma_plot.js"></script>
   <script type="text/javascript">
+    function roundNumber(num, dec) {
+      var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+      return result;
+    }
+    
     $(document).ready(function() {
 
       var plot = MaPlot()
@@ -101,26 +117,47 @@
         .y(function(d) { 
           if( d.rad == "NA" ) { return 0.0;}
           return parseFloat(d.rad); 
-        });
+          })
+        .p(function(d) { 
+          if( d["p.adj"] == "NA" ) { return 0.0;}
+          return parseFloat(d["p.adj"]); 
+          });
 
-          $("#sliderValue").text(plot.cutoff());
 
-          $("#slider").noUiSlider("init", { dontActivate: "lower", scale: [0.0, 3.0], startMax: plot.cutoff(),
+      window.plot = plot;
+
+      function display(data) {
+        d3.select("#vis")
+          .datum(data)
+          .call(plot);
+
+        $("#ySliderValue").text(plot.cutoff());
+
+        $("#ySlider").noUiSlider("init", { dontActivate: "lower", scale: plot.cutoff_domain(), startMax: plot.cutoff(),
             tracker: function() {
-              $("#sliderValue").text($("#slider").noUiSlider("getValue")[0]);
+            $("#ySliderValue").text(roundNumber($("#ySlider").noUiSlider("getValue")[0], 4));
             }, 
-            change: function() {
-              var value = $("#slider").noUiSlider("getValue")[0]
-              plot.cutoff(value).update();
+          change: function() {
+            var value = $("#ySlider").noUiSlider("getValue")[0]
+            plot.cutoff(value).update();
             }
-          });
+            });
 
-        /* d3.tsv("data/test.tsv", function(data) { */
-        d3.tsv("data/fit_data.txt", function(data) {
-          d3.select("#vis")
-            .datum(data)
-            .call(plot);
-          });
+
+        /* setup color selector */
+        color_selector = d3.select("#select_color");
+        color_selector.selectAll("option")
+          .data(plot.all_colors())
+          .enter().append("option")
+          .attr("value", function(d) {return d;})
+          .html(function(d) {return d;});
+
+        color_selector.on("change", function() {
+          plot.color(this.value).update();
+        });
+      }
+
+      d3.tsv("data/fit_data.txt", display);
     });
   </script>
 

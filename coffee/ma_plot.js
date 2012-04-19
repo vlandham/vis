@@ -5,7 +5,7 @@
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
   MaPlot = function() {
-    var allData, brush, brushEnd, brushOn, brushStart, chart, color, dataTableSelection, displaySelected, filteredData, g, height, id, margin, points, radius, setupSelectedTable, width, xAxis, xDomain, xScale, xValue, yAxis, yCutOff, yDomain, yScale, yValue;
+    var allData, baseG, brush, brushEnd, brushOn, brushStart, chart, colors, currentColor, dataTableSelection, displaySelected, filteredData, height, id, insideExtent, margin, opacity, pDomain, pScale, pValue, points, radius, setCutOff, setupSelectedTable, updateColor, width, xAxis, xDomain, xScale, xValue, yAxis, yCutOff, yCutOffDomain, yDomain, yScale, yValue;
     width = 600;
     height = 600;
     margin = {
@@ -20,39 +20,72 @@
     yValue = function(d) {
       return parseFloat(d.m);
     };
+    pValue = function(d) {
+      return parseFloat(d.p);
+    };
     id = function(d) {
       return d.index;
     };
     yCutOff = 0.4;
+    yCutOffDomain = [0, 5.0];
     radius = 3;
-    color = function(d) {
-      if (yValue(d) > 1.0) {
-        return "#A21705";
-      } else if (yValue(d) < -1.0) {
-        return "#87A205";
-      } else {
+    opacity = 1.0;
+    colors = {
+      high_low: function(d) {
+        if (yValue(d) > 1.0) {
+          return "#A21705";
+        } else if (yValue(d) < -1.0) {
+          return "#87A205";
+        } else {
+          return "#ccc";
+        }
+      },
+      p_value: function(d) {
+        return pScale(pValue(d));
+      },
+      none: function(d) {
         return "#ccc";
       }
     };
+    currentColor = "high_low";
     dataTableSelection = "#data-list";
-    g = null;
+    baseG = null;
     points = null;
     allData = [];
     filteredData = [];
     xScale = d3.scale.linear().range([0, width]);
     yScale = d3.scale.linear().range([0, height]);
+    pScale = d3.scale.linear().range(["#BDD7E7", "#08519C"]);
     xDomain = function(data) {
       return d3.extent(data, xValue);
     };
     yDomain = function(data) {
       return d3.extent(data, yValue).reverse();
     };
+    pDomain = function(data) {
+      return d3.extent(data, pValue).reverse();
+    };
     xAxis = d3.svg.axis().scale(xScale).orient("bottom");
     yAxis = d3.svg.axis().scale(yScale).orient("left");
+    insideExtent = function(extent, d) {
+      return extent[0][0] <= xValue(d) && xValue(d) <= extent[1][0] && extent[0][1] <= yValue(d) && yValue(d) <= extent[1][1];
+    };
+    updateColor = function(point_set) {
+      var e;
+      e = brush.extent();
+      return point_set.attr("fill", function(d) {
+        if (insideExtent(e, d)) {
+          return "blue";
+        } else {
+          return colors[currentColor](d);
+        }
+      });
+    };
     brushStart = function(p) {
+      console.log("start");
       if (brush.empty()) {
-        points.call(brush.clear());
-        return points.selectAll("circle").attr("fill", color);
+        updateColor(points.selectAll("circle"));
+        return console.log('empty');
       }
     };
     brushOn = function(p) {
@@ -60,56 +93,71 @@
       e = brush.extent();
       all_points = points.selectAll("circle");
       selected_points = all_points.filter(function(d) {
-        if (e[0][0] <= xValue(d) && xValue(d) <= e[1][0] && e[0][1] <= yValue(d) && yValue(d) <= e[1][1]) {
-          return true;
-        } else {
-          return false;
-        }
+        return insideExtent(e, d);
       });
-      all_points.attr("fill", color);
-      selected_points.attr("fill", "blue");
+      updateColor(all_points);
       return displaySelected(selected_points);
     };
     brushEnd = function(p) {
+      console.log("end");
       if (brush.empty()) {
-        return points.selectAll("circle").attr("fill", color);
+        updateColor(points.selectAll("circle"));
+        console.log("end-empty");
       }
+      return console.log("---");
     };
     brush = d3.svg.brush().on("brushstart", brushStart).on("brush", brushOn).on("brushend", brushEnd);
+    setCutOff = function() {
+      var extent, max;
+      extent = yDomain(allData);
+      max = d3.max(extent.map(function(d) {
+        return Math.abs(d);
+      }));
+      yCutOff = max / 8.0;
+      return yCutOffDomain = [0, max];
+    };
     chart = function(selection) {
       return selection.each(function(data) {
         var gEnter, svg;
         allData = data;
+        setCutOff();
         xScale.domain(xDomain(data));
         yScale.domain(yDomain(data));
+        pScale.domain(pDomain(allData));
         brush.x(xScale).y(yScale);
         svg = d3.select(this).selectAll("svg").data([data]);
         gEnter = svg.enter().append("svg").append("g");
         svg.attr("width", width + margin.left + margin.right);
         svg.attr("height", height + margin.top + margin.bottom);
-        g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        g.append("g").attr("class", "x axis").attr("transform", "translate(" + 0 + "," + height + ")").call(xAxis);
-        g.append("g").attr("class", "y axis").attr("transform", "translate(" + 0 + "," + 0 + ")").call(yAxis);
-        points = g.append("g").attr("class", "points");
+        baseG = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+        baseG.append("g").attr("class", "x axis").attr("transform", "translate(" + 0 + "," + height + ")").call(xAxis);
+        baseG.append("g").attr("class", "y axis").attr("transform", "translate(" + 0 + "," + 0 + ")").call(yAxis);
+        points = baseG.append("g").attr("class", "points");
         chart.update();
-        points.call(brush);
+        baseG.call(brush);
         return setupSelectedTable(d3.keys(data[0]));
       });
     };
     chart.update = function() {
       var newPoints;
-      filteredData = allData.filter(function(d) {
-        return Math.abs(yValue(d)) > yCutOff;
-      });
+      filteredData = chart.filter(allData);
       newPoints = points.selectAll("circle").data(filteredData, function(d) {
         return id(d);
       });
       newPoints.exit().remove();
-      return newPoints.enter().append("circle").attr("class", "point").attr("cx", function(d) {
+      newPoints.enter().append("circle").attr("class", "point").attr("cx", function(d) {
         return xScale(xValue(d));
       }).attr("cy", function(d) {
         return yScale(yValue(d));
-      }).attr("r", radius).attr("fill", color);
+      }).attr("r", radius).attr("fill-opacity", opacity);
+      return updateColor(newPoints);
+    };
+    chart.filter = function(data) {
+      var fd;
+      fd = data.filter(function(d) {
+        return Math.abs(yValue(d)) > yCutOff;
+      });
+      return fd;
     };
     setupSelectedTable = function(keys) {
       var head, table;
@@ -164,10 +212,13 @@
     };
     chart.color = function(_) {
       if (!arguments.length) {
-        return color;
+        return currentColor;
       }
-      color = _;
+      currentColor = _;
       return chart;
+    };
+    chart.all_colors = function() {
+      return d3.keys(colors);
     };
     chart.x = function(_) {
       if (!arguments.length) {
@@ -183,6 +234,13 @@
       yValue = _;
       return chart;
     };
+    chart.p = function(_) {
+      if (!arguments.length) {
+        return pValue;
+      }
+      pValue = _;
+      return chart;
+    };
     chart.cutoff = function(_) {
       if (!arguments.length) {
         return yCutOff;
@@ -190,11 +248,32 @@
       yCutOff = _;
       return chart;
     };
+    chart.cutoff_domain = function(_) {
+      if (!arguments.length) {
+        return yCutOffDomain;
+      }
+      yCutOffDomain = _;
+      return chart;
+    };
+    chart.y_domain = function(_) {
+      if (!arguments.length) {
+        return yDomain;
+      }
+      yDomain = _;
+      return chart;
+    };
     chart.id = function(_) {
       if (!arguments.length) {
         return id;
       }
       id = _;
+      return chart;
+    };
+    chart.data = function(_) {
+      if (!arguments.length) {
+        return allData;
+      }
+      allData = _;
       return chart;
     };
     return chart;
