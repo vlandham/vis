@@ -75,14 +75,10 @@ MaPlot = () ->
   # ----
   # Brush callback functions
   # ----
-  brushStart = (p) ->
-    console.log("start")
-    if brush.empty()
-      updateColor(points.selectAll("circle"))
-      console.log('empty')
 
   brushOn = (p) ->
     # console.log("move")
+    eventTarget = d3.select(d3.event.target)
     e = brush.extent()
     all_points = points.selectAll("circle")
 
@@ -93,18 +89,9 @@ MaPlot = () ->
     updateColor(all_points)
     displaySelected(selected_points)
 
-  brushEnd = (p) ->
-    console.log("end")
-    if brush.empty()
-      updateColor(points.selectAll("circle"))
-      console.log("end-empty")
-    console.log("---")
-
   # create brush
   brush = d3.svg.brush()
-    .on("brushstart", brushStart)
     .on("brush", brushOn)
-    .on("brushend", brushEnd)
 
   # function to guess at good starting
   # point for cutoff
@@ -153,7 +140,7 @@ MaPlot = () ->
 
       chart.update()
 
-      baseG.call(brush)
+      baseG.append("g").attr("class", "brush").call(brush)
       setupSelectedTable(d3.keys(data[0]))
 
   # Update function called with 
@@ -291,3 +278,8 @@ MaPlot = () ->
 
 # To get function outside of coffeescript encapsulation
 root.MaPlot = MaPlot
+# Hack to hide wierd d3 code till i understand it more
+root.plotData = (selector, data, plot) ->
+  d3.select(selector)
+    .datum(data)
+    .call(plot)

@@ -127,9 +127,7 @@
       window.plot = plot;
 
       function display(data) {
-        d3.select("#vis")
-          .datum(data)
-          .call(plot);
+        plotData("#vis", data, plot);
 
         $("#ySliderValue").text(plot.cutoff());
 

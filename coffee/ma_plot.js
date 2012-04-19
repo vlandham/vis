@@ -5,7 +5,7 @@
   root = typeof exports !== "undefined" && exports !== null ? exports : this;
 
   MaPlot = function() {
-    var allData, baseG, brush, brushEnd, brushOn, brushStart, chart, colors, currentColor, dataTableSelection, displaySelected, filteredData, height, id, insideExtent, margin, opacity, pDomain, pScale, pValue, points, radius, setCutOff, setupSelectedTable, updateColor, width, xAxis, xDomain, xScale, xValue, yAxis, yCutOff, yCutOffDomain, yDomain, yScale, yValue;
+    var allData, baseG, brush, brushOn, chart, colors, currentColor, dataTableSelection, displaySelected, filteredData, height, id, insideExtent, margin, opacity, pDomain, pScale, pValue, points, radius, setCutOff, setupSelectedTable, updateColor, width, xAxis, xDomain, xScale, xValue, yAxis, yCutOff, yCutOffDomain, yDomain, yScale, yValue;
     width = 600;
     height = 600;
     margin = {
@@ -81,15 +81,9 @@
         }
       });
     };
-    brushStart = function(p) {
-      console.log("start");
-      if (brush.empty()) {
-        updateColor(points.selectAll("circle"));
-        return console.log('empty');
-      }
-    };
     brushOn = function(p) {
-      var all_points, e, selected_points;
+      var all_points, e, eventTarget, selected_points;
+      eventTarget = d3.select(d3.event.target);
       e = brush.extent();
       all_points = points.selectAll("circle");
       selected_points = all_points.filter(function(d) {
@@ -98,15 +92,7 @@
       updateColor(all_points);
       return displaySelected(selected_points);
     };
-    brushEnd = function(p) {
-      console.log("end");
-      if (brush.empty()) {
-        updateColor(points.selectAll("circle"));
-        console.log("end-empty");
-      }
-      return console.log("---");
-    };
-    brush = d3.svg.brush().on("brushstart", brushStart).on("brush", brushOn).on("brushend", brushEnd);
+    brush = d3.svg.brush().on("brush", brushOn);
     setCutOff = function() {
       var extent, max;
       extent = yDomain(allData);
@@ -134,7 +120,7 @@
         baseG.append("g").attr("class", "y axis").attr("transform", "translate(" + 0 + "," + 0 + ")").call(yAxis);
         points = baseG.append("g").attr("class", "points");
         chart.update();
-        baseG.call(brush);
+        baseG.append("g").attr("class", "brush").call(brush);
         return setupSelectedTable(d3.keys(data[0]));
       });
     };
@@ -280,5 +266,9 @@
   };
 
   root.MaPlot = MaPlot;
+
+  root.plotData = function(selector, data, plot) {
+    return d3.select(selector).datum(data).call(plot);
+  };
 
 }).call(this);
