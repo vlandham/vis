@@ -16,7 +16,7 @@ $ ->
     .attr("height", 900)
 
   display_tracts = (json) ->
-    d3.csv "data/locations.csv", display_locations
+    d3.json "data/voroni_lat_lon.json", display_cells
     tracts = vis.append("g")
       .attr("id", "tracts")
 
@@ -29,24 +29,59 @@ $ ->
       .attr("stroke", "#222")
       .call(d3.behavior.zoom().on("zoom", redraw))
 
+  display_cells = (json) ->
+    cells = vis.append("g")
+      .attr("id", "cells")
+
+    cells.selectAll("path")
+      .data(json.features)
+    .enter().append("path")
+      .attr("d", path)
+      .attr("fill-opacity", 0.5)
+      .attr("fill", "#ddd")
+      .attr("stroke", "#222")
+    d3.csv "data/locations.csv", display_locations
+
+
   display_locations = (location_data) ->
     positions = []
     location_data.forEach (loc) ->
-      positions.push projection([+loc.lon, +loc.lat])
+      # positions.push projection([+loc.lon, +loc.lat])
+      positions.push [+loc.lon, +loc.lat]
 
     polygons = d3.geom.voronoi(positions)
 
-    cells = vis.append("g")
-      .attr("class", "cells")
-      .attr("id", "voronoi")
+    geo_polygons =
+      "type": "FeatureCollection"
+      "features": []
 
-    cell_gs = cells.selectAll("g")
-        .data(location_data)
-      .enter().append("g")
+    # console.log(polygons)
 
-    cell_gs.append("path")
-      .attr("class", "cell")
-      .attr("d", (d,i) -> "M#{polygons[i].join("L")}Z")
+    polygons.forEach (p, i) ->
+      geo_poly =
+        type: "Feature"
+        properties: location_data[i]
+        geometry:
+          type: "Polygon"
+          coordinates: [ p.map (p_element) -> p_element ]
+      geo_polygons.features.push geo_poly
+
+    root.geo = geo_polygons
+
+
+    # console.log(geo_polygons)
+
+    # cells = vis.append("g")
+    #   .attr("class", "cells")
+    #   .attr("id", "voronoi")
+
+    # cell_gs = cells.selectAll("g")
+    #     .data(location_data)
+    #   .enter().append("g")
+
+    # cell_gs.append("path")
+    #   .attr("class", "cell")
+    #   .attr("d", (d,i) -> "M#{polygons[i].join("L")}Z")
 
 
     locations = vis.append("g")
@@ -58,9 +93,7 @@ $ ->
       .attr("cx", (d,i) -> positions[i][0])
       .attr("cy", (d,i) -> positions[i][1])
       .attr("r", 3.5)
-      .on "mouseover", (d,i) ->
-        console.log(d)
-
+    
 
   redraw = () ->
     tx = translation[0] * d3.event.scale + d3.event.translate[0]
