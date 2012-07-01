@@ -1,51 +1,42 @@
 
 root = exports ? this
 
+width = 800
+height = 600
+
+data = null
+vis = null
+
+render_states = (json) ->
+  projection = d3.geo.albersUsa()
+    .scale(width)
+    .translate([0, 0])
+
+  path = d3.geo.path()
+    .projection(projection)
+
+  svg = d3.select("#vis").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+
+  svg.append("rect")
+    .attr("class", "background")
+    .attr("width", width)
+    .attr("height", height)
+
+  g = svg.append("g")
+    .attr("transform", "translate(#{width / 2},#{height / 2})")
+  states = g.append("g")
+    .attr("id", "states")
+
+  labels = g.append("g")
+    .attr("id", "state-labels")
+
+  states.selectAll("path")
+    .data(json.features)
+    .enter().append("path")
+    .attr("d", path)
+
 $ ->
 
-  w = 940
-  h = 600
-  r = 3
-  [pt, pr, pb, pl] = [10, 10, 10, 10]
-
-  data = null
-  vis = null
-
-  x_scale = d3.scale.linear()
-    .domain([0, 10])
-    .range([0, w])
-
-  y_scale = d3.scale.linear()
-    .domain([0, 10])
-    .range([0, h])
-
-  render_vis = (csv) ->
-    data = csv
-    console.log(data)
-
-    vis = d3.select("#vis")
-      .append("svg")
-      .attr("id", "vis-svg")
-      .attr("width", w + (pl + pr))
-      .attr("height", h + (pt + pb))
-
-    vis.append("rect")
-      .attr("width", w + (pl + pr))
-      .attr("height", h + (pt + pb))
-      .attr("fill", "#ddd")
-      .attr("pointer-events","all")
-
-    points_g = vis.append("g")
-      .attr("transform", "translate(#{pr},#{pt}")
-
-
-    points = points_g.selectAll(".point")
-      .data(data)
-    .enter().append("circle")
-      .attr("cx", (d) -> x_scale(d.x))
-      .attr("cy", (d) -> y_scale(d.y))
-      .attr("r", r)
-      .attr("fill", "#4e4e4e")
-
-
-  d3.csv "data/test.csv", render_vis
+  d3.json "data/us-states.json", render_states
