@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
+
+  <link rel="stylesheet" href="css/jquery.miniColors.css">
   <!-- end CSS-->
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
@@ -31,6 +33,16 @@
     <div id="main" role="main">
       <div id="vis"></div>
     </div>
+
+    <div id="controls" style="background-color:white;">
+      <input id="mapOpacity" type="range" min="0" max="1.0" step="0.1" value="0.8">
+      <input type="text" id="backgroundColor" name="backgroundColor" class="color-picker" size="6" />
+      <input type="text" id="lineColor" name="lineColor" class="color-picker" size="6" />
+      <form id="newPoint">
+        <input type="text" id="pointInput"/>
+        <input type="submit" id="pointSubmit" value="Add"/>
+      </form>
+    </div>
     <footer>
 
     </footer>
@@ -43,6 +55,7 @@
 
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
+  <script src="js/libs/jquery.miniColors.min.js"></script>
   <script src="js/libs/coffee-script.js"></script>
   <script src="js/libs/d3.v2.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>

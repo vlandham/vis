@@ -1,1 +1,32 @@
+body {
+  background-color: #A4DCDD;
+}
 
+#container {
+  margin: auto;
+  width:1064px;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+/* #countries { */
+/*   fill: #aaa; */
+/*   stroke: #fff; */
+/*   stroke-width:1.5px; */
+/* } */
+
+#countries path {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 1.5px;
+  stroke-dasharray: 6, 5;
+}
+
+#controls {
+  width:1064px;
+  margin-top: 15px;
+  padding:5px;
+}
