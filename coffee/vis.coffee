@@ -39,7 +39,7 @@ FeltMap = () ->
   fmap = (selection) ->
     selection.each (rawData) ->
       # console.log(this)
-      width = $(this).width()
+      width = $(this).width() - 320
       height = $(this).height()
       data = rawData
       svg = d3.select(this).selectAll("svg").data([data])
@@ -246,13 +246,35 @@ $ ->
 
   d3.select("#mapOpacity").on "change", (d) ->
     map.opacity(parseFloat(this.value))
+  
+  addLatLon = (val) ->
+    point = val.split(",").map (s) -> parseFloat(s.replace(/\s/g,''))
+    point = {"lat": point[0], "lon":point[1]}
+    map.add(point)
+
+  addLocation = (val) ->
+    encodedVal = encodeURIComponent(val)
+    geocoder = new google.maps.Geocoder()
+    geocoder.geocode({
+      address: val
+    }, (results) ->
+      if results.length > 0
+        lat = results[0].geometry.location.lat()
+        lon = results[0].geometry.location.lng()
+        point = {"lat":lat,"lon":lon}
+        map.add(point)
+    )
+
+    # command = "http://nominatim.openstreetmap.org/search?format=json"
+    # command += "&q=#{encodedVal}"
+    # console.log(command)
+    # jQuery.ajax({url:command, dataType: 'jsonp', jsonpCallback:'parseLocationResults'})
 
   $('#pointSubmit').click (e) ->
     e.preventDefault()
     val = $('#pointInput').val()
-    point = val.split(",").map (s) -> parseFloat(s.replace(/\s/g,''))
-    point = {"lat": point[0], "lon":point[1]}
-    map.add(point)
+    addLocation(val)
+    # addLatLon(val)
     $('#pointInput').val("")
 
   $("#backgroundColor").miniColors({
