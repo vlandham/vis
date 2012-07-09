@@ -3,13 +3,61 @@ body {
 }
 
 #container {
-  margin: auto;
-  width:1064px;
+  /* margin: auto; */
+  /* width:1064px; */
+}
+
+#vis {
+  z-index: 0;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+div.drawer {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right:0px;
+  width: 320px;
+  border-left: 1px solid #CCC;
+  background: white;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.hud .content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.delete_location {
+  padding-left:10px;
 }
 
 .background {
   fill: none;
   pointer-events: all;
+}
+
+ul {
+  list-style-type:none;
+}
+
+li.location {
+  padding-bottom: 5px;
+  cursor: default;
+}
+
+.delete_location {
+  cursor: pointer:
 }
 
 /* #countries { */

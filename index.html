@@ -15,10 +15,10 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/reset.css">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
 
   <link rel="stylesheet" href="css/jquery.miniColors.css">
+  <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
@@ -26,22 +26,36 @@
 
 <body>
 
-  <div id="container" class="container">
-    <header>
-
-    </header>
-    <div id="main" role="main">
-      <div id="vis"></div>
-    </div>
-
-    <div id="controls" style="background-color:white;">
-      <input id="mapOpacity" type="range" min="0" max="1.0" step="0.1" value="0.8">
-      <input type="text" id="backgroundColor" name="backgroundColor" class="color-picker" size="6" />
-      <input type="text" id="lineColor" name="lineColor" class="color-picker" size="6" />
-      <form id="newPoint">
-        <input type="text" id="pointInput"/>
-        <input type="submit" id="pointSubmit" value="Add"/>
-      </form>
+  <div id="container">
+    <div id="vis"></div>
+    <div class="drawer">
+      <div class="hud">
+        <div id="controls" class="content">
+          <h2>Map Options</h2>
+          <div class="control">
+            <h3>Map Opacity</h3>
+            <input id="mapOpacity" type="range" min="0" max="1.0" step="0.1" value="0.5">
+          </div>
+          <div class="control">
+            <h3>Background Color</h3>
+            <input type="text" id="backgroundColor" name="backgroundColor" class="color-picker" size="6" />
+          </div>
+          <div class="control">
+            <h3>Line Color</h3>
+            <input type="text" id="lineColor" name="lineColor" class="color-picker" size="6" />
+          </div>
+          <div class="points">
+            <h3>Locations</h3>
+            <ul id="all_locations">
+            </ul>
+            <h4>Add New Location</h4>
+            <form id="newPoint">
+              <input type="text" id="pointInput"/>
+              <input type="submit" id="pointSubmit" value="Add"/>
+            </form>
+        </div>
+        </div>
+      </div>
     </div>
     <footer>
 

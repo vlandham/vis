@@ -4,7 +4,7 @@ root = exports ? this
 FeltMap = () ->
   width = 1024
   height = 600
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
+  margin = {top: 0, right: 0, bottom: 0, left: 0}
   latValue = (d) -> parseFloat(d.lat)
   lonValue = (d) -> parseFloat(d.lon)
   data = []
@@ -18,6 +18,7 @@ FeltMap = () ->
   node = null
   line = null
   map = null
+  locationsDivId = null
   lineColor = "#fff"
   nodeColor = "#fff"
   lineSize = 1.3
@@ -32,11 +33,14 @@ FeltMap = () ->
   zoom = d3.behavior.zoom()
     .translate(projection.translate())
     .scale(projection.scale())
-    .scaleExtent([height, 10 * height])
+    # .scaleExtent([height, 10 * height])
     .on("zoom", zoomer)
 
   fmap = (selection) ->
     selection.each (rawData) ->
+      # console.log(this)
+      width = $(this).width()
+      height = $(this).height()
       data = rawData
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg")
@@ -71,28 +75,66 @@ FeltMap = () ->
     if !arguments.length
       return mapOpacity
     mapOpacity = _
-    map.style("opacity", mapOpacity)
+    if map
+      map.style("opacity", mapOpacity)
+    fmap
 
   fmap.line = (_) ->
     if !arguments.length
       return lineColor
     lineColor = _
-    line.style("stroke", lineColor)
+    if line
+      line.style("stroke", lineColor)
+    fmap
 
   fmap.node = (_) ->
     if !arguments.length
       return nodeColor
     nodeColor = _
-    node.style("fill", nodeColor)
+    if node
+      node.style("fill", nodeColor)
+    fmap
 
   fmap.add = (point) ->
     data.push(point)
+    console.log(point)
     update()
+    fmap.displayLocations(locationsDivId)
+    fmap
 
   fmap.remove = (index) ->
     console.log(index)
+    data.splice(index,1)
+    console.log(data)
+    update()
+    fmap.displayLocations(locationsDivId)
+    fmap
     # data.push(point)
     # update()
+    #
+  fmap.displayLocations = (id) ->
+    locationsDivId = id
+    locationsDiv = d3.select(id)
+
+    locationsDiv.selectAll(".location").remove()
+
+    loc = locationsDiv.selectAll(".location")
+      .data(data, (d) -> "#{d.lat},#{d.lon}")
+
+    loc.enter().append("li")
+      .attr("class", "location")
+      .text((d) -> "#{d.lat}, #{d.lon}")
+      .on("mouseover", (d) -> console.log(d))
+      .append("span")
+        .attr("class", "delete_location")
+        .append("a")
+          .text("X")
+          .on("click", (d,i) -> fmap.remove(i))
+
+    loc.exit().remove()
+    fmap
+
+
 
   drawMap = (json) ->
     map = mapG.selectAll("path")
@@ -183,10 +225,24 @@ plotData = (selector, data, plot) ->
     .datum(data)
     .call(plot)
 
+setBackground = (newBackground) ->
+  $('body').css({"background-color":newBackground})
+
 $ ->
-  map = FeltMap()
+  options =
+    opacity:0.5
+    line:"#DDDDDD"
+    background:"#198587"
+
+  map = FeltMap().opacity(options.opacity)
+    .line(options.line)
+
+  setBackground(options.background)
+
   d3.csv "data/locations.csv", (data) ->
     plotData("#vis", data, map)
+    map.displayLocations("#all_locations")
+    false
 
   d3.select("#mapOpacity").on "change", (d) ->
     map.opacity(parseFloat(this.value))
@@ -194,22 +250,27 @@ $ ->
   $('#pointSubmit').click (e) ->
     e.preventDefault()
     val = $('#pointInput').val()
-    point = val.split(",").map (s) -> parseFloat(s)
+    point = val.split(",").map (s) -> parseFloat(s.replace(/\s/g,''))
     point = {"lat": point[0], "lon":point[1]}
     map.add(point)
     $('#pointInput').val("")
 
-
   $("#backgroundColor").miniColors({
-    value: "#A4DCDD",
 	  letterCase: 'uppercase',
 	  change: (hex, rgb) ->
-      $('body').css({"background-color":hex})
-    })
+      setBackground(hex)
+  }
+  )
+
+  $("#backgroundColor").miniColors('value', options.background)
   
   $("#lineColor").miniColors({
 	  letterCase: 'uppercase',
 		change: (hex, rgb) ->
       map.line(hex)
-	  })
+  }
+  )
+
+  $("#lineColor").miniColors('value', options.line)
+
 
