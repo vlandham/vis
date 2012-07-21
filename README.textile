@@ -1,95 +1,80 @@
-h1. A simple way to get started with data visualizations using d3 and coffeescript
 
-h2. Usage
+h2. sliders:
 
-h3. First Clone the Repository
+Sliders
+The sliders are simply input mechanisms for the variables that will determine the number of dots on the U.S. Map and the resulting Metrics.  The sliders will be controlled using functionality similar to the Mike Bostock example:   http://square.github.com/crossfilter/.  However, there won't be any mini graphs associated with each slider.  Just a scale with a minimum value on the left end and a maximum value on the right end.  Each slider should probably also have some sort of scale associated with it (markings at intervals along the slider (ex. $10.00, $20.00, $30.00, etc. on the Rent PSF slider).  I think that the left and right "bookends" of the slider will have to have some sort of pop-up label that appears above when you move them so you can see exactly what value you are setting.
 
-<pre>
-git clone git@github.com:vlandham/vis.git
-cd vis
-</pre>
+The header to the sliders section of the dashboard would be entitled "Investment Criteria".  These are the sliders I envision, in descending order (top to bottom) on the dashboard:
 
-h3. You might consider creating a new branch for your Vis
+The header to the sliders section of the dashboard would be entitled "Investment Criteria".  These are the sliders I envision, in descending order (top to bottom) on the dashboard:
 
-<pre>
-git checkout -b interesting_new_bar_chart
-</pre>
+Title:  Building RSF
+Scale range:  3,000-[use max value]
+Scale labels: 3,000-[use max value]
+Tick marks: 10 tick marks at logarithmic (unequal) intervals
+(This should probably be a logarithmic scale weighted heavily to the low end of the size spectrum.  The largest lease in the U.S. Is almost twice the size of the next largest lease, and there are really only about a dozen leases larger than 500,000 RSF)
 
-h3. View built in example
+Title: % Government Leased
+Scale range: 0%-100%
+Scale labels: 0% (min) / 100% (max)
+Tick marks: every 10%
 
-You can start up a local webserver by using python's simple server:
+Title:  Government Leased RSF
+Scale range:  3,000-[use max value]
+Scale labels: 1% (min) / 100% (max)
+Tick marks: 10 tick marks at logarithmic (unequal) intervals
+(This should probably be a logarithmic scale weighted heavily to the low end of the size spectrum.  The largest lease in the U.S. Is almost twice the size of the next largest lease, and there are really only about a dozen leases larger than 500,000 RSF)
 
-<pre>
-python -m SimpleHTTTPServer -p 3000
-</pre>
+Title: Remaining Total Term (Yrs)
+Scale range: 0-20
+Scale labels: 0 (min) / 20 (max)
+Tick marks: 10 tick marks at equal intervals
 
-or @thin@ in ruby
+Title: Remaining Firm Term (Yrs)
+Scale range: 0-20
+Scale labels: 0 (min) / 20 (max)
+Tick marks: 10 tick marks at equal intervals
 
-<pre>
-thin start
-# might have to run 'bundle install' first
-</pre>
+Title: Total Rent
+Scale range: $[Lowest Value in Table] - [Largest Value in Table]
+Scale labels: $[Lowest Value in Table] (min) / [Largest Value in Table] (max)
+Tick marks: 10 tick marks at equal intervals
 
-Now go to "http://0.0.0.0:3000":http://0.0.0.0:3000/
+Title: Rent PRSF
+Scale range: $[Lowest Value in Table]-[Largest Value in Table]
+Scale labels: $[Lowest Value in Table] (min) / [Largest Value in Table] (max)
+Tick marks: 10 tick marks at equal intervals
 
-and you have a basic visualization
+Title: Capitalized Value
+Scale range: $[Lowest Value TBD]-$[Highest Value TBD]
+Scale Labels $[Lowest Value TBD] (min) / $[Highest Value TBD] (max)
+Tick marks: 10 tick marks at logarithmic (unequal) intervals
 
-h3. Start Coding
+Mini Slider 1 Title:  % Operating Expenses 
+Scale range: 0%-100%
+Scale labels: 0% (min) / 100% (max)
+Tick marks: 10 tick marks at equal intervals
 
-Open up @coffee/vis.coffee@ and start modifying the built in visualization to fit your needs.
+Mini Slider 2 Title:  Cap rate 
+Scale range: 4%-14%
+Scale labels: 4% (min) / 14% (max)
+Tick marks: 10 tick marks at equal intervals
 
-h2. Folder Organization
+Two mini-sliders or some other methods of selecting two additional variables is required. These would be simple sliders (choose one value) and not the bookend style.  The sliders are required to determine the range of the highest and lowest Capitalized Values based upon the values in the entire data table. The two sliders are necessary because capitalized value a function of Net Operating Income (NOI) and a capitalization rate (cap rate).  NOI = Total Rent – Operating Expenses, so we need to have a mini slider for the % of operating expenses.  This would then allow us to calculate the remaining portion of Total Rent that is NOI.  Capitalized Value = NOI/Cap Rate, so we need a slider to provide a cap rate input.  For example:  Total rent = $1,000,000 and % Operating Expenses = 25%.  NOI, then is $750,000.  If we choose a 10% cap rate then the capitalized value is $7.5 million.
 
-* @/@
-** main vis area
-* @/index.html@
-** main page for your visualization. Loads coffeescript and javascript files.
-* @/coffee/@
-** coffeescript files. Example @vis.coffee@.
-* @/data/@
-** data dump for @.csv@ and @.json@ files and other data files your vis uses.
-* @/js/@
-** javascript goes here. JS Libraries in @libs@ directory
-* @/css/@
-** put your stylesheets in here
-* @/img/@
-** put your images in here
-* @/tools/@
-** put your helper scripts / data manipulation tools here
 
-h2. Requirments
+Metrics
+The Metrics would be nothing more than big numbers oriented above or to the left or right of the map.
 
-To startup the server, you either need @python@, or a bunch of @ruby@ gems (should be simplified in the future).
+Title: # of Locations
+Format:#,### (no decimals)
 
-Run @bundle install@ to get the gems needed. Gems listed in the Gemfile
+Title:  Total RSF
+Format: ###.#M, or ###,### (up to 999,999 format normally, otherwise abbreviate)
 
-h2. Contents
+Title: Capitalized Value
+Format: $##.#B, or $###.#M ( format will change above $999.9 million)
 
-h3. Twitter Bootstrap
-
-* 2.0.4
-
-h3. html5boilerplate
-
-* 2.0 Aug 10th
-
-h3. d3.js
-
-* 2.9.6
-
-h3. Raphael
-
-* 2.1.0
-
-h3. coffee-script.js
-
-* 1.3.3
-
-h3. jQuery
-
-* 1.7.2
-
-h3. Leaflet
-
-* 0.4 beta
+Miscellaneous
+Every Slider and Metric label will have a "?" symbol next to it.  On mouseover a 1-2 sentence definition will appear.  I will provide these once you begin the project.
 
