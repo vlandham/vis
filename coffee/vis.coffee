@@ -36,6 +36,8 @@ USMap = () ->
   projection = d3.geo.albersUsa()
   path = d3.geo.path()
 
+  circleRadius = 3
+
   usmap = (selection) ->
     selection.each (rawData) ->
       data = rawData
@@ -64,12 +66,15 @@ USMap = () ->
       labels = g.append("g")
         .attr("id", "state-labels")
 
-      circles = svg.append("g")
+      circles = g.append("g")
         .attr("id", "circles")
 
       d3.json "data/us-states.json", render_states
       update()
 
+  usmap.update = (newData) ->
+    data = newData
+    update()
 
   update = () ->
     positions = []
@@ -79,6 +84,11 @@ USMap = () ->
 
     circle = circles.selectAll("circle")
       .data(data)
+
+    circle.enter().append("circle")
+      .attr("cx", (d,i) -> positions[i][0])
+      .attr("cy", (d,i) -> positions[i][1])
+      .attr("r", circleRadius)
 
 
   render_states = (states_json) ->
@@ -110,6 +120,7 @@ $ ->
 
   display = (data) ->
     my_data(data)
+    my_map.update(data)
 
   d3.csv("data/property_data.csv", display)
 
