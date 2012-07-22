@@ -3,14 +3,53 @@ root = exports ? this
 
 PropertyData = () ->
   data = null
-  dimensions = null
+  dimensions = {}
+
+  filterData = {
+    "building_rsf":
+      min:3000
+      max:800000
+      values:[4000,300000]
+    "government_leased":
+      min:0
+      max:100
+      values:[0,100]
+    "government_rsf":
+      min:3000
+      max:800000
+      values:[4000,400000]
+    "remaining_total_term":
+      min:0
+      max:20
+      values:[0,20]
+    "remaining_firm_term":
+      min:0
+      max:20
+      values:[0,20]
+  }
 
   pdata = (rawData) ->
     data = crossfilter(rawData)
     setupDimensions()
+    setupSliders()
+
+  setupSliders = () ->
+    d3.entries(filterData).forEach (entry) ->
+      sliderId = "#slider_#{entry.key}"
+      $(sliderId).slider({
+        range:true,
+        min:entry.value.min,
+        max:entry.value.max,
+        values: entry.value.values
+        slide: handleSlide
+      })
+
+  handleSlide = (event,ui) ->
+    sliderId = $(this).attr("id").replace("slider_","")
+    dimensions[sliderId].filter(ui.values)
+    $(root).trigger('filterupdate')
 
   setupDimensions = () ->
-    dimensions = {}
     dimensions.building_rsf = data.dimension (d) -> d.bldg_rsf
     dimensions.government_leased = data.dimension (d) -> d.percent_govt_leased
     dimensions.government_rsf = data.dimension (d) -> d.total_leased_rsf
@@ -18,6 +57,15 @@ PropertyData = () ->
     dimensions.remaining_firm_term = data.dimension (d) -> d.remaining_firm_term
     dimensions.total_rent = data.dimension (d) -> d.total_annual_rent
     dimensions.rent_prsf = data.dimension (d) -> d.rent_prsf
+
+    d3.entries(filterData).forEach (entry) ->
+      dimensions[entry.key].filter(entry.value.values)
+
+  pdata.data = () ->
+    if dimensions.building_rsf
+      dimensions.building_rsf.top(Infinity)
+    else
+      []
 
   pdata
 
@@ -83,13 +131,14 @@ USMap = () ->
       positions.push(projection(location))
 
     circle = circles.selectAll("circle")
-      .data(data)
+      .data(data, (d) -> "#{d.longitude},#{d.latitude}")
 
     circle.enter().append("circle")
       .attr("cx", (d,i) -> positions[i][0])
       .attr("cy", (d,i) -> positions[i][1])
       .attr("r", circleRadius)
 
+    circle.exit().remove()
 
   render_states = (states_json) ->
     states.selectAll("path")
@@ -108,19 +157,27 @@ $ ->
 
   my_map = USMap()
   my_data = PropertyData()
+
+  root.update = () ->
+    filteredData = my_data.data()
+    $("#metric_locations").text(addCommas(filteredData.length))
+    my_map.update(filteredData)
+
+  $(root).bind('filterupdate', update)
+
   plotData("#map",[], my_map)
 
-  $(".slider").slider({
-    range:true,
-    min:0,
-    max:500,
-    values: [75, 300]
-  })
+  # $(".slider").slider({
+  #   range:true,
+  #   min:0,
+  #   max:500,
+  #   values: [75, 300]
+  # })
   $(".mini_slider").slider()
 
   display = (data) ->
     my_data(data)
-    my_map.update(data)
+    update()
 
   d3.csv("data/property_data.csv", display)
 
