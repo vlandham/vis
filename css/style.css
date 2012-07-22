@@ -1,1 +1,109 @@
 
+#container {
+  padding-top: 15px;
+  margin: auto;
+}
+
+#map {
+  width: 620px;
+  height: 430px;
+}
+
+#metrics {
+  /* height: 340px; */
+  height:100%;
+  border: 2px #333 solid;
+}
+
+.metric_title {
+  text-align: center;
+  height:25px;
+  background-color: #333;
+  color: white;
+}
+
+.metric_value {
+  height: 50px;
+  font-size: 60px;
+  line-height: 90%;
+  text-align: center;
+  vertical-align: middle;
+  margin:15px;
+}
+
+#mini_sliders {
+}
+
+#mini_sliders h4 {
+  padding-bottom: 5px;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.mini_slider_section {
+  clear: both;
+}
+
+.mini_slider {
+  width: 68%;
+  float: left;
+  margin-left: 10px;
+}
+
+#sliders h3 {
+  text-align: right;
+  padding-right:15px;
+  margin-top: -7px;
+}
+
+#sliders .row {
+  padding-top: 10px;
+}
+
+.slider_question {
+  float:left;
+  margin-top: -3px;
+  margin-left: 4px;
+}
+
+#sliders .slider {
+  width: 75%;
+  float: left;
+  margin-left: 10px;
+}
+
+.slider_label {
+  float: left;
+  margin-top: -3px;
+  margin-left: 4px;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+#footer {
+  text-align: left;
+  clear: both;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  font-style: italic;
+}
+
+#states {
+  fill: #bbb;
+  stroke: #fff;
+  stroke-width: 1.5px;
+}
+
+#states path:hover {
+  stroke: white;
+}
+
+circle {
+  fill: steelblue;
+  fill-opacity: 0.8;
+  stroke: #fff;
+}
+

@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>vis</title>
+  <title>GSA-Leased Investment Opportunity</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -16,6 +16,7 @@
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/smoothness/jquery-ui-1.8.21.custom.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
@@ -26,14 +27,166 @@
 
   <div id="container" class="container">
     <header>
-
+    <h1>GSA-Leased Investment Opportunity</h1>
     </header>
     <div id="main" role="main">
-      <div id="vis"></div>
+      <div class="row">
+        <div class="span8">
+          <div id="map"></div>
+        </div>
+        <div class="span4">
+          <div id="metrics">
+            <div class="metric_title">
+              <h3># of Locations</h3>
+            </div>
+            <div class="metric_value" id="metric_locations">
+              1,200
+            </div>
+            <div class="metric_title">
+              <h3>Total RSF</h3>
+            </div>
+            <div class="metric_value" id="metric_rsf">
+              1,200
+            </div>
+            <div class="metric_title">
+              <h3>Capitalized Value</h3>
+            </div>
+            <div class="metric_value" id="metric_value">
+              1,200
+            </div>
+          </div>
+          <div id="mini_sliders">
+            <div class="mini_slider_section">
+              <h4>% Operating Expenses</h4>
+              <div class="slider_label">0%</div>
+              <div class="mini_slider"></div>
+              <div class="slider_label">100%</div>
+              <div class="slider_question">
+                <i class="icon-question-sign"></i>
+              </div>
+            </div>
+            <div class="mini_slider_section">
+              <h4>Cap Rate</h4>
+              <div class="slider_label">4%</div>
+              <div class="mini_slider"></div>
+              <div class="slider_label">14%</div>
+              <div class="slider_question">
+                <i class="icon-question-sign"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="sliders">
+        <div class="row">
+          <div class="span4">
+            <h3>Building RSF</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">3,000</div>
+            <div class="slider" id="slider_building_rsf"></div>
+            <div class="slider_label">800k</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>% Government Leased</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">0%</div>
+            <div class="slider" id="slider_government_leased"></div>
+            <div class="slider_label">100%</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>Government Leased RSF</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">3,000</div>
+            <div class="slider" id="slider_government_rsf"></div>
+            <div class="slider_label">800k</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>Remaining Total Term (Yrs)</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">0</div>
+            <div class="slider" id="slider_remaining_total_term"></div>
+            <div class="slider_label">20</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>Remaining Firm Term (Yrs)</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">0</div>
+            <div class="slider" id="slider_remaining_firm_term"></div>
+            <div class="slider_label">20</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>Total Rent</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">0</div>
+            <div class="slider" id="slider_total_rent"></div>
+            <div class="slider_label">20</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>Rent PRSF</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">0</div>
+            <div class="slider" id="slider_rent_prsf"></div>
+            <div class="slider_label">20</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="span4">
+            <h3>Capitalized Value</h3>
+          </div>
+          <div class="span6">
+            <div class="slider_label">0</div>
+            <div class="slider" id="slider_capitalized_value"></div>
+            <div class="slider_label">20</div>
+            <div class="slider_question">
+              <i class="icon-question-sign"></i>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <footer>
-
-    </footer>
+    <div id="footer">
+    <p>Analysis is based upon 5,531 properties identified using April 2012 GSA lease inventory.  Multiple leases in the same building have been aggregated to calculate total rent and % leased, and remaining lease term and rent/RSF are presented using a weighted average.  The data set excludes properties that are very small  (&lt;3,000 RSF) and properties for which no building size could be determined.  Properties located in U.S. Territories (ex. Puerto Rico) are excluded from this analysis.</p>
+    </div>
   </div> <!--! end of #container -->
 
 
@@ -43,8 +196,10 @@
 
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
+  <script src="js/libs/jquery-ui-1.8.21.custom.min.js"></script>
   <script src="js/libs/coffee-script.js"></script>
   <script src="js/libs/d3.v2.js"></script>
+  <script src="js/libs/crossfilter.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
     $(document).ready(function() {
