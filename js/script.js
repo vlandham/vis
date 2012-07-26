@@ -11,6 +11,31 @@ function addCommas(nStr)
 	return x1 + x2;
 }
 
+function roundNumber(num, dec) {
+	var result = Math.round(num*Math.pow(10,dec))/Math.pow(10,dec);
+	return result;
+}
+
+
+function fixUp(number)
+{
+  if(number > 999999999)
+  {
+    number = roundNumber(number / 1000000000.0, 1);
+    return addCommas(number) + "B";
+  }
+  else if(number > 999999)
+  {
+    number = roundNumber(number / 1000000.0, 1);
+    return addCommas(number) + "M";
+
+  }
+  else
+  {
+    return addCommas(number);
+  }
+}
+
 
 
 
