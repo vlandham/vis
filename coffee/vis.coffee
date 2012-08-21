@@ -7,8 +7,8 @@ Plot = () ->
   data = []
   points = null
   margin = {top: 20, right: 20, bottom: 20, left: 20}
-  xScale = d3.scale.linear().range([0,width])
-  yScale = d3.scale.linear().range([0,height])
+  xScale = d3.scale.linear().domain([0,10]).range([0,width])
+  yScale = d3.scale.linear().domain([0,10]).range([0,height])
   xValue = (d) -> parseFloat(d.x)
   yValue = (d) -> parseFloat(d.y)
 
@@ -33,8 +33,8 @@ Plot = () ->
     points.selectAll(".point")
       .data(data).enter()
       .append("circle")
-      .attr("x", (d) -> xScale(xValue(d)))
-      .attr("y", (d) -> yScale(yValue(d)))
+      .attr("cx", (d) -> xScale(xValue(d)))
+      .attr("cy", (d) -> yScale(yValue(d)))
       .attr("r", 4)
       .attr("fill", "steelblue")
 
