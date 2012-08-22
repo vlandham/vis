@@ -81,6 +81,15 @@ handleClick = (e) ->
   click_location = e.latlng
   console.log('click')
 
+geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+}
+
 $ ->
   
   api_key = "a901e8e6d6c04353895e2fede2d4a7c6"
@@ -89,18 +98,25 @@ $ ->
   map = L.map('map').setView([37.8, -96], 4)
 
   L.tileLayer(map_layer_url, {
-    attribution: 'Map data &copy; ',
-    maxZoom: 18
+    attribution: 'Map Data &copy; ',
+    maxZoom: 22
   }).addTo(map)
 
   map.on('click', handleClick)
 
 
   # plot = Plot()
-  # display = (data) ->
+  display = (data) ->
+    console.log(data.features.length)
+    L.geoJson(data, {
+      pointToLayer: (feature, latlng) ->
+        console.log(latlng)
+        L.circleMarker(latlng, geojsonMarkerOptions)
+    }).addTo(map)
+    
   #   console.log("display")
   #   plotData("#vis", data, plot)
 
 
-  # d3.csv("data/test.csv", display)
+  d3.json("data/geo.geojson", display)
 
