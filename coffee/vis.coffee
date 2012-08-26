@@ -90,6 +90,12 @@ geojsonMarkerOptions = {
     fillOpacity: 0.8
 }
 
+eachFeature = (feature, layer) ->
+  layer.bindPopup(feature.properties["PARKNAME"])
+
+filterFeatures = (feature, layer) ->
+  feature.properties["PLAYGROUND"] == "Yes"
+
 $ ->
   
   api_key = "a901e8e6d6c04353895e2fede2d4a7c6"
@@ -99,7 +105,7 @@ $ ->
 
   L.tileLayer(map_layer_url, {
     attribution: 'Map Data &copy; ',
-    maxZoom: 22
+    maxZoom: 18
   }).addTo(map)
 
   map.on('click', handleClick)
@@ -110,13 +116,14 @@ $ ->
     console.log(data.features.length)
     L.geoJson(data, {
       pointToLayer: (feature, latlng) ->
-        console.log(latlng)
         L.circleMarker(latlng, geojsonMarkerOptions)
+      onEachFeature: eachFeature
+      filter: filterFeatures
     }).addTo(map)
     
   #   console.log("display")
   #   plotData("#vis", data, plot)
 
 
-  d3.json("data/geo.geojson", display)
+  d3.json("data/kcmo_parks_with_geom.geojson", display)
 
