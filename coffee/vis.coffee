@@ -2,15 +2,18 @@
 root = exports ? this
 
 Plot = () ->
-  width = 600
+  width = 1000
   height = 600
   data = []
-  points = null
+  lines = null
   margin = {top: 20, right: 20, bottom: 20, left: 20}
   xScale = d3.scale.linear().range([0,width])
   yScale = d3.scale.linear().range([0,height])
   xValue = (d) -> parseFloat(d.x)
   yValue = (d) -> parseFloat(d.y)
+  line = d3.svg.line()
+    .x((d,i) -> xScale(i))
+    .y((d) -> height - yScale(d.time))
 
   chart = (selection) ->
     selection.each (rawData) ->
@@ -26,17 +29,41 @@ Plot = () ->
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
 
-      points = g.append("g").attr("id", "vis_points")
+      lines = g.append("g").attr("id", "vis_lines")
       update()
 
   update = () ->
-    points.selectAll(".point")
+
+    xScale.domain([0,data[0].run.length])
+    yMin = d3.min(data, (d) -> d3.min(d.run.map (e) -> e.time))
+    yMax = d3.max(data, (d) -> d3.max(d.run.map (e) -> e.time))
+    yExtent = [yMin, yMax]
+    console.log(yExtent)
+    yScale.domain(yExtent)
+    runs = lines.selectAll(".runs")
       .data(data).enter()
-      .append("circle")
-      .attr("x", (d) -> xScale(xValue(d)))
-      .attr("y", (d) -> yScale(yValue(d)))
+      .append("g")
+      .attr("class", "runs")
+
+    runs.selectAll("path")
+      .data((d) -> [d.run]).enter()
+      .append("path")
+      .attr("d", line)
+      .attr("stroke", "#e2e2e2")
+      .attr("stroke-width", 1)
+      .attr("fill", "none")
+    
+
+    run = runs.selectAll(".run")
+      .data( (d) -> d.run).enter().append("g").attr("class","run")
+
+    run.append("circle")
+      .attr("cx", (d,i) -> xScale(i))
+      .attr("cy", (d) -> height - yScale(d.time))
       .attr("r", 4)
       .attr("fill", "steelblue")
+
+
 
   chart.height = (_) ->
     if !arguments.length
@@ -85,5 +112,5 @@ $ ->
     plotData("#vis", data, plot)
 
 
-  d3.csv("data/test.csv", display)
+  d3.json("data/sprint_data.json", display)
 
