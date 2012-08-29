@@ -1,1 +1,8 @@
 
+.highlight {
+  stroke: black;
+}
+
+circle.highlight {
+  fill: black;
+}
