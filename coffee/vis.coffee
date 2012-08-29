@@ -5,6 +5,7 @@ Plot = () ->
   width = 1000
   height = 600
   data = []
+  allData = []
   lines = null
   margin = {top: 20, right: 20, bottom: 20, left: 130}
   xScale = d3.scale.linear().range([0,width])
@@ -19,6 +20,7 @@ Plot = () ->
     selection.each (rawData) ->
 
       data = rawData
+      allData = data
 
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
@@ -38,53 +40,70 @@ Plot = () ->
     yMin = d3.min(data, (d) -> d3.min(d.run.map (e) -> e.time))
     yMax = d3.max(data, (d) -> d3.max(d.run.map (e) -> e.time))
     yExtent = [yMin, yMax]
-    console.log(yExtent)
     yScale.domain(yExtent)
-    runs = lines.selectAll(".runs")
-      .data(data, (d) -> d["Pos"]).enter()
+
+    runData = lines.selectAll(".runs")
+      .data(data, (d) -> d["Name"])
+
+    runData.exit().transition().remove()
+
+
+    runs = runData.enter()
       .append("g")
       .attr("class", "runs")
 
     runs.append("text")
-      .attr("x", -8)
-      .attr("y", (d) -> height - yScale(d.run[0].time))
       .attr("dy", 5)
       .attr("text-anchor", "end")
       .classed("hidden", true)
       .text((d) -> d["Name"])
 
-    runs.selectAll("path")
-      .data((d) -> [d.run]).enter()
-      .append("path")
-      .attr("d", line)
+    runData.selectAll("text")
+      .attr("x", -8)
+      .attr("y", (d) -> height - yScale(d.run[0].time))
+
+    runs.append("path")
       .attr("stroke", "#e2e2e2")
       .attr("stroke-width", 1.7)
       .attr("fill", "none")
       .on("mouseover", showDetailsPath)
       .on("mouseout", hideDetailsPath)
     
+    runData.selectAll("path").transition()
+      .duration(2000)
+      .attr("d", (d) -> line(d.run))
 
-    run = runs.selectAll(".run")
-      .data( (d) -> d.run).enter().append("g").attr("class","run")
+    runPoints = runData.selectAll(".run")
+      .data((d) -> d.run)
 
-    run.append("circle")
+    runPoints.exit().remove()
+
+    run = runPoints.enter()
+
+    circles = run.append("circle")
       .attr("cx", (d,i) -> xScale(i))
       .attr("cy", (d) -> height - yScale(d.time))
       .attr("r", 4)
+      .attr("class", "run")
       .attr("fill", "steelblue")
       .on("mouseover", showDetailsPoint)
       .on("mouseout", hideDetailsPoint)
 
+    runPoints.transition().duration(2000).attr("r",4)
+      .attr("cx", (d,i) -> xScale(i))
+      .attr("cy", (d) -> height - yScale(d.time))
+
+
 
   showDetailsPoint = (d,i) ->
     d3.select(this).classed("highlight", true)
-    d3.select(this.parentNode.parentNode).select("text").classed("hidden", false)
-    d3.select(this.parentNode.parentNode).select("path").classed("highlight", true)
+    d3.select(this.parentNode).select("text").classed("hidden", false)
+    d3.select(this.parentNode).select("path").classed("highlight", true)
 
   hideDetailsPoint = (d,i) ->
     d3.select(this).classed("highlight", false)
-    d3.select(this.parentNode.parentNode).select("text").classed("hidden", true)
-    d3.select(this.parentNode.parentNode).select("path").classed("highlight", false)
+    d3.select(this.parentNode).select("text").classed("hidden", true)
+    d3.select(this.parentNode).select("path").classed("highlight", false)
 
 
   showDetailsPath = (d,i) ->
@@ -95,6 +114,18 @@ Plot = () ->
   hideDetailsPath = (d,i) ->
     d3.select(this).classed("highlight", false)
     d3.select(this.parentNode).select("text").classed("hidden", true)
+
+  chart.updateData = (input) ->
+    if !arguments.length
+      data = allData
+    else if input < 1
+      number = Math.round(allData.length * input)
+      data = allData[0..number]
+    else
+      number = input
+      data = allData[0...number]
+      console.log(data.length)
+    update()
 
   chart.height = (_) ->
     if !arguments.length
@@ -141,6 +172,18 @@ $ ->
   plot = Plot()
   display = (data) ->
     plotData("#vis", data, plot)
+
+  $("#10_percent").on "click", (d) ->
+    plot.updateData(0.1)
+    false
+
+  $("#all").on "click", (d) ->
+    plot.updateData()
+    false
+
+  $("#top_5").on "click", (d) ->
+    plot.updateData(5)
+    false
 
 
   d3.json("data/sprint_data.json", display)
