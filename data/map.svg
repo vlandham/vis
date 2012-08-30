@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 14.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 43363)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="route_map" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="254px" height="234px" viewBox="0 0 254 234" enable-background="new 0 0 254 234" xml:space="preserve">
+<g>
+	<g id="PS">
+		<line fill="none" stroke="#000000" stroke-width="2" x1="49.082" y1="163.271" x2="51.194" y2="175.564"/>
+		<line fill="none" stroke="#000000" stroke-width="2" x1="51.194" y1="175.564" x2="60.414" y2="167.881"/>
+		<line fill="none" stroke="#000000" stroke-width="2" x1="60.414" y1="167.881" x2="49.082" y2="163.271"/>
+	</g>
+	<line id="PS-P1" fill="none" stroke="#000000" stroke-width="2" x1="60.414" y1="168.881" x2="93.067" y2="163.119"/>
+	<circle id="P1" fill="none" stroke="#000000" stroke-width="2" cx="98.829" cy="162.542" r="5.378"/>
+	<circle id="P2" fill="none" stroke="#000000" stroke-width="2" cx="81.069" cy="123.094" r="5.378"/>
+	<circle id="P3" fill="none" stroke="#000000" stroke-width="2" cx="32.658" cy="157.74" r="5.378"/>
+	<circle id="P4" fill="none" stroke="#000000" stroke-width="2" cx="7.207" cy="76.963" r="5.378"/>
+	<circle id="P5" fill="none" stroke="#000000" stroke-width="2" cx="36.705" cy="85.069" r="5.378"/>
+	<circle id="P6" fill="none" stroke="#000000" stroke-width="2" cx="131.055" cy="45.566" r="5.378"/>
+	<circle id="P7" fill="none" stroke="#000000" stroke-width="2" cx="60.488" cy="8.305" r="5.377"/>
+	<circle id="P8" fill="none" stroke="#000000" stroke-width="2" cx="236.768" cy="7.377" r="5.378"/>
+	<circle id="P9" fill="none" stroke="#000000" stroke-width="2" cx="224.734" cy="77.741" r="5.378"/>
+	<circle id="P10" fill="none" stroke="#000000" stroke-width="2" cx="207.005" cy="74.574" r="5.377"/>
+	<circle id="P11" fill="none" stroke="#000000" stroke-width="2" cx="167.479" cy="114.46" r="5.377"/>
+	<circle id="P12" fill="none" stroke="#000000" stroke-width="2" cx="246.348" cy="116.529" r="5.378"/>
+	<circle id="P13" fill="none" stroke="#000000" stroke-width="2" cx="246.348" cy="180.901" r="5.378"/>
+	<circle id="P14" fill="none" stroke="#000000" stroke-width="2" cx="217.76" cy="205.562" r="5.378"/>
+	<circle id="P15" fill="none" stroke="#000000" stroke-width="2" cx="216.26" cy="190.042" r="5.378"/>
+	<circle id="P16" fill="none" stroke="#000000" stroke-width="2" cx="232.781" cy="207.099" r="5.378"/>
+	<circle id="P17" fill="none" stroke="#000000" stroke-width="2" cx="231.488" cy="228.267" r="5.378"/>
+	<circle id="P18" fill="none" stroke="#000000" stroke-width="2" cx="112.005" cy="206.137" r="5.378"/>
+	<circle id="P19" fill="none" stroke="#000000" stroke-width="2" cx="101.249" cy="221.979" r="5.377"/>
+	<g id="PE">
+		<circle fill="none" stroke="#000000" cx="62.613" cy="210.843" r="6.434"/>
+		<circle fill="none" stroke="#000000" cx="62.488" cy="210.865" r="3.486"/>
+	</g>
+	<line id="P1-P2" fill="none" stroke="#000000" stroke-width="2" x1="96.416" y1="157.74" x2="83.809" y2="127.716"/>
+	<line id="P2-P3" fill="none" stroke="#000000" stroke-width="2" x1="75.691" y1="126.624" x2="37.359" y2="155.131"/>
+	<line id="P3-P4" fill="none" stroke="#000000" stroke-width="2" x1="31.327" y1="152.363" x2="8.746" y2="82.341"/>
+	<line id="P4-P5" fill="none" stroke="#000000" stroke-width="2" x1="12.228" y1="78.877" x2="31.435" y2="83.988"/>
+	<line id="P5-P6" fill="none" stroke="#000000" stroke-width="2" x1="41.333" y1="82.341" x2="126.408" y2="48.266"/>
+	<line id="P6-P7" fill="none" stroke="#000000" stroke-width="2" x1="126.408" y1="42.868" x2="65.075" y2="11.103"/>
+	<line id="P7-P8" fill="none" stroke="#000000" stroke-width="2" x1="65.866" y1="8.305" x2="231.391" y2="7.377"/>
+	<line id="P8-P9" fill="none" stroke="#000000" stroke-width="2" x1="235.945" y1="12.687" x2="225.6" y2="72.439"/>
+	<line id="P9-P10" fill="none" stroke="#000000" stroke-width="2" x1="219.518" y1="76.461" x2="212.382" y2="74.574"/>
+	<line id="P10-P11" fill="none" stroke="#000000" stroke-width="2" x1="203.493" y1="78.643" x2="171.712" y2="111.151"/>
+	<line id="P11-P12" fill="none" stroke="#000000" stroke-width="2" x1="172.855" y1="114.46" x2="240.969" y2="116.529"/>
+	<line id="P12-P13" fill="none" stroke="#000000" stroke-width="2" x1="246.348" y1="121.907" x2="246.348" y2="175.525"/>
+	<line id="P13-P14" fill="none" stroke="#000000" stroke-width="2" x1="242.506" y1="184.664" x2="221.521" y2="201.721"/>
+	<line id="P14-P15" fill="none" stroke="#000000" stroke-width="2" x1="217.76" y1="200.184" x2="216.26" y2="195.421"/>
+	<line id="P15-P16" fill="none" stroke="#000000" stroke-width="2" x1="220.123" y1="193.779" x2="228.951" y2="203.326"/>
+	<line id="P16-P17" fill="none" stroke="#000000" stroke-width="2" x1="232.781" y1="212.477" x2="231.486" y2="222.889"/>
+	<line id="P17-P18" fill="none" stroke="#000000" stroke-width="2" x1="226.188" y1="227.355" x2="117.292" y2="207.1"/>
+	<line id="P18-P19" fill="none" stroke="#000000" stroke-width="2" x1="108.65" y1="210.336" x2="104.207" y2="217.49"/>
+	<line id="P19-PE" fill="none" stroke="#000000" stroke-width="2" x1="96.016" y1="220.759" x2="68.831" y2="212.477"/>
+</g>
+</svg>

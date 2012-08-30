@@ -1,8 +1,24 @@
 
+#main {
+  padding-bottom: 10px;
+}
+
 .highlight {
   stroke: black;
 }
 
 circle.highlight {
   fill: black;
+}
+
+#map {
+  width: 254px;
+  height: 234px;
+  padding: 10px;
+  border: 2px #ddd solid;
+}
+
+#map .highlight {
+  stroke: red;
+  fill: none;
 }
