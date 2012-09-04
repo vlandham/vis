@@ -22,3 +22,55 @@ circle.highlight {
   stroke: red;
   fill: none;
 }
+
+#vis {
+  position:relative;
+}
+
+#detail {
+  position:absolute;
+  right: 10%;
+  padding-right: 20px;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.hidden {
+  display:none;
+}
+
+.faded {
+  color: #ddd;
+}
+
+#table {
+  margin-top: 20px;
+}
+
+#table th {
+  white-space: nowrap;
+}
+
+#table .highlight {
+  color: red;
+}
+
+.x.axis line {
+  stroke: #fff;
+}
+
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+

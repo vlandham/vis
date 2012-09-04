@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="css/reset.css">
+  <!-- <link rel="stylesheet" href="css/reset.css"> -->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
@@ -29,14 +29,36 @@
 
     </header>
     <div id="main" role="main">
-      <div id="vis"></div>
-      <div class="controls">
-        <a id="all" href="#">All</a>
-        <a id="10_percent" href="#">Top 10%</a>
-        <a id="top_5" href="#">Top 5</a>
+      <div class="row">
+        <div class="span4">
+          <h3>Course Map</h3>
+          <div id="map"></div>
+        </div>
+        <div class="span8">
+          <h3>Relative Times</h3>
+          <div id="vis">
+            <div id="detail"></div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span8 offset4">
+          <div class="controls">
+            <a id="all" href="#" class="btn">All</a>
+            <a id="10_percent" href="#" class="btn">Top 10%</a>
+            <a id="top_5" href="#" class="btn">Top 5</a>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="span9">
+          <table id="table" class="table">
+            <thead></thead>
+            <tbody></tbody>
+          </table>
+        </div>
       </div>
 
-      <div id="map"></div>
     </div>
     <footer>
 
