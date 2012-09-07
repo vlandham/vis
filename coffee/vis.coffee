@@ -17,13 +17,13 @@ Bubbles = () ->
 
   collisionPadding = 4
   minCollisionRadius = 16
+  jitter = 0.5
 
   tick = (e) ->
     reducedAlpha = e.alpha * 0.1
-    collisionAlpha =  0.5
     node
       .each(gravity(reducedAlpha))
-      .each(collide(collisionAlpha))
+      .each(collide(jitter))
       .attr("transform", (d) -> "translate(#{d.x},#{d.y})")
 
     label
@@ -195,6 +195,14 @@ Bubbles = () ->
     console.log(id)
     node.classed("bubble-selected", (d) -> id == idValue(d))
 
+  chart.jitter = (_) ->
+    if !arguments.length
+      return jitter
+    jitter = _
+    console.log(jitter)
+    force.start()
+    chart
+
   chart.height = (_) ->
     if !arguments.length
       return height
@@ -233,6 +241,10 @@ $ ->
   plot = Bubbles()
   display = (data) ->
     plotData("#vis", data, plot)
+
+  d3.select("#jitter")
+    .on "input", () -> 
+      plot.jitter(+this.output.value)
 
   d3.csv("data/words_short.csv", display)
 

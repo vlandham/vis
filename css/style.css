@@ -6,11 +6,24 @@ body {
 #container {
   padding-top:20px;
   width: 980px;
+  border-left: 2px #ddd solid;
+  border-right: 2px #ddd solid;
+}
+
+header {
+  padding: 10px;
 }
 
 #vis {
   overflow: hidden;
   position: relative;
+}
+
+#controls {
+  padding: 20px;
+  background-color: #eee;
+  margin: 10px;
+  width: 350px;
 }
 
 #bubble-background {
