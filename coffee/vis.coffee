@@ -10,32 +10,72 @@ Bubbles = () ->
   margin = {top: 20, right: 10, bottom: 20, left: 10}
   maxRadius = 65
 
+  # this scale will be used to size our bubbles
   rScale = d3.scale.sqrt().range([0,maxRadius])
+  
+  # I've abstracted the data value used to size each
+  # into its own function. This should make it easy
+  # to switch out the underlying dataset
   rValue = (d) -> parseInt(d.count)
+
+  # function to define the 'id' of a data element
+  #  - used to bind the data to the force nodes
+  #   and for url creation
+  #  - should make it easier to switch out dataset
+  #   for your own
   idValue = (d) -> d.name
+
+  # function to define what to display in each bubble
+  #  again, to ease migration to a different dataset
   textValue = (d) -> d.name
 
+ 
+  # constants to control how
+  # collision acts
   collisionPadding = 4
-  minCollisionRadius = 16
+  minCollisionRadius = 12
+
+  # variables that can be changed
+  # to tweak how the force layout
+  # acts
   jitter = 0.5
 
+  # tick function will be executed for every
+  # iteration of the force simulation
+  # - moves force nodes towards their destinations
+  # - deals with collisions of force nodes
+  # - updates bubbles to reflect new force node locations
   tick = (e) ->
-    reducedAlpha = e.alpha * 0.1
+    dampenedAlpha = e.alpha * 0.1
+    
+    # Most of the work is done by the gravity and collide
+    # functions.
     node
-      .each(gravity(reducedAlpha))
+      .each(gravity(dampenedAlpha))
       .each(collide(jitter))
       .attr("transform", (d) -> "translate(#{d.x},#{d.y})")
 
+    # As the labels are created in raw html and not svg, we need
+    # to ensure we specify the 'px' for moving based on pixels
     label
       .style("left", (d) -> ((margin.left + d.x) - d.dx / 2) + "px")
       .style("top", (d) -> ((margin.top + d.y) - d.dy / 2) + "px")
 
+  # The force variable is the force layout controlling the bubbles
+  # here we disable gravity and charge as we implement custom versions
+  # of gravity and collisions for this visualization
   force = d3.layout.force()
     .gravity(0)
     .charge(0)
     .size([width, height - 80])
     .on("tick", tick)
 
+  # ---
+  # Creates new chart function. This is the 'constructor' of our
+  #  visualization
+  # Check out http://bost.ocks.org/mike/chart/ 
+  #  for a explanation and rational behind this function design
+  # ---
   chart = (selection) ->
     selection.each (rawData) ->
 
@@ -52,6 +92,7 @@ Bubbles = () ->
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
 
+      # node will be used to group the bubbles
       node = g.append("g").attr("id", "bubble-nodes")
 
       node.append("rect")
@@ -60,6 +101,9 @@ Bubbles = () ->
         .attr("height", height)
         .on("click", clear)
 
+
+      # label is the container div for all the labels that sit on top of 
+      # the bubbles
       label = d3.select(this).selectAll("#bubble-labels").data([data])
         .enter()
         .append("div")
@@ -67,19 +111,36 @@ Bubbles = () ->
 
       update()
       hashchange()
+
+      # automatically call hashchange when the url has changed
       d3.select(window)
         .on("hashchange", hashchange)
 
+  # update starts up the force directed layout and then
+  # updates the nodes and labels
   update = () ->
     data.forEach (d,i) ->
-      d.forceR = Math.max(12, rScale(rValue(d)))
+      d.forceR = Math.max(minCollisionRadius, rScale(rValue(d)))
     force.nodes(data).start()
     updateNodes()
     updateLabels()
 
+  # updateNodes creates a new bubble for each node in our dataset
   updateNodes = () ->
-    node = node.selectAll("bubble-node").data(data, (d) -> idValue(d))
+
+    # here we are using the idValue function to uniquely bind our
+    # data to the (currently) empty 'bubble-node selection'.
+    # if you want to use your own data, you just need to modify what
+    # idValue returns
+    node = node.selectAll(".bubble-node").data(data, (d) -> idValue(d))
+
+    # we don't actually remove any nodes from our data in this example 
+    # but if we did, this line of code would remove them from the
+    # visualization as well
     node.exit().remove()
+
+    # nodes are just links with circles inside.
+    # the styling comes from the css
     node.enter()
       .append("a")
       .attr("class", "bubble-node")
@@ -89,8 +150,13 @@ Bubbles = () ->
       .append("circle")
       .attr("r", (d) -> rScale(rValue(d)))
 
+  # updateLabels is more involved as we need to deal with getting the sizing
+  # to work well with the font size
   updateLabels = () ->
-    label = label.selectAll("bubble-label").data(data, (d) -> idValue(d))
+
+    # as before, we use idValue to define what the unique id for each data 
+    # point is
+    label = label.selectAll(".bubble-label").data(data, (d) -> idValue(d))
 
     label.exit().remove()
 
