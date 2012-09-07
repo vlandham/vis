@@ -1,1 +1,49 @@
 
+body {
+  font-family: georgia, "times new roman", times, serif;
+}
+
+#container {
+  width: 980px;
+}
+
+#vis {
+  position: relative;
+}
+
+#bubble-background {
+  fill: none;
+  pointer-events: all;
+}
+
+.bubble-node {
+  fill: #d1e0f3;
+}
+
+.bubble-hover {
+  fill: #b8c7d9;
+}
+
+.bubble-selected {
+  fill: #a8c8ee; 
+  stroke: #6081a3;
+  stroke-width: 1.5px;
+}
+
+
+a.bubble-label {
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1em;
+  position: absolute;
+}
+
+
+.bubble-label .bubble-label-value {
+  font: 11px sans-serif;
+  white-space: nowrap;
+}
+
