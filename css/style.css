@@ -4,10 +4,12 @@ body {
 }
 
 #container {
+  padding-top:20px;
   width: 980px;
 }
 
 #vis {
+  overflow: hidden;
   position: relative;
 }
 
@@ -17,16 +19,20 @@ body {
 }
 
 .bubble-node {
-  fill: #d1e0f3;
+  /* fill: #d1e0f3; */
+  fill: #DCE9BE;
 }
 
 .bubble-hover {
-  fill: #b8c7d9;
+  /* fill: #b8c7d9; */
+  fill: #E8E9E7;
 }
 
 .bubble-selected {
-  fill: #a8c8ee; 
-  stroke: #6081a3;
+  /* fill: #a8c8ee;  */
+  fill: #CEE98F;
+  /* stroke: #6081a3; */
+  stroke: #A6BA92;
   stroke-width: 1.5px;
 }
 

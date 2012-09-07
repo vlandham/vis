@@ -106,6 +106,7 @@ Bubbles = () ->
 
     labelEnter.append("div")
       .attr("class", "bubble-label-value")
+      .text((d) -> d.count)
 
     label
       .style("font-size", (d) -> Math.max(8, rScale(rValue(d) / 2)) + "px")
@@ -115,6 +116,9 @@ Bubbles = () ->
       .text((d) -> textValue(d))
       .each((d) -> d.dx = Math.max(2.5 * rScale(rValue(d)), this.getBoundingClientRect().width))
       .remove()
+
+    label
+      .style("width", (d) -> d.dx + "px")
 
     label.each((d) -> d.dy = this.getBoundingClientRect().height)
 
