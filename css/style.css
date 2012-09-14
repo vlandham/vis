@@ -1,1 +1,19 @@
 
+#chart {
+  background-color: #D3AB64;
+}
+
+.axis path {
+  fill: none;
+  stroke: #000;
+}
+
+.ring {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+.names {
+ font-weight: bold; 
+}
