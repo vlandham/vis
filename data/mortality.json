@@ -1,5 +1,91 @@
 [
+  { "id":"scarlet_cities",
+    "disease":"scarlet",
+    "location":"cities",
+    "data":[
+    {"month": "jan.",
+      "count": 93.82
+    },
+    {"month": "feb.",
+      "count": 82.42
+    },
+    {"month": "mar.",
+      "count": 92.06
+    },
+    {"month": "apr.",
+      "count": 78.04
+    },
+    {"month": "may",
+      "count": 75.84
+    },
+    {"month": "jun.",
+      "count": 127.14
+    },
+    {"month": "jul.",
+      "count": 73.65
+    },
+    {"month": "aug.",
+      "count": 65.32
+    },
+    {"month": "sep.",
+      "count": 56.55
+    },
+    {"month": "oct.",
+      "count": 83.30
+    },
+    {"month": "nov.",
+      "count": 82.86
+    },
+    {"month": "dec.",
+      "count": 88.56
+    }
+    ]
+  },
+  { "id":"scarlet_rural",
+    "disease":"scarlet",
+    "location":"rural",
+    "data":[
+    {"month": "jan.",
+      "count": 92.46
+    },
+    {"month": "feb.",
+      "count": 92.46
+    },
+    {"month": "mar.",
+      "count": 100.05
+    },
+    {"month": "apr.",
+      "count": 97.61
+    },
+    {"month": "may",
+      "count": 103.31
+    },
+    {"month": "jun.",
+      "count": 78.63
+    },
+    {"month": "jul.",
+      "count": 56.13
+    },
+    {"month": "aug.",
+      "count": 67.25
+    },
+    {"month": "sep.",
+      "count": 65.62
+    },
+    {"month": "oct.",
+      "count": 63.99
+    },
+    {"month": "nov.",
+      "count": 73.21
+    },
+    {"month": "dec.",
+      "count": 85.41
+    }
+    ]
+  },
   { "id":"measles_cities",
+    "disease":"measles",
+    "location":"cities",
     "data":[
     {"month": "jan.",
       "count":77.15
@@ -36,6 +122,174 @@
     },
     {"month": "dec.",
       "count": 46.29
+    }
+    ]
+  },
+  { "id":"measles_rural",
+    "disease":"measles",
+    "location":"rural",
+    "data":[
+    {"month": "jan.",
+      "count":64.42
+    },
+    {"month": "feb.",
+      "count": 106.17
+    },
+    {"month": "mar.",
+      "count": 166.55
+    },
+    {"month": "apr.",
+      "count": 175.07
+    },
+    {"month": "may",
+      "count": 190.24
+    },
+    {"month": "jun.",
+      "count": 76.24
+    },
+    {"month": "jul.",
+      "count": 44.20
+    },
+    {"month": "aug.",
+      "count": 38.71
+    },
+    {"month": "sep.",
+      "count": 30.33
+    },
+    {"month": "oct.",
+      "count": 24.56
+    },
+    {"month": "nov.",
+      "count": 25.13
+    },
+    {"month": "dec.",
+      "count": 36.10
+    }
+    ]
+  },
+  { "id":"all_ages_total",
+    "disease":"all",
+    "location":"us",
+    "data":[
+    {"month": "jan.",
+      "count": 100.93
+    },
+    {"month": "feb.",
+      "count": 87.61
+    },
+    {"month": "mar.",
+      "count": 92.28
+    },
+    {"month": "apr.",
+      "count": 87.35
+    },
+    {"month": "may",
+      "count": 94.37
+    },
+    {"month": "jun.",
+      "count": 72.51
+    },
+    {"month": "jul.",
+      "count": 84.73
+    },
+    {"month": "aug.",
+      "count": 85.76
+    },
+    {"month": "sep.",
+      "count": 77.97
+    },
+    {"month": "oct.",
+      "count": 74.44
+    },
+    {"month": "nov.",
+      "count": 67.31
+    },
+    {"month": "dec.",
+      "count": 72.55
+    }
+    ]
+  },
+  { "id":"under_5_total",
+    "disease":"all",
+    "location":"us",
+    "data":[
+    {"month": "jan.",
+      "count": 82.13
+    },
+    {"month": "feb.",
+      "count": 77.12
+    },
+    {"month": "mar.",
+      "count": 85.71
+    },
+    {"month": "apr.",
+      "count": 80.72
+    },
+    {"month": "may",
+      "count": 92.57
+    },
+    {"month": "jun.",
+      "count": 82.19
+    },
+    {"month": "jul.",
+      "count": 113.29
+    },
+    {"month": "aug.",
+      "count": 105.78
+    },
+    {"month": "sep.",
+      "count": 87.05
+    },
+    {"month": "oct.",
+      "count": 70.07
+    },
+    {"month": "nov.",
+      "count": 59.69
+    },
+    {"month": "dec.",
+      "count": 63.68
+    }
+    ]
+  },
+  { "id":"over_60_total",
+    "disease":"all",
+    "location":"us",
+    "data":[
+    {"month": "jan.",
+      "count": 95.50
+    },
+    {"month": "feb.",
+      "count": 97.39
+    },
+    {"month": "mar.",
+      "count": 105.92
+    },
+    {"month": "apr.",
+      "count": 103.74
+    },
+    {"month": "may",
+      "count": 107.36
+    },
+    {"month": "jun.",
+      "count": 69.97
+    },
+    {"month": "jul.",
+      "count": 65.93
+    },
+    {"month": "aug.",
+      "count": 67.93
+    },
+    {"month": "sep.",
+      "count": 65.84
+    },
+    {"month": "oct.",
+      "count": 65.29
+    },
+    {"month": "nov.",
+      "count": 62.00
+    },
+    {"month": "dec.",
+      "count": 69.94
     }
     ]
   }

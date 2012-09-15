@@ -3,6 +3,11 @@
   background-color: #D3AB64;
 }
 
+.radar {
+  float: left;
+  background-color: #D3AB64;
+}
+
 .axis path {
   fill: none;
   stroke: #000;

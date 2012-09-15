@@ -1,15 +1,17 @@
 root = exports ? this
 
 Plot = () ->
-  width = 600
-  height = 600
-  outerRadius = 200
+  width = 400
+  height = 400
+  outerRadius = 150
   innerRadius = 0
   rotate = 210
-  buffer = 60
+  buffer = 3
   data = []
   vis = null
   margin = {top: 20, right: 20, bottom: 20, left: 20}
+  
+  maxDomain = 250
 
   angle = d3.scale.linear()
     .range([0, 2 * Math.PI])
@@ -31,21 +33,20 @@ Plot = () ->
     .angle(line.angle())
 
   transformData = (rawData) ->
-    rawData.forEach (r) ->
-      r.data.forEach (d, i) ->
-        d.count = parseFloat(d.count)
-        d.index = i + 1
-        d.month = d.month.toUpperCase()
+    rawData.data.forEach (d, i) ->
+      d.count = parseFloat(d.count)
+      d.index = i + 1
+      d.month = d.month.toUpperCase()
     rawData
 
   chart = (selection) ->
     selection.each (rawData) ->
 
       data = transformData(rawData)
-      console.log(data)
 
       # angle.domain([1, 13])
-      radius.domain([0, d3.max(data[0].data, (d) -> d.count)])
+      radius.domain([0, d3.max(data.data, (d) -> d.count)])
+      radius.domain([0, maxDomain])
 
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
@@ -56,7 +57,7 @@ Plot = () ->
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
 
-      vis = g.append("g").attr("id", "vis_g")
+      vis = g.append("g").attr("class", "vis_g")
         .attr("transform", "translate(#{width / 2},#{height / 2})rotate(#{rotate})")
       
       update()
@@ -64,7 +65,7 @@ Plot = () ->
   update = () ->
 
     layer = vis.selectAll(".layer")
-      .data(data).enter()
+      .data([data]).enter()
       .append("path")
       .attr("class", "layer")
       .attr("d", (d) -> area(d.data))
@@ -73,7 +74,7 @@ Plot = () ->
       .attr("stroke-width", 2)
 
     axis =vis.selectAll(".axis")
-      .data(data[0].data)
+      .data(data.data)
       .enter()
       .append("g")
       .attr("class", "axis")
@@ -111,7 +112,7 @@ Plot = () ->
 
     vis.append("g").attr("transform", "rotate(15)")
       .selectAll("g.arc")
-      .data(donut(data[0].data))
+      .data(donut(data.data))
       .enter().append("g")
       .attr("class", "arc")
       .append("path")
@@ -137,6 +138,9 @@ Plot = () ->
     #   .attr("cy", 0)
     #   .attr("r", outerRadius + buffer + 25)
     #   .attr("class", "ring")
+  chart.max = (_) ->
+    maxDomain = _
+    chart
 
   return chart
 
@@ -212,8 +216,22 @@ $ ->
     .style("stroke", "black")
     .style("stroke-width", 2)
 
+  plots = []
   plot = Plot()
   display = (data) ->
-    plotData("#chart", data, plot)
+
+    data.forEach (d,i) ->
+      d3.select("#chart").append("div").attr("id", d.id).attr("class", "radar")
+      plot = Plot()
+      if d.disease == "scarlet"
+        plot.max(150)
+      else if d.id == "under_5_total"
+        plot.max(180)
+      else if d.id == "all_ages_total"
+        plot.max(200)
+      else if d.id == "over_60_total"
+        plot.max(150)
+      plots.push(plot)
+      plotData("##{d.id}", d, plot)
 
   d3.json("data/mortality.json", display)
