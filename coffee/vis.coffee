@@ -77,13 +77,38 @@ root.plotData = (selector, data, plot) ->
     .datum(data)
     .call(plot)
 
+symbolFor = (props) ->
+
+  symbol = {name: 'park', color: '#4D8035'}
+  if props['PLAYGROUND'].toLowerCase() == 'yes'
+    symbol.name = 'star'
+    symbol.color = '#5F9D41'
+  symbol
+
+
+convertData = (data) ->
+  # data = data.filter (d) ->
+  #   d.properties['GOLF'].toLowerCase() == 'no'
+
+  data.forEach (loc) ->
+    symbol = symbolFor(loc.properties)
+    loc.properties['marker-color'] = symbol.color
+    loc.properties['marker-symbol'] = symbol.name
+    loc.properties['title'] = loc.properties['PARKNAME']
+  data
 
 $ ->
 
-  plot = Plot()
-  display = (data) ->
-    plotData("#vis", data, plot)
+  map = mapbox.map('map')
+  map.addLayer(mapbox.layer().id('vlandham.map-wc8hmk8u'))
+  map.centerzoom({lat: 39.044, lon: -94.583}, 12)
+
+  view = (data) ->
+    features = convertData(data.features)
+    markerLayer = mapbox.markers.layer().features(features)
+    interaction = mapbox.markers.interaction(markerLayer)
+    console.log(interaction.formatter())
+    map.addLayer(markerLayer)
 
 
-  d3.csv("data/test.csv", display)
-
+  d3.json("data/kcmo_parks.geojson", view)
