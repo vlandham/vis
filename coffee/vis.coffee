@@ -102,12 +102,19 @@ $ ->
   map = mapbox.map('map')
   map.addLayer(mapbox.layer().id('vlandham.map-wc8hmk8u'))
   map.centerzoom({lat: 39.044, lon: -94.583}, 12)
+  map.ui.zoomer.add()
+  map.ui.zoombox.add()
 
   view = (data) ->
     features = convertData(data.features)
-    markerLayer = mapbox.markers.layer().features(features)
+    markerLayer = mapbox.markers.layer()
+    markerLayer.factory = (feature) ->
+      elem = mapbox.markers.simplestyle_factory(m)
+      MM.addEvent elem, 'click', (e) ->
+        console.log(e)
+
+    markerLayer.features(features)
     interaction = mapbox.markers.interaction(markerLayer)
-    console.log(interaction.formatter())
     map.addLayer(markerLayer)
 
 
