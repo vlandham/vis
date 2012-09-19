@@ -97,6 +97,29 @@ convertData = (data) ->
     loc.properties['title'] = loc.properties['PARKNAME']
   data
 
+displayDetails = (properties) ->
+  d3.select("#park-info").html('')
+  info_div = d3.select("#park-info").selectAll("h2").data([properties]).enter()
+
+  info_div.append("h2")
+    .text((d) -> d.title)
+
+  info_div.append("h3")
+    .text((d) -> d['ADDRESS'])
+    .attr("class", "park-address")
+
+  list = ['PLAYGROUND','RESTROOM']
+
+  list = info_div.append("div")
+    .attr("id", "park-info-list")
+  list.append("p")
+    .text("Details:")
+  list.append("ul")
+
+  list.append("li")
+    .text((d) -> "Playground: #{d['PLAYGROUND']}")
+
+
 $ ->
 
   map = mapbox.map('map')
@@ -108,10 +131,12 @@ $ ->
   view = (data) ->
     features = convertData(data.features)
     markerLayer = mapbox.markers.layer()
-    markerLayer.factory = (feature) ->
-      elem = mapbox.markers.simplestyle_factory(m)
+    markerLayer.factory (feature) ->
+      elem = mapbox.markers.simplestyle_factory(feature)
       MM.addEvent elem, 'click', (e) ->
-        console.log(e)
+        displayDetails(feature.properties)
+        console.log(feature)
+      elem
 
     markerLayer.features(features)
     interaction = mapbox.markers.interaction(markerLayer)
