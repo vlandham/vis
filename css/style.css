@@ -78,7 +78,7 @@ label { font-weight:700;}
   padding: 15px;
 }
 
-.markerfilter {
+.markerfilter, .markerfilter:hover {
   margin: 5px;
   width: 52px;
   height: 52px;
@@ -96,7 +96,13 @@ label { font-weight:700;}
   font-size: 12px;
   color: white;
   cursor: pointer;
+  text-decoration: none;
 }
+
+.selected, .selected:hover {
+  opacity: 1;
+}
+
 
 form input[type=text] {
   height: 20px;
@@ -159,3 +165,8 @@ form.geocode.loading input[type=submit] {
   color: #555;
   /* font-size: 1.0em; */
 }
+
+#park-info-list p {
+  margin-bottom: 4px;
+}
+

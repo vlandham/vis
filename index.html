@@ -36,17 +36,11 @@
     </div>
     <div id="content">
       <div class="limiter">
-        <h2>Filter by Park Type</h2>
+        <h2>Filter Parks</h2>
         <div id="markerfilters" class="clearfix section">
-          <div class="markerfilter selected" id="all">All</div>
-          <a class="markerfilter" id="parks" style="background-image: url(http://a.tiles.mapbox.com/v3/marker/pin-l-park+000000.png); "></a>
+          <a class="markerfilter selected" id="all">All</a>
           <a class="markerfilter" id="playgrounds" style="background-image: url(http://a.tiles.mapbox.com/v3/marker/pin-l-star+000000.png); "></a>
-        </div>
-        <h2>Find A Park By Name</h2>
-        <div class="clearfix section" id="name_search">
-          <form class="search">
-            <input placeholder="Search for a park name" type="text">
-          </form>
+          <a class="markerfilter" id="basketball" style="background-image: url(http://a.tiles.mapbox.com/v3/marker/pin-l-basketball+000000.png); "></a>
         </div>
         <h2>Find An Address</h2>
         <div data-control="geocode" class="clearfix section" id="location_search">
@@ -57,6 +51,8 @@
           </form>
         </div>
         <div id="park-info">
+        </div>
+        <div id="park-near">
         </div>
       </div>
     </div>

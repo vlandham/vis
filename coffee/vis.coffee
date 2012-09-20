@@ -72,17 +72,78 @@ Plot = () ->
 
 root.Plot = Plot
 
+PLAYGROUND_COLOR = "#FC462E"
+PARK_COLOR = "#4D8035"
+
+map = null
+markerLayer = null
+geocodeLayer = null
+
 root.plotData = (selector, data, plot) ->
   d3.select(selector)
     .datum(data)
     .call(plot)
 
+
+createFeature = (location) ->
+  feature = {
+    'type': 'Feature',
+    'geometry':{'type':'Point', 'coordinates': [location.lon, location.lat] },
+    'properties': {}
+  }
+  feature
+
+findNearbyParks = (feature) ->
+  allFeatures = markerLayer.features()
+  nearby = allFeatures.filter (f) ->
+
+
+geocode = (query, m) ->
+ query = encodeURIComponent(query + " Kansas City")
+ $('form.geocode').addClass('loading')
+ reqwest({
+      url: 'http://open.mapquestapi.com/nominatim/v1/search?format=json&&limit=1&q=' + query,
+      type: 'jsonp',
+      jsonpCallback: 'json_callback',
+      success: (r) ->
+        geocodeLayer.features([])
+        $('form.geocode').removeClass('loading')
+
+        if (r.length == 0)
+          $('#geocode-error').text('This address cannot be found.').fadeIn('fast')
+        else
+          r = r[0]
+          $('#geocode-error').hide()
+          map.setExtent([{lat :r.boundingbox[1], lon: r.boundingbox[2] },
+            { lat: r.boundingbox[0], lon: r.boundingbox[3] }])
+          feature = createFeature(r)
+          geocodeLayer.add_feature(feature)
+          map.ease.location({lat: feature.geometry.coordinates[1], lon: feature.geometry.coordinates[0]}).zoom(map.zoom()).optimal()
+
+          findNearbyParks(feature)
+        })
+
+
+        
+
+
+bindGeocoder = () ->
+  $('[data-control="geocode"] form').submit (e) ->
+    console.log('bind')
+    e.preventDefault()
+    geocode($('input[type=text]', this).val(), map)
+
+
+isPark = (properties) ->
+  properties['PLAYGROUND'].toLowerCase() == 'yes'
+
 symbolFor = (props) ->
 
-  symbol = {name: 'park', color: '#4D8035'}
-  if props['PLAYGROUND'].toLowerCase() == 'yes'
+  symbol = {name: 'park', color: PARK_COLOR}
+  if isPark(props)
     symbol.name = 'star'
-    symbol.color = '#5F9D41'
+    # symbol.color = '#5F9D41'
+    symbol.color = PLAYGROUND_COLOR
   symbol
 
 
@@ -119,14 +180,34 @@ displayDetails = (properties) ->
   list.append("li")
     .text((d) -> "Playground: #{d['PLAYGROUND']}")
 
+switchFilter = (filterId) ->
+  $(".markerfilter").toggleClass("selected", false)
+  $("##{filterId}").toggleClass("selected", true)
+
+filterMarkers = (filterId) ->
+  markerLayer.filter (feature) ->
+    if filterId == 'all'
+      return true
+    else if filterId == 'playgrounds'
+      return isPark(feature.properties)
+    true
 
 $ ->
+
+  $(".markerfilter").click (e) ->
+    clickedFilter = $(this).attr('id')
+    switchFilter(clickedFilter)
+    filterMarkers(clickedFilter)
+    
 
   map = mapbox.map('map')
   map.addLayer(mapbox.layer().id('vlandham.map-wc8hmk8u'))
   map.centerzoom({lat: 39.044, lon: -94.583}, 12)
   map.ui.zoomer.add()
   map.ui.zoombox.add()
+
+  geocodeLayer = mapbox.markers.layer()
+  map.addLayer(geocodeLayer)
 
   view = (data) ->
     features = convertData(data.features)
@@ -135,12 +216,14 @@ $ ->
       elem = mapbox.markers.simplestyle_factory(feature)
       MM.addEvent elem, 'click', (e) ->
         displayDetails(feature.properties)
-        console.log(feature)
+        # map.ease.location({lat: feature.geometry.coordinates[1],
+        # lon: feature.geometry.coordinates[0]}).zoom(map.zoom()).optimal()
       elem
 
     markerLayer.features(features)
     interaction = mapbox.markers.interaction(markerLayer)
     map.addLayer(markerLayer)
 
+  bindGeocoder()
 
   d3.json("data/kcmo_parks.geojson", view)
