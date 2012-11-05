@@ -1,1 +1,29 @@
 
+#vis {
+  position: relative;
+  margin: auto;
+  /* margin-top: 30px; */
+}
+
+#previews {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+#detail {
+  position: fixed;
+  top: 128px;
+  left: 0;
+  width: 100%;
+}
+
+.hidden {
+opacity: 0;
+transition: opacity 500ms ease-in;
+-webkit-transition: opacity 500ms ease-in;
+-moz-transition: opacity 500ms ease-in;
+z-index: 0 !important;
+}
+
