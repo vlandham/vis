@@ -1,11 +1,12 @@
 
 #vis {
   position: relative;
-  margin: auto;
+  width: 800px;
+  margin: 0 auto;
   /* margin-top: 30px; */
 }
 
-#previews {
+#previews, #detail {
   position: absolute;
   top: 0;
   left: 0;
@@ -15,15 +16,32 @@
 #detail {
   position: fixed;
   top: 128px;
-  left: 0;
   width: 100%;
 }
 
+#detail_panel {
+  margin: 0px auto;
+  width: 800px;
+  position: relative;
+}
+
+#detail_zoom {
+  fill: red;
+  width: 800px;
+}
+
 .hidden {
-opacity: 0;
-transition: opacity 500ms ease-in;
--webkit-transition: opacity 500ms ease-in;
--moz-transition: opacity 500ms ease-in;
-z-index: 0 !important;
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+  -webkit-transition: opacity 500ms ease-in;
+  -moz-transition: opacity 500ms ease-in;
+  z-index: 0 !important;
+}
+
+.visible {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+  -webkit-transition: opacity 500ms ease-in;
+  -moz-transition: opacity 500ms ease-in;
 }
 

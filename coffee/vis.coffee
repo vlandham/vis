@@ -4,6 +4,8 @@ root = exports ? this
 Plot = () ->
   width = 200
   height = 200
+  preview_width = 100
+  preview_height = 100
   data = []
   points = null
   margin = {top: 0, right: 0, bottom: 0, left: 0}
@@ -12,53 +14,67 @@ Plot = () ->
   xValue = (d) -> parseFloat(d.x)
   yValue = (d) -> parseFloat(d.y)
 
+  scaleFactor = 3
+
   chart = (selection) ->
     selection.each (rawData) ->
 
       data = rawData
 
-      svg = d3.select(this).selectAll("#previews .preview svg").data(data)
-      gEnter = svg.enter().append("svg").append("g")
+      svg = d3.select(this).select("#previews").selectAll("svg").data(data)
+      svg.enter().append("svg").append("g")
       
       svg.attr("width", width + margin.left + margin.right )
       svg.attr("height", height + margin.top + margin.bottom )
 
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
-
-
-      g.append("rect").attr("width", width / 2).attr("height", height / 2).attr("fill", "steelblue")
+    
+      g.append("rect")
+        .attr("width", preview_width)
+        .attr("height", preview_height)
+        .attr("fill", "steelblue")
         .attr("class", "preview")
-        .attr("transform", "translate(#{width/2},#{height/2})")
-        .on("click", focus)
+        .attr("transform", "translate(#{(width/2) - preview_width/2},#{(height/2) - preview_height/2})")
+        .on("click", showDetail)
 
-  focus = (d,i) ->
-    pos = getPosition(i)
-    scrollTop = $(window).scrollTop()
-    console.log(pos)
+      d3.select("#detail").classed("hidden", true)
 
   getPosition = (i) ->
     el = $('.preview')[i]
     pos = $(el).position()
     pos
 
+  toggleDetail = (show) ->
+    d3.select("#previews").classed("hidden", show).classed("visible", !show)
+    d3.select("#detail").classed("hidden", !show).classed("visible", show)
+
   showDetail = (d,i) ->
-    svg = d3.selectAll('#detail svg')
-    g = svg.selectAll('#full')
+    pos = getPosition(i)
+    scrollTop = $(window).scrollTop()
 
+    toggleDetail(true)
 
+    g = d3.selectAll('#detail_zoom')
+    g.append("rect")
+      .attr("width", preview_width)
+      .attr("height", preview_height)
+      .attr("fill", "steelblue")
+      .on("click", (e,f) -> hideDetails(d,i))
 
-      # points = g.append("g").attr("id", "vis_points")
-  #     update()
+    g.attr('transform', 'translate(' + [pos.left, pos.top - scrollTop] + ')')
+    g.transition().delay(500).duration(500).attr('transform', 'translate(' + [0, 20] + ') scale(' + scaleFactor + ')')
 
-  # update = () ->
-  #   points.selectAll(".point")
-  #     .data(data).enter()
-  #     .append("circle")
-  #     .attr("cx", (d) -> xScale(xValue(d)))
-  #     .attr("cy", (d) -> yScale(yValue(d)))
-  #     .attr("r", 4)
-  #     .attr("fill", "steelblue")
+  hideDetails = (d,i) ->
+    pos = getPosition(i)
+    scrollTop = $(window).scrollTop()
+
+    d3.selectAll('#detail_zoom').transition()
+      .duration(500)
+      .attr('transform', 'translate(' + [pos.left, pos.top - scrollTop] + ')')
+      .each 'end', () ->
+        toggleDetail(false)
+
 
   chart.height = (_) ->
     if !arguments.length

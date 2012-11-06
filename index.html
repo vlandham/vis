@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
   <!-- CSS concatenated and minified via ant build script-->
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
@@ -25,15 +25,18 @@
 
   <div id="container" class="container">
     <header>
-
+    <h1>Details on Demand</h1>
+    <h2>An example of elegant detail displays</h2>
     </header>
     <div id="main" role="main">
       <div id="vis">
         <div id="previews"></div>
         <div id="detail" class="hidden">
-          <svg>
-          <g id="full" class="main_detail"></g>
-          </svg>
+          <div id="detail_panel">
+            <svg width="800" height="800">
+            <g id="detail_zoom"></g>
+            </svg>
+          </div>
         </div>
       </div>
     </div>
