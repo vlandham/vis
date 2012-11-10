@@ -13,10 +13,23 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
+  <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+  <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+  <!--[if lte IE 8]>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.ie.css" />
+  <![endif]-->
+
+
   <!-- CSS concatenated and minified via ant build script-->
+  <link href='http://fonts.googleapis.com/css?family=Petit+Formal+Script|Lobster|Sanchez' rel='stylesheet' type='text/css'>
+
+
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
+
+  <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.2.0"></script>
+
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
@@ -25,10 +38,38 @@
 
   <div id="container" class="container">
     <header>
-
+	<h1>CHRIS <span class="accent">&amp;</span> EMMY</h1>
+	<div class="border"></div>
     </header>
     <div id="main" role="main">
-      <div id="vis"></div>
+	<div class="row">
+		<div class="span12">
+			<div class="fancy-header" data-header="The Event"></div>
+			<p>Get ready for </p>
+		</div>
+	</div>
+	<div class="border"></div>
+	<div class="row">
+		<div class="span12">
+			<div class="fancy-header" data-header="The Venue"></div>
+			<h3 class="bold">Overbrook House</h3>
+			<div id="map-border">
+				<div id="map"></div>
+			</div>
+			<p><span class="big">THE</span> Overbrook House is at the end of a very quiet street, and care has been taken over the years to plant flowering bushes and trees along it for the benefit of those taking walks.</p>
+		</div>
+	</div>
+	<div class="border"></div>
+	<div class="row">
+		<div class="span8 right-border">
+			<h2 class="fancy">Header</h2>
+			<p>This is </p>
+		</div>
+		<div class="span4">
+			<h2 class="fancy">Header</h2>
+			<p> Where</p>
+		</div>
+	</div>
     </div>
     <footer>
 

@@ -1,1 +1,63 @@
 
+body {
+	color: #555;
+	padding-top: 50px;
+	font-size: 130%;
+	font-family: 'Sanchez', serif;
+}
+
+header h1 {
+	font-size: 64px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+h2,h3,h4 {
+	text-align: center;
+	font-family: 'Lobster', serif;
+	font-family: 'Petit Formal Script', cursive;
+}
+
+.bold {
+	font-family: 'Sanchez', serif;
+}
+
+.big {
+	font-size: 140%;
+}
+
+.accent {
+	color: #FFD340;
+	/*color: #934020;*/
+}
+
+.divider {
+	width: 100%;
+	border-bottom: dotted 5px #555;
+	clear:both;
+}
+
+.right-divider {
+	border-right: dotted 5px #555;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+#map { 
+	height: 300px;
+	width: 920px;
+	margin: 10px auto;
+}
+
+#map-border {
+	height: 320px;
+	width: 940px;
+	border: dotted 1px #ddd;
+	margin-bottom: 20px;
+}
+
+.script {
+	font-family: 'Petit Formal Script', cursive;
+	font-size: 30px;
+}
