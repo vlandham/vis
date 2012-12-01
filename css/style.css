@@ -8,14 +8,14 @@
 .boundary {
   fill: #ccc;
   fill-opacity: .8;
-  /* stroke: #fff; */
+  stroke: #fff;
 }
 
 .background {
   fill: none;
   pointer-events: all;
-  stroke: black;
-  stroke-width: 2px;
+  stroke: #777;
+  /* stroke-width: 2px; */
 }
 
 
@@ -55,3 +55,4 @@ hr.tooltip-hr {
 .tooltip .name {
   font-weight:bold;
 }
+

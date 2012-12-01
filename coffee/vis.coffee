@@ -2,7 +2,7 @@
 root = exports ? this
 
 width = 960
-height = 960
+height = 620
 map = null
 graticule = null
 points = null
@@ -33,6 +33,10 @@ projection = d3.geo.satellite()
 path = d3.geo.path()
   .projection(projection)
 
+graticule = d3.geo.graticule()
+  .extent([[-142, 23], [-47 + 1e-6, 67 + 1e-6]])
+  .step([5, 5])
+
 zoomer = () ->
   projection.translate(d3.event.translate).scale(d3.event.scale)
   map.attr("d", path)
@@ -59,6 +63,10 @@ $ ->
     .attr("height", height)
     .attr("pointer-events", "all")
 
+  graticule = svg.append("path")
+    .datum(graticule)
+    .attr("class", "graticule")
+    .attr("d", path)
 
   display_bars = (error, data) ->
     bar_scale.domain(d3.extent(data, (d) -> d[key]))
@@ -83,10 +91,6 @@ $ ->
       .attr("class", "boundary")
       .attr("d", path)
 
-    graticule = svg.append("path")
-      .datum(graticule)
-      .attr("class", "graticule")
-      .attr("d", path)
 
     d3.json("/data/properties_all.json", display_bars)
 
