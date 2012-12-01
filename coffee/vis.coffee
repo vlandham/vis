@@ -20,7 +20,7 @@ hide_tooltip = (d,i) ->
   tooltip.hideTooltip()
 
 bar_scale = d3.scale.linear()
-  .range([-2, -100])
+  .range([-2, -120])
 
 projection = d3.geo.satellite()
   .distance(1.3)
@@ -47,6 +47,7 @@ zoomer = () ->
 zoom = d3.behavior.zoom()
   .translate(projection.translate())
   .scale(projection.scale())
+  .scaleExtent([930, Infinity])
   .on("zoom", zoomer)
 
 key = "total_annual_rent_avg"

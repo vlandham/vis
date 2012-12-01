@@ -14,7 +14,7 @@
 .background {
   fill: none;
   pointer-events: all;
-  stroke: #777;
+  /* stroke: #777; */
   /* stroke-width: 2px; */
 }
 
