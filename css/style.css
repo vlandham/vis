@@ -1,1 +1,17 @@
 
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 4,4;
+}
+
+.boundary {
+  fill: #ccc;
+  fill-opacity: .8;
+  stroke: #fff;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}

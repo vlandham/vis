@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-dasharray: 4,4;
+}
+
+.boundary {
+  fill: #ccc;
+  fill-opacity: .8;
+  stroke: #fff;
+}
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://raw.github.com/d3/d3-plugins/master/geo/projection/projection.js"></script>
+<script>
+
+
+var width = 960,
+    height = 960;
+
+var map, graticule;
+
+
+var start = [100.00, -30.50];
+var projection = d3.geo.satellite()
+    .distance(1.3)
+    .scale(1200)
+    .rotate([start[0], start[1], 0])
+    .center([0, 15])
+    .tilt(25)
+    .clipAngle(45);
+
+var key = "total_annual_rent_avg";
+
+
+var graticule = d3.geo.graticule()
+    .extent([[-142, 23], [-47 + 1e-6, 67 + 1e-6]])
+    .step([5, 5]);
+
+var path = d3.geo.path()
+    .projection(projection);
+
+    var bar_scale = d3.scale.linear()
+      .range([-2, -100]);
+
+
+function zoomer() {
+  projection.translate(d3.event.translate).scale(d3.event.scale);
+  var new_rotate = [start[0] + d3.event.translate[0], start[1] -  d3.event.translate[1]];
+  // projection.rotate([new_rotate[0], new_rotate[1], 32.12]);
+  // projection.scale(d3.event.scale);
+  // console.log(projection.scale());
+  // console.log(projection.rotate());
+  map.attr("d", path);
+  graticule.attr("d", path);
+  points.selectAll(".point").attr("d", function(d,i) { return "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[key]); });
+
+
+}
+
+var zoom = d3.behavior.zoom()
+  .translate(projection.translate())
+  .scale(projection.scale())
+  .on("zoom", zoomer);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .call(zoom);
+
+svg.append("rect")
+    .attr("class", "background")
+    .attr("width", width)
+    .attr("height", height)
+    .attr("pointer-events", "all")
+
+
+graticule = svg.append("path")
+    .datum(graticule)
+    .attr("class", "graticule")
+    .attr("d", path);
+
+d3.json("/data/us-states.json", function(error, collection) {
+  map = svg.append("path")
+      .datum(collection)
+      .attr("class", "boundary")
+      .attr("d", path);
+
+      d3.json("/data/properties_all.json", function(error, data) {
+
+        bar_scale.domain(d3.extent(data, function(d){return d[key];}));
+
+        points = svg.append("g")
+        .attr("class", "points");
+
+        points.selectAll(".point")
+        .data(data).enter()
+        .append("path")
+        .attr("class", "point")
+        .attr("stroke", "#002244")
+        .attr("stroke-width", 4)
+        .attr("opacity", 0.6)
+        .attr("d", function(d,i) { return "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[key]); });
+
+      });
+});
+
+d3.select(self.frameElement).style("height", height + "px");
+
+</script>
