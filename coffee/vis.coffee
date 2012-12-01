@@ -37,12 +37,15 @@ graticule = d3.geo.graticule()
   .extent([[-142, 23], [-47 + 1e-6, 67 + 1e-6]])
   .step([5, 5])
 
+update_lines = () ->
+  points.selectAll(".point").attr "d", (d,i) ->
+    "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[key])
+
 zoomer = () ->
   projection.translate(d3.event.translate).scale(d3.event.scale)
   map.attr("d", path)
   graticule.attr("d", path)
-  points.selectAll(".point").attr "d", (d,i) ->
-    "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[key])
+  update_lines()
 
 zoom = d3.behavior.zoom()
   .translate(projection.translate())
@@ -82,9 +85,9 @@ $ ->
       .attr("stroke", "#002244")
       .attr("stroke-width", 4)
       .attr("opacity", 0.6)
-      .attr("d", (d,i) -> "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[key]) )
       .on("mouseover", show_tooltip)
       .on("mouseout", hide_tooltip)
+    update_lines()
 
   display_map = (error, states) ->
     map = svg.append("path")
