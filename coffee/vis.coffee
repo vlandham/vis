@@ -1,19 +1,21 @@
 
 root = exports ? this
 
-width = 960
-height = 620
+width = 940
+height = 500
 map = null
 graticule = null
 points = null
+data = null
 start = [98.00, -35.50]
 
 tooltip = Tooltip("vis-tooltip", 230)
 
 show_tooltip = (d,i) ->
-  content = '<p class="main">' + d.city + ", " + d.state + '</span></p>'
+  content = '<p class="main">' + d.city + ", " + d.state + '</p>'
   content += '<hr class="tooltip-hr">'
-  content += '<p class="main">' + d.state + '</span></p>'
+  content += '<span class="name">Leased SF: </span><span class="value">' + fixUp(d.total_leased_rsf) + '</span><br/>'
+  content += '<span class="name">Total Rent: </span><span class="value">' + fixUp(d.total_annual_rent) + '</span><br/>'
   tooltip.showTooltip(content,d3.event)
 
 hide_tooltip = (d,i) ->
@@ -39,7 +41,15 @@ graticule = d3.geo.graticule()
 
 update_lines = () ->
   points.selectAll(".point").attr "d", (d,i) ->
-    "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[key])
+    "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[size_key])
+
+update_size = () ->
+  bar_scale.domain(d3.extent(data, (d) -> d[size_key]))
+  points.selectAll(".point").transition()
+    .duration(250)
+    .attr "d", (d,i) ->
+      "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[size_key])
+
 
 zoomer = () ->
   projection.translate(d3.event.translate).scale(d3.event.scale)
@@ -53,7 +63,12 @@ zoom = d3.behavior.zoom()
   .scaleExtent([930, Infinity])
   .on("zoom", zoomer)
 
-key = "total_annual_rent_avg"
+size_key = "total_leased_rsf"
+
+update_map = (type, new_key) ->
+  if type == 'size'
+    size_key = new_key
+    update_size()
 
 $ ->
   svg = d3.select("#vis").append("svg")
@@ -72,8 +87,9 @@ $ ->
     .attr("class", "graticule")
     .attr("d", path)
 
-  display_bars = (error, data) ->
-    bar_scale.domain(d3.extent(data, (d) -> d[key]))
+  display_bars = (error, bar_data) ->
+    data = bar_data
+    bar_scale.domain(d3.extent(data, (d) -> d[size_key]))
 
     points = svg.append("g")
       .attr("class", "points")
@@ -100,4 +116,15 @@ $ ->
 
 
   d3.json("data/us-states.json", display_map)
+
+  $(".btn").on "click", (event) ->
+    event.preventDefault()
+    target = $(event.target)
+    parent = target.parent()
+    $(".btn", parent).removeClass('btn-primary')
+    target.addClass("btn-primary")
+
+    type = target.data("type")
+    new_key = target.data("val")
+    update_map(type, new_key)
 

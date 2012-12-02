@@ -1,4 +1,10 @@
 
+.button_title {
+  font-size: 20px;
+  color: #555;
+  line-height: 12px;
+
+}
 .graticule {
   fill: none;
   stroke: #777;
@@ -19,40 +25,56 @@
 }
 
 
-.tooltip {
-  position: absolute;
-  top: 100px;
-  left: 100px;
-  -moz-border-radius:3px;
-  border-radius: 3px;
-  border: 2px solid #DDD;
-  background: #fff;
-  opacity: 1;
-  color: #000;
-  padding: 10px;
-  width: 300px;
-  font-size: 15px;
-  z-index: 120;
+#vis-tooltip {
+    position: absolute;
+    top: 100px;
+    left: 100px;
+    -moz-border-radius:3px;
+    border-radius: 3px;
+    border: 2px solid #DDD;
+    background: #fff;
+    opacity: 1;
+    color: #000;
+    padding: 10px;
+    width: 230px;
+    font-size: 15px;
+    z-index: 120;
 }
-
-.tooltip p.main {
+ 
+#vis-tooltip p.main {
   font-size: 15px;
-  text-align: center;
+  text-align: left;
   padding:0;
   margin:0;
 }
-
+ 
 hr.tooltip-hr {
   padding:3px 0 0 0;
   margin:3px 0 3px 0;
 }
-
-.tooltip .title {
-  font-size: 20px;
-  line-height: 24px;
+  
+#vis-tooltip .title {
+    font-size: 20px;
+    line-height: 24px;
+}
+  
+#vis-tooltip .name {
+  font-weight:bold;
 }
  
-.tooltip .name {
-  font-weight:bold;
+.tooltip {
+  width: 240px;
+}
+ 
+.tooltip-inner {
+  text-align: left;
+}
+
+#footer {
+  text-align: left;
+  clear: both;
+  padding-top: 25px;
+  padding-bottom: 10px;
+  font-style: italic;
 }
 
