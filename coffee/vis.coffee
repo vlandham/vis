@@ -24,9 +24,12 @@ hide_tooltip = (d,i) ->
 bar_scale = d3.scale.linear()
   .range([-2, -120])
 
+color_scale = d3.scale.linear()
+  .range(["#BDC9E1", "#045A8D"])
+
 projection = d3.geo.satellite()
   .distance(1.3)
-  .scale(1200)
+  .scale(1000)
   .rotate([start[0], start[1], 0])
   .center([0, 0])
   .tilt(25)
@@ -43,10 +46,16 @@ update_lines = () ->
   points.selectAll(".point").attr "d", (d,i) ->
     "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[size_key])
 
+update_color = () ->
+  color_scale.domain(d3.extent(data, (d) -> d[color_key]))
+  console.log(color_scale.domain())
+  points.selectAll(".point")
+    .attr "stroke", (d,i) -> color_scale(d[color_key])
+
 update_size = () ->
   bar_scale.domain(d3.extent(data, (d) -> d[size_key]))
   points.selectAll(".point").transition()
-    .duration(250)
+    .duration(400)
     .attr "d", (d,i) ->
       "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[size_key])
 
@@ -60,15 +69,19 @@ zoomer = () ->
 zoom = d3.behavior.zoom()
   .translate(projection.translate())
   .scale(projection.scale())
-  .scaleExtent([930, Infinity])
+  .scaleExtent([930, 9120])
   .on("zoom", zoomer)
 
 size_key = "total_leased_rsf"
+color_key = "percent_govt_leased"
 
 update_map = (type, new_key) ->
   if type == 'size'
     size_key = new_key
     update_size()
+  else
+    color_key = new_key
+    update_color()
 
 $ ->
   svg = d3.select("#vis").append("svg")
@@ -90,6 +103,7 @@ $ ->
   display_bars = (error, bar_data) ->
     data = bar_data
     bar_scale.domain(d3.extent(data, (d) -> d[size_key]))
+    color_scale.domain(d3.extent(data, (d) -> d[color_key]))
 
     points = svg.append("g")
       .attr("class", "points")
@@ -98,9 +112,9 @@ $ ->
       .data(data).enter()
       .append("path")
       .attr("class", "point")
-      .attr("stroke", "#002244")
+      .attr("stroke", (d) -> color_scale(d[color_key]))
       .attr("stroke-width", 4)
-      .attr("opacity", 0.6)
+      .attr("opacity", 0.9)
       .on("mouseover", show_tooltip)
       .on("mouseout", hide_tooltip)
     update_lines()
