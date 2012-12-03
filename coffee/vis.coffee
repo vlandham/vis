@@ -7,6 +7,8 @@ map = null
 graticule = null
 points = null
 data = null
+svg = null
+key = null
 start_pos = [98.00, -35.50]
 start_scale = 1000
 
@@ -51,8 +53,8 @@ update_lines = () ->
     "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[size_key])
 
 update_color = () ->
-  color_scale.domain(d3.extent(data, (d) -> d[color_key]))
-  console.log(color_scale.domain())
+  color_scale.domain([0, d3.max(data, (d) -> d[color_key])])
+  update_key()
   points.selectAll(".point")
     .attr "stroke", (d,i) -> color_scale(d[color_key])
 
@@ -97,6 +99,49 @@ toggle_map = (type, new_key) ->
     color_key = new_key
     update_color()
 
+update_key = () ->
+  key_values = color_scale.domain()
+
+  key.selectAll(".key_text").remove()
+  key.selectAll(".key_text").data(key_values)
+    .enter()
+    .append("text")
+    .attr("class", "key_text")
+    .attr("x", (d,i) -> if i == 0 then 25 else (25 + 120))
+    .attr("y", (d,i) -> height - 25)
+    .attr("text-anchor", "middle")
+    .text((d) -> if color_key == "percent_govt_leased" then "#{Math.round(d)}%" else Math.round(d))
+
+create_key = () ->
+  key = svg.append("g")
+    .attr("id", "key")
+
+  gradient = svg.append("defs")
+    .append("linearGradient")
+  gradient.attr("id", "color_gradient")
+    .attr("x1", "0%")
+    .attr("x2", "100%")
+    .attr("y1", "0%")
+    .attr("y2", "0%")
+  gradient.append("stop")
+    .attr("offset", "0%")
+    .style("stop-color", (d) -> color_scale.range()[0])
+    .style("stop-opacity", 1)
+  gradient.append("stop")
+    .attr("offset", "100%")
+    .style("stop-color", (d) -> color_scale.range()[1])
+    .style("stop-opacity", 1)
+
+  key.append("rect")
+    .attr("x", 25)
+    .attr("y", height - 60)
+    .attr("width", 120)
+    .attr("height", 20)
+    .attr("fill", "url(#color_gradient)")
+
+  update_key()
+
+
 $ ->
   svg = d3.select("#vis").append("svg")
     .attr("width", width)
@@ -117,7 +162,9 @@ $ ->
   display_bars = (error, bar_data) ->
     data = bar_data
     bar_scale.domain(d3.extent(data, (d) -> d[size_key]))
-    color_scale.domain(d3.extent(data, (d) -> d[color_key]))
+    color_scale.domain([0,d3.max(data, (d) -> d[color_key])])
+
+    create_key()
 
     points = svg.append("g")
       .attr("class", "points")

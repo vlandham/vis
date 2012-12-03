@@ -1,4 +1,16 @@
 
+.main_title {
+
+}
+
+.subtitle {
+  color: #555;
+  font-size: 24px;
+  line-height: 25px;
+  padding-top:0;
+  padding-left: 10px;
+}
+
 .button_title {
   font-size: 20px;
   color: #555;
@@ -49,6 +61,11 @@
   bottom: 20px;
   right: 25px;
   z-index: 10;
+}
+
+.key_text {
+  font-size: 12px;
+  color: #555;
 }
 
 
