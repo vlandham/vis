@@ -7,7 +7,8 @@ map = null
 graticule = null
 points = null
 data = null
-start = [98.00, -35.50]
+start_pos = [98.00, -35.50]
+start_scale = 1000
 
 tooltip = Tooltip("vis-tooltip", 230)
 
@@ -25,15 +26,18 @@ bar_scale = d3.scale.linear()
   .range([-2, -120])
 
 color_scale = d3.scale.linear()
-  .range(["#BDC9E1", "#045A8D"])
+  .range(["#DEA3A1", "#B1302D"])
+  # .range(["#BDC9E1", "#045A8D"])
 
 projection = d3.geo.satellite()
   .distance(1.3)
-  .scale(1000)
-  .rotate([start[0], start[1], 0])
+  .scale(start_scale)
+  .rotate([start_pos[0], start_pos[1], 0])
   .center([0, 0])
   .tilt(25)
   .clipAngle(45)
+
+starting_translate = projection.translate()
 
 path = d3.geo.path()
   .projection(projection)
@@ -60,11 +64,14 @@ update_size = () ->
       "M"+projection(d.lon_lat) + "l 0 " + bar_scale(d[size_key])
 
 
-zoomer = () ->
-  projection.translate(d3.event.translate).scale(d3.event.scale)
+update_map = () ->
   map.attr("d", path)
   graticule.attr("d", path)
   update_lines()
+
+zoomer = () ->
+  projection.translate(d3.event.translate).scale(d3.event.scale)
+  update_map()
 
 zoom = d3.behavior.zoom()
   .translate(projection.translate())
@@ -72,10 +79,17 @@ zoom = d3.behavior.zoom()
   .scaleExtent([930, 9120])
   .on("zoom", zoomer)
 
+reset_projection = () ->
+  projection
+    .scale(start_scale)
+    .rotate([start_pos[0], start_pos[1], 0])
+    .translate(starting_translate)
+  update_map()
+
 size_key = "total_leased_rsf"
 color_key = "percent_govt_leased"
 
-update_map = (type, new_key) ->
+toggle_map = (type, new_key) ->
   if type == 'size'
     size_key = new_key
     update_size()
@@ -131,7 +145,7 @@ $ ->
 
   d3.json("data/us-states.json", display_map)
 
-  $(".btn").on "click", (event) ->
+  $(".btn-toggle").on "click", (event) ->
     event.preventDefault()
     target = $(event.target)
     parent = target.parent()
@@ -140,5 +154,9 @@ $ ->
 
     type = target.data("type")
     new_key = target.data("val")
-    update_map(type, new_key)
+    toggle_map(type, new_key)
+
+  $("#btn-recenter").on "click", (event) ->
+    event.preventDefault()
+    reset_projection()
 

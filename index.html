@@ -29,20 +29,25 @@
       <h2>Subtitle</h2>
     </header>
     <div id="main" role="main">
+      <div id="vis-container">
+      <div id="vis-overlay">
+        <a href="#" class="btn" id="btn-recenter" title="Reset Map Zoom"><img src="img/expand-2.png"/></a>
+      </div>
       <div id="vis"></div>
+    </div>
       <div class="row">
         <div class="span3 offset1">
           <h3 class="button_title">Color</h3>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary" data-val="percent_govt_leased" data-type="color">% Leased</a>
-            <a href="#" class="btn" data-val="rent_prsf" data-type="color">Rent/SF</a>
+            <a href="#" class="btn btn-primary btn-toggle" data-val="percent_govt_leased" data-type="color">% Leased</a>
+            <a href="#" class="btn btn-toggle" data-val="rent_prsf" data-type="color">Rent/SF</a>
           </div>
         </div>
         <div class="span4 offset3">
           <h3 class="button_title">Size</h3>
           <div class="btn-group">
-            <a href="#" class="btn btn-primary" data-val="total_leased_rsf" data-type="size">SF Leased</a>
-            <a href="#" class="btn" data-val="total_annual_rent" data-type="size">Total Rent</a>
+            <a href="#" class="btn btn-primary btn-toggle" data-val="total_leased_rsf" data-type="size">SF Leased</a>
+            <a href="#" class="btn btn-toggle" data-val="total_annual_rent" data-type="size">Total Rent</a>
           </div>
       </div>
     </div>

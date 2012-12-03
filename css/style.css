@@ -24,11 +24,38 @@
   /* stroke-width: 2px; */
 }
 
+#vis-container {
+  position: relative;
+  width: 940px;
+  height: 500px;
+}
+
+#vis {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+#vis-overlay {
+  position: absolute;
+  height:500px;
+  width: 940px;
+  right: 0;
+  top: 0;
+}
+
+#btn-recenter {
+  position: absolute;
+  bottom: 20px;
+  right: 25px;
+  z-index: 10;
+}
+
 
 #vis-tooltip {
     position: absolute;
-    top: 100px;
-    left: 100px;
+    /* top: 100px; */
+    /* left: 100px; */
     -moz-border-radius:3px;
     border-radius: 3px;
     border: 2px solid #DDD;
