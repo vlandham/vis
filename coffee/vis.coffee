@@ -4,15 +4,15 @@ root = exports ? this
 Plot = () ->
   width = 200
   height = 200
-  preview_width = 100
-  preview_height = 100
+  preview_width = 180
+  preview_height = 140
   data = []
   points = null
-  margin = {top: 0, right: 0, bottom: 0, left: 0}
-  xScale = d3.scale.linear().domain([0,10]).range([0,width])
-  yScale = d3.scale.linear().domain([0,10]).range([0,height])
-  xValue = (d) -> parseFloat(d.x)
-  yValue = (d) -> parseFloat(d.y)
+  xScale = d3.scale.ordinal().rangeRoundBands([0,preview_width], 0.1)
+  yScale = d3.scale.linear().range([0, preview_height])
+  colorScale = d3.scale.ordinal()
+    .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c"])
+  
 
   scaleFactor = 3
 
@@ -21,24 +21,46 @@ Plot = () ->
 
       data = rawData
 
+      updateScales()
+
       svg = d3.select(this).select("#previews").selectAll("svg").data(data)
       svg.enter().append("svg").append("g")
       
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
+      svg.attr("width", width)
+      svg.attr("height", height)
 
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
+      previews = svg.append("g")
+        .attr("transform", "translate(#{(width/2) - preview_width/2},#{(height/2) - preview_height/2})")
+        
     
-      g.append("rect")
+      previews.append("rect")
         .attr("width", preview_width)
         .attr("height", preview_height)
-        .attr("fill", "steelblue")
+        .attr("fill", "#d3d3d3")
         .attr("class", "preview")
-        .attr("transform", "translate(#{(width/2) - preview_width/2},#{(height/2) - preview_height/2})")
         .on("click", showDetail)
 
+      previews.append("g").each(drawPreview)
+
       d3.select("#detail").classed("hidden", true)
+  
+  drawPreview = (d,i) ->
+    d3.select(this).selectAll(".bar")
+      .data((d) -> d.values)
+      .enter().append("rect")
+      .attr("x", (d,i) -> xScale(d.name))
+      .attr("y", (d) -> preview_height - yScale(d.value))
+      .attr("width", xScale.rangeBand())
+      .attr("height", (d,i) ->  yScale(d.value))
+      .attr("fill", (d) -> colorScale(d.name))
+
+  updateScales = () ->
+    yMax = d3.max(data, (d) -> d3.max(d.values, (e) -> e.value))
+    yScale.domain([0,yMax])
+    # xMax = d3.max(data, (d) -> d.values.length)
+    names = data[0].values.map (d) -> d.name
+    xScale.domain(names)
+    colorScale.domain(names)
 
   getPosition = (i) ->
     el = $('.preview')[i]
@@ -76,34 +98,10 @@ Plot = () ->
         toggleDetail(false)
 
 
-  chart.height = (_) ->
-    if !arguments.length
-      return height
-    height = _
-    chart
-
   chart.width = (_) ->
     if !arguments.length
       return width
     width = _
-    chart
-
-  chart.margin = (_) ->
-    if !arguments.length
-      return margin
-    margin = _
-    chart
-
-  chart.x = (_) ->
-    if !arguments.length
-      return xValue
-    xValue = _
-    chart
-
-  chart.y = (_) ->
-    if !arguments.length
-      return yValue
-    yValue = _
     chart
 
   return chart
@@ -123,5 +121,5 @@ $ ->
     plotData("#vis", data, plot)
 
 
-  d3.csv("data/test.csv", display)
+  d3.json("data/co2_kt_data.json", display)
 

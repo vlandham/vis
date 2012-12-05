@@ -1,0 +1,1394 @@
+[
+  {
+    "year": 1961,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 552066.85
+      },
+      {
+        "name": "USA",
+        "value": 2880505.507
+      },
+      {
+        "name": "EUU",
+        "value": 2429999.986
+      },
+      {
+        "name": "IND",
+        "value": 130402.187
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 283118.069
+      }
+    ]
+  },
+  {
+    "year": 1962,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 440359.029
+      },
+      {
+        "name": "USA",
+        "value": 2987207.873
+      },
+      {
+        "name": "EUU",
+        "value": 2570388.998
+      },
+      {
+        "name": "IND",
+        "value": 143467.708
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 293220.654
+      }
+    ]
+  },
+  {
+    "year": 1963,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 436695.696
+      },
+      {
+        "name": "USA",
+        "value": 3119230.874
+      },
+      {
+        "name": "EUU",
+        "value": 2745644.318
+      },
+      {
+        "name": "IND",
+        "value": 154083.673
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 325222.563
+      }
+    ]
+  },
+  {
+    "year": 1964,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 436923.05
+      },
+      {
+        "name": "USA",
+        "value": 3255995.306
+      },
+      {
+        "name": "EUU",
+        "value": 2860817.703
+      },
+      {
+        "name": "IND",
+        "value": 150647.694
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 359318.329
+      }
+    ]
+  },
+  {
+    "year": 1965,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 475972.933
+      },
+      {
+        "name": "USA",
+        "value": 3390922.571
+      },
+      {
+        "name": "EUU",
+        "value": 2957598.027
+      },
+      {
+        "name": "IND",
+        "value": 165972.087
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 386919.838
+      }
+    ]
+  },
+  {
+    "year": 1966,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 522789.522
+      },
+      {
+        "name": "USA",
+        "value": 3561878.111
+      },
+      {
+        "name": "EUU",
+        "value": 3046079.798
+      },
+      {
+        "name": "IND",
+        "value": 171765.947
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 419743.155
+      }
+    ]
+  },
+  {
+    "year": 1967,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 433234.048
+      },
+      {
+        "name": "USA",
+        "value": 3695708.943
+      },
+      {
+        "name": "EUU",
+        "value": 3115053.777
+      },
+      {
+        "name": "IND",
+        "value": 172238.99
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 489881.864
+      }
+    ]
+  },
+  {
+    "year": 1968,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 468928.626
+      },
+      {
+        "name": "USA",
+        "value": 3831354.94
+      },
+      {
+        "name": "EUU",
+        "value": 3295573.105
+      },
+      {
+        "name": "IND",
+        "value": 187336.029
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 562565.471
+      }
+    ]
+  },
+  {
+    "year": 1969,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 577237.138
+      },
+      {
+        "name": "USA",
+        "value": 4024748.853
+      },
+      {
+        "name": "EUU",
+        "value": 3497649.058
+      },
+      {
+        "name": "IND",
+        "value": 190724.337
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 653958.112
+      }
+    ]
+  },
+  {
+    "year": 1970,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 771617.474
+      },
+      {
+        "name": "USA",
+        "value": 4328904.501
+      },
+      {
+        "name": "EUU",
+        "value": 3728971.218
+      },
+      {
+        "name": "IND",
+        "value": 195143.072
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 768823.22
+      }
+    ]
+  },
+  {
+    "year": 1971,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 876633.02
+      },
+      {
+        "name": "USA",
+        "value": 4356770.034
+      },
+      {
+        "name": "EUU",
+        "value": 3821932.556
+      },
+      {
+        "name": "IND",
+        "value": 205869.047
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 797543.164
+      }
+    ]
+  },
+  {
+    "year": 1972,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 931575.681
+      },
+      {
+        "name": "USA",
+        "value": 4564952.958
+      },
+      {
+        "name": "EUU",
+        "value": 3973757.882
+      },
+      {
+        "name": "IND",
+        "value": 217849.136
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 853373.239
+      }
+    ]
+  },
+  {
+    "year": 1973,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 968542.708
+      },
+      {
+        "name": "USA",
+        "value": 4770194.948
+      },
+      {
+        "name": "EUU",
+        "value": 4176623.437
+      },
+      {
+        "name": "IND",
+        "value": 224343.393
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 991850.16
+      }
+    ]
+  },
+  {
+    "year": 1974,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 988014.478
+      },
+      {
+        "name": "USA",
+        "value": 4598487.673
+      },
+      {
+        "name": "EUU",
+        "value": 4116366.035
+      },
+      {
+        "name": "IND",
+        "value": 231992.755
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 966734.877
+      }
+    ]
+  },
+  {
+    "year": 1975,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1145607.47
+      },
+      {
+        "name": "USA",
+        "value": 4406329.539
+      },
+      {
+        "name": "EUU",
+        "value": 4038654.836
+      },
+      {
+        "name": "IND",
+        "value": 252201.592
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 920941.381
+      }
+    ]
+  },
+  {
+    "year": 1976,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1196193.735
+      },
+      {
+        "name": "USA",
+        "value": 4613100.668
+      },
+      {
+        "name": "EUU",
+        "value": 4302660.288
+      },
+      {
+        "name": "IND",
+        "value": 263785.645
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 953196.313
+      }
+    ]
+  },
+  {
+    "year": 1977,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1310310.775
+      },
+      {
+        "name": "USA",
+        "value": 4742292.745
+      },
+      {
+        "name": "EUU",
+        "value": 4288060.409
+      },
+      {
+        "name": "IND",
+        "value": 315681.029
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 999998.234
+      }
+    ]
+  },
+  {
+    "year": 1978,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1462168.579
+      },
+      {
+        "name": "USA",
+        "value": 4889112.091
+      },
+      {
+        "name": "EUU",
+        "value": 4429971.855
+      },
+      {
+        "name": "IND",
+        "value": 318035.243
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 989312.596
+      }
+    ]
+  },
+  {
+    "year": 1979,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1494859.884
+      },
+      {
+        "name": "USA",
+        "value": 4900373.448
+      },
+      {
+        "name": "EUU",
+        "value": 4618273.656
+      },
+      {
+        "name": "IND",
+        "value": 331940.507
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 1024787.154
+      }
+    ]
+  },
+  {
+    "year": 1980,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1467192.369
+      },
+      {
+        "name": "USA",
+        "value": 4721170.825
+      },
+      {
+        "name": "EUU",
+        "value": 4489960.896
+      },
+      {
+        "name": "IND",
+        "value": 348581.353
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 1000592.288
+      }
+    ]
+  },
+  {
+    "year": 1981,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1451501.276
+      },
+      {
+        "name": "USA",
+        "value": 4531792.277
+      },
+      {
+        "name": "EUU",
+        "value": 4238831.619
+      },
+      {
+        "name": "IND",
+        "value": 374822.405
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 970566.892
+      }
+    ]
+  },
+  {
+    "year": 1982,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1580260.647
+      },
+      {
+        "name": "USA",
+        "value": 4300598.928
+      },
+      {
+        "name": "EUU",
+        "value": 4143181.508
+      },
+      {
+        "name": "IND",
+        "value": 398419.55
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 942066.968
+      }
+    ]
+  },
+  {
+    "year": 1983,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1667029.201
+      },
+      {
+        "name": "USA",
+        "value": 4334925.715
+      },
+      {
+        "name": "EUU",
+        "value": 4083724.029
+      },
+      {
+        "name": "IND",
+        "value": 432320.965
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 935323.355
+      }
+    ]
+  },
+  {
+    "year": 1984,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1814908.31
+      },
+      {
+        "name": "USA",
+        "value": 4470326.023
+      },
+      {
+        "name": "EUU",
+        "value": 4056934.36
+      },
+      {
+        "name": "IND",
+        "value": 447109.976
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 992282.866
+      }
+    ]
+  },
+  {
+    "year": 1985,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 1966553.428
+      },
+      {
+        "name": "USA",
+        "value": 4486460.823
+      },
+      {
+        "name": "EUU",
+        "value": 4162653.175
+      },
+      {
+        "name": "IND",
+        "value": 490464.917
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 968418.03
+      }
+    ]
+  },
+  {
+    "year": 1986,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2068969.071
+      },
+      {
+        "name": "USA",
+        "value": 4491176.585
+      },
+      {
+        "name": "EUU",
+        "value": 4152641.239
+      },
+      {
+        "name": "IND",
+        "value": 525862.468
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 971832.007
+      }
+    ]
+  },
+  {
+    "year": 1987,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2209708.531
+      },
+      {
+        "name": "USA",
+        "value": 4684431.152
+      },
+      {
+        "name": "EUU",
+        "value": 4231931.64
+      },
+      {
+        "name": "IND",
+        "value": 561560.713
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 962675.508
+      }
+    ]
+  },
+  {
+    "year": 1988,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2369501.723
+      },
+      {
+        "name": "USA",
+        "value": 4888664.717
+      },
+      {
+        "name": "EUU",
+        "value": 4176607.955
+      },
+      {
+        "name": "IND",
+        "value": 606298.113
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 1055358.933
+      }
+    ]
+  },
+  {
+    "year": 1989,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2408540.605
+      },
+      {
+        "name": "USA",
+        "value": 4951084.391
+      },
+      {
+        "name": "EUU",
+        "value": 4304208.526
+      },
+      {
+        "name": "IND",
+        "value": 662945.929
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 1084280.562
+      }
+    ]
+  },
+  {
+    "year": 1990,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2460744.017
+      },
+      {
+        "name": "USA",
+        "value": 4879376.206
+      },
+      {
+        "name": "EUU",
+        "value": 4134263.66
+      },
+      {
+        "name": "IND",
+        "value": 690576.774
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 1094705.843
+      }
+    ]
+  },
+  {
+    "year": 1991,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2584538.27
+      },
+      {
+        "name": "USA",
+        "value": 4870238.042
+      },
+      {
+        "name": "EUU",
+        "value": 4232256.77
+      },
+      {
+        "name": "IND",
+        "value": 737851.738
+      },
+      {
+        "name": "RUS",
+        "value": 0.0
+      },
+      {
+        "name": "JPN",
+        "value": 1100598.712
+      }
+    ]
+  },
+  {
+    "year": 1992,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2695982.067
+      },
+      {
+        "name": "USA",
+        "value": 4876006.233
+      },
+      {
+        "name": "EUU",
+        "value": 4125165.981
+      },
+      {
+        "name": "IND",
+        "value": 783634.233
+      },
+      {
+        "name": "RUS",
+        "value": 2220720.532
+      },
+      {
+        "name": "JPN",
+        "value": 1123660.475
+      }
+    ]
+  },
+  {
+    "year": 1993,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 2878694.009
+      },
+      {
+        "name": "USA",
+        "value": 5167485.062
+      },
+      {
+        "name": "EUU",
+        "value": 4031312.783
+      },
+      {
+        "name": "IND",
+        "value": 814297.687
+      },
+      {
+        "name": "RUS",
+        "value": 2030029.198
+      },
+      {
+        "name": "JPN",
+        "value": 1108673.446
+      }
+    ]
+  },
+  {
+    "year": 1994,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3058241.33
+      },
+      {
+        "name": "USA",
+        "value": 5227176.488
+      },
+      {
+        "name": "EUU",
+        "value": 3986344.362
+      },
+      {
+        "name": "IND",
+        "value": 864931.623
+      },
+      {
+        "name": "RUS",
+        "value": 1752998.349
+      },
+      {
+        "name": "JPN",
+        "value": 1174169.733
+      }
+    ]
+  },
+  {
+    "year": 1995,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3320285.15
+      },
+      {
+        "name": "USA",
+        "value": 5237968.469
+      },
+      {
+        "name": "EUU",
+        "value": 4071807.464
+      },
+      {
+        "name": "IND",
+        "value": 920046.633
+      },
+      {
+        "name": "RUS",
+        "value": 1692364.504
+      },
+      {
+        "name": "JPN",
+        "value": 1184088.968
+      }
+    ]
+  },
+  {
+    "year": 1996,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3463089.131
+      },
+      {
+        "name": "USA",
+        "value": 5343512.063
+      },
+      {
+        "name": "EUU",
+        "value": 4177431.732
+      },
+      {
+        "name": "IND",
+        "value": 1002224.103
+      },
+      {
+        "name": "RUS",
+        "value": 1668958.043
+      },
+      {
+        "name": "JPN",
+        "value": 1205782.94
+      }
+    ]
+  },
+  {
+    "year": 1997,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3469510.048
+      },
+      {
+        "name": "USA",
+        "value": 5501365.412
+      },
+      {
+        "name": "EUU",
+        "value": 4063347.695
+      },
+      {
+        "name": "IND",
+        "value": 1043939.895
+      },
+      {
+        "name": "RUS",
+        "value": 1577033.687
+      },
+      {
+        "name": "JPN",
+        "value": 1201778.576
+      }
+    ]
+  },
+  {
+    "year": 1998,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3324344.519
+      },
+      {
+        "name": "USA",
+        "value": 5449077.659
+      },
+      {
+        "name": "EUU",
+        "value": 4069526.59
+      },
+      {
+        "name": "IND",
+        "value": 1071911.771
+      },
+      {
+        "name": "RUS",
+        "value": 1511269.709
+      },
+      {
+        "name": "JPN",
+        "value": 1159186.371
+      }
+    ]
+  },
+  {
+    "year": 1999,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3318055.614
+      },
+      {
+        "name": "USA",
+        "value": 5528149.18
+      },
+      {
+        "name": "EUU",
+        "value": 3870998.877
+      },
+      {
+        "name": "IND",
+        "value": 1144390.026
+      },
+      {
+        "name": "RUS",
+        "value": 1534250.798
+      },
+      {
+        "name": "JPN",
+        "value": 1197880.555
+      }
+    ]
+  },
+  {
+    "year": 2000,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3405179.867
+      },
+      {
+        "name": "USA",
+        "value": 5512399.415
+      },
+      {
+        "name": "EUU",
+        "value": 3888831.498
+      },
+      {
+        "name": "IND",
+        "value": 1186663.202
+      },
+      {
+        "name": "RUS",
+        "value": 1553451.21
+      },
+      {
+        "name": "JPN",
+        "value": 1219592.862
+      }
+    ]
+  },
+  {
+    "year": 2001,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3487566.356
+      },
+      {
+        "name": "USA",
+        "value": 5389928.949
+      },
+      {
+        "name": "EUU",
+        "value": 3974257.93
+      },
+      {
+        "name": "IND",
+        "value": 1203843.097
+      },
+      {
+        "name": "RUS",
+        "value": 1544404.721
+      },
+      {
+        "name": "JPN",
+        "value": 1202266.287
+      }
+    ]
+  },
+  {
+    "year": 2002,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 3694242.143
+      },
+      {
+        "name": "USA",
+        "value": 5437816.302
+      },
+      {
+        "name": "EUU",
+        "value": 3945171.286
+      },
+      {
+        "name": "IND",
+        "value": 1226791.183
+      },
+      {
+        "name": "RUS",
+        "value": 1537195.399
+      },
+      {
+        "name": "JPN",
+        "value": 1216761.938
+      }
+    ]
+  },
+  {
+    "year": 2003,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 4525177.009
+      },
+      {
+        "name": "USA",
+        "value": 5471754.387
+      },
+      {
+        "name": "EUU",
+        "value": 4036684.938
+      },
+      {
+        "name": "IND",
+        "value": 1281913.527
+      },
+      {
+        "name": "RUS",
+        "value": 1584998.411
+      },
+      {
+        "name": "JPN",
+        "value": 1237242.133
+      }
+    ]
+  },
+  {
+    "year": 2004,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 5288166.032
+      },
+      {
+        "name": "USA",
+        "value": 5563799.754
+      },
+      {
+        "name": "EUU",
+        "value": 4050725.881
+      },
+      {
+        "name": "IND",
+        "value": 1346595.74
+      },
+      {
+        "name": "RUS",
+        "value": 1602963.044
+      },
+      {
+        "name": "JPN",
+        "value": 1259658.504
+      }
+    ]
+  },
+  {
+    "year": 2005,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 5790016.984
+      },
+      {
+        "name": "USA",
+        "value": 5595357.956
+      },
+      {
+        "name": "EUU",
+        "value": 4023175.71
+      },
+      {
+        "name": "IND",
+        "value": 1411127.606
+      },
+      {
+        "name": "RUS",
+        "value": 1615683.867
+      },
+      {
+        "name": "JPN",
+        "value": 1238188.219
+      }
+    ]
+  },
+  {
+    "year": 2006,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 6414463.08
+      },
+      {
+        "name": "USA",
+        "value": 5514775.631
+      },
+      {
+        "name": "EUU",
+        "value": 4037117.644
+      },
+      {
+        "name": "IND",
+        "value": 1504364.748
+      },
+      {
+        "name": "RUS",
+        "value": 1669603.435
+      },
+      {
+        "name": "JPN",
+        "value": 1231770.969
+      }
+    ]
+  },
+  {
+    "year": 2007,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 6791804.714
+      },
+      {
+        "name": "USA",
+        "value": 5581537.033
+      },
+      {
+        "name": "EUU",
+        "value": 3980906.201
+      },
+      {
+        "name": "IND",
+        "value": 1612383.567
+      },
+      {
+        "name": "RUS",
+        "value": 1667575.584
+      },
+      {
+        "name": "JPN",
+        "value": 1251187.734
+      }
+    ]
+  },
+  {
+    "year": 2008,
+    "values": [
+      {
+        "name": "CHN",
+        "value": 7031916.207
+      },
+      {
+        "name": "USA",
+        "value": 5461013.744
+      },
+      {
+        "name": "EUU",
+        "value": 3906818.133
+      },
+      {
+        "name": "IND",
+        "value": 1742697.746
+      },
+      {
+        "name": "RUS",
+        "value": 1708653.318
+      },
+      {
+        "name": "JPN",
+        "value": 1208162.823
+      }
+    ]
+  }
+]

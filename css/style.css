@@ -1,8 +1,24 @@
+header {
+  position: fixed;
+  width: 100%;
+  top: 0px;
+  left: 0px;
+  height: 90px;
+  box-shadow: 0px -10px 50px #0E0C08;
+  z-index: 100000;
+}
+
+h1 {
+  padding:0 0 0 20px;
+  margin:0;
+}
+
 
 #vis {
   position: relative;
   width: 800px;
   margin: 0 auto;
+  top: 120px;
   /* margin-top: 30px; */
 }
 
