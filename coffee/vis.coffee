@@ -187,7 +187,7 @@ $ ->
       .attr("d", path)
 
 
-    d3.json("/data/properties_all.json", display_bars)
+    d3.json("data/properties_all.json", display_bars)
 
 
   d3.json("data/us-states.json", display_map)
