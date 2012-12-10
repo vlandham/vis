@@ -81,7 +81,8 @@ root.plotData = (selector, data, plot) ->
 $ ->
 
   plot = Plot()
-  display = (data) ->
+  display = (error, data) ->
+    console.log(error)
     plotData("#vis", data, plot)
 
 
