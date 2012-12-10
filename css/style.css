@@ -39,6 +39,7 @@ h1 {
   top: 0;
   left: 0;
   z-index: 1000;
+  padding-bottom: 45px;
 }
 
 #detail {
