@@ -1,3 +1,13 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  background: url("../img/subtle_dots.png") white repeat;
+}
+
+a, a:visited {
+  color: #555;
+}
+
 header {
   position: fixed;
   width: 100%;
@@ -6,10 +16,12 @@ header {
   height: 90px;
   box-shadow: 0px -10px 50px #0E0C08;
   z-index: 100000;
+  background-color: white;
+  text-align: center;
 }
 
 h1 {
-  padding:0 0 0 20px;
+  padding:0 0 0 10px;
   margin:0;
 }
 
@@ -30,6 +42,27 @@ h1 {
 }
 
 #detail {
+  background-color:rgba(255,255,255,0.5);
+}
+
+.title {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.background {
+  fill: #eeeeee;
+  /* fill: none; */
+  /* stroke: #d3d3d3; */
+  /* stroke-width: 2; */
+}
+
+.preview {
+  pointer-events: all;
+  cursor: pointer;
+}
+
+#detail {
   position: fixed;
   top: 128px;
   width: 100%;
@@ -42,7 +75,6 @@ h1 {
 }
 
 #detail_zoom {
-  fill: red;
   width: 800px;
 }
 
@@ -61,3 +93,22 @@ h1 {
   -moz-transition: opacity 500ms ease-in;
 }
 
+footer {
+  background-color: white;
+  padding-top: 15px;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  bottom: 0px;
+  left: 0px;
+  height: 20px;
+  box-shadow: 0px 10px 20px #0E0C08;
+  z-index: 10000;
+  color: #AAAA9A;
+  font-size: 15px;
+}
+
+footer p {
+  margin:0;
+  padding:0;
+}
