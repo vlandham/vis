@@ -3,28 +3,40 @@
     "year": 1961,
     "values": [
       {
-        "name": "CHN",
-        "value": 552066.85
+        "code": "CHN",
+        "name": "China",
+        "value": 552066.85,
+        "percent_world": 0.059
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 2880505.507
+        "value": 2880505.507,
+        "percent_world": 0.305
       },
       {
-        "name": "EUU",
-        "value": 2429999.986
+        "code": "EUU",
+        "name": "EU",
+        "value": 2429999.986,
+        "percent_world": 0.258
       },
       {
-        "name": "IND",
-        "value": 130402.187
+        "code": "IND",
+        "name": "India",
+        "value": 130402.187,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 283118.069
+        "code": "JPN",
+        "name": "Japan",
+        "value": 283118.069,
+        "percent_world": 0.03
       }
     ]
   },
@@ -32,28 +44,40 @@
     "year": 1962,
     "values": [
       {
-        "name": "CHN",
-        "value": 440359.029
+        "code": "CHN",
+        "name": "China",
+        "value": 440359.029,
+        "percent_world": 0.045
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 2987207.873
+        "value": 2987207.873,
+        "percent_world": 0.304
       },
       {
-        "name": "EUU",
-        "value": 2570388.998
+        "code": "EUU",
+        "name": "EU",
+        "value": 2570388.998,
+        "percent_world": 0.262
       },
       {
-        "name": "IND",
-        "value": 143467.708
+        "code": "IND",
+        "name": "India",
+        "value": 143467.708,
+        "percent_world": 0.015
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 293220.654
+        "code": "JPN",
+        "name": "Japan",
+        "value": 293220.654,
+        "percent_world": 0.03
       }
     ]
   },
@@ -61,28 +85,40 @@
     "year": 1963,
     "values": [
       {
-        "name": "CHN",
-        "value": 436695.696
+        "code": "CHN",
+        "name": "China",
+        "value": 436695.696,
+        "percent_world": 0.042
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 3119230.874
+        "value": 3119230.874,
+        "percent_world": 0.301
       },
       {
-        "name": "EUU",
-        "value": 2745644.318
+        "code": "EUU",
+        "name": "EU",
+        "value": 2745644.318,
+        "percent_world": 0.265
       },
       {
-        "name": "IND",
-        "value": 154083.673
+        "code": "IND",
+        "name": "India",
+        "value": 154083.673,
+        "percent_world": 0.015
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 325222.563
+        "code": "JPN",
+        "name": "Japan",
+        "value": 325222.563,
+        "percent_world": 0.031
       }
     ]
   },
@@ -90,28 +126,40 @@
     "year": 1964,
     "values": [
       {
-        "name": "CHN",
-        "value": 436923.05
+        "code": "CHN",
+        "name": "China",
+        "value": 436923.05,
+        "percent_world": 0.04
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 3255995.306
+        "value": 3255995.306,
+        "percent_world": 0.297
       },
       {
-        "name": "EUU",
-        "value": 2860817.703
+        "code": "EUU",
+        "name": "EU",
+        "value": 2860817.703,
+        "percent_world": 0.261
       },
       {
-        "name": "IND",
-        "value": 150647.694
+        "code": "IND",
+        "name": "India",
+        "value": 150647.694,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 359318.329
+        "code": "JPN",
+        "name": "Japan",
+        "value": 359318.329,
+        "percent_world": 0.033
       }
     ]
   },
@@ -119,28 +167,40 @@
     "year": 1965,
     "values": [
       {
-        "name": "CHN",
-        "value": 475972.933
+        "code": "CHN",
+        "name": "China",
+        "value": 475972.933,
+        "percent_world": 0.042
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 3390922.571
+        "value": 3390922.571,
+        "percent_world": 0.297
       },
       {
-        "name": "EUU",
-        "value": 2957598.027
+        "code": "EUU",
+        "name": "EU",
+        "value": 2957598.027,
+        "percent_world": 0.259
       },
       {
-        "name": "IND",
-        "value": 165972.087
+        "code": "IND",
+        "name": "India",
+        "value": 165972.087,
+        "percent_world": 0.015
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 386919.838
+        "code": "JPN",
+        "name": "Japan",
+        "value": 386919.838,
+        "percent_world": 0.034
       }
     ]
   },
@@ -148,28 +208,40 @@
     "year": 1966,
     "values": [
       {
-        "name": "CHN",
-        "value": 522789.522
+        "code": "CHN",
+        "name": "China",
+        "value": 522789.522,
+        "percent_world": 0.044
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 3561878.111
+        "value": 3561878.111,
+        "percent_world": 0.297
       },
       {
-        "name": "EUU",
-        "value": 3046079.798
+        "code": "EUU",
+        "name": "EU",
+        "value": 3046079.798,
+        "percent_world": 0.254
       },
       {
-        "name": "IND",
-        "value": 171765.947
+        "code": "IND",
+        "name": "India",
+        "value": 171765.947,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 419743.155
+        "code": "JPN",
+        "name": "Japan",
+        "value": 419743.155,
+        "percent_world": 0.035
       }
     ]
   },
@@ -177,28 +249,40 @@
     "year": 1967,
     "values": [
       {
-        "name": "CHN",
-        "value": 433234.048
+        "code": "CHN",
+        "name": "China",
+        "value": 433234.048,
+        "percent_world": 0.035
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 3695708.943
+        "value": 3695708.943,
+        "percent_world": 0.298
       },
       {
-        "name": "EUU",
-        "value": 3115053.777
+        "code": "EUU",
+        "name": "EU",
+        "value": 3115053.777,
+        "percent_world": 0.251
       },
       {
-        "name": "IND",
-        "value": 172238.99
+        "code": "IND",
+        "name": "India",
+        "value": 172238.99,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 489881.864
+        "code": "JPN",
+        "name": "Japan",
+        "value": 489881.864,
+        "percent_world": 0.04
       }
     ]
   },
@@ -206,28 +290,40 @@
     "year": 1968,
     "values": [
       {
-        "name": "CHN",
-        "value": 468928.626
+        "code": "CHN",
+        "name": "China",
+        "value": 468928.626,
+        "percent_world": 0.036
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 3831354.94
+        "value": 3831354.94,
+        "percent_world": 0.294
       },
       {
-        "name": "EUU",
-        "value": 3295573.105
+        "code": "EUU",
+        "name": "EU",
+        "value": 3295573.105,
+        "percent_world": 0.253
       },
       {
-        "name": "IND",
-        "value": 187336.029
+        "code": "IND",
+        "name": "India",
+        "value": 187336.029,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 562565.471
+        "code": "JPN",
+        "name": "Japan",
+        "value": 562565.471,
+        "percent_world": 0.043
       }
     ]
   },
@@ -235,28 +331,40 @@
     "year": 1969,
     "values": [
       {
-        "name": "CHN",
-        "value": 577237.138
+        "code": "CHN",
+        "name": "China",
+        "value": 577237.138,
+        "percent_world": 0.042
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4024748.853
+        "value": 4024748.853,
+        "percent_world": 0.292
       },
       {
-        "name": "EUU",
-        "value": 3497649.058
+        "code": "EUU",
+        "name": "EU",
+        "value": 3497649.058,
+        "percent_world": 0.254
       },
       {
-        "name": "IND",
-        "value": 190724.337
+        "code": "IND",
+        "name": "India",
+        "value": 190724.337,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 653958.112
+        "code": "JPN",
+        "name": "Japan",
+        "value": 653958.112,
+        "percent_world": 0.047
       }
     ]
   },
@@ -264,28 +372,40 @@
     "year": 1970,
     "values": [
       {
-        "name": "CHN",
-        "value": 771617.474
+        "code": "CHN",
+        "name": "China",
+        "value": 771617.474,
+        "percent_world": 0.052
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4328904.501
+        "value": 4328904.501,
+        "percent_world": 0.293
       },
       {
-        "name": "EUU",
-        "value": 3728971.218
+        "code": "EUU",
+        "name": "EU",
+        "value": 3728971.218,
+        "percent_world": 0.252
       },
       {
-        "name": "IND",
-        "value": 195143.072
+        "code": "IND",
+        "name": "India",
+        "value": 195143.072,
+        "percent_world": 0.013
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 768823.22
+        "code": "JPN",
+        "name": "Japan",
+        "value": 768823.22,
+        "percent_world": 0.052
       }
     ]
   },
@@ -293,28 +413,40 @@
     "year": 1971,
     "values": [
       {
-        "name": "CHN",
-        "value": 876633.02
+        "code": "CHN",
+        "name": "China",
+        "value": 876633.02,
+        "percent_world": 0.057
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4356770.034
+        "value": 4356770.034,
+        "percent_world": 0.284
       },
       {
-        "name": "EUU",
-        "value": 3821932.556
+        "code": "EUU",
+        "name": "EU",
+        "value": 3821932.556,
+        "percent_world": 0.249
       },
       {
-        "name": "IND",
-        "value": 205869.047
+        "code": "IND",
+        "name": "India",
+        "value": 205869.047,
+        "percent_world": 0.013
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 797543.164
+        "code": "JPN",
+        "name": "Japan",
+        "value": 797543.164,
+        "percent_world": 0.052
       }
     ]
   },
@@ -322,28 +454,40 @@
     "year": 1972,
     "values": [
       {
-        "name": "CHN",
-        "value": 931575.681
+        "code": "CHN",
+        "name": "China",
+        "value": 931575.681,
+        "percent_world": 0.058
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4564952.958
+        "value": 4564952.958,
+        "percent_world": 0.286
       },
       {
-        "name": "EUU",
-        "value": 3973757.882
+        "code": "EUU",
+        "name": "EU",
+        "value": 3973757.882,
+        "percent_world": 0.249
       },
       {
-        "name": "IND",
-        "value": 217849.136
+        "code": "IND",
+        "name": "India",
+        "value": 217849.136,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 853373.239
+        "code": "JPN",
+        "name": "Japan",
+        "value": 853373.239,
+        "percent_world": 0.053
       }
     ]
   },
@@ -351,28 +495,40 @@
     "year": 1973,
     "values": [
       {
-        "name": "CHN",
-        "value": 968542.708
+        "code": "CHN",
+        "name": "China",
+        "value": 968542.708,
+        "percent_world": 0.058
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4770194.948
+        "value": 4770194.948,
+        "percent_world": 0.284
       },
       {
-        "name": "EUU",
-        "value": 4176623.437
+        "code": "EUU",
+        "name": "EU",
+        "value": 4176623.437,
+        "percent_world": 0.248
       },
       {
-        "name": "IND",
-        "value": 224343.393
+        "code": "IND",
+        "name": "India",
+        "value": 224343.393,
+        "percent_world": 0.013
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 991850.16
+        "code": "JPN",
+        "name": "Japan",
+        "value": 991850.16,
+        "percent_world": 0.059
       }
     ]
   },
@@ -380,28 +536,40 @@
     "year": 1974,
     "values": [
       {
-        "name": "CHN",
-        "value": 988014.478
+        "code": "CHN",
+        "name": "China",
+        "value": 988014.478,
+        "percent_world": 0.059
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4598487.673
+        "value": 4598487.673,
+        "percent_world": 0.273
       },
       {
-        "name": "EUU",
-        "value": 4116366.035
+        "code": "EUU",
+        "name": "EU",
+        "value": 4116366.035,
+        "percent_world": 0.244
       },
       {
-        "name": "IND",
-        "value": 231992.755
+        "code": "IND",
+        "name": "India",
+        "value": 231992.755,
+        "percent_world": 0.014
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 966734.877
+        "code": "JPN",
+        "name": "Japan",
+        "value": 966734.877,
+        "percent_world": 0.057
       }
     ]
   },
@@ -409,28 +577,40 @@
     "year": 1975,
     "values": [
       {
-        "name": "CHN",
-        "value": 1145607.47
+        "code": "CHN",
+        "name": "China",
+        "value": 1145607.47,
+        "percent_world": 0.068
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4406329.539
+        "value": 4406329.539,
+        "percent_world": 0.263
       },
       {
-        "name": "EUU",
-        "value": 4038654.836
+        "code": "EUU",
+        "name": "EU",
+        "value": 4038654.836,
+        "percent_world": 0.241
       },
       {
-        "name": "IND",
-        "value": 252201.592
+        "code": "IND",
+        "name": "India",
+        "value": 252201.592,
+        "percent_world": 0.015
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 920941.381
+        "code": "JPN",
+        "name": "Japan",
+        "value": 920941.381,
+        "percent_world": 0.055
       }
     ]
   },
@@ -438,28 +618,40 @@
     "year": 1976,
     "values": [
       {
-        "name": "CHN",
-        "value": 1196193.735
+        "code": "CHN",
+        "name": "China",
+        "value": 1196193.735,
+        "percent_world": 0.067
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4613100.668
+        "value": 4613100.668,
+        "percent_world": 0.26
       },
       {
-        "name": "EUU",
-        "value": 4302660.288
+        "code": "EUU",
+        "name": "EU",
+        "value": 4302660.288,
+        "percent_world": 0.243
       },
       {
-        "name": "IND",
-        "value": 263785.645
+        "code": "IND",
+        "name": "India",
+        "value": 263785.645,
+        "percent_world": 0.015
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 953196.313
+        "code": "JPN",
+        "name": "Japan",
+        "value": 953196.313,
+        "percent_world": 0.054
       }
     ]
   },
@@ -467,28 +659,40 @@
     "year": 1977,
     "values": [
       {
-        "name": "CHN",
-        "value": 1310310.775
+        "code": "CHN",
+        "name": "China",
+        "value": 1310310.775,
+        "percent_world": 0.072
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4742292.745
+        "value": 4742292.745,
+        "percent_world": 0.259
       },
       {
-        "name": "EUU",
-        "value": 4288060.409
+        "code": "EUU",
+        "name": "EU",
+        "value": 4288060.409,
+        "percent_world": 0.234
       },
       {
-        "name": "IND",
-        "value": 315681.029
+        "code": "IND",
+        "name": "India",
+        "value": 315681.029,
+        "percent_world": 0.017
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 999998.234
+        "code": "JPN",
+        "name": "Japan",
+        "value": 999998.234,
+        "percent_world": 0.055
       }
     ]
   },
@@ -496,28 +700,40 @@
     "year": 1978,
     "values": [
       {
-        "name": "CHN",
-        "value": 1462168.579
+        "code": "CHN",
+        "name": "China",
+        "value": 1462168.579,
+        "percent_world": 0.079
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4889112.091
+        "value": 4889112.091,
+        "percent_world": 0.264
       },
       {
-        "name": "EUU",
-        "value": 4429971.855
+        "code": "EUU",
+        "name": "EU",
+        "value": 4429971.855,
+        "percent_world": 0.239
       },
       {
-        "name": "IND",
-        "value": 318035.243
+        "code": "IND",
+        "name": "India",
+        "value": 318035.243,
+        "percent_world": 0.017
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 989312.596
+        "code": "JPN",
+        "name": "Japan",
+        "value": 989312.596,
+        "percent_world": 0.053
       }
     ]
   },
@@ -525,28 +741,40 @@
     "year": 1979,
     "values": [
       {
-        "name": "CHN",
-        "value": 1494859.884
+        "code": "CHN",
+        "name": "China",
+        "value": 1494859.884,
+        "percent_world": 0.076
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4900373.448
+        "value": 4900373.448,
+        "percent_world": 0.25
       },
       {
-        "name": "EUU",
-        "value": 4618273.656
+        "code": "EUU",
+        "name": "EU",
+        "value": 4618273.656,
+        "percent_world": 0.236
       },
       {
-        "name": "IND",
-        "value": 331940.507
+        "code": "IND",
+        "name": "India",
+        "value": 331940.507,
+        "percent_world": 0.017
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 1024787.154
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1024787.154,
+        "percent_world": 0.052
       }
     ]
   },
@@ -554,28 +782,40 @@
     "year": 1980,
     "values": [
       {
-        "name": "CHN",
-        "value": 1467192.369
+        "code": "CHN",
+        "name": "China",
+        "value": 1467192.369,
+        "percent_world": 0.076
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4721170.825
+        "value": 4721170.825,
+        "percent_world": 0.244
       },
       {
-        "name": "EUU",
-        "value": 4489960.896
+        "code": "EUU",
+        "name": "EU",
+        "value": 4489960.896,
+        "percent_world": 0.232
       },
       {
-        "name": "IND",
-        "value": 348581.353
+        "code": "IND",
+        "name": "India",
+        "value": 348581.353,
+        "percent_world": 0.018
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 1000592.288
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1000592.288,
+        "percent_world": 0.052
       }
     ]
   },
@@ -583,28 +823,40 @@
     "year": 1981,
     "values": [
       {
-        "name": "CHN",
-        "value": 1451501.276
+        "code": "CHN",
+        "name": "China",
+        "value": 1451501.276,
+        "percent_world": 0.077
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4531792.277
+        "value": 4531792.277,
+        "percent_world": 0.241
       },
       {
-        "name": "EUU",
-        "value": 4238831.619
+        "code": "EUU",
+        "name": "EU",
+        "value": 4238831.619,
+        "percent_world": 0.226
       },
       {
-        "name": "IND",
-        "value": 374822.405
+        "code": "IND",
+        "name": "India",
+        "value": 374822.405,
+        "percent_world": 0.02
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 970566.892
+        "code": "JPN",
+        "name": "Japan",
+        "value": 970566.892,
+        "percent_world": 0.052
       }
     ]
   },
@@ -612,28 +864,40 @@
     "year": 1982,
     "values": [
       {
-        "name": "CHN",
-        "value": 1580260.647
+        "code": "CHN",
+        "name": "China",
+        "value": 1580260.647,
+        "percent_world": 0.085
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4300598.928
+        "value": 4300598.928,
+        "percent_world": 0.231
       },
       {
-        "name": "EUU",
-        "value": 4143181.508
+        "code": "EUU",
+        "name": "EU",
+        "value": 4143181.508,
+        "percent_world": 0.222
       },
       {
-        "name": "IND",
-        "value": 398419.55
+        "code": "IND",
+        "name": "India",
+        "value": 398419.55,
+        "percent_world": 0.021
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 942066.968
+        "code": "JPN",
+        "name": "Japan",
+        "value": 942066.968,
+        "percent_world": 0.051
       }
     ]
   },
@@ -641,28 +905,40 @@
     "year": 1983,
     "values": [
       {
-        "name": "CHN",
-        "value": 1667029.201
+        "code": "CHN",
+        "name": "China",
+        "value": 1667029.201,
+        "percent_world": 0.09
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4334925.715
+        "value": 4334925.715,
+        "percent_world": 0.234
       },
       {
-        "name": "EUU",
-        "value": 4083724.029
+        "code": "EUU",
+        "name": "EU",
+        "value": 4083724.029,
+        "percent_world": 0.22
       },
       {
-        "name": "IND",
-        "value": 432320.965
+        "code": "IND",
+        "name": "India",
+        "value": 432320.965,
+        "percent_world": 0.023
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 935323.355
+        "code": "JPN",
+        "name": "Japan",
+        "value": 935323.355,
+        "percent_world": 0.05
       }
     ]
   },
@@ -670,28 +946,40 @@
     "year": 1984,
     "values": [
       {
-        "name": "CHN",
-        "value": 1814908.31
+        "code": "CHN",
+        "name": "China",
+        "value": 1814908.31,
+        "percent_world": 0.094
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4470326.023
+        "value": 4470326.023,
+        "percent_world": 0.233
       },
       {
-        "name": "EUU",
-        "value": 4056934.36
+        "code": "EUU",
+        "name": "EU",
+        "value": 4056934.36,
+        "percent_world": 0.211
       },
       {
-        "name": "IND",
-        "value": 447109.976
+        "code": "IND",
+        "name": "India",
+        "value": 447109.976,
+        "percent_world": 0.023
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 992282.866
+        "code": "JPN",
+        "name": "Japan",
+        "value": 992282.866,
+        "percent_world": 0.052
       }
     ]
   },
@@ -699,28 +987,40 @@
     "year": 1985,
     "values": [
       {
-        "name": "CHN",
-        "value": 1966553.428
+        "code": "CHN",
+        "name": "China",
+        "value": 1966553.428,
+        "percent_world": 0.099
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4486460.823
+        "value": 4486460.823,
+        "percent_world": 0.227
       },
       {
-        "name": "EUU",
-        "value": 4162653.175
+        "code": "EUU",
+        "name": "EU",
+        "value": 4162653.175,
+        "percent_world": 0.21
       },
       {
-        "name": "IND",
-        "value": 490464.917
+        "code": "IND",
+        "name": "India",
+        "value": 490464.917,
+        "percent_world": 0.025
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 968418.03
+        "code": "JPN",
+        "name": "Japan",
+        "value": 968418.03,
+        "percent_world": 0.049
       }
     ]
   },
@@ -728,28 +1028,40 @@
     "year": 1986,
     "values": [
       {
-        "name": "CHN",
-        "value": 2068969.071
+        "code": "CHN",
+        "name": "China",
+        "value": 2068969.071,
+        "percent_world": 0.101
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4491176.585
+        "value": 4491176.585,
+        "percent_world": 0.22
       },
       {
-        "name": "EUU",
-        "value": 4152641.239
+        "code": "EUU",
+        "name": "EU",
+        "value": 4152641.239,
+        "percent_world": 0.204
       },
       {
-        "name": "IND",
-        "value": 525862.468
+        "code": "IND",
+        "name": "India",
+        "value": 525862.468,
+        "percent_world": 0.026
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 971832.007
+        "code": "JPN",
+        "name": "Japan",
+        "value": 971832.007,
+        "percent_world": 0.048
       }
     ]
   },
@@ -757,28 +1069,40 @@
     "year": 1987,
     "values": [
       {
-        "name": "CHN",
-        "value": 2209708.531
+        "code": "CHN",
+        "name": "China",
+        "value": 2209708.531,
+        "percent_world": 0.106
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4684431.152
+        "value": 4684431.152,
+        "percent_world": 0.224
       },
       {
-        "name": "EUU",
-        "value": 4231931.64
+        "code": "EUU",
+        "name": "EU",
+        "value": 4231931.64,
+        "percent_world": 0.202
       },
       {
-        "name": "IND",
-        "value": 561560.713
+        "code": "IND",
+        "name": "India",
+        "value": 561560.713,
+        "percent_world": 0.027
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 962675.508
+        "code": "JPN",
+        "name": "Japan",
+        "value": 962675.508,
+        "percent_world": 0.046
       }
     ]
   },
@@ -786,28 +1110,40 @@
     "year": 1988,
     "values": [
       {
-        "name": "CHN",
-        "value": 2369501.723
+        "code": "CHN",
+        "name": "China",
+        "value": 2369501.723,
+        "percent_world": 0.109
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4888664.717
+        "value": 4888664.717,
+        "percent_world": 0.226
       },
       {
-        "name": "EUU",
-        "value": 4176607.955
+        "code": "EUU",
+        "name": "EU",
+        "value": 4176607.955,
+        "percent_world": 0.193
       },
       {
-        "name": "IND",
-        "value": 606298.113
+        "code": "IND",
+        "name": "India",
+        "value": 606298.113,
+        "percent_world": 0.028
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 1055358.933
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1055358.933,
+        "percent_world": 0.049
       }
     ]
   },
@@ -815,28 +1151,40 @@
     "year": 1989,
     "values": [
       {
-        "name": "CHN",
-        "value": 2408540.605
+        "code": "CHN",
+        "name": "China",
+        "value": 2408540.605,
+        "percent_world": 0.109
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4951084.391
+        "value": 4951084.391,
+        "percent_world": 0.224
       },
       {
-        "name": "EUU",
-        "value": 4304208.526
+        "code": "EUU",
+        "name": "EU",
+        "value": 4304208.526,
+        "percent_world": 0.195
       },
       {
-        "name": "IND",
-        "value": 662945.929
+        "code": "IND",
+        "name": "India",
+        "value": 662945.929,
+        "percent_world": 0.03
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 1084280.562
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1084280.562,
+        "percent_world": 0.049
       }
     ]
   },
@@ -844,28 +1192,40 @@
     "year": 1990,
     "values": [
       {
-        "name": "CHN",
-        "value": 2460744.017
+        "code": "CHN",
+        "name": "China",
+        "value": 2460744.017,
+        "percent_world": 0.11
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4879376.206
+        "value": 4879376.206,
+        "percent_world": 0.219
       },
       {
-        "name": "EUU",
-        "value": 4134263.66
+        "code": "EUU",
+        "name": "EU",
+        "value": 4134263.66,
+        "percent_world": 0.185
       },
       {
-        "name": "IND",
-        "value": 690576.774
+        "code": "IND",
+        "name": "India",
+        "value": 690576.774,
+        "percent_world": 0.031
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 1094705.843
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1094705.843,
+        "percent_world": 0.049
       }
     ]
   },
@@ -873,28 +1233,40 @@
     "year": 1991,
     "values": [
       {
-        "name": "CHN",
-        "value": 2584538.27
+        "code": "CHN",
+        "name": "China",
+        "value": 2584538.27,
+        "percent_world": 0.114
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4870238.042
+        "value": 4870238.042,
+        "percent_world": 0.215
       },
       {
-        "name": "EUU",
-        "value": 4232256.77
+        "code": "EUU",
+        "name": "EU",
+        "value": 4232256.77,
+        "percent_world": 0.187
       },
       {
-        "name": "IND",
-        "value": 737851.738
+        "code": "IND",
+        "name": "India",
+        "value": 737851.738,
+        "percent_world": 0.033
       },
       {
-        "name": "RUS",
-        "value": 0.0
+        "code": "RUS",
+        "name": "Russia",
+        "value": 0.0,
+        "percent_world": 0.0
       },
       {
-        "name": "JPN",
-        "value": 1100598.712
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1100598.712,
+        "percent_world": 0.049
       }
     ]
   },
@@ -902,28 +1274,40 @@
     "year": 1992,
     "values": [
       {
-        "name": "CHN",
-        "value": 2695982.067
+        "code": "CHN",
+        "name": "China",
+        "value": 2695982.067,
+        "percent_world": 0.12
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 4876006.233
+        "value": 4876006.233,
+        "percent_world": 0.218
       },
       {
-        "name": "EUU",
-        "value": 4125165.981
+        "code": "EUU",
+        "name": "EU",
+        "value": 4125165.981,
+        "percent_world": 0.184
       },
       {
-        "name": "IND",
-        "value": 783634.233
+        "code": "IND",
+        "name": "India",
+        "value": 783634.233,
+        "percent_world": 0.035
       },
       {
-        "name": "RUS",
-        "value": 2220720.532
+        "code": "RUS",
+        "name": "Russia",
+        "value": 2220720.532,
+        "percent_world": 0.099
       },
       {
-        "name": "JPN",
-        "value": 1123660.475
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1123660.475,
+        "percent_world": 0.05
       }
     ]
   },
@@ -931,28 +1315,40 @@
     "year": 1993,
     "values": [
       {
-        "name": "CHN",
-        "value": 2878694.009
+        "code": "CHN",
+        "name": "China",
+        "value": 2878694.009,
+        "percent_world": 0.129
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5167485.062
+        "value": 5167485.062,
+        "percent_world": 0.231
       },
       {
-        "name": "EUU",
-        "value": 4031312.783
+        "code": "EUU",
+        "name": "EU",
+        "value": 4031312.783,
+        "percent_world": 0.18
       },
       {
-        "name": "IND",
-        "value": 814297.687
+        "code": "IND",
+        "name": "India",
+        "value": 814297.687,
+        "percent_world": 0.036
       },
       {
-        "name": "RUS",
-        "value": 2030029.198
+        "code": "RUS",
+        "name": "Russia",
+        "value": 2030029.198,
+        "percent_world": 0.091
       },
       {
-        "name": "JPN",
-        "value": 1108673.446
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1108673.446,
+        "percent_world": 0.05
       }
     ]
   },
@@ -960,28 +1356,40 @@
     "year": 1994,
     "values": [
       {
-        "name": "CHN",
-        "value": 3058241.33
+        "code": "CHN",
+        "name": "China",
+        "value": 3058241.33,
+        "percent_world": 0.134
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5227176.488
+        "value": 5227176.488,
+        "percent_world": 0.229
       },
       {
-        "name": "EUU",
-        "value": 3986344.362
+        "code": "EUU",
+        "name": "EU",
+        "value": 3986344.362,
+        "percent_world": 0.175
       },
       {
-        "name": "IND",
-        "value": 864931.623
+        "code": "IND",
+        "name": "India",
+        "value": 864931.623,
+        "percent_world": 0.038
       },
       {
-        "name": "RUS",
-        "value": 1752998.349
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1752998.349,
+        "percent_world": 0.077
       },
       {
-        "name": "JPN",
-        "value": 1174169.733
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1174169.733,
+        "percent_world": 0.052
       }
     ]
   },
@@ -989,28 +1397,40 @@
     "year": 1995,
     "values": [
       {
-        "name": "CHN",
-        "value": 3320285.15
+        "code": "CHN",
+        "name": "China",
+        "value": 3320285.15,
+        "percent_world": 0.143
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5237968.469
+        "value": 5237968.469,
+        "percent_world": 0.225
       },
       {
-        "name": "EUU",
-        "value": 4071807.464
+        "code": "EUU",
+        "name": "EU",
+        "value": 4071807.464,
+        "percent_world": 0.175
       },
       {
-        "name": "IND",
-        "value": 920046.633
+        "code": "IND",
+        "name": "India",
+        "value": 920046.633,
+        "percent_world": 0.04
       },
       {
-        "name": "RUS",
-        "value": 1692364.504
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1692364.504,
+        "percent_world": 0.073
       },
       {
-        "name": "JPN",
-        "value": 1184088.968
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1184088.968,
+        "percent_world": 0.051
       }
     ]
   },
@@ -1018,28 +1438,40 @@
     "year": 1996,
     "values": [
       {
-        "name": "CHN",
-        "value": 3463089.131
+        "code": "CHN",
+        "name": "China",
+        "value": 3463089.131,
+        "percent_world": 0.146
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5343512.063
+        "value": 5343512.063,
+        "percent_world": 0.225
       },
       {
-        "name": "EUU",
-        "value": 4177431.732
+        "code": "EUU",
+        "name": "EU",
+        "value": 4177431.732,
+        "percent_world": 0.176
       },
       {
-        "name": "IND",
-        "value": 1002224.103
+        "code": "IND",
+        "name": "India",
+        "value": 1002224.103,
+        "percent_world": 0.042
       },
       {
-        "name": "RUS",
-        "value": 1668958.043
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1668958.043,
+        "percent_world": 0.07
       },
       {
-        "name": "JPN",
-        "value": 1205782.94
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1205782.94,
+        "percent_world": 0.051
       }
     ]
   },
@@ -1047,28 +1479,40 @@
     "year": 1997,
     "values": [
       {
-        "name": "CHN",
-        "value": 3469510.048
+        "code": "CHN",
+        "name": "China",
+        "value": 3469510.048,
+        "percent_world": 0.143
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5501365.412
+        "value": 5501365.412,
+        "percent_world": 0.227
       },
       {
-        "name": "EUU",
-        "value": 4063347.695
+        "code": "EUU",
+        "name": "EU",
+        "value": 4063347.695,
+        "percent_world": 0.168
       },
       {
-        "name": "IND",
-        "value": 1043939.895
+        "code": "IND",
+        "name": "India",
+        "value": 1043939.895,
+        "percent_world": 0.043
       },
       {
-        "name": "RUS",
-        "value": 1577033.687
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1577033.687,
+        "percent_world": 0.065
       },
       {
-        "name": "JPN",
-        "value": 1201778.576
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1201778.576,
+        "percent_world": 0.05
       }
     ]
   },
@@ -1076,28 +1520,40 @@
     "year": 1998,
     "values": [
       {
-        "name": "CHN",
-        "value": 3324344.519
+        "code": "CHN",
+        "name": "China",
+        "value": 3324344.519,
+        "percent_world": 0.137
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5449077.659
+        "value": 5449077.659,
+        "percent_world": 0.224
       },
       {
-        "name": "EUU",
-        "value": 4069526.59
+        "code": "EUU",
+        "name": "EU",
+        "value": 4069526.59,
+        "percent_world": 0.167
       },
       {
-        "name": "IND",
-        "value": 1071911.771
+        "code": "IND",
+        "name": "India",
+        "value": 1071911.771,
+        "percent_world": 0.044
       },
       {
-        "name": "RUS",
-        "value": 1511269.709
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1511269.709,
+        "percent_world": 0.062
       },
       {
-        "name": "JPN",
-        "value": 1159186.371
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1159186.371,
+        "percent_world": 0.048
       }
     ]
   },
@@ -1105,28 +1561,40 @@
     "year": 1999,
     "values": [
       {
-        "name": "CHN",
-        "value": 3318055.614
+        "code": "CHN",
+        "name": "China",
+        "value": 3318055.614,
+        "percent_world": 0.137
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5528149.18
+        "value": 5528149.18,
+        "percent_world": 0.229
       },
       {
-        "name": "EUU",
-        "value": 3870998.877
+        "code": "EUU",
+        "name": "EU",
+        "value": 3870998.877,
+        "percent_world": 0.16
       },
       {
-        "name": "IND",
-        "value": 1144390.026
+        "code": "IND",
+        "name": "India",
+        "value": 1144390.026,
+        "percent_world": 0.047
       },
       {
-        "name": "RUS",
-        "value": 1534250.798
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1534250.798,
+        "percent_world": 0.064
       },
       {
-        "name": "JPN",
-        "value": 1197880.555
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1197880.555,
+        "percent_world": 0.05
       }
     ]
   },
@@ -1134,28 +1602,40 @@
     "year": 2000,
     "values": [
       {
-        "name": "CHN",
-        "value": 3405179.867
+        "code": "CHN",
+        "name": "China",
+        "value": 3405179.867,
+        "percent_world": 0.138
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5512399.415
+        "value": 5512399.415,
+        "percent_world": 0.223
       },
       {
-        "name": "EUU",
-        "value": 3888831.498
+        "code": "EUU",
+        "name": "EU",
+        "value": 3888831.498,
+        "percent_world": 0.157
       },
       {
-        "name": "IND",
-        "value": 1186663.202
+        "code": "IND",
+        "name": "India",
+        "value": 1186663.202,
+        "percent_world": 0.048
       },
       {
-        "name": "RUS",
-        "value": 1553451.21
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1553451.21,
+        "percent_world": 0.063
       },
       {
-        "name": "JPN",
-        "value": 1219592.862
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1219592.862,
+        "percent_world": 0.049
       }
     ]
   },
@@ -1163,28 +1643,40 @@
     "year": 2001,
     "values": [
       {
-        "name": "CHN",
-        "value": 3487566.356
+        "code": "CHN",
+        "name": "China",
+        "value": 3487566.356,
+        "percent_world": 0.138
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5389928.949
+        "value": 5389928.949,
+        "percent_world": 0.213
       },
       {
-        "name": "EUU",
-        "value": 3974257.93
+        "code": "EUU",
+        "name": "EU",
+        "value": 3974257.93,
+        "percent_world": 0.157
       },
       {
-        "name": "IND",
-        "value": 1203843.097
+        "code": "IND",
+        "name": "India",
+        "value": 1203843.097,
+        "percent_world": 0.047
       },
       {
-        "name": "RUS",
-        "value": 1544404.721
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1544404.721,
+        "percent_world": 0.061
       },
       {
-        "name": "JPN",
-        "value": 1202266.287
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1202266.287,
+        "percent_world": 0.047
       }
     ]
   },
@@ -1192,28 +1684,40 @@
     "year": 2002,
     "values": [
       {
-        "name": "CHN",
-        "value": 3694242.143
+        "code": "CHN",
+        "name": "China",
+        "value": 3694242.143,
+        "percent_world": 0.144
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5437816.302
+        "value": 5437816.302,
+        "percent_world": 0.212
       },
       {
-        "name": "EUU",
-        "value": 3945171.286
+        "code": "EUU",
+        "name": "EU",
+        "value": 3945171.286,
+        "percent_world": 0.154
       },
       {
-        "name": "IND",
-        "value": 1226791.183
+        "code": "IND",
+        "name": "India",
+        "value": 1226791.183,
+        "percent_world": 0.048
       },
       {
-        "name": "RUS",
-        "value": 1537195.399
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1537195.399,
+        "percent_world": 0.06
       },
       {
-        "name": "JPN",
-        "value": 1216761.938
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1216761.938,
+        "percent_world": 0.048
       }
     ]
   },
@@ -1221,28 +1725,40 @@
     "year": 2003,
     "values": [
       {
-        "name": "CHN",
-        "value": 4525177.009
+        "code": "CHN",
+        "name": "China",
+        "value": 4525177.009,
+        "percent_world": 0.167
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5471754.387
+        "value": 5471754.387,
+        "percent_world": 0.202
       },
       {
-        "name": "EUU",
-        "value": 4036684.938
+        "code": "EUU",
+        "name": "EU",
+        "value": 4036684.938,
+        "percent_world": 0.149
       },
       {
-        "name": "IND",
-        "value": 1281913.527
+        "code": "IND",
+        "name": "India",
+        "value": 1281913.527,
+        "percent_world": 0.047
       },
       {
-        "name": "RUS",
-        "value": 1584998.411
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1584998.411,
+        "percent_world": 0.058
       },
       {
-        "name": "JPN",
-        "value": 1237242.133
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1237242.133,
+        "percent_world": 0.046
       }
     ]
   },
@@ -1250,28 +1766,40 @@
     "year": 2004,
     "values": [
       {
-        "name": "CHN",
-        "value": 5288166.032
+        "code": "CHN",
+        "name": "China",
+        "value": 5288166.032,
+        "percent_world": 0.185
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5563799.754
+        "value": 5563799.754,
+        "percent_world": 0.195
       },
       {
-        "name": "EUU",
-        "value": 4050725.881
+        "code": "EUU",
+        "name": "EU",
+        "value": 4050725.881,
+        "percent_world": 0.142
       },
       {
-        "name": "IND",
-        "value": 1346595.74
+        "code": "IND",
+        "name": "India",
+        "value": 1346595.74,
+        "percent_world": 0.047
       },
       {
-        "name": "RUS",
-        "value": 1602963.044
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1602963.044,
+        "percent_world": 0.056
       },
       {
-        "name": "JPN",
-        "value": 1259658.504
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1259658.504,
+        "percent_world": 0.044
       }
     ]
   },
@@ -1279,28 +1807,40 @@
     "year": 2005,
     "values": [
       {
-        "name": "CHN",
-        "value": 5790016.984
+        "code": "CHN",
+        "name": "China",
+        "value": 5790016.984,
+        "percent_world": 0.195
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5595357.956
+        "value": 5595357.956,
+        "percent_world": 0.189
       },
       {
-        "name": "EUU",
-        "value": 4023175.71
+        "code": "EUU",
+        "name": "EU",
+        "value": 4023175.71,
+        "percent_world": 0.136
       },
       {
-        "name": "IND",
-        "value": 1411127.606
+        "code": "IND",
+        "name": "India",
+        "value": 1411127.606,
+        "percent_world": 0.048
       },
       {
-        "name": "RUS",
-        "value": 1615683.867
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1615683.867,
+        "percent_world": 0.054
       },
       {
-        "name": "JPN",
-        "value": 1238188.219
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1238188.219,
+        "percent_world": 0.042
       }
     ]
   },
@@ -1308,28 +1848,40 @@
     "year": 2006,
     "values": [
       {
-        "name": "CHN",
-        "value": 6414463.08
+        "code": "CHN",
+        "name": "China",
+        "value": 6414463.08,
+        "percent_world": 0.209
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5514775.631
+        "value": 5514775.631,
+        "percent_world": 0.18
       },
       {
-        "name": "EUU",
-        "value": 4037117.644
+        "code": "EUU",
+        "name": "EU",
+        "value": 4037117.644,
+        "percent_world": 0.132
       },
       {
-        "name": "IND",
-        "value": 1504364.748
+        "code": "IND",
+        "name": "India",
+        "value": 1504364.748,
+        "percent_world": 0.049
       },
       {
-        "name": "RUS",
-        "value": 1669603.435
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1669603.435,
+        "percent_world": 0.055
       },
       {
-        "name": "JPN",
-        "value": 1231770.969
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1231770.969,
+        "percent_world": 0.04
       }
     ]
   },
@@ -1337,28 +1889,40 @@
     "year": 2007,
     "values": [
       {
-        "name": "CHN",
-        "value": 6791804.714
+        "code": "CHN",
+        "name": "China",
+        "value": 6791804.714,
+        "percent_world": 0.217
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5581537.033
+        "value": 5581537.033,
+        "percent_world": 0.178
       },
       {
-        "name": "EUU",
-        "value": 3980906.201
+        "code": "EUU",
+        "name": "EU",
+        "value": 3980906.201,
+        "percent_world": 0.127
       },
       {
-        "name": "IND",
-        "value": 1612383.567
+        "code": "IND",
+        "name": "India",
+        "value": 1612383.567,
+        "percent_world": 0.051
       },
       {
-        "name": "RUS",
-        "value": 1667575.584
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1667575.584,
+        "percent_world": 0.053
       },
       {
-        "name": "JPN",
-        "value": 1251187.734
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1251187.734,
+        "percent_world": 0.04
       }
     ]
   },
@@ -1366,28 +1930,40 @@
     "year": 2008,
     "values": [
       {
-        "name": "CHN",
-        "value": 7031916.207
+        "code": "CHN",
+        "name": "China",
+        "value": 7031916.207,
+        "percent_world": 0.219
       },
       {
+        "code": "USA",
         "name": "USA",
-        "value": 5461013.744
+        "value": 5461013.744,
+        "percent_world": 0.17
       },
       {
-        "name": "EUU",
-        "value": 3906818.133
+        "code": "EUU",
+        "name": "EU",
+        "value": 3906818.133,
+        "percent_world": 0.122
       },
       {
-        "name": "IND",
-        "value": 1742697.746
+        "code": "IND",
+        "name": "India",
+        "value": 1742697.746,
+        "percent_world": 0.054
       },
       {
-        "name": "RUS",
-        "value": 1708653.318
+        "code": "RUS",
+        "name": "Russia",
+        "value": 1708653.318,
+        "percent_world": 0.053
       },
       {
-        "name": "JPN",
-        "value": 1208162.823
+        "code": "JPN",
+        "name": "Japan",
+        "value": 1208162.823,
+        "percent_world": 0.038
       }
     ]
   }

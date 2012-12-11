@@ -16,7 +16,7 @@ header {
   height: 90px;
   box-shadow: 0px -10px 50px #0E0C08;
   z-index: 100000;
-  background-color: white;
+  background: url("../img/subtle_dots.png") white repeat;
   text-align: center;
 }
 
@@ -46,6 +46,11 @@ h1 {
   background-color:rgba(255,255,255,0.5);
 }
 
+.preview {
+  position: relative;
+  float: left;
+}
+
 .title {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
@@ -58,9 +63,10 @@ h1 {
   /* stroke-width: 2; */
 }
 
-.preview {
+.mouse_preview {
   pointer-events: all;
   cursor: pointer;
+  fill: none;
 }
 
 #detail {
@@ -75,7 +81,7 @@ h1 {
   position: relative;
 }
 
-#detail_zoom {
+#detail_view {
   width: 800px;
 }
 
@@ -96,7 +102,7 @@ h1 {
 
 footer {
   background-color: white;
-  padding-top: 15px;
+  padding-top: 5px;
   position: fixed;
   text-align: center;
   width: 100%;
@@ -113,3 +119,49 @@ footer p {
   margin:0;
   padding:0;
 }
+
+#vis-tooltip {
+    position: absolute;
+    /* top: 100px; */
+    /* left: 100px; */
+    -moz-border-radius:3px;
+    border-radius: 3px;
+    border: 2px solid #DDD;
+    background: #fff;
+    opacity: 1;
+    color: #000;
+    padding: 10px;
+    width: 230px;
+    font-size: 15px;
+    z-index: 20000;
+}
+ 
+#vis-tooltip p.main {
+  font-size: 15px;
+  text-align: left;
+  padding:0;
+  margin:0;
+}
+ 
+hr.tooltip-hr {
+  padding:3px 0 0 0;
+  margin:3px 0 3px 0;
+}
+  
+#vis-tooltip .title {
+    font-size: 20px;
+    line-height: 24px;
+}
+  
+#vis-tooltip .name {
+  font-weight:bold;
+}
+ 
+.tooltip {
+  width: 240px;
+}
+ 
+.tooltip-inner {
+  text-align: left;
+}
+
