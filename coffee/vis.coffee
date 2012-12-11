@@ -23,6 +23,10 @@ formatNumber = (number) ->
 # encapsulating the visualization code
 # ---
 SmallMults = () ->
+  # ---
+  # Variables availible to all of SmallMults
+  # ---
+  
   # size of the svg's that hold the small multiples 
   width = 200
   height = 160
@@ -63,7 +67,6 @@ SmallMults = () ->
   # ---
   chart = (selection) ->
     selection.each (rawData) ->
-
       # store our data and set the scale domains
       data = rawData
       setScales()
@@ -158,7 +161,6 @@ SmallMults = () ->
       .attr("x", (d,i) -> xScale(d.name) + xScale.rangeBand() / 2)
       .attr("font-size", 8)
 
-
   # ---
   # Shows the detail view for a given element
   # This works by appending a copy of the graph
@@ -218,8 +220,7 @@ SmallMults = () ->
       .attr('transform', "translate(#{40},#{0}) scale(#{scaleFactor})")
 
   # ---
-  # This function shrinks the detail view back from whence 
-  # it came
+  # This function shrinks the detail view back from whence it came
   # ---
   hideDetail = (d,i) ->
     # hide the tooltip if present
@@ -265,6 +266,8 @@ SmallMults = () ->
 
   # ---
   # Updates domains for scales used in bar charts
+  # expects 'data' to be accessible and set to our
+  # data.
   # ---
   setScales = () ->
     yMax = d3.max(data, (d) -> d3.max(d.values, (e) -> e.value))
@@ -305,7 +308,6 @@ $ ->
   plot = SmallMults()
   display = (data) ->
     plotData("#vis", data, plot)
-
 
   d3.json("data/co2_kt_data.json", display)
 
