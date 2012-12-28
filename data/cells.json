@@ -1,0 +1,291 @@
+{
+  "nodes": [
+    {
+      "id": "a",
+      "layer":1
+    },
+    {
+      "id": "b",
+      "layer":1
+    },
+    {
+      "id": "c",
+      "layer":1
+    },
+    {
+      "id": "d",
+      "layer":1
+    },
+    {
+      "id": "e",
+      "layer":1
+    },
+    {
+      "id": "f",
+      "layer":1
+    },
+    {
+      "id": "g",
+      "layer":1
+    },
+    {
+      "id": "h",
+      "layer":1
+    },
+    {
+      "id": "i",
+      "layer":1
+    },
+    {
+      "id": "j",
+      "layer":1
+    },
+    {
+      "id": "k",
+      "layer":1
+    },
+    {
+      "id": "l",
+      "layer":1
+    },
+    {
+      "id": "m",
+      "layer":1
+    },
+    {
+      "id": "n",
+      "layer":1
+    },
+    {
+      "id": "o",
+      "layer":1
+    },
+    {
+      "id": "p",
+      "layer":1
+    },
+    {
+      "id": "q",
+      "layer":1
+    },
+    {
+      "id": "r",
+      "layer":1
+    },
+    {
+      "id": "s",
+      "layer":1
+    },
+    {
+      "id": "t",
+      "layer":1
+    },
+    {
+      "id": "u",
+      "layer":1
+    },
+    {
+      "id": "v",
+      "layer":1
+    },
+    {
+      "id": "2a",
+      "layer":2
+    },
+    {
+      "id": "2b",
+      "layer":2
+    },
+    {
+      "id": "2c",
+      "layer":2
+    },
+    {
+      "id": "2d",
+      "layer":2
+    },
+    {
+      "id": "2e",
+      "layer":2
+    },
+    {
+      "id": "2f",
+      "layer":2
+    },
+    {
+      "id": "2g",
+      "layer":2
+    },
+    {
+      "id": "2h",
+      "layer":2
+    },
+    {
+      "id": "2i",
+      "layer":2
+    },
+    {
+      "id": "2j",
+      "layer":2
+    },
+    {
+      "id": "2k",
+      "layer":2
+    },
+    {
+      "id": "2l",
+      "layer":2
+    },
+    {
+      "id": "2m",
+      "layer":2
+    },
+    {
+      "id": "2n",
+      "layer":2
+    },
+    {
+      "id": "2o",
+      "layer":2
+    },
+    {
+      "id": "2p",
+      "layer":2
+    },
+    {
+      "id": "2q",
+      "layer":2
+    },
+    {
+      "id": "2r",
+      "layer":2
+    },
+    {
+      "id": "2s",
+      "layer":2
+    },
+    {
+      "id": "2t",
+      "layer":2
+    },
+    {
+      "id": "2u",
+      "layer":2
+    },
+    {
+      "id": "2v",
+      "layer":2
+    }
+  ],
+  "links": [
+    {
+      "source": "a",
+      "target": "u"
+    },
+    {
+      "source": "b",
+      "target": "t"
+    },
+    {
+      "source": "t",
+      "target": "e"
+    },
+    {
+      "source": "n",
+      "target": "b"
+    },
+    {
+      "source": "q",
+      "target": "e"
+    },
+    {
+      "source": "i",
+      "target": "r"
+    },
+    {
+      "source": "s",
+      "target": "k"
+    },
+
+    {
+      "source": "2s",
+      "target": "2k"
+    },
+    {
+      "source": "2r",
+      "target": "2k"
+    },
+    {
+      "source": "2g",
+      "target": "2k"
+    },
+    {
+      "source": "2g",
+      "target": "2a"
+    },
+    {
+      "source": "2p",
+      "target": "2a"
+    },
+    {
+      "source": "2b",
+      "target": "2a"
+    },
+    {
+      "source": "2u",
+      "target": "2f"
+    },
+    {
+      "source": "2p",
+      "target": "2f"
+    },
+    {
+      "source": "2r",
+      "target": "2f"
+    },
+    {
+      "source": "2i",
+      "target": "2f"
+    },
+    {
+      "source": "2v",
+      "target": "2f"
+    },
+    {
+      "source": "2s",
+      "target": "2f"
+    },
+    {
+      "source": "2b",
+      "target": "2p"
+    },
+    {
+      "source": "2f",
+      "target": "2p"
+    },
+    {
+      "source": "2a",
+      "target": "2p"
+    },
+    {
+      "source": "2u",
+      "target": "2d"
+    },
+    {
+      "source": "2f",
+      "target": "2d"
+    },
+    {
+      "source": "2g",
+      "target": "2d"
+    },
+    {
+      "source": "2h",
+      "target": "2d"
+    },
+    {
+      "source": "2a",
+      "target": "2d"
+    }
+  ]
+}
