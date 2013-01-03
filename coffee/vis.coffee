@@ -8,18 +8,18 @@ RadialPlacement = () ->
   # how much to separate each location by
   increment = 20
   # how large to make the layout
-  radius = 200
+  radius = 10
   # where the center of the layout should be
   center = {"x":0, "y":0}
   # what angle to start at
-  start = -120
+  start = -117
   current = start
 
   # Given an center point, angle, and radius length,
   # return a radial position for that angle
   radialLocation = (center, angle, radius) ->
-    x = (center.x + radius * Math.cos(angle * Math.PI / 180))
-    y = (center.y + radius * Math.sin(angle * Math.PI / 180))
+    x = (center.x + (2 * radius) * Math.cos(angle * Math.PI / 180))
+    y = (center.y + radius * (1/2)*Math.sin(angle * Math.PI / 180))
     {"x":x,"y":y}
 
   # Main entry point for RadialPlacement
@@ -64,7 +64,7 @@ RadialPlacement = () ->
 
     # setup outer circle
     radius = radius + radius / 1.8
-    increment = 360 / secondCircleKeys.length
+    # increment = 360 / secondCircleKeys.length
 
     secondCircleKeys.forEach (k) -> place(k)
 
@@ -117,12 +117,55 @@ Plot = () ->
   xValue = (d) -> parseFloat(d.x)
   yValue = (d) -> parseFloat(d.y)
 
- 
-  arc = (source, target) ->
+
+  # ok, perhaps we now actually have to stupid code to get
+  # lines to come from the radius of the circle, instead of
+  # the center. 
+  # http://stackoverflow.com/questions/7586063/how-to-calculate-the-angle-between-two-points-relative-to-the-horizontal-axis
+  # I really wish I had paid more attention in high school geometry
+  # TODO: fix up awful code
+  #
+  arc = (source, target, type) ->
     dx = target.x - source.x
     dy = target.y - source.y
     dr = Math.sqrt(dx * dx + dy * dy)
-    "M" + source.x + "," + source.y + "A" + dr + "," + dr + " 0 0,1 " + target.x + "," + target.y
+
+    r = 6.5
+    in_gap = if type == "triangle" then 0.5 else 2
+    out_gap = if type == "triangle" then 3 else 5
+
+    s_angle = Math.atan2(dy, dx)
+    s_x = Math.cos(s_angle) * (r + in_gap) + source.x
+    s_y = Math.sin(s_angle) * (r + in_gap) + source.y
+
+    tx = source.x - target.x
+    ty = source.y - target.y
+    t_angle = Math.atan2(ty, tx)
+
+    t_x = Math.cos(t_angle) * (r + out_gap) + target.x
+    t_y = Math.sin(t_angle) * (r + out_gap) + target.y
+  
+
+    "M" + (s_x ) + "," + (s_y ) + "A" + dr + "," + dr + " 0 0,1 " + (t_x ) + "," + (t_y)
+
+
+  # here we want a path that loop backs on to the same node
+  loopback = (source) ->
+    r = 6.5
+    in_gap = 2
+    out_gap = 6
+    angle_1 = (5 * Math.PI) / 6
+    angle_2 = (7 * Math.PI) / 6
+    # angle_2 = (11 * Math.PI) / 6
+    # angle_1 = Math.PI / 4
+    s_x = Math.cos(angle_1) * (r + in_gap) + source.x
+    s_y = Math.sin(angle_1) * (r + in_gap) + source.y
+
+    t_x = Math.cos(angle_2) * (r + out_gap) + source.x
+    t_y = Math.sin(angle_2) * (r + out_gap) + source.y
+
+    "M" + (s_x) + "," + (s_y) + "A 14 5 10 1,1" + (t_x) + "," + (t_y)
+
 
   chart = (selection) ->
     selection.each (rawData) ->
@@ -136,10 +179,34 @@ Plot = () ->
       svg.append("defs").append("marker")
         .attr("id", "arrow")
         .attr("viewBox", "0 -5 10 10")
-        .attr("refX", 15)
-        .attr("refY", -1.5)
+        # .attr("refX", 14.5)
+        .attr("refY", 0)
         .attr("markerWidth", 6)
         .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .attr("fill", lineColor)
+        .append("path").attr("d", "M0,-5L10,0L0,5")
+
+      svg.append("defs").append("marker")
+        .attr("id", "circle")
+        .attr("viewBox", "-5 -5 10 10")
+        # .attr("refX", 11)
+        .attr("refY", 0)
+        .attr("markerWidth", 6)
+        .attr("markerHeight", 6)
+        .attr("orient", "auto")
+        .attr("fill", "white")
+        .attr("stroke", lineColor)
+        .attr("stroke-width", 1.5)
+        .append("circle").attr("r", 4)
+
+      svg.append("defs").append("marker")
+        .attr("id", "small_arrow")
+        .attr("viewBox", "0 -5 10 10")
+        # .attr("refX", 14.5)
+        .attr("refY", 0)
+        .attr("markerWidth", 4)
+        .attr("markerHeight", 4)
         .attr("orient", "auto")
         .attr("fill", lineColor)
         .append("path").attr("d", "M0,-5L10,0L0,5")
@@ -158,8 +225,8 @@ Plot = () ->
 
   update = () ->
     [1,2].forEach (layer_index) ->
-      placement = RadialPlacement().center({"x":width/2, "y":height / 4 + ( (height / 4 + 100) * (layer_index - 1))})
-        .radius(150).increment(15)
+      placement = RadialPlacement().center({"x":width/2, "y":height / 4 + ( (height / 8 + 100) * (layer_index - 1))})
+        .radius(100).increment(25)
       layer = cells.append("g").attr("id", "layer_#{layer_index}")
       layer_nodes = data.nodes.filter (d) -> d.layer == layer_index
       ids = layer_nodes.map (d) -> d.id
@@ -167,14 +234,26 @@ Plot = () ->
       layer_nodes.forEach (d) ->
         d.location = placement(d.id)
 
-      layer.selectAll(".cell")
-        .data(layer_nodes).enter()
-        .append("circle")
-        .attr("class", "cell")
-        .attr("cx", (d) -> d.location.x)
-        .attr("cy", (d) -> d.location.y)
-        .attr("r", radius)
-        .attr("fill", (d) -> colorScale(d.layer))
+      if layer_index == 1
+        layer.selectAll(".cell")
+          .data(layer_nodes).enter()
+          .append("circle")
+          .attr("class", "cell")
+          .attr("cx", (d) -> d.location.x)
+          .attr("cy", (d) -> d.location.y)
+          .attr("r", radius)
+          .attr("fill", (d) -> colorScale(d.layer))
+          .on("mouseover", (d) -> console.log(d.id))
+      else
+        layer.selectAll(".cell")
+          .data(layer_nodes).enter()
+          .append("path")
+          .attr("class", "cell")
+          .attr("transform", (d) -> "translate(#{d.location.x},#{d.location.y})")
+          # .attr("d", "M-7,-5l14,0l-7,14Z")
+          .attr("d", "M0,-5l7,14l-14,0Z")
+          .attr("fill", (d) -> colorScale(d.layer))
+          .on("mouseover", (d) -> console.log(d.id))
     update_links()
 
   # Helper function to map node id's to node objects.
@@ -212,15 +291,36 @@ Plot = () ->
       .attr("class", "edge")
       .attr "d", (d) ->
         if d.type == "cross"
+          d.points[1].y = d.points[1].y - 15
           line(d.points)
         else
-          arc(d.points[0], d.points[1])
+          type = if d.target.layer == 2 then "triangle" else "circle"
+          arc(d.points[0], d.points[1], type)
       # .attr("d", (d) -> line(d.points))
       # .attr("d", (d) -> arc(d.points[0], d.points[1]))
       .attr("fill", "none")
       .attr("stroke", lineColor)
       .attr("stroke-width", 1.5)
-      .attr("marker-end", "url(#arrow)")
+      .attr "marker-end", (d) ->
+        if d.type == "cross"
+          "url(#arrow)"
+        else
+          "url(#circle)"
+
+    loopbacks = []
+    d3.select("#layer_1").selectAll(".cell").each (d) ->
+      console.log(d)
+      loopbacks.push(d)
+    
+    edges.selectAll(".loopback").data(loopbacks).enter()
+      .append("path")
+      .attr("class", "loopback")
+      .attr("d", (d) -> loopback(d.location))
+      .attr("fill", "none")
+      .attr("stroke", lineColor)
+      .attr("stroke-width", 1.5)
+      .attr("marker-end", "url(#small_arrow)")
+     
 
 
 
@@ -263,6 +363,18 @@ root.plotData = (selector, data, plot) ->
     .datum(data)
     .call(plot)
 
+  html = d3.select("svg")
+    .attr("title", "test2")
+    .attr("version", 1.1)
+    .attr("xmlns", "http://www.w3.org/2000/svg")
+    .node().parentNode.innerHTML
+
+  d3.select("body").append("div")
+    .attr("id", "download")
+    .html("Right-click on this preview and choose Save as<br />Left-Click to dismiss<br />")
+    .append("img")
+    .attr("src", "data:image/svg+xml;base64,"+ btoa(html))
+
 
 $ ->
 
@@ -272,4 +384,5 @@ $ ->
 
 
   d3.json("data/cells.json", display)
+
 
