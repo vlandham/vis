@@ -81,7 +81,7 @@ root.plotData = (selector, data, plot) ->
 $ ->
 
   plot = Plot()
-  display = (data) ->
+  display = (error, data) ->
     plotData("#vis", data, plot)
 
 

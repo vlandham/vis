@@ -71,7 +71,7 @@ h3. Twitter Bootstrap
 
 h3. d3.js
 
-* 2.10.3
+* 3.0.2
 
 h3. Raphael
 
@@ -79,7 +79,7 @@ h3. Raphael
 
 h3. coffee-script.js
 
-* 1.4
+* 1.4.0
 
 h3. jQuery
 
