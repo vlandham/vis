@@ -1,89 +1,47 @@
 
 root = exports ? this
 
-Plot = () ->
-  width = 600
-  height = 600
-  data = []
-  points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
-  xScale = d3.scale.linear().domain([0,10]).range([0,width])
-  yScale = d3.scale.linear().domain([0,10]).range([0,height])
-  xValue = (d) -> parseFloat(d.x)
-  yValue = (d) -> parseFloat(d.y)
+width = 900
+height = 900
 
-  chart = (selection) ->
-    selection.each (rawData) ->
+projection = d3.geo.albers()
+  .center([0, 39.3])
+  .rotate([94.58, 0])
+  .scale(80000)
+  .translate([width / 2, 0])
 
-      data = rawData
+path = d3.geo.path().projection(projection)
 
-      svg = d3.select(this).selectAll("svg").data([data])
-      gEnter = svg.enter().append("svg").append("g")
-      
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
-
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
-
-      points = g.append("g").attr("id", "vis_points")
-      update()
-
-  update = () ->
-    points.selectAll(".point")
-      .data(data).enter()
-      .append("circle")
-      .attr("cx", (d) -> xScale(xValue(d)))
-      .attr("cy", (d) -> yScale(yValue(d)))
-      .attr("r", 4)
-      .attr("fill", "steelblue")
-
-  chart.height = (_) ->
-    if !arguments.length
-      return height
-    height = _
-    chart
-
-  chart.width = (_) ->
-    if !arguments.length
-      return width
-    width = _
-    chart
-
-  chart.margin = (_) ->
-    if !arguments.length
-      return margin
-    margin = _
-    chart
-
-  chart.x = (_) ->
-    if !arguments.length
-      return xValue
-    xValue = _
-    chart
-
-  chart.y = (_) ->
-    if !arguments.length
-      return yValue
-    yValue = _
-    chart
-
-  return chart
-
-root.Plot = Plot
-
-root.plotData = (selector, data, plot) ->
-  d3.select(selector)
-    .datum(data)
-    .call(plot)
-
+svg = d3.select("#vis").append("svg")
+  .attr("width", width)
+  .attr("height", height)
 
 $ ->
+  
+  display_map = (geojson) ->
+    tracts = svg.append("g")
+      .attr("class", "tracts")
 
-  plot = Plot()
-  display = (error, data) ->
-    plotData("#vis", data, plot)
+    tracts.selectAll("path").data(geojson.features).enter()
+      .append("path")
+      .attr("d", path)
+      .attr("stroke", "#eee")
+      .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#B5D9B9" else "#85C3C0")
 
+  display_data = (data) ->
+    svg.selectAll("point").data(data).enter()
+      .append("circle")
+      .attr("cx", (d) -> projection([d.lat,d.lon])[0])
+      .attr("cy", (d) -> projection([d.lat,d.lon])[1])
+      .attr("r", 2)
 
-  d3.csv("data/test.csv", display)
+  display = (error, kc, data) ->
+    console.log(error)
+    display_map(kc)
+    display_data(data)
+  
+  queue()
+    .defer(d3.json, "data/kc.json")
+    .defer(d3.csv, "data/fastfood.csv")
+    .await(display)
 
