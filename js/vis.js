@@ -1,20 +1,16 @@
 var m = [80, 60, 160, 60],
-    w = 1280 - m[1] - m[3],
-    h = 800 - m[0] - m[2];
+    w = 880 - m[1] - m[3],
+    h = 700 - m[0] - m[2];
 
 var x = d3.time.scale().range([0, w - 60]),
     y = d3.scale.linear().range([h / 4 - 20, 0]),
     delay = 500,
     duration,
+    svg,
     rate;
 
 var color = d3.scale.category10();
 
-var svg = d3.select("#body").append("svg:svg")
-    .attr("width", w + m[1] + m[3])
-    .attr("height", h + m[0] + m[2])
-  .append("svg:g")
-    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
 
 var stocks,
     symbols;
@@ -38,46 +34,10 @@ var area = d3.svg.area()
     .y0(h / 4 - 20)
     .y1(function(d) { return y(d.price); });
 
-d3.csv("data/stocks.csv", function(error, data) {
-  console.log(data);
-  var parse = d3.time.format("%b %Y").parse,
-      filter = {AAPL: 1, AMZN: 1, MSFT: 1, IBM: 1};
-
-  stocks = data.filter(function(d) { return d.symbol in filter; });
-
-  // Nest stock values by symbol.
-  symbols = d3.nest()
-      .key(function(d) { return d.symbol; })
-      .entries(stocks);
-
-  // Parse dates and numbers. We assume values are sorted by date.
-  // Also compute the maximum price per symbol, needed for the y-domain.
-  symbols.forEach(function(s) {
-    s.values.forEach(function(d) { d.date = parse(d.date); d.price = +d.price; });
-    s.maxPrice = d3.max(s.values, function(d) { return d.price; });
-    s.sumPrice = d3.sum(s.values, function(d) { return d.price; });
-  });
-
-  // Sort by maximum price, descending.
-  symbols.sort(function(a, b) { return b.maxPrice - a.maxPrice; });
-
-  // Compute the minimum and maximum date across symbols.
-  x.domain([
-    d3.min(symbols, function(d) { return d.values[0].date; }),
-    d3.max(symbols, function(d) { return d.values[d.values.length - 1].date; })
-  ]);
-
-  var g = svg.selectAll("g")
-      .data(symbols)
-    .enter().append("svg:g")
-      .attr("class", "symbol");
-
-  d3.select("#body").on("click", start);
-});
 
 function start() {
   d3.select("#body").on("click", null);
-  duration = d3.event.altKey ? 7500 : 750;
+  duration = 750;
   rate = duration / 100;
   lines();
 }
@@ -89,6 +49,7 @@ function stop() {
 }
 
 function lines() {
+  console.log('lines');
   x = d3.time.scale().range([0, w - 60]);
   y = d3.scale.linear().range([h / 4 - 20, 0]);
 
@@ -242,6 +203,8 @@ function areas() {
       .each("end", function() { d3.select(this).attr("clip-path", null); });
 
   setTimeout(stackedArea, duration + delay);
+  // setTimeout(horizons, duration + delay);
+  // 
 }
 
 function stackedArea() {
@@ -280,7 +243,9 @@ function stackedArea() {
   t.select("text")
       .attr("transform", function(d) { d = d.values[d.values.length - 1]; return "translate(" + (w - 60) + "," + y(d.price / 2 + d.price0) + ")"; });
 
-  setTimeout(streamgraph, duration + delay);
+  // setTimeout(streamgraph, duration + delay);
+  // setTimeout(areas, duration + delay);
+  // setTimeout(transposeBar, duration + delay);
 }
 
 function streamgraph() {
@@ -577,3 +542,51 @@ function donutExplode() {
 
   setTimeout(stop, duration);
 }
+
+$(document).ready(function() {
+
+svg = d3.select("#vis").append("svg")
+    .attr("width", w + m[1] + m[3])
+    .attr("height", h + m[0] + m[2])
+  .append("svg:g")
+    .attr("transform", "translate(" + m[3] + "," + m[0] + ")");
+
+d3.csv("data/stocks.csv", function(error, data) {
+  console.log(data);
+  var parse = d3.time.format("%b %Y").parse,
+      filter = {AAPL: 1, AMZN: 1, MSFT: 1, IBM: 1};
+
+  stocks = data.filter(function(d) { return d.symbol in filter; });
+
+  // Nest stock values by symbol.
+  symbols = d3.nest()
+      .key(function(d) { return d.symbol; })
+      .entries(stocks);
+
+  // Parse dates and numbers. We assume values are sorted by date.
+  // Also compute the maximum price per symbol, needed for the y-domain.
+  symbols.forEach(function(s) {
+    s.values.forEach(function(d) { d.date = parse(d.date); d.price = +d.price; });
+    s.maxPrice = d3.max(s.values, function(d) { return d.price; });
+    s.sumPrice = d3.sum(s.values, function(d) { return d.price; });
+  });
+
+  // Sort by maximum price, descending.
+  symbols.sort(function(a, b) { return b.maxPrice - a.maxPrice; });
+
+  // Compute the minimum and maximum date across symbols.
+  x.domain([
+    d3.min(symbols, function(d) { return d.values[0].date; }),
+    d3.max(symbols, function(d) { return d.values[d.values.length - 1].date; })
+  ]);
+
+  var g = svg.selectAll("g")
+      .data(symbols)
+    .enter().append("g")
+      .attr("class", "symbol");
+
+  // d3.select("#body").on("click", start);
+  start();
+});
+
+});
