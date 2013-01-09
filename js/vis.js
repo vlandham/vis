@@ -214,7 +214,7 @@ function stackedArea() {
       .y(function(d) { return d.price; })
       .out(function(d, y0, y) { d.price0 = y0; })
       .order("reverse");
-
+  console.log(symbols);
   stack(symbols);
 
   y

@@ -1,89 +1,13 @@
 
-root = exports ? this
-
-Plot = () ->
-  width = 600
-  height = 600
-  data = []
-  points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
-  xScale = d3.scale.linear().domain([0,10]).range([0,width])
-  yScale = d3.scale.linear().domain([0,10]).range([0,height])
-  xValue = (d) -> parseFloat(d.x)
-  yValue = (d) -> parseFloat(d.y)
-
-  chart = (selection) ->
-    selection.each (rawData) ->
-
-      data = rawData
-
-      svg = d3.select(this).selectAll("svg").data([data])
-      gEnter = svg.enter().append("svg").append("g")
-      
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
-
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
-
-      points = g.append("g").attr("id", "vis_points")
-      update()
-
-  update = () ->
-    points.selectAll(".point")
-      .data(data).enter()
-      .append("circle")
-      .attr("cx", (d) -> xScale(xValue(d)))
-      .attr("cy", (d) -> yScale(yValue(d)))
-      .attr("r", 4)
-      .attr("fill", "steelblue")
-
-  chart.height = (_) ->
-    if !arguments.length
-      return height
-    height = _
-    chart
-
-  chart.width = (_) ->
-    if !arguments.length
-      return width
-    width = _
-    chart
-
-  chart.margin = (_) ->
-    if !arguments.length
-      return margin
-    margin = _
-    chart
-
-  chart.x = (_) ->
-    if !arguments.length
-      return xValue
-    xValue = _
-    chart
-
-  chart.y = (_) ->
-    if !arguments.length
-      return yValue
-    yValue = _
-    chart
-
-  return chart
-
-root.Plot = Plot
-
-root.plotData = (selector, data, plot) ->
-  d3.select(selector)
-    .datum(data)
-    .call(plot)
-
 width = 880
 height = 700
+duration = 750
+
 x = d3.time.scale()
   .range([0, width - 60])
 
 y = d3.scale.linear()
-  .range([height / 4 - 20, 0])
+  .range([height, 0])
 
 axis = d3.svg.line()
   .interpolate("basis")
@@ -120,18 +44,18 @@ svg = d3.select("#vis").append("svg")
 start = () ->
   g = svg.selectAll(".symbol")
 
-  g.each (d) ->
-    y.domain([0, d.maxPrice])
-
   stacks()
 
-areas = () ->
-  g = svg.selectAll(".symbol")
-  axis.y(height / 4 - 21)
-
-  g.select(".line")
+transitionTo = (name) ->
+  if name == "steam"
+    steamgraph()
+  if name == "stack"
+    stacks()
+  if name == "area"
+    overlapAreas()
 
 stacks = () ->
+  stack.offset("zero")
   stack(symbols)
 
   y.domain([0, d3.max(symbols[0].values.map((d) -> d.price + d.price0))])
@@ -142,8 +66,71 @@ stacks = () ->
   area.y0((d) -> y(d.price0))
     .y1((d) -> y(d.price0 + d.price))
 
-  svg.selectAll("path.area")
+  t = svg.selectAll(".symbol")
+    .transition()
+    .duration(duration)
+
+  t.select("path.area")
+    .style("fill-opacity", 1.0)
     .attr("d", (d) -> area(d.values))
+
+  t.select("path.line")
+    .style("stroke-opacity", 1e-6)
+    .attr("d", (d) -> line(d.values))
+
+
+steamgraph = () ->
+  stack.offset("wiggle")
+
+  stack(symbols)
+
+  y.domain([0, d3.max(symbols[0].values.map((d) -> d.price + d.price0))])
+    .range([height, 0])
+
+  line.y((d) -> y(d.price0))
+
+  area.y0((d) -> y(d.price0))
+    .y1((d) -> y(d.price0 + d.price))
+
+  t = svg.selectAll(".symbol")
+    .transition()
+    .duration(duration)
+  
+  t.select("path.area")
+    .style("fill-opacity", 1.0)
+    .attr("d", (d) -> area(d.values))
+
+  t.select("path.line")
+      .style("stroke-opacity", 1e-6)
+      .attr("d", (d) -> line(d.values))
+
+overlapAreas = () ->
+  g = svg.selectAll(".symbol")
+
+  line.y((d) -> y(d.price0 + d.price))
+
+  g.select("path.line")
+      .attr("d", (d) -> line(d.values))
+      .style("stroke-opacity", 1e-6)
+
+  y.domain([0, d3.max(symbols.map((d) -> d.maxPrice))])
+    .range([height, 0])
+
+  area.y0(height)
+    .y1((d) -> y(d.price))
+
+  line.y((d) -> y(d.price))
+
+  t = g.transition()
+    .duration(duration)
+
+  t.select("path.area")
+    .style("fill-opacity", 0.5)
+    .attr("d", (d) -> area(d.values))
+
+  t.select("path.line")
+    .style("stroke-opacity", 1)
+    .attr("d", (d) -> line(d.values))
 
 $ ->
 
@@ -167,19 +154,31 @@ $ ->
     min_date = d3.min(symbols, (d) -> d.values[0].date)
     max_date = d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
 
+    x.domain([
+      d3.min(symbols, (d) -> d.values[0].date),
+      d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
+    ])
+
     g = svg.selectAll("g")
       .data(symbols)
       .enter()
+
     sym = g.append("g")
       .attr("class", "symbol")
 
     sym.append("path")
       .attr("class", "area")
+      .style("fill", (d) -> color(d.key))
 
     sym.append("path")
       .attr("class", "line")
+      .style("stroke-opacity", 1e-6)
 
     start()
 
+  d3.selectAll(".switch").on "click", (d) ->
+    d3.event.preventDefault()
+    id = d3.select(this).attr("id")
+    transitionTo(id)
   d3.csv("data/stocks.csv", display)
 
