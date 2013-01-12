@@ -7,15 +7,14 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>vis</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
+  <title>How to Transition between Multiple Charts - Demo</title>
+  <meta name="description" content="Demo for How to Transition between Multiple Charts tutorial">
+  <meta name="author" content="Jim Vallandingham">
 
   <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <!-- end CSS-->
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
@@ -24,33 +23,28 @@
 
   <div id="container" class="container">
     <header>
-
+    <h1>Title</h1>
+    <p>Subtitle</p>
     </header>
     <div id="main" role="main">
+      <div class="btn-group" data-toggle="buttons-radio">
+        <button type="button" id="area" class="btn active switch">Area</button>
+        <button type="button" id="stack" class="btn switch">Stacked Area</button>
+        <button type="button" id="steam" class="btn switch">Steamgraph</button>
+      </div>
       <div id="vis"></div>
-      <a href="#" id="stack" class="switch">Stack</a> |
-      <a href="#" id="steam" class="switch">Steam</a> |
-      <a href="#" id="area" class="switch">Area</a> |
     </div>
     <footer>
-
+      <p>Data from <a href="">LOCATION</a>.</p>
     </footer>
   </div> <!--! end of #container -->
 
-
-  <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> -->
-  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
-
-
+  <script src="js/libs/jquery-1.7.2.min.js"></script>
   <script defer src="js/plugins.js"></script>
-  <script defer src="js/script.js"></script>
   <script src="js/libs/coffee-script.js"></script>
-  <script src="js/libs/d3.js"></script>
-  <!-- <script src="js/vis.js"></script> -->
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/libs/d3.v3.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
-  <script type="text/javascript">
-  </script>
-
 
   <script> // Change UA-XXXXX-X to be your site's ID
     window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];

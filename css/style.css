@@ -1,24 +1,24 @@
-rect {
-  fill: none;
-  pointer-events: all;
+body {
+  font-family: "Helvetica Neue";
 }
 
-line {
-  stroke: #000;
-  stroke-width: 1.5px;
+#main {
+  padding-bottom: 20px;
 }
 
 svg {
-  border: solid 1px #000;
   display: block;
   margin: auto;
-  font-family: "Helvetica Neue";
 }
 
 .line {
   fill: none;
   stroke: #000;
   stroke-width: 2px;
+}
+
+footer p {
+  text-align: center;
 }
 
 
