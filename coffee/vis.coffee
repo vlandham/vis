@@ -70,10 +70,10 @@ transitionTo = (name) ->
 # elements that will hold our chart elements.
 # ---
 start = () ->
-  x.domain([
-    d3.min(symbols, (d) -> d.values[0].date),
-    d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
-  ])
+
+  min_date = d3.min(symbols, (d) -> d.values[0].date)
+  max_date = d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
+  x.domain([min_date,max_date])
 
   g = svg.selectAll("g")
     .data(symbols)
@@ -208,8 +208,8 @@ display = (error, data) ->
     s.sumPrice = d3.sum(s.values, (d) -> d.price)
 
   symbols.sort((a,b) -> b.maxPrice - a.maxPrice)
-  min_date = d3.min(symbols, (d) -> d.values[0].date)
-  max_date = d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
+
+  console.log(symbols)
 
   start()
 
