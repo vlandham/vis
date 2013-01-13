@@ -31,10 +31,7 @@ svg {
 
 .x.axis line {
   stroke: #ddd;
-}
-
-.x.axis .minor {
-  stroke-opacity: .5;
+  stroke-opacity: 0.6;
 }
 
 .x.axis path {
@@ -49,7 +46,7 @@ footer p {
   position: fixed;
   top: 100px;
   right: 0px;
-  width: 300px;
+  width: 200px;
   height: 280px;
   z-index: 100000;
   overflow: visible;

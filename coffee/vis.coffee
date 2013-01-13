@@ -37,7 +37,7 @@ xAxis = d3.svg.axis()
   .tickSize(-height)
   .tickFormat(d3.time.format('%a %d'))
 
-symbols = null
+data = null
 
 # Create the blank SVG the visualization will live in.
 svg = d3.select("#vis").append("svg")
@@ -54,7 +54,7 @@ transitionTo = (name) ->
   if name == "stream"
     streamgraph()
   if name == "stack"
-    stacks()
+    stackedAreas()
   if name == "area"
     areas()
 
@@ -64,10 +64,11 @@ transitionTo = (name) ->
 # elements that will hold our chart elements.
 # ---
 start = () ->
-
-  min_date = d3.min(symbols, (d) -> d.values[0].date)
-  max_date = d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
-  x.domain([min_date,max_date])
+  # First, lets setup our x scale domain.
+  # This assumes that the dates in our data are in order.
+  minDate = d3.min(data, (d) -> d.values[0].date)
+  maxDate = d3.max(data, (d) -> d.values[d.values.length - 1].date)
+  x.domain([minDate, maxDate])
 
   # D3's axis functionality usually works great.
   # However, I was having some aesthetic issues
@@ -75,7 +76,7 @@ start = () ->
   # Here I extract out every other day - and 
   # manually specify these values as the tick 
   # values
-  dates = symbols[0].values.map((v) -> v.date)
+  dates = data[0].values.map((v) -> v.date)
   index = 0
   dates = dates.filter (d) ->
     index += 1
@@ -89,7 +90,7 @@ start = () ->
     .call(xAxis)
   
   g = svg.selectAll(".symbol")
-    .data(symbols)
+    .data(data)
     .enter()
 
   sym = g.append("g")
@@ -120,9 +121,9 @@ start = () ->
 streamgraph = () ->
   stack.offset("wiggle")
 
-  stack(symbols)
+  stack(data)
 
-  y.domain([0, d3.max(symbols[0].values.map((d) -> d.count + d.count0))])
+  y.domain([0, d3.max(data[0].values.map((d) -> d.count + d.count0))])
     .range([height, 0])
 
   line.y((d) -> y(d.count0))
@@ -145,11 +146,11 @@ streamgraph = () ->
 # ---
 # Code to transition to Stacked Area chart.
 # ---
-stacks = () ->
+stackedAreas = () ->
   stack.offset("zero")
-  stack(symbols)
+  stack(data)
 
-  y.domain([0, d3.max(symbols[0].values.map((d) -> d.count + d.count0))])
+  y.domain([0, d3.max(data[0].values.map((d) -> d.count + d.count0))])
     .range([height, 0])
 
   line.y((d) -> y(d.count0))
@@ -171,7 +172,6 @@ stacks = () ->
 
 # ---
 # Code to transition to Area chart.
-#
 # ---
 areas = () ->
   g = svg.selectAll(".symbol")
@@ -182,7 +182,7 @@ areas = () ->
       .attr("d", (d) -> line(d.values))
       .style("stroke-opacity", 1e-6)
 
-  y.domain([0, d3.max(symbols.map((d) -> d.maxCount))])
+  y.domain([0, d3.max(data.map((d) -> d.maxCount))])
     .range([height, 0])
 
   area.y0(height)
@@ -202,7 +202,7 @@ areas = () ->
     .attr("d", (d) -> line(d.values))
 
 # ---
-#
+# Called on legend mouse over. Shows the legend
 # ---
 showLegend = (d,i) ->
   d3.select("#legend svg g.panel")
@@ -211,26 +211,27 @@ showLegend = (d,i) ->
     .attr("transform", "translate(0,0)")
 
 # ---
-#
+# Called on legend mouse out. Hides the legend
 # ---
 hideLegend = (d,i) ->
   d3.select("#legend svg g.panel")
     .transition()
     .duration(500)
-    .attr("transform", "translate(200,0)")
+    .attr("transform", "translate(165,0)")
 
 # ---
-#
+# Helper function that creates the 
+# legend sidebar.
 # ---
 createLegend = () ->
-  legendWidth = 240
+  legendWidth = 200
   legendHeight = 245
   legend = d3.select("#legend").append("svg")
     .attr("width", legendWidth)
     .attr("height", legendHeight)
 
   legendG = legend.append("g")
-    .attr("transform", "translate(200,0)")
+    .attr("transform", "translate(165,0)")
     .attr("class", "panel")
 
   legendG.append("rect")
@@ -245,7 +246,7 @@ createLegend = () ->
     .on("mouseout", hideLegend)
 
   keys = legendG.selectAll("g")
-    .data(symbols)
+    .data(data)
     .enter().append("g")
     .attr("transform", (d,i) -> "translate(#{5},#{10 + 40 * (i + 0)})")
 
@@ -269,23 +270,24 @@ createLegend = () ->
 # and then call start() to create the baseline 
 # visualization framework.
 # ---
-display = (error, data) ->
-  parse = d3.time.format("%x").parse
-
+display = (error, rawData) ->
+  
+  # A quick way to manually select which calls to display. 
+  # Feel free to pick other keys and explore the less frequent call types.
   filterer = {"Heating": 1, "Damaged tree": 1, "Noise": 1, "Traffic signal condition": 1, "General construction":1, "Street light condition":1}
-  keys = data.map (d) -> d.key
-  console.log(keys)
+  data = rawData.filter((d) -> filterer[d.key] == 1)
 
-  # symbols = data[0..5]
-  symbols = data.filter((d) -> filterer[d.key] == 1)
-  symbols.forEach (s) ->
+  # A parser to convert our date/time string into a JS time.
+  parseTime = d3.time.format.utc("%x").parse
+
+  data.forEach (s) ->
     s.values.forEach (d) ->
-      d.date = parse(d.date)
+      d.date = parseTime(d.date)
       d.count = parseFloat(d.count)
+
     s.maxCount = d3.max(s.values, (d) -> d.count)
 
-  symbols.sort((a,b) -> b.maxCount - a.maxCount)
-
+  data.sort((a,b) -> b.maxCount - a.maxCount)
 
   start()
 
