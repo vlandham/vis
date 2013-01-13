@@ -57,8 +57,8 @@ svg = d3.select("#vis").append("svg")
 # was clicked. 
 # ---
 transitionTo = (name) ->
-  if name == "steam"
-    steamgraph()
+  if name == "stream"
+    streamgraph()
   if name == "stack"
     stacks()
   if name == "area"
@@ -158,9 +158,9 @@ stacks = () ->
     .attr("d", (d) -> line(d.values))
 
 # ---
-# Code to transition to Steamgraph.
+# Code to transition to streamgraph.
 # ---
-steamgraph = () ->
+streamgraph = () ->
   stack.offset("wiggle")
 
   stack(symbols)
