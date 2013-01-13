@@ -3,52 +3,46 @@
 # These global variables will be available 
 # to all the transition functions 
 # ---
+paddingBottom = 20
 width = 880
-height = 600
+height = 600 - paddingBottom
 duration = 750
 
-# We need to leave a bit of room
-# for the titles - so the x
-# scale doesn't go the full width
-# of the visualization
 x = d3.time.scale()
-  .range([0, width - 60])
+  .range([0, width])
 
 y = d3.scale.linear()
   .range([height, 0])
-
-axis = d3.svg.line()
-  .interpolate("basis")
-  .x((d) -> x(d.date))
-  .y(height)
 
 color = d3.scale.category10()
 
 line = d3.svg.line()
     .interpolate("basis")
     .x((d) -> x(d.date))
-    .y((d) -> y(d.price))
+    .y((d) -> y(d.count))
 
 area = d3.svg.area()
     .interpolate("basis")
     .x((d) -> x(d.date))
-    .y0(height / 4 - 20)
-    .y1((d) -> y(d.price))
 
 stack = d3.layout.stack()
   .values((d) -> d.values)
   .x((d) -> d.date)
-  .y((d) -> d.price)
-  .out((d,y0,y) -> d.price0 = y0)
+  .y((d) -> d.count)
+  .out((d,y0,y) -> d.count0 = y0)
   .order("reverse")
 
-stocks = null
+xAxis = d3.svg.axis()
+  .scale(x)
+  .tickSize(-height)
+  .tickFormat(d3.time.format('%a %d'))
+
 symbols = null
 
 # Create the blank SVG the visualization will live in.
 svg = d3.select("#vis").append("svg")
   .attr("width", width)
-  .attr("height", height)
+  .attr("height", height + paddingBottom)
 
 # ---
 # Called when the chart buttons are clicked.
@@ -75,7 +69,26 @@ start = () ->
   max_date = d3.max(symbols, (d) -> d.values[d.values.length - 1].date)
   x.domain([min_date,max_date])
 
-  g = svg.selectAll("g")
+  # D3's axis functionality usually works great.
+  # However, I was having some aesthetic issues
+  # with the tick placement.
+  # Here I extract out every other day - and 
+  # manually specify these values as the tick 
+  # values
+  dates = symbols[0].values.map((v) -> v.date)
+  index = 0
+  dates = dates.filter (d) ->
+    index += 1
+    (index % 2) == 0
+
+  xAxis.tickValues(dates)
+
+  svg.append("g")
+    .attr("class", "x axis")
+    .attr("transform", "translate(0," + height + ")")
+    .call(xAxis)
+  
+  g = svg.selectAll(".symbol")
     .data(symbols)
     .enter()
 
@@ -90,10 +103,12 @@ start = () ->
     .attr("class", "line")
     .style("stroke-opacity", 1e-6)
 
-  areas()
+  createLegend()
+
+  streamgraph()
 
 # ---
-# Code to transition to Area chart.
+# Code to transition to streamgraph.
 #
 # For each of these chart transition functions, 
 # we first reset any shared scales and layouts,
@@ -102,32 +117,29 @@ start = () ->
 # the transition that switches the visualization
 # to the new display.
 # ---
-areas = () ->
-  g = svg.selectAll(".symbol")
+streamgraph = () ->
+  stack.offset("wiggle")
 
-  line.y((d) -> y(d.price0 + d.price))
+  stack(symbols)
 
-  g.select("path.line")
-      .attr("d", (d) -> line(d.values))
-      .style("stroke-opacity", 1e-6)
-
-  y.domain([0, d3.max(symbols.map((d) -> d.maxPrice))])
+  y.domain([0, d3.max(symbols[0].values.map((d) -> d.count + d.count0))])
     .range([height, 0])
 
-  area.y0(height)
-    .y1((d) -> y(d.price))
+  line.y((d) -> y(d.count0))
 
-  line.y((d) -> y(d.price))
+  area.y0((d) -> y(d.count0))
+    .y1((d) -> y(d.count0 + d.count))
 
-  t = g.transition()
+  t = svg.selectAll(".symbol")
+    .transition()
     .duration(duration)
-
+  
   t.select("path.area")
-    .style("fill-opacity", 0.5)
+    .style("fill-opacity", 1.0)
     .attr("d", (d) -> area(d.values))
 
   t.select("path.line")
-    .style("stroke-opacity", 1)
+    .style("stroke-opacity", 1e-6)
     .attr("d", (d) -> line(d.values))
 
 # ---
@@ -137,13 +149,13 @@ stacks = () ->
   stack.offset("zero")
   stack(symbols)
 
-  y.domain([0, d3.max(symbols[0].values.map((d) -> d.price + d.price0))])
+  y.domain([0, d3.max(symbols[0].values.map((d) -> d.count + d.count0))])
     .range([height, 0])
 
-  line.y((d) -> y(d.price0))
+  line.y((d) -> y(d.count0))
 
-  area.y0((d) -> y(d.price0))
-    .y1((d) -> y(d.price0 + d.price))
+  area.y0((d) -> y(d.count0))
+    .y1((d) -> y(d.count0 + d.count))
 
   t = svg.selectAll(".symbol")
     .transition()
@@ -158,32 +170,98 @@ stacks = () ->
     .attr("d", (d) -> line(d.values))
 
 # ---
-# Code to transition to streamgraph.
+# Code to transition to Area chart.
+#
 # ---
-streamgraph = () ->
-  stack.offset("wiggle")
+areas = () ->
+  g = svg.selectAll(".symbol")
 
-  stack(symbols)
+  line.y((d) -> y(d.count0 + d.count))
 
-  y.domain([0, d3.max(symbols[0].values.map((d) -> d.price + d.price0))])
+  g.select("path.line")
+      .attr("d", (d) -> line(d.values))
+      .style("stroke-opacity", 1e-6)
+
+  y.domain([0, d3.max(symbols.map((d) -> d.maxCount))])
     .range([height, 0])
 
-  line.y((d) -> y(d.price0))
+  area.y0(height)
+    .y1((d) -> y(d.count))
 
-  area.y0((d) -> y(d.price0))
-    .y1((d) -> y(d.price0 + d.price))
+  line.y((d) -> y(d.count))
 
-  t = svg.selectAll(".symbol")
-    .transition()
+  t = g.transition()
     .duration(duration)
-  
+
   t.select("path.area")
-    .style("fill-opacity", 1.0)
+    .style("fill-opacity", 0.5)
     .attr("d", (d) -> area(d.values))
 
   t.select("path.line")
-      .style("stroke-opacity", 1e-6)
-      .attr("d", (d) -> line(d.values))
+    .style("stroke-opacity", 1)
+    .attr("d", (d) -> line(d.values))
+
+# ---
+#
+# ---
+showLegend = (d,i) ->
+  d3.select("#legend svg g.panel")
+    .transition()
+    .duration(500)
+    .attr("transform", "translate(0,0)")
+
+# ---
+#
+# ---
+hideLegend = (d,i) ->
+  d3.select("#legend svg g.panel")
+    .transition()
+    .duration(500)
+    .attr("transform", "translate(200,0)")
+
+# ---
+#
+# ---
+createLegend = () ->
+  legendWidth = 240
+  legendHeight = 245
+  legend = d3.select("#legend").append("svg")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+
+  legendG = legend.append("g")
+    .attr("transform", "translate(200,0)")
+    .attr("class", "panel")
+
+  legendG.append("rect")
+    .attr("width", legendWidth)
+    .attr("height", legendHeight)
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("fill-opacity", 0.5)
+    .attr("fill", "white")
+
+  legendG.on("mouseover", showLegend)
+    .on("mouseout", hideLegend)
+
+  keys = legendG.selectAll("g")
+    .data(symbols)
+    .enter().append("g")
+    .attr("transform", (d,i) -> "translate(#{5},#{10 + 40 * (i + 0)})")
+
+  keys.append("rect")
+    .attr("width", 30)
+    .attr("height", 30)
+    .attr("rx", 4)
+    .attr("ry", 4)
+    .attr("fill", (d) -> color(d.key))
+
+  keys.append("text")
+    .text((d) -> d.key)
+    .attr("text-anchor", "left")
+    .attr("dx", "2.3em")
+    .attr("dy", "1.3em")
+  
 
 # ---
 # Function that is called when data is loaded
@@ -192,24 +270,22 @@ streamgraph = () ->
 # visualization framework.
 # ---
 display = (error, data) ->
-  parse = d3.time.format("%b %Y").parse
-  filter = {AAPL: 1, AMZN: 1, MSFT: 1, IBM: 1}
-  stocks = data.filter((d) -> d.symbol in d3.keys(filter))
+  parse = d3.time.format("%x").parse
 
-  symbols = d3.nest()
-    .key((d) -> d.symbol)
-    .entries(stocks)
+  filterer = {"Heating": 1, "Damaged tree": 1, "Noise": 1, "Traffic signal condition": 1, "General construction":1, "Street light condition":1}
+  keys = data.map (d) -> d.key
+  console.log(keys)
 
+  # symbols = data[0..5]
+  symbols = data.filter((d) -> filterer[d.key] == 1)
   symbols.forEach (s) ->
     s.values.forEach (d) ->
       d.date = parse(d.date)
-      d.price = parseFloat(d.price)
-    s.maxPrice = d3.max(s.values, (d) -> d.price)
-    s.sumPrice = d3.sum(s.values, (d) -> d.price)
+      d.count = parseFloat(d.count)
+    s.maxCount = d3.max(s.values, (d) -> d.count)
 
-  symbols.sort((a,b) -> b.maxPrice - a.maxPrice)
+  symbols.sort((a,b) -> b.maxCount - a.maxCount)
 
-  console.log(symbols)
 
   start()
 
@@ -224,5 +300,5 @@ $ ->
     transitionTo(id)
 
   # load the data and call 'display'
-  d3.csv("data/stocks.csv", display)
+  d3.json("data/all_reports.json", display)
 

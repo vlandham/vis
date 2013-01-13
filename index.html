@@ -23,21 +23,22 @@
 
   <div id="container" class="container">
     <header>
-    <h1>Title</h1>
+    <h1>Huricane Sandy's Impact on NYC 311 Calls</h1>
     <p>Subtitle</p>
     </header>
     <div id="main" role="main">
       <div class="btn-group" data-toggle="buttons-radio">
-        <button type="button" id="area" class="btn active switch">Area</button>
+        <button type="button" id="stream" class="btn active switch">Streamgraph</button>
         <button type="button" id="stack" class="btn switch">Stacked Area</button>
-        <button type="button" id="stream" class="btn switch">Streamgraph</button>
+        <button type="button" id="area" class="btn switch">Area</button>
       </div>
       <div id="vis"></div>
     </div>
     <footer>
-      <p>Data from <a href="">LOCATION</a>.</p>
+      <p>Data from <a href="https://nycopendata.socrata.com/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9">NYC OpenData</a>.</p>
     </footer>
   </div> <!--! end of #container -->
+  <div id="legend"></div>
 
   <script src="js/libs/jquery-1.7.2.min.js"></script>
   <script defer src="js/plugins.js"></script>
