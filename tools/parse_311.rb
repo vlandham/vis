@@ -5,7 +5,7 @@ require 'date'
 require 'json'
 
 input_filename = ARGV[0]
-output_filename = File.join(Dir.pwd, "all_reports.json")
+output_filename = File.join(Dir.pwd, "requests.json")
 
 start = Time.now
 
