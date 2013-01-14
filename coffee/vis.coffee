@@ -30,7 +30,6 @@ area = d3.svg.area()
 line = d3.svg.line()
     .interpolate("basis")
     .x((d) -> x(d.date))
-    .y((d) -> y(d.count))
 
 # stack layout for streamgraph
 # and stacked area chart
