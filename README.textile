@@ -1,78 +1,55 @@
-h1. How to Transition Between Multiple Charts Demo app
+h1. Demo for How to Transition Between Multiple Charts
 
-h2. Usage
+h2. Running
 
 h3. View the code in the browser
 
 You can start up a local webserver by using python's simple server:
 
 <pre>
-python -m SimpleHTTTPServer -p 3000
+python -m SimpleHTTPServer
 </pre>
 
 or @thin@ in ruby
 
 <pre>
-thin start
+thin start -p 8000
 # might have to run 'bundle install' first
 </pre>
 
-Now go to "http://0.0.0.0:3000":http://0.0.0.0:3000/
+Now go to "http://0.0.0.0:8000":http://0.0.0.0:8000/
 
-and you have a basic visualization
+and you should see the Demo running on your machine.
 
 h3. Start Coding
 
-Open up @coffee/vis.coffee@ and start modifying the built in visualization to fit your needs.
+Open up @coffee/vis.coffee@ and start modifying the visualization to fit your needs.
 
 h2. Folder Organization
 
-* @/@
-** main vis area
 * @/index.html@
 ** main page for your visualization. Loads coffeescript and javascript files.
 * @/coffee/@
-** coffeescript files. @vis.coffee@.
+** @vis.coffee@ - source code for visualization
 * @/data/@
-** data dump for @.csv@ and @.json@ files and other data files your vis uses.
+** storage location for @requests.json@ - the data loaded in visualization
 * @/js/@
 ** javascript goes here. JS Libraries in @libs@ directory
 * @/css/@
 ** stylesheets are in here
-* @/img/@
-** images, if any, are in here
 * @/tools/@
-** put your helper scripts / data manipulation tools here
+** scripts that were used to parse raw 311 data and get it into the right shape for the visualization.
 
-h2. Requirments
+h3. Data Source and formatting 
 
-To startup the server, you either need @python@, or a bunch of @ruby@ gems (should be simplified in the future).
+I was able to download the entire 311 Service Request data from here:
+https://nycopendata.socrata.com/Social-Services/311-Service-Requests-from-2010-to-Present/erm2-nwe9
 
-Run @bundle install@ to get the gems needed. Gems listed in the Gemfile
+The total file size was around 2.5Gb at the time of download. 
 
-h2. Contents
+First, @limit_311.rb@ was used to filter the dataset down to a reasonable size around the time I was interested in.
 
-h3. Twitter Bootstrap
+Then, @parse_311.rb@ was used on this smaller file to extract out and format the data. 
 
-* 2.2.1
-
-h3. d3.js
-
-* 2.10.3
-
-h3. Raphael
-
-* 2.1.0
-
-h3. coffee-script.js
-
-* 1.4
-
-h3. jQuery
-
-* 1.7.2
-
-h3. Leaflet
-
-* 0.4 beta
+Not very efficient (I think R or Python with pandas would be a lot faster) but it got the job done for me.
 
