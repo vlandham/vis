@@ -32,15 +32,15 @@ h2. Folder Organization
 * @/index.html@
 ** main page for your visualization. Loads coffeescript and javascript files.
 * @/coffee/@
-** coffeescript files. Example @vis.coffee@.
+** coffeescript files. @vis.coffee@.
 * @/data/@
 ** data dump for @.csv@ and @.json@ files and other data files your vis uses.
 * @/js/@
 ** javascript goes here. JS Libraries in @libs@ directory
 * @/css/@
-** put your stylesheets in here
+** stylesheets are in here
 * @/img/@
-** put your images in here
+** images, if any, are in here
 * @/tools/@
 ** put your helper scripts / data manipulation tools here
 
