@@ -1,21 +1,8 @@
-h1. A simple way to get started with data visualizations using d3 and coffeescript
+h1. How to Transition Between Multiple Charts Demo app
 
 h2. Usage
 
-h3. First Clone the Repository
-
-<pre>
-git clone git@github.com:vlandham/vis.git
-cd vis
-</pre>
-
-h3. You might consider creating a new branch for your Vis
-
-<pre>
-git checkout -b interesting_new_bar_chart
-</pre>
-
-h3. View built in example
+h3. View the code in the browser
 
 You can start up a local webserver by using python's simple server:
 
