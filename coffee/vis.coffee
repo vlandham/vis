@@ -27,6 +27,11 @@ svg = d3.select("#vis").append("svg")
   .attr("width", width)
   .attr("height", height)
 
+color = d3.scale.ordinal()
+  .domain(["kcata", "jo"])
+  # .range(["#397EDA", "#DA7239"])
+  .range(["#15407A", "#397EDA"])
+
 $ ->
   
   display_map = (geojson) ->
@@ -37,7 +42,8 @@ $ ->
       .append("path")
       .attr("d", path)
       .attr("stroke", "#eee")
-      .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#B5D9B9" else "#85C3C0")
+      # .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#B5D9B9" else "#85C3C0")
+      .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#ccc" else "#bbb")
 
   display_data = (data) ->
     svg.selectAll(".point").data(data).enter()
@@ -48,7 +54,7 @@ $ ->
       .attr("fill", "red")
       .attr("r", 2)
 
-  display_stops = (data) ->
+  display_stops = (data, name) ->
     converted_data = []
     data.forEach (d) ->
       p = projection([+d.stop_lon, +d.stop_lat])
@@ -57,12 +63,27 @@ $ ->
     # radius.domain([0,hexs[0].length])
     console.log(radius.domain())
 
-    svg.selectAll(".stop")
+    g = svg.append("g")
+      .attr("class", name)
+    
+    g.selectAll(".stop")
       .data(hexs).enter()
       .append("circle")
       .attr("class", "stop")
       .attr("transform", (d) -> "translate(#{d.x},#{d.y})")
       .attr("r", (d) -> radius(d.length))
+      .attr("fill", (d) -> color(name))
+
+  display_hoods = (json, name) ->
+    tracts = svg.append("g")
+      .attr("class", name)
+
+    tracts.selectAll("path").data(json.features).enter()
+      .append("path")
+      .attr("d", path)
+      .attr("stroke", "#eee")
+      # .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#B5D9B9" else "#85C3C0")
+      # .attr("fill", (d) -> if d.properties["STATEFP10"] == "20" then "#ccc" else "#bbb")
 
 
   # hexbin
@@ -90,17 +111,24 @@ $ ->
       .attr("fill", "none")
       .attr("stroke", "black")
 
-  display = (error, kc, data) ->
+  display = (error, kc, data, data_jo, hoods_mo, hoods_kc) ->
     console.log(error)
-    display_map(kc)
+    # display_map(kc)
     # display_data(data)
     # hexbin
     # display_hexbin(data)
-    display_stops(data)
+    display_stops(data, "kcata")
+    display_stops(data_jo, "jo")
+
+    display_hoods(hoods_mo, "hoods_mo")
+
   
   queue()
     .defer(d3.json, "data/kc.json")
     # .defer(d3.csv, "data/fastfood.csv")
-    .defer(d3.csv, "data/stops.txt")
+    .defer(d3.csv, "data/stops_kcata.txt")
+    .defer(d3.csv, "data/stops_jo.txt")
+    .defer(d3.json, "data/kc_mo_hoods.geojson")
+    .defer(d3.json, "data/kc_ks_hoods.geojson")
     .await(display)
 
