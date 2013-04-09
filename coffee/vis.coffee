@@ -1,89 +1,119 @@
 
 root = exports ? this
 
-Plot = () ->
-  width = 600
-  height = 600
-  data = []
-  points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
-  xScale = d3.scale.linear().domain([0,10]).range([0,width])
-  yScale = d3.scale.linear().domain([0,10]).range([0,height])
-  xValue = (d) -> parseFloat(d.x)
-  yValue = (d) -> parseFloat(d.y)
+width = 1280
+height = 800
 
-  chart = (selection) ->
-    selection.each (rawData) ->
+svg = d3.select("#vis").append("svg")
+  .attr("width", width)
+  .attr("height", height)
 
-      data = rawData
+start_three = () ->
+  panel_three = svg.append("rect")
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr("transform", "translate(#{850},#{130})")
 
-      svg = d3.select(this).selectAll("svg").data([data])
-      gEnter = svg.enter().append("svg").append("g")
-      
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
+  circle = svg.append("circle")
+    .attr("r", 50)
+    .attr("transform", "translate(#{900},#{310})")
 
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
+  
+  circle_two = svg.append("circle")
+    .attr("r", 50)
+    .attr("opacity", 1)
+    .attr("transform", "translate(#{900},#{310})")
 
-      points = g.append("g").attr("id", "vis_points")
-      update()
+  circle_two.transition()
+    .delay(100)
+    .duration(500)
+    .attr("transform", "translate(#{1080},#{230})")
+    .transition()
+    .duration(500)
+    .attr("opacity", 1e-6)
 
-  update = () ->
-    points.selectAll(".point")
-      .data(data).enter()
-      .append("circle")
-      .attr("cx", (d) -> xScale(xValue(d)))
-      .attr("cy", (d) -> yScale(yValue(d)))
-      .attr("r", 4)
-      .attr("fill", "steelblue")
+  rect_two = svg.append("rect")
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr("transform", "translate(#{850},#{130})")
+    .attr("rx", 0)
+    .attr("ry", 0)
 
-  chart.height = (_) ->
-    if !arguments.length
-      return height
-    height = _
-    chart
+  rect_two.transition()
+    .delay(100)
+    .duration(500)
+    .attr("transform", "translate(#{1030},#{180})")
+    .transition()
+    .duration(500)
+    .attr("rx", 20)
+    .attr("ry", 20)
 
-  chart.width = (_) ->
-    if !arguments.length
-      return width
-    width = _
-    chart
 
-  chart.margin = (_) ->
-    if !arguments.length
-      return margin
-    margin = _
-    chart
+start_two = () ->
 
-  chart.x = (_) ->
-    if !arguments.length
-      return xValue
-    xValue = _
-    chart
+  panel_two = svg.append("rect")
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr("transform", "translate(#{450},#{200})")
 
-  chart.y = (_) ->
-    if !arguments.length
-      return yValue
-    yValue = _
-    chart
+  rectangle = svg.append("rect")
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr("transform", "translate(#{450},#{200})")
 
-  return chart
+  rectangle.transition()
+    .delay(100)
+    .duration(500)
+    .attr("transform", "translate(#{630},#{200})")
+    .transition()
+    .duration(500)
+    .attr("height", 200)
+    .attr("transform", "translate(#{630},#{150})")
+    .each("end", start_three)
 
-root.Plot = Plot
+start = () ->
 
-root.plotData = (selector, data, plot) ->
-  d3.select(selector)
-    .datum(data)
-    .call(plot)
+  panel_one = svg.append("rect")
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr("transform", "translate(#{50},#{200})")
 
+  copy = svg.append("rect")
+    .attr("width", 100)
+    .attr("height", 100)
+    .attr("transform", "translate(#{50},#{200})")
+
+  copy.transition()
+    .delay(100)
+    .duration(500)
+    .attr("transform", "translate(#{230},#{200})")
+    .each("end", start_two)
+
+
+labels = () ->
+
+  text_y = 450
+  svg.append('text')
+    .attr('x', 200)
+    .attr('y', text_y)
+    .attr("text-anchor", "middle")
+    .text("COPY")
+
+  svg.append('text')
+    .attr('x', 585)
+    .attr('y', text_y)
+    .attr("text-anchor", "middle")
+    .text("TRANSFORM")
+
+  svg.append('text')
+    .attr('x', 975)
+    .attr('y', text_y)
+    .attr("text-anchor", "middle")
+    .text("COMBINE")
 
 $ ->
 
-  plot = Plot()
-  display = (error, data) ->
-    plotData("#vis", data, plot)
+  start()
 
-
-  d3.csv("data/test.csv", display)
+  labels()
 
