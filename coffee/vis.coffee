@@ -22,7 +22,7 @@ padding = 25
 
 mid_points = [(width / 3) / 2, (width / 2), width - ((width / 3) / 2)]
 
-rect_y = 340
+rect_y = (height / 2) - padding * 2
 
 svg = d3.select("#vis").append("svg")
   .attr("width", width)
@@ -238,11 +238,25 @@ title = () ->
     .attr('x', (d) -> d)
     .text("EVERYTHING IS A REMIX")
 
+
+author = () ->
+
+  title_y = rect_y + rect_height * 3 + padding * 2
+
+  svg.append("text")
+    .attr('class', 'author')
+    .attr('text-anchor', 'middle')
+    .attr('y', title_y)
+    .attr('x', mid_points[1])
+    .text("KIRBY FERGUSON")
+
 $ ->
 
   title()
   bars()
   labels()
   start()
+  author()
+
 
 
