@@ -1,15 +1,25 @@
+body {
+  background-image: url(../img/ricepaper.png);
+  font-size: 24px;
+}
+
 #container {
   width: 1280px;
+  /* border: 2px solid black; */
+}
+
+.title {
+  font-size: 40px;
 }
 
 rect {
-  fill: none;
-  stroke: black;
+  /* fill: none; */
+  /* stroke: black; */
   stroke-width: 2;
 }
 
 circle {
-  fill: none;
-  stroke: black;
+  /* fill: none; */
+  /* stroke: black; */
   stroke-width: 2;
 }
