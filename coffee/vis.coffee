@@ -7,11 +7,13 @@ rect_height = rect_width
 salmon = "#FC6E60"
 hatch_color = "#6ED3CD"
 hatch_color = "#888"
-rect_color = hatch_color
-stroke_color = salmon
 dark_yellow = "#AEA020"
 yellow = "#FEE92C"
 gray = "#303031"
+
+
+stroke_color = salmon
+stroke1_color = gray
 
 width = 1280
 height = 800
@@ -27,6 +29,22 @@ svg = d3.select("#vis").append("svg")
   .attr("height", height)
 
 defs = svg.append('defs')
+
+hatch1 = defs.append("pattern")
+  # .attr("id", "lines-tight-pattern")
+  .attr("id", "rect1-pattern")
+  .attr("patternUnits", "userSpaceOnUse")
+  .attr("patternTransform", "rotate(#{-210})")
+  .attr("x", 0)
+  .attr("y", 2)
+  .attr("width", 5)
+  .attr("height", 3)
+  .append("g")
+hatch1.append("path")
+  .attr("d", "M0 0 H 5")
+  .style("fill", "none")
+  .style("stroke", gray)
+  .style("stroke-width", 1.6)
 
 hatch1 = defs.append("pattern")
   # .attr("id", "lines-tight-pattern")
@@ -55,12 +73,12 @@ diag = defs.append("pattern")
 diag.append("path")
   .attr("d", "M0 0 l5 5")
   .style("fill", "none")
-  .style("stroke", stroke_color)
+  .style("stroke", stroke1_color)
   .style("stroke-width", 1)
 diag.append("path")
   .attr("d", "M5 0 l-5 5")
   .style("fill", "none")
-  .style("stroke", stroke_color)
+  .style("stroke", stroke1_color)
   .style("stroke-width", 1)
 
 start_three = () ->
@@ -74,15 +92,15 @@ start_three = () ->
   panel_three = svg.append("rect")
     .attr("width", rect_width)
     .attr("height", rect_height)
-    .attr("fill", "url(#rect-pattern)")
-    .attr("stroke", stroke_color)
+    .attr("fill", "url(#rect1-pattern)")
+    .attr("stroke", stroke1_color)
     # .attr("transform", "translate(#{rect1_x},#{130})")
     .attr("transform", "translate(#{rect1_x},#{rect_y - (rect_height / 2) - padding})")
 
   circle = svg.append("circle")
     .attr("r", circle_radius)
-    .attr("fill", "url(#rect-pattern)")
-    .attr("stroke", stroke_color)
+    .attr("fill", "url(#rect1-pattern)")
+    .attr("stroke", stroke1_color)
     # .attr("transform", "translate(#{rect1_x + (circle_radius)},#{310})")
     .attr("transform", "translate(#{rect1_x + (circle_radius)},#{rect_y + rect_height + padding})")
 
@@ -134,8 +152,8 @@ start_two = () ->
   panel_two = svg.append("rect")
     .attr("width", rect_width)
     .attr("height", rect_height)
-    .attr("fill", "url(#rect-pattern)")
-    .attr("stroke", stroke_color)
+    .attr("fill", "url(#rect1-pattern)")
+    .attr("stroke", stroke1_color)
     .attr("transform", "translate(#{rect1_x},#{rect_y})")
 
   rectangle = svg.append("rect")
@@ -163,8 +181,8 @@ start = () ->
   panel_one = svg.append("rect")
     .attr("width", rect_width)
     .attr("height", rect_height)
-    .attr("fill", "url(#rect-pattern)")
-    .attr("stroke", stroke_color)
+    .attr("fill", "url(#rect1-pattern)")
+    .attr("stroke", stroke1_color)
     .attr("transform", "translate(#{rect1_x},#{rect_y})")
 
   copy = svg.append("rect")
