@@ -20,8 +20,9 @@ h3. View built in example
 You can start up a local webserver by using python's simple server:
 
 <pre>
-python -m SimpleHTTTPServer -p 3000
+python -m SimpleHTTPServer 3000
 </pre>
+
 
 or @thin@ in ruby
 
