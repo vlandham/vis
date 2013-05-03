@@ -1,0 +1,318 @@
+StationName	LINE_ID	Line	Title	Color	stop_lon	stop_lat	ROUTE	TERMINUS	WkdyEntry
+Wonderland	BLUE01	Blue Line	Blue Line	27A9E1	-70.99166451	42.41343349	Bowdoin to Wonderland	Y	5520
+Revere Beach	BLUE02	Blue Line	Blue Line	27A9E1	-70.99250349	42.4078424	Bowdoin to Wonderland	N	2693
+Beachmont	BLUE03	Blue Line	Blue Line	27A9E1	-70.99253225	42.39725165	Bowdoin to Wonderland	N	1936
+Suffolk Downs	BLUE04	Blue Line	Blue Line	27A9E1	-70.99714973	42.39049646	Bowdoin to Wonderland	N	794
+Orient Heights	BLUE05	Blue Line	Blue Line	27A9E1	-71.0047964	42.38684164	Bowdoin to Wonderland	N	4121
+Wood Island	BLUE06	Blue Line	Blue Line	27A9E1	-71.02291229	42.37964744	Bowdoin to Wonderland	N	1450
+Airport	BLUE07	Blue Line	Blue Line	27A9E1	-71.03022451	42.3743627	Bowdoin to Wonderland	N	6901
+Maverick	BLUE08	Blue Line	Blue Line	27A9E1	-71.03957976	42.36899298	Bowdoin to Wonderland	N	8134
+Aquarium	BLUE09	Blue Line	Blue Line	27A9E1	-71.05193843	42.35951696	Bowdoin to Wonderland	N	4444
+State	BLUE10	Blue Line	Blue Line	27A9E1	-71.05781905	42.35879934	Bowdoin to Wonderland	N	12533
+Government Center	BLUE11	Blue Line	Blue Line	27A9E1	-71.05945867	42.3592966	Bowdoin to Wonderland	N	11317
+Bowdoin	BLUE12	Blue Line	Blue Line	27A9E1	-71.06183707	42.36116075	Bowdoin to Wonderland	Y	1454
+South Station	FairComm01	Commuter Rail	Fairmount	B4D0D8	-71.05527658	42.35261631
+Uphams Corner	FairComm02	Commuter Rail	Fairmount	B4D0D8	-71.06875808	42.31859657
+Talbot Ave	FairComm03	Commuter Rail	Fairmount	B4D0D9	-71.077191	42.291739
+Morton Street	FairComm04	Commuter Rail	Fairmount	B4D0D8	-71.08542299	42.28112605
+Fairmount	FairComm05	Commuter Rail	Fairmount	B4D0D8	-71.11880343	42.2542483
+Readville	FairComm06	Commuter Rail	Fairmount	B4D0D9	-71.13403828	42.23745987
+North Station	FitComm01	Commuter Rail	Fitchburg	B4D0D8	-71.05998294	42.36514376
+Porter	FitComm02	Commuter Rail	Fitchburg	B4D0D8	-71.11911422	42.38832048
+Belmont	FitComm03	Commuter Rail	Fitchburg	B4D0D8	-71.17582775	42.39598022
+Waverley	FitComm04	Commuter Rail	Fitchburg	B4D0D8	-71.19054266	42.38761945
+Waltham	FitComm05	Commuter Rail	Fitchburg	B4D0D8	-71.23652398	42.37410934
+Brandeis/Roberts	FitComm06	Commuter Rail	Fitchburg	B4D0D8	-71.26009067	42.36189797
+Kendal Green	FitComm07	Commuter Rail	Fitchburg	B4D0D8	-71.28326416	42.37976555
+Hastings	FitComm08	Commuter Rail	Fitchburg	B4D0D8	-71.28918035	42.38579546
+Silver Hill	FitComm09	Commuter Rail	Fitchburg	B4D0D8	-71.30211355	42.3956438
+Lincoln	FitComm10	Commuter Rail	Fitchburg	B4D0D8	-71.32592188	42.4140191
+Concord	FitComm11	Commuter Rail	Fitchburg	B4D0D8	-71.35883361	42.4570495
+West Concord	FitComm12	Commuter Rail	Fitchburg	B4D0D8	-71.39270927	42.4570399
+South Acton	FitComm13	Commuter Rail	Fitchburg	B4D0D8	-71.45790442	42.46035517
+Littleton/Route 495	FitComm14	Commuter Rail	Fitchburg	B4D0D8	-71.50248773	42.51929487
+Ayer	FitComm15	Commuter Rail	Fitchburg	B4D0D8	-71.59003551	42.55912793
+Shirley	FitComm16	Commuter Rail	Fitchburg	B4D0D8	-71.64830093	42.54512197
+North Leominster	FitComm17	Commuter Rail	Fitchburg	B4D0D8	-71.73992086	42.54007105
+Fitchburg	FitComm18	Commuter Rail	Fitchburg	B4D0D8	-71.79579101	42.58122902
+South Station	FraComm01	Commuter Rail	Franklin	B4D0D8	-71.05527658	42.35261631
+Back Bay	FraComm02	Commuter Rail	Franklin	B4D0D8	-71.07510604	42.3475591
+Ruggles	FraComm03	Commuter Rail	Franklin	B4D0D8	-71.08950957	42.33666615
+Forest Hills	FraComm03.5	Commuter Rail	Franklin	B4D0D8	-71.11419143	42.30077124
+Hyde Park	FraComm04	Commuter Rail	Franklin	B4D0D8	-71.12547566	42.25519757
+Readville	FraComm05	Commuter Rail	Franklin	B4D0D9	-71.13403828	42.23745987
+Endicott	FraComm06	Commuter Rail	Franklin	B4D0D8	-71.16029649	42.23265978
+Dedham Corp Ctr	FraComm07	Commuter Rail	Franklin	B4D0D8	-71.17346314	42.22745595
+Islington	FraComm08	Commuter Rail	Franklin	B4D0D8	-71.18755817	42.21669317
+Norwood Depot	FraComm09	Commuter Rail	Franklin	B4D0D8	-71.19684192	42.19630182
+Norwood Central	FraComm10	Commuter Rail	Franklin	B4D0D8	-71.19970353	42.18878272
+Windsor Gardens	FraComm11	Commuter Rail	Franklin	B4D0D8	-71.22069226	42.17106016
+Plimptonville	FraComm12	Commuter Rail	Franklin	B4D0D8	-71.23600811	42.15899844
+Walpole	FraComm13	Commuter Rail	Franklin	B4D0D8	-71.25813107	42.14531853
+Norfolk	FraComm14	Commuter Rail	Franklin	B4D0D8	-71.32538163	42.12053847
+Franklin/Dean Coll	FraComm15	Commuter Rail	Franklin	B4D0D8	-71.39694287	42.08266593
+Forge Park/Route 495	FraComm16	Commuter Rail	Franklin	B4D0D8	-71.43529216	42.09010763
+South Station	FramComm01	Commuter Rail	Framingham/Worcester	B4D0D8	-71.05527658	42.35261631
+Back Bay	FramComm02	Commuter Rail	Framingham/Worcester	B4D0D8	-71.07510604	42.3475591
+Yawkey	FramComm03	Commuter Rail	Framingham/Worcester	B4D0D8	-71.10417524	42.34825531
+Newtonville	FramComm04	Commuter Rail	Framingham/Worcester	B4D0D8	-71.20702426	42.35140319
+West Newton	FramComm05	Commuter Rail	Framingham/Worcester	B4D0D8	-71.23133525	42.34781697
+Auburndale	FramComm06	Commuter Rail	Framingham/Worcester	B4D0D8	-71.25029007	42.34589089
+Wellesley Farms	FramComm07	Commuter Rail	Framingham/Worcester	B4D0D8	-71.27206344	42.32364164
+Wellesley Hills	FramComm08	Commuter Rail	Framingham/Worcester	B4D0D8	-71.276864	42.31098173
+Wellesley Square	FramComm09	Commuter Rail	Framingham/Worcester	B4D0D8	-71.29494726	42.29718526
+Natick	FramComm10	Commuter Rail	Framingham/Worcester	B4D0D8	-71.34827378	42.28560588
+West Natick	FramComm11	Commuter Rail	Framingham/Worcester	B4D0D8	-71.39145373	42.28320544
+Framingham	FramComm12	Commuter Rail	Framingham/Worcester	B4D0D8	-71.41680545	42.27703652
+Ashland	FramComm13	Commuter Rail	Framingham/Worcester	B4D0D8	-71.47612216	42.26096013
+Southborough	FramComm14	Commuter Rail	Framingham/Worcester	B4D0D8	-71.52384475	42.2671418
+Westborough	FramComm15	Commuter Rail	Framingham/Worcester	B4D0D8	-71.64860083	42.26926792
+Grafton	FramComm16	Commuter Rail	Framingham/Worcester	B4D0D8	-71.68461428	42.24712683
+Worcester	FramComm17	Commuter Rail	Framingham/Worcester	B4D0D8	-71.79463671	42.26100831
+JFK/UMass	GreenComm00	Commuter Rail	Greenbush	B4D0D8	-71.05216105	42.32072589
+Quincy Center	GreenComm01	Commuter Rail	Greenbush	B4D0D8	-71.00564054	42.25208703
+Weymouth Landing/East Braintree	GreenComm02	Commuter Rail	Greenbush	B4D0D8	-70.96696471	42.22186591
+E. Weymouth	GreenComm03	Commuter Rail	Greenbush	B4D0D8	-70.92171885	42.21939939
+West Hingham	GreenComm04	Commuter Rail	Greenbush	B4D0D8	-70.9029583	42.23464428
+Nantasket Junction	GreenComm05	Commuter Rail	Greenbush	B4D0D8	-70.86831923	42.24494709
+Cohasset	GreenComm06	Commuter Rail	Greenbush	B4D0D8	-70.83813342	42.2442976
+North Scituate	GreenComm07	Commuter Rail	Greenbush	B4D0D8	-70.78646699	42.21903646
+Greenbush	GreenComm08	Commuter Rail	Greenbush	B4D0D8	-70.74675404	42.17823967
+North Station	HavComm01	Commuter Rail	Haverhill	B4D0D9	-71.05998294	42.36514376
+Malden Center	HavComm02	Commuter Rail	Haverhill	B4D0D8	-71.07431522	42.42658098
+Wyoming Hill	HavComm03	Commuter Rail	Haverhill	B4D0D8	-71.06931279	42.45202698
+Melrose/Cedar Park	HavComm04	Commuter Rail	Haverhill	B4D0D8	-71.06990191	42.45915538
+Melrose/Highlands	HavComm05	Commuter Rail	Haverhill	B4D0D8	-71.06849639	42.46879311
+Greenwood	HavComm06	Commuter Rail	Haverhill	B4D0D8	-71.06734049	42.482955
+Wakefield	HavComm07	Commuter Rail	Haverhill	B4D0D8	-71.0757689	42.50238132
+Reading	HavComm08	Commuter Rail	Haverhill	B4D0D8	-71.11067081	42.52325308
+North Wilmington	HavComm09	Commuter Rail	Haverhill	B4D0D8	-71.1591567	42.56895665
+Ballardvale	HavComm10	Commuter Rail	Haverhill	B4D0D8	-71.1598646	42.62698529
+Andover	HavComm11	Commuter Rail	Haverhill	B4D0D8	-71.14454072	42.65814803
+Lawrence	HavComm12	Commuter Rail	Haverhill	B4D0D8	-71.15827806	42.70093749
+Bradford	HavComm13	Commuter Rail	Haverhill	B4D0D8	-71.08655077	42.76872646
+Haverhill	HavComm14	Commuter Rail	Haverhill	B4D0D8	-71.08644939	42.77447207
+Braintree	KingComm01	Commuter Rail	Kingston	B4D0D8	-71.00170254	42.20753726
+South Weymouth	KingComm02	Commuter Rail	Kingston	B4D0D8	-70.95272137	42.15415109
+Abington	KingComm03	Commuter Rail	Kingston	B4D0D8	-70.93422498	42.106721
+Whitman	KingComm04	Commuter Rail	Kingston	B4D0D8	-70.92362523	42.08297621
+Hanson	KingComm05	Commuter Rail	Kingston	B4D0D8	-70.88241995	42.04394674
+Halifax	KingComm06	Commuter Rail	Kingston	B4D0D8	-70.82081138	42.01296971
+Kingston	KingComm07	Commuter Rail	Kingston	B4D0D8	-70.72168514	41.97761811
+Lowell	LowComm01	Commuter Rail	Lowell	B4D0D8	-71.3149939	42.63608185
+North Billerica	LowComm02	Commuter Rail	Lowell	B4D0D8	-71.28120417	42.59365333
+Wilmington	LowComm03	Commuter Rail	Lowell	B4D0D8	-71.17566509	42.54809785
+Anderson/Woburn	LowComm04	Commuter Rail	Lowell	B4D0D8	-71.14377996	42.51574681
+Mishawum	LowComm05	Commuter Rail	Lowell	B4D0D8	-71.13695782	42.50306966
+Winchester Center	LowComm06	Commuter Rail	Lowell	B4D0D8	-71.13737391	42.45225687
+Wedgemere	LowComm07	Commuter Rail	Lowell	B4D0D8	-71.14014904	42.44492727
+West Medford	LowComm08	Commuter Rail	Lowell	B4D0D8	-71.13339203	42.42177968
+North Station	LowComm09	Commuter Rail	Lowell	B4D0D9	-71.05998294	42.36514376
+Braintree	MidComm01	Commuter Rail	Middleborough/Lakeville	B4D0D8	-71.00170254	42.20753726
+Holbrook/Randolph	MidComm02	Commuter Rail	Middleborough/Lakeville	B4D0D8	-71.02770747	42.15542484
+Montello	MidComm03	Commuter Rail	Middleborough/Lakeville	B4D0D8	-71.02341869	42.10900966
+Brockton	MidComm04	Commuter Rail	Middleborough/Lakeville	B4D0D8	-71.0164264	42.08107162
+Campello	MidComm05	Commuter Rail	Middleborough/Lakeville	B4D0D8	-71.011055	42.06107083
+Bridgewater	MidComm06	Commuter Rail	Middleborough/Lakeville	B4D0D8	-70.9645774	41.98408622
+Middleborough/Lakeville	MidComm07	Commuter Rail	Middleborough/Lakeville	B4D0D8	-70.91736947	41.87747612
+Needham Heights	NeedComm01	Commuter Rail	Needham	B4D0D8	-71.23605562	42.29318422
+Needham Center	NeedComm02	Commuter Rail	Needham	B4D0D8	-71.23785482	42.28023533
+Needham Junction	NeedComm03	Commuter Rail	Needham	B4D0D8	-71.23657136	42.27300524
+Hersey	NeedComm04	Commuter Rail	Needham	B4D0D8	-71.21460175	42.2757735
+West Roxbury	NeedComm05	Commuter Rail	Needham	B4D0D8	-71.1598143	42.28152183
+Highland	NeedComm06	Commuter Rail	Needham	B4D0D8	-71.15422694	42.28480193
+Bellevue	NeedComm07	Commuter Rail	Needham	B4D0D8	-71.14547359	42.28658429
+Roslindale Village	NeedComm08	Commuter Rail	Needham	B4D0D8	-71.13165992	42.28705794
+Forest Hills	NeedComm09	Commuter Rail	Needham	B4D0D9	-71.11419143	42.30077124
+Newburyport	NewComm01	Commuter Rail	Newburyport	B4D0D8	-70.87819773	42.79833164
+Rowley	NewComm02	Commuter Rail	Newburyport	B4D0D8	-70.85854975	42.72501905
+Ipswich	NewComm03	Commuter Rail	Newburyport	B4D0D8	-70.84060167	42.67687056
+Hamilton/Wenham	NewComm04	Commuter Rail	Newburyport	B4D0D8	-70.87409514	42.61108929
+North Beverly	NewComm05	Commuter Rail	Newburyport	B4D0D8	-70.88396702	42.58291909
+Beverly	NewComm06	Commuter Rail	Newburyport	B4D0D8	-70.88535021	42.547906
+Salem	NewComm07	Commuter Rail	Newburyport	B4D0D8	-70.8959819	42.52396176
+Swampscott	NewComm08	Commuter Rail	Newburyport	B4D0D8	-70.92176137	42.47423988
+Lynn/Central Square	NewComm09	Commuter Rail	Newburyport	B4D0D8	-70.94732926	42.46197534
+River Works	NewComm10	Commuter Rail	Newburyport	B4D0D8	-70.96976718	42.44979824
+Chelsea	NewComm11	Commuter Rail	Newburyport	B4D0D8	-71.03343704	42.395491
+North Station	NewComm12	Commuter Rail	Newburyport	B4D0D8	-71.05998294	42.36514376
+Halifax	PlyComm01	Commuter Rail	Plymouth	B4D0D8	-70.82081138	42.01296971
+Plymouth	PlyComm02	Commuter Rail	Plymouth	B4D0D8	-70.69236355	41.98215911
+Readville	ProComm01	Commuter Rail	Providence	B4D0D8	-71.13403828	42.23745987
+Route 128	ProComm02	Commuter Rail	Providence	B4D0D8	-71.14741822	42.20965794
+Canton Junction	ProComm03	Commuter Rail	Providence	B4D0D8	-71.15385145	42.16299331
+Sharon	ProComm04	Commuter Rail	Providence	B4D0D8	-71.18428422	42.12480455
+Mansfield	ProComm05	Commuter Rail	Providence	B4D0D8	-71.21986479	42.03278162
+Attleboro	ProComm06	Commuter Rail	Providence	B4D0D8	-71.28429352	41.94174467
+South Attleboro	ProComm07	Commuter Rail	Providence	B4D0D8	-71.35493347	41.89775579
+Providence	ProComm08	Commuter Rail	Providence	B4D0D8	-71.41221131	41.83041608
+T F Green Airport (P)	ProComm09	Commuter Rail	Providence	B4D0D8	-71.44299836	41.72621403
+Rockport	RockComm01	Commuter Rail	Rockport	B4D0D8	-70.62626003	42.65620233
+Gloucester	RockComm02	Commuter Rail	Rockport	B4D0D8	-70.66581686	42.61670619
+West Gloucester	RockComm03	Commuter Rail	Rockport	B4D0D8	-70.70612108	42.611362
+Manchester	RockComm04	Commuter Rail	Rockport	B4D0D8	-70.77038596	42.57355259
+Beverly Farms	RockComm05	Commuter Rail	Rockport	B4D0D8	-70.81269335	42.56134822
+Prides Crossing	RockComm06	Commuter Rail	Rockport	B4D0D8	-70.8247431	42.55949056
+Montserrat	RockComm07	Commuter Rail	Rockport	B4D0D8	-70.86805747	42.56248903
+Beverly	RockComm08	Commuter Rail	Rockport	B4D0D8	-70.88535021	42.547906
+Canton Junction	StoComm01	Commuter Rail	Stoughton	B4D0D8	-71.15385145	42.16299331
+Canton Center	StoComm02	Commuter Rail	Stoughton	B4D0D8	-71.14556889	42.15675354
+Stoughton	StoComm03	Commuter Rail	Stoughton	B4D0D8	-71.10337181	42.12377537
+Lechmere	allGREEN01	Green Line	Green Line (main)	4A8E14	-71.07715771	42.37091787	E - Lechmere	Y	6645
+Science Park	allGREEN02	Green Line	Green Line (main)	4A8E14	-71.06774399	42.36674243	E - Lechmere	N	1179
+North Station	allGREEN03	Green Line	Green Line (main)	4A8E14	-71.05998294	42.36514376	C E	N	16702
+Haymarket	allGREEN04	Green Line	Green Line (main)	4A8E14	-71.05785166	42.36247252	C E	N	11223
+Government Center	allGREEN05	Green Line	Green Line (main)	4A8E14	-71.05945867	42.3592966	B C D E	N	11317
+Park Street	allGREEN06	Green Line	Green Line (main)	4A8E14	-71.06230984	42.35620327	B C D E	N	19836
+Boylston	allGREEN07	Green Line	Green Line (main)	4A8E14	-71.06460214	42.35302132	B C D E	N	7618
+Arlington	allGREEN08	Green Line	Green Line (main)	4A8E14	-71.07098957	42.35176845	B C D E	N	8378
+Copley	allGREEN09	Green Line	Green Line (main)	4A8E14	-71.07797545	42.3499076	B C D E	N	13500
+Copley	BGREEN01	Green Line	Green Line (B)	4A8E14	-71.07797545	42.3499076
+Hynes Convention Ctr/ICA	BGREEN02	Green Line	Green Line (B)	4A8E14	-71.08731456	42.34798229
+Kenmore	BGREEN03	Green Line	Green Line (B)	4A8E14	-71.09554477	42.34899687
+Blandford Street	BGREEN04	Green Line	Green Line (B)	4A8E14	-71.10005559	42.34919808	B - Boston College	N	2840
+Boston University East	BGREEN05	Green Line	Green Line (B)	4A8E14	-71.10442794	42.34972114	B - Boston College	N	2892
+Boston University Central	BGREEN06	Green Line	Green Line (B)	4A8E14	-71.10703612	42.35004076	B - Boston College	N	2524
+Boston University West	BGREEN07	Green Line	Green Line (B)	4A8E14	-71.11350641	42.35082168	B - Boston College	N	899
+Saint Paul Street B	BGREEN08	Green Line	Green Line (B)	4A8E14	-71.11634399	42.351163	C - Cleveland Circle	N	935	This might be the B line
+Pleasant Street	BGREEN09	Green Line	Green Line (B)	4A8E14	-71.11906016	42.35148965	B - Boston College	N	1014
+Babcock Street	BGREEN10	Green Line	Green Line (B)	4A8E14	-71.12171519	42.35180887	B - Boston College	N	1824
+Packards Corner	BGREEN11	Green Line	Green Line (B)	4A8E14	-71.12522583	42.35178581	B - Boston College	N	1571
+Harvard Avenue	BGREEN12	Green Line	Green Line (B)	4A8E14	-71.13100726	42.35041177	B - Boston College	N	4077
+Griggs Street	BGREEN13	Green Line	Green Line (B)	4A8E14	-71.13436463	42.34881951	B - Boston College	N	1260
+Allston Street	BGREEN14	Green Line	Green Line (B)	4A8E14	-71.1376368	42.34857609	B - Boston College	N	1115
+Warren Street	BGREEN15	Green Line	Green Line (B)	4A8E14	-71.14024039	42.34862365	B - Boston College	N	1650
+Washington Street	BGREEN16	Green Line	Green Line (B)	4A8E14	-71.14254885	42.34412329	B - Boston College	N	1723
+Sutherland Road	BGREEN17	Green Line	Green Line (B)	4A8E14	-71.1463299	42.3415615	B - Boston College	N	923
+Chiswick Road	BGREEN18	Green Line	Green Line (B)	4A8E14	-71.15095132	42.34061808	B - Boston College	N	735
+Chestnut Hill Avenue	BGREEN19	Green Line	Green Line (B)	4A8E14	-71.1526553	42.33857777	B - Boston College	N	861
+South Street	BGREEN20	Green Line	Green Line (B)	4A8E14	-71.15726166	42.33945404	B - Boston College	N	237
+Boston College	BGREEN21	Green Line	Green Line (B)	4A8E14	-71.16702496	42.34015544	B - Boston College	Y	1042
+Copley	CGREEN01	Green Line	Green Line (C)	4A8E14	-71.07797545	42.3499076
+Hynes Convention Ctr/ICA	CGREEN02	Green Line	Green Line (C)	4A8E14	-71.08731456	42.34798229
+Kenmore	CGREEN03	Green Line	Green Line (C)	4A8E14	-71.09554477	42.34899687
+Saint Marys Street	CGREEN04	Green Line	Green Line (C)	4A8E14	-71.10723956	42.34598737	C - Cleveland Circle	N	1970
+Hawes Street	CGREEN05	Green Line	Green Line (C)	4A8E14	-71.1111748	42.34485992	C - Cleveland Circle	N	426
+Kent Street	CGREEN06	Green Line	Green Line (C)	4A8E14	-71.11429129	42.34401012	C - Cleveland Circle	N	510
+Saint Paul Street C	CGREEN07	Green Line	Green Line (C)	4A8E14	-71.11718909	42.34321043	C - Cleveland Circle	N	935
+Coolidge Corner	CGREEN08	Green Line	Green Line (C)	4A8E14	-71.12129544	42.34214999	C - Cleveland Circle	N	4150
+Summit Ave/Winchester St	CGREEN09	Green Line	Green Line (C)	4A8E14	-71.12578787	42.34102837	C - Cleveland Circle	N	1175
+Brandon Hall	CGREEN10	Green Line	Green Line (C)	4A8E14	-71.1286572	42.34005364	C - Cleveland Circle	N	316
+Fairbanks Street	CGREEN11	Green Line	Green Line (C)	4A8E14	-71.13129703	42.33964026	C - Cleveland Circle	N	585
+Washington Square	CGREEN12	Green Line	Green Line (C)	4A8E14	-71.13536708	42.33932742	C - Cleveland Circle	N	1217
+Tappan Street	CGREEN13	Green Line	Green Line (C)	4A8E14	-71.13844138	42.33851882	C - Cleveland Circle	N	837
+Dean Road	CGREEN14	Green Line	Green Line (C)	4A8E14	-71.14195534	42.33771434	C - Cleveland Circle	N	316
+Englewood Avenue	CGREEN15	Green Line	Green Line (C)	4A8E14	-71.14549839	42.3369848	C - Cleveland Circle	N	585
+Cleveland Circle	CGREEN16	Green Line	Green Line (C)	4A8E14	-71.14928663	42.33613671	C - Cleveland Circle	Y	1557
+Copley	DGREEN01	Green Line	Green Line (D)	4A8E14	-71.07797545	42.3499076
+Hynes Convention Ctr/ICA	DGREEN02	Green Line	Green Line (D)	4A8E14	-71.08731456	42.34798229
+Kenmore	DGREEN03	Green Line	Green Line (D)	4A8E14	-71.09554477	42.34899687	B C D	N	8653
+Fenway Park	DGREEN04	Green Line	Green Line (D)	4A8E14	-71.10460443	42.34515864	D - Riverside	N	3041
+Longwood	DGREEN05	Green Line	Green Line (D)	4A8E14	-71.10993457	42.34166912	D - Riverside	N	2749
+Brookline Village	DGREEN06	Green Line	Green Line (D)	4A8E14	-71.11682794	42.33259466	D - Riverside	N	3512
+Brookline Hills	DGREEN07	Green Line	Green Line (D)	4A8E14	-71.1267274	42.33129459	D - Riverside	N	1654
+Beaconsfield	DGREEN08	Green Line	Green Line (D)	4A8E14	-71.14025927	42.33569218	D - Riverside	N	896
+Reservoir	DGREEN09	Green Line	Green Line (D)	4A8E14	-71.14837902	42.33513991	D - Riverside	N	3395
+Chestnut Hill	DGREEN10	Green Line	Green Line (D)	4A8E14	-71.16460873	42.32674178	D - Riverside	N	778
+Newton Centre	DGREEN11	Green Line	Green Line (D)	4A8E14	-71.19236981	42.32941549	D - Riverside	N	1487
+Newton Highlands	DGREEN12	Green Line	Green Line (D)	4A8E14	-71.20550186	42.32235408	D - Riverside	N	1052
+Eliot	DGREEN13	Green Line	Green Line (D)	4A8E14	-71.21658805	42.31897817	D - Riverside	N	595
+Waban	DGREEN14	Green Line	Green Line (D)	4A8E14	-71.23069342	42.32587772	D - Riverside	N	427
+Woodland	DGREEN15	Green Line	Green Line (D)	4A8E14	-71.2432679	42.33283282	D - Riverside	N	1044
+Riverside	DGREEN16	Green Line	Green Line (D)	4A8E14	-71.25255434	42.33739841	D - Riverside	Y	2191
+Copley	EGREEN01	Green Line	Green Line (E)	4A8E14	-71.07797545	42.3499076
+Prudential	EGREEN02	Green Line	Green Line (E)	4A8E14	-71.08119909	42.34576811	E - Health Street	N	3732
+Symphony	EGREEN03	Green Line	Green Line (E)	4A8E14	-71.08494061	42.34272034	E - Health Street	N	1993
+Northeastern	EGREEN04	Green Line	Green Line (E)	4A8E14	-71.08965206	42.34005063	E - Health Street	N	3007
+Museum of Fine Arts	EGREEN05	Green Line	Green Line (E)	4A8E14	-71.09497605	42.33792514	E - Health Street	N	1676
+Longwood Medical Area	EGREEN06	Green Line	Green Line (E)	4A8E14	-71.099561	42.33614101	E - Health Street	N	3800
+Brigham Circle	EGREEN07	Green Line	Green Line (E)	4A8E14	-71.10372419	42.33457105	E - Health Street	N	2535
+Fenwood Road	EGREEN08	Green Line	Green Line (E)	4A8E14	-71.10564567	42.33374541	E - Health Street	N	343
+Mission Park	EGREEN09	Green Line	Green Line (E)	4A8E14	-71.10958496	42.33317941	E - Health Street	N	462
+Back Of The Hill	EGREEN10	Green Line	Green Line (E)	4A8E14	-71.11107041	42.32963825	E - Health Street	N	86
+Riverway	EGREEN11	Green Line	Green Line (E)	4A8E14	-71.11195067	42.33197801	E - Health Street	N	664
+Heath Street	EGREEN12	Green Line	Green Line (E)	4A8E14	-71.11028102	42.32831128	E - Health Street	Y	622
+Oak Grove	ORANGE01	Orange Line	Orange Line	F7931D	-71.07082633	42.4375046	Forest Hills to Oak Grove	Y	5994
+Malden Center	ORANGE02	Orange Line	Orange Line	F7931D	-71.07431522	42.42658098	Forest Hills to Oak Grove	N	11258
+Wellington	ORANGE03	Orange Line	Orange Line	F7931D	-71.07711744	42.40174005	Forest Hills to Oak Grove	N	7464
+Sullivan Square	ORANGE04	Orange Line	Orange Line	F7931D	-71.07693157	42.38429742	Forest Hills to Oak Grove	N	9004
+Community College	ORANGE05	Orange Line	Orange Line	F7931D	-71.07033822	42.37390813	Forest Hills to Oak Grove	N	3695
+North Station	ORANGE06	Orange Line	Orange Line	F7931D	-71.05998294	42.36514376	Forest Hills to Oak Grove	N	16702
+Haymarket	ORANGE07	Orange Line	Orange Line	F7931D	-71.05785166	42.36247252	Forest Hills to Oak Grove	N	11223
+State	ORANGE08	Orange Line	Orange Line	F7931D	-71.05781905	42.35879934	Forest Hills to Oak Grove	N	12533
+Downtown Crossing	ORANGE09	Orange Line	Orange Line	F7931D	-71.0605121	42.35543398	Forest Hills to Oak Grove	N	22880
+Chinatown	ORANGE10	Orange Line	Orange Line	F7931D	-71.06256817	42.35241527	Forest Hills to Oak Grove	N	5822
+Tufts Medical Center	ORANGE11	Orange Line	Orange Line	F7931D	-71.06428155	42.34908001	Forest Hills to Oak Grove	N	5684
+Back Bay	ORANGE12	Orange Line	Orange Line	F7931D	-71.07510604	42.3475591	Forest Hills to Oak Grove	N	16769
+Massachusetts Ave	ORANGE13	Orange Line	Orange Line	F7931D	-71.08415065	42.34100639	Forest Hills to Oak Grove	N	5248
+Ruggles	ORANGE14	Orange Line	Orange Line	F7931D	-71.08950957	42.33666615	Forest Hills to Oak Grove	N	8378
+Roxbury Crossing	ORANGE15	Orange Line	Orange Line	F7931D	-71.09600502	42.33086765	Forest Hills to Oak Grove	N	3693
+Jackson Square	ORANGE16	Orange Line	Orange Line	F7931D	-71.09993248	42.32317162	Forest Hills to Oak Grove	N	4968
+Stony Brook	ORANGE17	Orange Line	Orange Line	F7931D	-71.10444127	42.3170998	Forest Hills to Oak Grove	N	3163
+Green Street	ORANGE18	Orange Line	Orange Line	F7931D	-71.10805939	42.30989874	Forest Hills to Oak Grove	N	3229
+Forest Hills	ORANGE19	Orange Line	Orange Line	F7931D	-71.11419143	42.30077124	Forest Hills to Oak Grove	Y	13568
+Alewife	allRED01	Red Line	Red Line (main)	EF4036	-71.14207731	42.39612103	A - Ashmont  B - Braintree  C - Alewife	Y	10657
+Davis	allRED02	Red Line	Red Line (main)	EF4036	-71.12223402	42.39675186	A - Ashmont  B - Braintree  C - Alewife	N	11628
+Porter	allRED03	Red Line	Red Line (main)	EF4036	-71.11911422	42.38832048	A - Ashmont  B - Braintree  C - Alewife	N	8552
+Harvard	allRED04	Red Line	Red Line (main)	EF4036	-71.11890607	42.37402923	A - Ashmont  B - Braintree  C - Alewife	N	21868
+Central	allRED05	Red Line	Red Line (main)	EF4036	-71.10382518	42.36543994	A - Ashmont  B - Braintree  C - Alewife	N	14531
+Kendall/MIT	allRED06	Red Line	Red Line (main)	EF4036	-71.08619149	42.36241534	A - Ashmont  B - Braintree  C - Alewife	N	13975
+Charles/MGH	allRED07	Red Line	Red Line (main)	EF4036	-71.07108061	42.36116762	A - Ashmont  B - Braintree  C - Alewife	N	10615
+Park Street	allRED08	Red Line	Red Line (main)	EF4036	-71.06230984	42.35620327	A - Ashmont  B - Braintree  C - Alewife	N	19836
+Downtown Crossing	allRED09	Red Line	Red Line (main)	EF4036	-71.0605121	42.35543398	A - Ashmont  B - Braintree  C - Alewife	N	22880
+South Station	allRED10	Red Line	Red Line (main)	EF4036	-71.05527658	42.35261631	A - Ashmont  B - Braintree  C - Alewife	N	22632
+Broadway	allRED11	Red Line	Red Line (main)	EF4036	-71.05717004	42.34258169	A - Ashmont  B - Braintree  C - Alewife	N	4200
+Andrew	allRED12	Red Line	Red Line (main)	EF4036	-71.05697755	42.33011323	A - Ashmont  B - Braintree  C - Alewife	N	5586
+JFK/UMass	allRED13	Red Line	Red Line (main)	EF4036	-71.05236077	42.32063651	A - Ashmont  B - Braintree  C - Alewife	N	7834
+JFK/UMass	ARED01	Red Line	Red Line (Ashmont)	EF4036	-71.05236077	42.32063651	A - Ashmont  B - Braintree  C - Alewife	N	7834
+Savin Hill	ARED02	Red Line	Red Line (Ashmont)	EF4036	-71.05364006	42.31074782	A - Ashmont  C - Alewife	N	1863
+Fields Corner	ARED03	Red Line	Red Line (Ashmont)	EF4036	-71.06192392	42.30000162	A - Ashmont  C - Alewife	N	4152
+Shawmut	ARED04	Red Line	Red Line (Ashmont)	EF4036	-71.06582889	42.29310745	A - Ashmont  C - Alewife	N	2241
+Ashmont	ARED05	Red Line	Red Line (Ashmont)	EF4036	-71.06343014	42.28388355	A - Ashmont  C - Alewife	Y	8004
+JFK/UMass	BRED01	Red Line	Red Line (Braintree)	EF4036	-71.05236077	42.32063651	A - Ashmont  B - Braintree  C - Alewife	N	7834
+North Quincy	BRED02	Red Line	Red Line (Braintree)	EF4036	-71.03044264	42.27597638	B - Braintree  C - Alewife	N	7132
+Wollaston	BRED03	Red Line	Red Line (Braintree)	EF4036	-71.02054284	42.26670977	B - Braintree  C - Alewife	N	4347
+Quincy Center	BRED04	Red Line	Red Line (Braintree)	EF4036	-71.00564054	42.25208703	B - Braintree  C - Alewife	N	7913
+Quincy Adams	BRED05	Red Line	Red Line (Braintree)	EF4036	-71.0069413	42.23329369	B - Braintree  C - Alewife	N	4383
+Braintree	BRED06	Red Line	Red Line (Braintree)	EF4036	-71.00170254	42.20753726	B - Braintree  C - Alewife	Y	4387
+Ashmont	MRED01	Red Line	Red Line (Mattapan)	EF4036	-71.06343014	42.28388355	A - Ashmont  C - Alewife	Y	8004
+Cedar Grove	MRED02	Red Line	Red Line (Mattapan)	EF4036	-71.06031736	42.27953957	Mattapan Trolley	N	91
+Butler	MRED03	Red Line	Red Line (Mattapan)	EF4036	-71.06246997	42.27241638	Mattapan Trolley	N	143
+Milton	MRED04	Red Line	Red Line (Mattapan)	EF4036	-71.0672419	42.27032711	Mattapan Trolley	N	240
+Central Avenue	MRED05	Red Line	Red Line (Mattapan)	EF4036	-71.07360914	42.26998517	Mattapan Trolley	N	521
+Valley Road	MRED06	Red Line	Red Line (Mattapan)	EF4036	-71.08150365	42.26832589	Mattapan Trolley	N	44
+Capen Street	MRED07	Red Line	Red Line (Mattapan)	EF4036	-71.08720482	42.26755306	Mattapan Trolley	N	58
+Mattapan	MRED08	Red Line	Red Line (Mattapan)	EF4036	-71.09251236	42.26751188	Mattapan Trolley	Y	1504
+South Station	1SILVER01	Silver Line	Silver Line (SL1)	99938C	-71.05527658	42.35261631	SL4	N	22632
+Court House	1SILVER02	Silver Line	Silver Line (SL1)	99938C	-71.04688863	42.35238494	SL1 SL2	N	945
+World Trade Center	1SILVER03	Silver Line	Silver Line (SL1)	99938C	-71.04262948	42.34834152	SL1 SL2	N	2338
+Silver Line Way	1SILVER04	Silver Line	Silver Line (SL1)	99938C	-71.03803715	42.34696989	SL1 SL2	N	974
+Airport Terminal A	1SILVER05	Silver Line	Silver Line (SL1)	99938C	-71.02115393	42.36472556	SL1	N
+Airport Terminal B1	1SILVER06	Silver Line	Silver Line (SL1)	99938C	-71.01854354	42.36133965	SL1	N
+Airport Terminal B2	1SILVER07	Silver Line	Silver Line (SL1)	99938C	-71.01836771	42.36307521	SL1	N	2626
+Airport Terminal C	1SILVER08	Silver Line	Silver Line (SL1)	99938C	-71.01783244	42.3672363	SL1	N
+Airport Terminal E	1SILVER09	Silver Line	Silver Line (SL1)	99938C	-71.02102932	42.36963804	SL1	Y
+Silver Line Way	2SILVER03	Silver Line	Silver Line (SL2)	99938C	-71.03803715	42.34696989	SL1 SL2	N	974
+306 Northern Avenue	2SILVER04	Silver Line	Silver Line (SL2)	99938C	-71.03635389	42.34760065	SL2	N
+Northern Avenue at Harbor Street	2SILVER05	Silver Line	Silver Line (SL2)	99938C	-71.03511427	42.34658844	SL2	N
+Northern Avenue at Tide Street	2SILVER06	Silver Line	Silver Line (SL2)	99938C	-71.03178183	42.3451035	SL2	N
+21 Dry Dock Avenue	2SILVER07	Silver Line	Silver Line (SL2)	99938C	-71.03088789	42.34473717	SL2	N
+25 Dry Dock Avenue	2SILVER08	Silver Line	Silver Line (SL2)	99938C	-71.02897872	42.3447645	SL2	N
+88 Black Falcon	2SILVER09	Silver Line	Silver Line (SL2)	99938C	-71.02632574	42.34366165	SL2	N
+Design Center	2SILVER10	Silver Line	Silver Line (SL2)	99938C	-71.03463737	42.34464719	SL2	N
+South Station	4SILVER01	Silver Line	Silver Line (SL4)	99938C	-71.05527658	42.35261631	SL4	N	22632
+Chinatown	4SILVER02	Silver Line	Silver Line (SL4)	99938C	-71.06256817	42.35241527	SL4 SL5
+Dudley Square	5SILVER01	Silver Line	Silver Line (SL5)	99938C	-71.08371931	42.32970399	SL4 SL5	Y	3128
+Melnea Cass Blvd	5SILVER02	Silver Line	Silver Line (SL5)	99938C	-71.0808019	42.33310537	SL4 SL5	N
+Lenox Street	5SILVER03	Silver Line	Silver Line (SL5)	99938C	-71.07854227	42.33516666	SL4 SL5	N
+Massachusetts Avenue	5SILVER04	Silver Line	Silver Line (SL5)	99938C	-71.077232	42.336378	SL4 SL5
+Worcester Square	5SILVER05	Silver Line	Silver Line (SL5)	99938C	-71.07539891	42.33755503	SL4 SL5	N
+Newton Street	5SILVER06	Silver Line	Silver Line (SL5)	99938C	-71.0738833	42.33875976	SL4 SL5	N
+Union Park Street	5SILVER07	Silver Line	Silver Line (SL5)	99938C	-71.06961181	42.34137011	SL4 SL5	N
+E. Berkeley Street	5SILVER08	Silver Line	Silver Line (SL5)	99938C	-71.06592637	42.34417549	SL4 SL5	N
+Herald Street	5SILVER09	Silver Line	Silver Line (SL5)	99938C	-71.06471962	42.34641169	SL4 SL5	N
+Tufts Medical Center	5SILVER10	Silver Line	Silver Line (SL5)	99938C	-71.06428155	42.34908001	SL4 SL5	N
+Chinatown	5SILVER11	Silver Line	Silver Line (SL5)	99938C	-71.06256817	42.35241527	SL4 SL5
+Downtown Crossing	5SILVER12	Silver Line	Silver Line (SL5)	99938C	-71.0605121	42.35543398	SL4 SL5	N	22880
+Boylston	5SILVER13	Silver Line	Silver Line (SL5)	99938C	-71.06460214	42.35302132	SL4 SL5	N	7618
+Tufts Medical Center	5SILVER14	Silver Line	Silver Line (SL5)	99938C	-71.06428155	42.34908001	SL4 SL5	N
