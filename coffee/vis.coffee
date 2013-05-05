@@ -33,9 +33,10 @@ svg = d3.select("#vis")
   .attr("height", height)
 
 projection = d3.geo.mercator()
-  .center([-71.0609, 42.3681])
+  # .center([-71.0609, 42.3681])
+  .center([-71.092, 42.33])
   .translate([width / 2, height / 2])
-  .scale([34000])
+  .scale([74000])
 
 path = d3.geo.path()
   .projection(projection)
@@ -162,6 +163,7 @@ setupLinks = (data) ->
 
 draw_map = () ->
 
+  projectData(name_data)
 
   force.nodes(name_data)
     .links(links)
@@ -189,8 +191,12 @@ draw_map = () ->
     .data(force.links())
     .enter().append('line')
     .attr('class', 'link')
-    .style('stroke-width', 1.5)
+    .style('stroke-width', 2.5)
     .style('stroke', (d) -> d.source['Color'])
+    .attr("x1", (d) -> d.source.x)
+    .attr("y1", (d) -> d.source.y)
+    .attr("x2", (d) -> d.target.x)
+    .attr("y2", (d) -> d.target.y)
 
 
   node = gg.selectAll("circle.stop")
@@ -202,15 +208,19 @@ draw_map = () ->
     .attr("cy", (d) -> d.y)
     .style("fill", (d) -> color(d["Line"]))
     .style("fill", (d) -> "#" + d["Color"])
-    .on("click", (d) -> console.log(d))
+    .on("click", (d) -> console.log(d) )
 
+  force.stop()
 
+projectData = (data) ->
+  data.forEach (d) ->
+    d.x = projection([parseFloat(d.stop_lon), parseFloat(d.stop_lat)])[0]
+    d.screenX = d.x
+    d.y = projection([parseFloat(d.stop_lon), parseFloat(d.stop_lat)])[1]
+    d.screenY = d.y
 
 setupData = (data) ->
   data = data.filter (d) -> d["Line"] != "Commuter Rail"
-  data.forEach (d) ->
-    d.x = projection([parseFloat(d.stop_lon), parseFloat(d.stop_lat)])[0]
-    d.y = projection([parseFloat(d.stop_lon), parseFloat(d.stop_lat)])[1]
 
   data
 
@@ -229,5 +239,9 @@ $ ->
     grid_type = $(this).attr("value")
     clear()
     draw_map()
+    # force.start()
+
+  $("#START").click () ->
+    force.start()
   
 
