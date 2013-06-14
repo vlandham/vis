@@ -84,6 +84,7 @@ $ ->
   display = (error, data) ->
     plotData("#vis", data, plot)
 
-
-  d3.csv("data/test.csv", display)
+  queue()
+    .defer(d3.csv, "data/test.csv")
+    .await(display)
 
