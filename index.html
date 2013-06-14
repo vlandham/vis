@@ -18,6 +18,30 @@
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
+  <style>
+
+.counties {
+  fill: none;
+}
+
+.states {
+  fill: none;
+  stroke: #fff;
+  stroke-linejoin: round;
+}
+
+.q0-9 { fill:rgb(247,251,255); }
+.q1-9 { fill:rgb(222,235,247); }
+.q2-9 { fill:rgb(198,219,239); }
+.q3-9 { fill:rgb(158,202,225); }
+.q4-9 { fill:rgb(107,174,214); }
+.q5-9 { fill:rgb(66,146,198); }
+.q6-9 { fill:rgb(33,113,181); }
+.q7-9 { fill:rgb(8,81,156); }
+.q8-9 { fill:rgb(8,48,107); }
+
+</style>
+
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
 
@@ -45,6 +69,7 @@
   <script src="js/libs/coffee-script.js"></script>
   <script src="js/libs/d3.v3.js"></script>
   <script src="js/libs/queue.min.js"></script>
+  <script src="js/libs/topojson.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
     $(document).ready(function() {
