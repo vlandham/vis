@@ -8,6 +8,7 @@ Plot = () ->
   us = {}
   zips = {}
   counties = {}
+  non_counties = {26000:1, 55000:1, 53055:1, 72001:1, 72063:1, 72081:1}
   points = null
   margin = {top: 0, right: 0, bottom: 0, left: 0}
   xScale = d3.scale.linear().domain([0,10]).range([0,width])
@@ -30,12 +31,9 @@ Plot = () ->
       if vote_county
         votes[vote_county] ||= 0
         votes[vote_county] += 1
-      else
-        console.log("no county for #{vote_zip}")
-
 
   isCounty = (d) ->
-    true
+    !non_counties[d.id]
 
   chart = (selection) ->
     selection.each (rawData) ->
@@ -43,8 +41,6 @@ Plot = () ->
       data = rawData
 
       countVotes(data)
-      console.log(votes)
-
 
       found = 0
       not_found = 0
@@ -52,6 +48,7 @@ Plot = () ->
         if counties[f.id]
           found += 1
         else
+          non_counties[f.id] = 1
           not_found += 1
 
       console.log("found counties: #{found}")
@@ -67,11 +64,11 @@ Plot = () ->
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
 
-      console.log(us)
       counties = g.append("g").attr("class", "counties")
         .selectAll("path")
         .data(topojson.feature(us, us.objects.counties).features)
         .enter().append("path")
+        .on("click", (d) -> console.log(d))
         .attr "class", (d) ->
           count = votes[d.id]
           if count
@@ -85,6 +82,11 @@ Plot = () ->
 
       g.append("path")
         .datum(topojson.mesh(us, us.objects.states, (a,b) -> a != b))
+        .attr("class", "states")
+        .attr("d", path)
+
+      g.append("path")
+        .datum(topojson.mesh(us, us.objects.land ))
         .attr("class", "states")
         .attr("d", path)
 
