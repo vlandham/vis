@@ -1,0 +1,866 @@
+key,country,local,region,count,lat,lon
+United States__New York,United States,"",New York,3776,43.00035,-75.4999
+United States_New York City_New York,United States,New York City,New York,2647,40.71427,-74.00597
+United States_Los Angeles_California,United States,Los Angeles,California,725,34.05223,-118.24368
+United Kingdom_London_England,United Kingdom,London,England,514,51.50853,-0.12574
+United States_Chicago_Illinois,United States,Chicago,Illinois,340,41.85003,-87.65005
+United States__,United States,"","",328,39.76,-98.5
+United States_Brooklyn_New York,United States,Brooklyn,New York,325,40.6501,-73.94958
+United States_Miami_Florida,United States,Miami,Florida,317,25.77427,-80.19366
+United States__New Jersey,United States,"",New Jersey,303,40.16706,-74.49987
+Canada_Toronto_Ontario,Canada,Toronto,Ontario,302,43.70011,-79.4163
+United States__Washington D.C.,United States,"",Washington D.C.,263,38.91706,-77.00025
+United Arab Emirates__Dubai,United Arab Emirates,"",Dubai,263,25,55.33333
+United States_San Francisco_California,United States,San Francisco,California,244,37.77493,-122.41942
+United States_Houston_Texas,United States,Houston,Texas,160,29.76328,-95.36327
+United States_Atlanta_Georgia,United States,Atlanta,Georgia,150,33.749,-84.38798
+Japan__,Japan,"","",144,35.68536,139.75309
+United States_Indianapolis_Indiana,United States,Indianapolis,Indiana,131,39.76838,-86.15804
+United States_Dallas_Texas,United States,Dallas,Texas,127,32.78306,-96.80667
+United States_Boston_Massachusetts,United States,Boston,Massachusetts,124,42.35843,-71.05977
+Dominican Republic__,Dominican Republic,"","",116,19,-70.66667
+United States_Manhattan_New York,United States,Manhattan,New York,101,40.78343,-73.96625
+United States_Leisure World_Maryland,United States,Leisure World,Maryland,101,39.1023,-77.06898
+United States__California,United States,"",California,101,37.25022,-119.75126
+Canada__,Canada,"","",96,60.10867,-113.64258
+Mexico_Mexico City_The Federal District,Mexico,Mexico City,The Federal District,93,19.42847,-99.12766
+United States_Hollywood_California,United States,Hollywood,California,89,34.09834,-118.32674
+United States_New Orleans_Louisiana,United States,New Orleans,Louisiana,88,29.95465,-90.07507
+United States_Philadelphia_Pennsylvania,United States,Philadelphia,Pennsylvania,87,39.95234,-75.16379
+Spain_Barcelona_Catalonia,Spain,Barcelona,Catalonia,86,41.38879,2.15899
+Argentina_Buenos Aires_Buenos Aires F.D.,Argentina,Buenos Aires,Buenos Aires F.D.,82,-34.61315,-58.37723
+France_Paris_Île-de-France,France,Paris,Île-de-France,82,48.85341,2.3488
+Netherlands__,Netherlands,"","",78,52.5,5.75
+United States__Georgia,United States,"",Georgia,66,32.75042,-83.50018
+United States__Texas,United States,"",Texas,63,31.25044,-99.25061
+Argentina__,Argentina,"","",60,-34,-64
+United States_Orlando_Florida,United States,Orlando,Florida,54,28.53834,-81.37924
+United States_Buffalo_New York,United States,Buffalo,New York,54,42.88645,-78.87837
+Bolivarian Republic of Venezuela__,Bolivarian Republic of Venezuela,"","",53,8,-66
+United States_Pittsburgh_Pennsylvania,United States,Pittsburgh,Pennsylvania,53,40.44062,-79.99589
+United Kingdom__,United Kingdom,"","",51,54.75844,-2.69531
+United States_St. Louis_Missouri,United States,St. Louis,Missouri,50,38.62727,-90.19789
+United States__Connecticut,United States,"",Connecticut,50,41.66704,-72.66648
+Monaco__,Monaco,"","",49,43.73141,7.41903
+Peru_Lima_Provincia de Lima,Peru,Lima,Provincia de Lima,48,-12.04318,-77.02824
+United States__Florida,United States,"",Florida,48,28.75054,-82.5001
+United States_Long Island City_New York,United States,Long Island City,New York,47,40.74482,-73.94875
+Canada_Vancouver_British Columbia,Canada,Vancouver,British Columbia,45,49.24966,-123.11934
+United States_Seattle_Washington,United States,Seattle,Washington,45,47.60621,-122.33207
+United States_Austin_Texas,United States,Austin,Texas,45,30.26715,-97.74306
+United States_Borough of West Chester_Pennsylvania,United States,Borough of West Chester,Pennsylvania,44,39.96012,-75.6058
+Papua New Guinea__,Papua New Guinea,"","",43,-6,147
+Armenia__,Armenia,"","",42,40,45
+United States_Las Vegas_Nevada,United States,Las Vegas,Nevada,41,36.17497,-115.13722
+Bahrain__,Bahrain,"","",40,26,50.5
+United States_Charlotte_North Carolina,United States,Charlotte,North Carolina,40,35.22709,-80.84313
+Italy_Turin_Piedmont,Italy,Turin,Piedmont,38,45.07049,7.68682
+United States__South Carolina,United States,"",South Carolina,37,34.00043,-81.00009
+United States_Minneapolis_Minnesota,United States,Minneapolis,Minnesota,37,44.97997,-93.26384
+United States_Miami Beach_Florida,United States,Miami Beach,Florida,36,25.79065,-80.13005
+Bosnia and Herzegovina__,Bosnia and Herzegovina,"","",36,44.25,17.83333
+Thailand__,Thailand,"","",36,15,100
+United States_Apple Valley_California,United States,Apple Valley,California,35,34.50083,-117.18588
+Mexico__,Mexico,"","",34,23,-102
+United States__North Carolina,United States,"",North Carolina,33,35.50069,-80.00032
+New Zealand__,New Zealand,"","",33,-42,174
+United States_South Gate Ridge_Florida,United States,South Gate Ridge,Florida,32,27.28644,-82.49676
+United States__Michigan,United States,"",Michigan,32,44.25029,-85.50033
+Denmark__,Denmark,"","",31,56,10
+Cura/u00E7ao__,Cura/u00E7ao,"","",31,12.16667,-69
+United States_Lubbock_Texas,United States,Lubbock,Texas,30,33.57786,-101.85517
+United States__Alabama,United States,"",Alabama,30,32.75041,-86.75026
+Spain__Madrid,Spain,"",Madrid,29,40.42526,-3.69063
+United States_Tampa_Florida,United States,Tampa,Florida,29,27.94752,-82.45843
+Indonesia__,Indonesia,"","",28,-5,120
+United States_San Diego_California,United States,San Diego,California,28,32.71533,-117.15726
+United States_Oklahoma City_Oklahoma,United States,Oklahoma City,Oklahoma,27,35.46756,-97.51643
+Egypt__,Egypt,"","",27,27,30
+United States__Ohio,United States,"",Ohio,27,40.25034,-83.00018
+France__,France,"","",26,46,2
+United States_Milwaukee_Wisconsin,United States,Milwaukee,Wisconsin,26,43.0389,-87.90647
+Côte d`Ivoire__,Côte d`Ivoire,"","",26,8,-5
+Spain__,Spain,"","",26,40,-4
+Spain_Granada_Andalusia,Spain,Granada,Andalusia,26,37.18817,-3.60667
+South Africa_Cape Town_Western Cape,South Africa,Cape Town,Western Cape,25,-33.92584,18.42322
+United States_Durham_North Carolina,United States,Durham,North Carolina,25,35.99403,-78.89862
+United States__Virginia,United States,"",Virginia,25,37.54812,-77.44675
+Philippines_Makati City_National Capital Region,Philippines,Makati City,National Capital Region,25,14.55027,121.03269
+United States__Pennsylvania,United States,"",Pennsylvania,24,40.27245,-76.90567
+United States__Maryland,United States,"",Maryland,23,39.00039,-76.74997
+United States_Cleveland_Ohio,United States,Cleveland,Ohio,23,41.4995,-81.69541
+United States__Utah,United States,"",Utah,22,39.25024,-111.75103
+United States_Borough of Bronx_New York,United States,Borough of Bronx,New York,22,40.84985,-73.86641
+Indonesia_Jakarta_Jakarta Raya,Indonesia,Jakarta,Jakarta Raya,22,-6.21462,106.84513
+United States_Asbury Park_New Jersey,United States,Asbury Park,New Jersey,21,40.22039,-74.01208
+Romania_Bucharest_Bucureşti,Romania,Bucharest,Bucureşti,21,44.43225,26.10626
+United States_Portland_Oregon,United States,Portland,Oregon,21,45.52345,-122.67621
+__,"","","",21,-1,-1
+United States_Olympia_Washington,United States,Olympia,Washington,21,47.03787,-122.9007
+United States_Santa Monica_California,United States,Santa Monica,California,21,34.01945,-118.49119
+South Africa__,South Africa,"","",21,-29,24
+Brazil__,Brazil,"","",21,-10,-55
+Pakistan_Karachi_Sindh,Pakistan,Karachi,Sindh,21,24.9056,67.0822
+United States_Baltimore_Maryland,United States,Baltimore,Maryland,21,39.29038,-76.61219
+United States_Brighton_Illinois,United States,Brighton,Illinois,20,39.03977,-90.14066
+Australia_Sydney_New South Wales,Australia,Sydney,New South Wales,20,-33.86785,151.20732
+United States_Universal City_Texas,United States,Universal City,Texas,20,29.54801,-98.29112
+United States__Missouri,United States,"",Missouri,20,38.25031,-92.50046
+United States_Detroit_Michigan,United States,Detroit,Michigan,19,42.33143,-83.04575
+Saint Barthélemy__,Saint Barthélemy,"","",18,17.9,-62.83333
+United States_Columbus_Ohio,United States,Columbus,Ohio,18,39.96118,-82.99879
+Singapore__,Singapore,"","",17,1.36667,103.8
+United States_Kansas City_Missouri,United States,Kansas City,Missouri,17,39.09973,-94.57857
+Ireland__,Ireland,"","",17,53,-8
+South Africa_Johannesburg_Gauteng,South Africa,Johannesburg,Gauteng,17,-26.20227,28.04363
+Germany__Berlin,Germany,"",Berlin,16,52.5,13.41667
+Australia__,Australia,"","",16,-25,135
+Russian Federation__,Russian Federation,"","",16,60,100
+Plurinational State of Bolivia__,Plurinational State of Bolivia,"","",16,-17,-65
+United States_University Gardens_New York,United States,University Gardens,New York,15,40.77732,-73.72263
+Tunisia__,Tunisia,"","",15,34,9
+Honduras__,Honduras,"","",15,15,-86.5
+Germany__,Germany,"","",15,51.5,10.5
+Saudi Arabia__,Saudi Arabia,"","",15,25,45
+Chile__,Chile,"","",15,-30,-71
+United States_Malibu_California,United States,Malibu,California,14,34.00501,-118.81009
+United States_Jacksonville_Florida,United States,Jacksonville,Florida,14,30.33218,-81.65565
+Canada_Montréal_Quebec,Canada,Montréal,Quebec,14,45.50884,-73.58781
+Australia_North Melbourne_Victoria,Australia,North Melbourne,Victoria,14,-37.80289,144.94816
+El Salvador__,El Salvador,"","",14,13.83333,-88.91667
+United Kingdom__England,United Kingdom,"",England,14,52.16045,-0.70312
+United States_Phoenix_Arizona,United States,Phoenix,Arizona,14,33.44838,-112.07404
+United States_Nashville_Tennessee,United States,Nashville,Tennessee,13,36.16589,-86.78444
+United States__Maine,United States,"",Maine,13,45.50032,-69.24977
+United States_Midwest City_Oklahoma,United States,Midwest City,Oklahoma,13,35.44951,-97.3967
+United States_Louisville_Kentucky,United States,Louisville,Kentucky,13,38.25424,-85.75941
+United States_Borough of North Caldwell_New Jersey,United States,Borough of North Caldwell,New Jersey,13,40.86289,-74.25767
+United States_Milan_Michigan,United States,Milan,Michigan,13,42.08532,-83.68244
+United States__Arizona,United States,"",Arizona,13,34.5003,-111.50098
+United States_Honolulu_Hawaii,United States,Honolulu,Hawaii,12,21.30694,-157.85833
+United States_Ann Arbor_Michigan,United States,Ann Arbor,Michigan,12,42.27756,-83.74088
+United States_Dayton_Ohio,United States,Dayton,Ohio,12,39.75895,-84.19161
+United States_Albuquerque_New Mexico,United States,Albuquerque,New Mexico,12,35.08449,-106.65114
+United States__Colorado,United States,"",Colorado,12,39.00027,-105.50083
+Mexico_Guadalajara_Jalisco,Mexico,Guadalajara,Jalisco,12,20.66667,-103.33333
+Uruguay__,Uruguay,"","",11,-33,-56
+United States_Denver_Colorado,United States,Denver,Colorado,11,39.73915,-104.9847
+United States_Arlington_Virginia,United States,Arlington,Virginia,11,38.88101,-77.10428
+United States_Rochester_New York,United States,Rochester,New York,11,43.15478,-77.61556
+United States_Charleston_South Carolina,United States,Charleston,South Carolina,11,32.77657,-79.93092
+United States_Richmond_Virginia,United States,Richmond,Virginia,11,37.55376,-77.46026
+Puerto Rico_Puerto Rico_,Puerto Rico,Puerto Rico,"",11,18.24829,-66.49989
+United States_Lexington_Kentucky,United States,Lexington,Kentucky,10,37.98869,-84.47772
+Indonesia_Bandung_West Java,Indonesia,Bandung,West Java,10,-6.90389,107.61861
+Peru__,Peru,"","",10,-10,-76
+Sweden__Stockholm,Sweden,"",Stockholm,10,59.5,18
+Japan_Tokyo_Tōkyō,Japan,Tokyo,Tōkyō,10,35.6895,139.69171
+Italy_Milano_Lombardy,Italy,Milano,Lombardy,10,45.46427,9.18951
+Portugal__,Portugal,"","",10,39.6945,-8.13057
+United States__West Virginia,United States,"",West Virginia,10,38.50038,-80.50009
+Canada_Calgary_Alberta,Canada,Calgary,Alberta,10,51.05011,-114.08529
+United States_Greenwich_Connecticut,United States,Greenwich,Connecticut,10,41.02649,-73.62846
+United States_West New York_New Jersey,United States,West New York,New Jersey,10,40.78788,-74.01431
+Republic of Korea__Seoul,Republic of Korea,"",Seoul,10,37.58333,127
+Colombia__,Colombia,"","",10,4,-72
+Finland__,Finland,"","",10,64,26
+Honduras_Tegucigalpa_Francisco Morazán,Honduras,Tegucigalpa,Francisco Morazán,10,14.0818,-87.20681
+United States__Rhode Island,United States,"",Rhode Island,10,41.75038,-71.49978
+Panama__,Panama,"","",10,9,-80
+Australia_Melbourne_Victoria,Australia,Melbourne,Victoria,10,-37.814,144.96332
+United States_Syracuse_New York,United States,Syracuse,New York,10,43.04812,-76.14742
+Turkey__Istanbul,Turkey,"",Istanbul,10,41.03508,28.98331
+India__,India,"","",9,20,77
+Bolivarian Republic of Venezuela_Maracaibo_Estado Zulia,Bolivarian Republic of Venezuela,Maracaibo,Estado Zulia,9,10.63167,-71.64056
+Estonia__Harju County,Estonia,"",Harju County,9,59.33333,24.83333
+Belgium__,Belgium,"","",9,50.83333,4
+Italy__,Italy,"","",9,42.83333,12.83333
+United States_Ship Bottom_New Jersey,United States,Ship Bottom,New Jersey,9,39.6429,-74.18042
+Malaysia__Kuala Lumpur,Malaysia,"",Kuala Lumpur,9,3.14309,101.68653
+United States__Massachusetts,United States,"",Massachusetts,9,42.36565,-71.10832
+United States_Baton Rouge_Louisiana,United States,Baton Rouge,Louisiana,9,30.45075,-91.15455
+United States_Beverly Hills_California,United States,Beverly Hills,California,9,34.07362,-118.40036
+Ecuador__,Ecuador,"","",9,-2,-77.5
+Philippines__,Philippines,"","",9,13,122
+United States_Charleroi_Pennsylvania,United States,Charleroi,Pennsylvania,9,40.13785,-79.8981
+Australia_Perth_Western Australia,Australia,Perth,Western Australia,9,-31.95224,115.8614
+San Marino__,San Marino,"","",8,43.9367,12.4463
+United States__Tennessee,United States,"",Tennessee,8,35.75035,-86.25027
+Mexico_Monterrey_Nuevo León,Mexico,Monterrey,Nuevo León,8,25.66667,-100.31667
+United States_Montvale_New Jersey,United States,Montvale,New Jersey,8,41.04676,-74.02292
+United States_Columbia_Missouri,United States,Columbia,Missouri,8,38.95171,-92.33407
+Colombia_Bogotá_Bogota D.C.,Colombia,Bogotá,Bogota D.C.,8,4.60971,-74.08175
+United States_Kent_Ohio,United States,Kent,Ohio,8,41.15367,-81.35789
+Canada_Ottawa_Ontario,Canada,Ottawa,Ontario,8,45.41117,-75.69812
+United States_Memphis_Tennessee,United States,Memphis,Tennessee,8,35.14953,-90.04898
+United Kingdom_Rainham_England,United Kingdom,Rainham,England,7,51.36323,0.60893
+Central African Republic__,Central African Republic,"","",7,7,21
+United Kingdom_Wimborne Minster_England,United Kingdom,Wimborne Minster,England,7,50.78333,-1.98333
+United States__Minnesota,United States,"",Minnesota,7,46.25024,-94.25055
+Kenya_Nairobi_Nairobi Area,Kenya,Nairobi,Nairobi Area,7,-1.28333,36.81667
+United States_San Antonio_Texas,United States,San Antonio,Texas,7,29.42412,-98.49363
+Trinidad and Tobago__,Trinidad and Tobago,"","",7,11,-61
+United States_Woodstock_Illinois,United States,Woodstock,Illinois,7,42.31474,-88.4487
+United Arab Emirates__,United Arab Emirates,"","",7,24,54
+United States__Louisiana,United States,"",Louisiana,7,31.00047,-92.0004
+Colombia__Bogota D.C.,Colombia,"",Bogota D.C.,7,4.25,-74.18333
+United States_West Hollywood_California,United States,West Hollywood,California,7,34.09001,-118.36174
+United States_Virginia Beach_Virginia,United States,Virginia Beach,Virginia,7,36.85293,-75.97798
+United States_Saint Petersburg_Florida,United States,Saint Petersburg,Florida,6,27.77086,-82.67927
+United States_Salt Lake City_Utah,United States,Salt Lake City,Utah,6,40.76078,-111.89105
+Paraguay_Nueva Italia_Central,Paraguay,Nueva Italia,Central,6,-25.61667,-57.5
+Egypt_Cairo_Al Qāhirah,Egypt,Cairo,Al Qāhirah,6,30.06263,31.24967
+United States_Staten Island_New York,United States,Staten Island,New York,6,40.56233,-74.13986
+United States__Oklahoma,United States,"",Oklahoma,6,35.49209,-97.50328
+United States__Indiana,United States,"",Indiana,6,40.00032,-86.25027
+Chile_Santiago_Santiago,Chile,Santiago,Santiago,6,-33.45694,-70.64827
+United States_Knoxville_Tennessee,United States,Knoxville,Tennessee,6,35.96064,-83.92074
+Canada_Québec_Quebec,Canada,Québec,Quebec,6,46.81228,-71.21454
+France_Lyon_Rhône-Alpes,France,Lyon,Rhône-Alpes,6,45.74846,4.84671
+United Kingdom_Glasgow_Scotland,United Kingdom,Glasgow,Scotland,6,55.86515,-4.25763
+Japan_Okayama-shi_Okayama,Japan,Okayama-shi,Okayama,6,34.66167,133.935
+Haiti__,Haiti,"","",6,19,-72.41667
+Italy_Venezia_Veneto,Italy,Venezia,Veneto,6,45.43861,12.32667
+Costa Rica__,Costa Rica,"","",6,10,-84
+United States_Scottsdale_Arizona,United States,Scottsdale,Arizona,6,33.50921,-111.89903
+United States_San Jose_California,United States,San Jose,California,6,37.33939,-121.89496
+Brazil_Franca_São Paulo,Brazil,Franca,São Paulo,5,-20.53861,-47.40083
+United States_Athens_Georgia,United States,Athens,Georgia,5,33.96095,-83.37794
+United States_Cincinnati_Ohio,United States,Cincinnati,Ohio,5,39.162,-84.45689
+United States_Fort Lauderdale_Florida,United States,Fort Lauderdale,Florida,5,26.12231,-80.14338
+United States_Arlington_Texas,United States,Arlington,Texas,5,32.73569,-97.10807
+United States_Saratoga_California,United States,Saratoga,California,5,37.26383,-122.02301
+United States_Savannah_Georgia,United States,Savannah,Georgia,5,32.08354,-81.09983
+United States_Altamonte Springs_Florida,United States,Altamonte Springs,Florida,5,28.66111,-81.36562
+Mexico__Baja California Sur,Mexico,"",Baja California Sur,5,25.83333,-111.83333
+Georgia__,Georgia,"","",5,41.99998,43.4999
+United States_Oxford_Ohio,United States,Oxford,Ohio,5,39.507,-84.74523
+Saudi Arabia_Riyadh_Ar Riyāḑ,Saudi Arabia,Riyadh,Ar Riyāḑ,5,24.68773,46.72185
+United States_Conroe_Texas,United States,Conroe,Texas,5,30.31188,-95.45605
+United States_Bellevue_Washington,United States,Bellevue,Washington,5,47.61038,-122.20068
+United States_Hoboken_New Jersey,United States,Hoboken,New Jersey,5,40.74399,-74.03236
+Austria_Vienna_Vienna,Austria,Vienna,Vienna,5,48.20849,16.37208
+Turkey__,Turkey,"","",5,39.05901,34.91155
+Philippines_Cebu City_Central Visayas,Philippines,Cebu City,Central Visayas,5,10.31672,123.89071
+Colombia_Barranquilla_Atlántico,Colombia,Barranquilla,Atlántico,5,10.96389,-74.79639
+United States_Mountain View_California,United States,Mountain View,California,5,37.38605,-122.08385
+Canada_Edmonton_Alberta,Canada,Edmonton,Alberta,5,53.55014,-113.46871
+Greece__,Greece,"","",5,39,22
+South Africa__North-West,South Africa,"",North-West,5,-26.5,26
+United States_Fort Worth_Texas,United States,Fort Worth,Texas,5,32.72541,-97.32085
+South Africa_Durban_KwaZulu-Natal,South Africa,Durban,KwaZulu-Natal,5,-29.8579,31.0292
+Canada_West Kelowna_British Columbia,Canada,West Kelowna,British Columbia,5,49.8625,-119.58333
+United States_Alexandria_Virginia,United States,Alexandria,Virginia,5,38.80484,-77.04692
+Réunion_Reunion_,Réunion,Reunion,"",5,-21.1,55.6
+United States_Gainesville_Florida,United States,Gainesville,Florida,5,29.65163,-82.32483
+Ecuador_Guayaquil_Guayas,Ecuador,Guayaquil,Guayas,4,-2.18194,-79.89167
+United States_Raleigh_North Carolina,United States,Raleigh,North Carolina,4,35.7721,-78.63861
+Paraguay_Asunción_Asunción,Paraguay,Asunción,Asunción,4,-25.30066,-57.63591
+Azerbaijan__,Azerbaijan,"","",4,40.5,47.5
+United States_Laredo_Texas,United States,Laredo,Texas,4,27.50641,-99.50754
+United States_Lafayette_Louisiana,United States,Lafayette,Louisiana,4,30.22409,-92.01984
+United States_West Hartford_Connecticut,United States,West Hartford,Connecticut,4,41.76204,-72.74204
+Mexico_Santo Domingo de Guzmán_México,Mexico,Santo Domingo de Guzmán,México,4,19.58833,-99.77472
+United States_Birmingham_Alabama,United States,Birmingham,Alabama,4,33.52066,-86.80249
+United States_Wausau_Wisconsin,United States,Wausau,Wisconsin,4,44.95914,-89.63012
+United States_Village of East Brooklyn_Illinois,United States,Village of East Brooklyn,Illinois,4,41.17277,-88.26603
+United States__Kentucky,United States,"",Kentucky,4,38.20042,-84.87762
+United States_Ponte Vedra Beach_Florida,United States,Ponte Vedra Beach,Florida,4,30.23969,-81.38564
+Pakistan__,Pakistan,"","",4,30,70
+Spain_Sevilla_Andalusia,Spain,Sevilla,Andalusia,4,37.38241,-5.97613
+United States_East Hampton_Connecticut,United States,East Hampton,Connecticut,4,41.57593,-72.50259
+Ireland_Dublin_Leinster,Ireland,Dublin,Leinster,4,53.33306,-6.24889
+United Kingdom_Manchester_England,United Kingdom,Manchester,England,4,53.48095,-2.23743
+Germany_Frankfurt am Main_Hesse,Germany,Frankfurt am Main,Hesse,4,50.11552,8.68417
+Australia_Canberra_Australian Capital Territory,Australia,Canberra,Australian Capital Territory,4,-35.28346,149.12807
+Malaysia__,Malaysia,"","",4,2.5,112.5
+United Kingdom__Scotland,United Kingdom,"",Scotland,4,56,-4
+United States_Tuscaloosa_Alabama,United States,Tuscaloosa,Alabama,4,33.20984,-87.56917
+Belgium_Brussels_Brussels Capital Region,Belgium,Brussels,Brussels Capital Region,4,50.85045,4.34878
+Italy_Firenze_Tuscany,Italy,Firenze,Tuscany,4,43.76667,11.25
+Philippines_Manila_National Capital Region,Philippines,Manila,National Capital Region,4,14.6042,120.9822
+United States_Newark_New Jersey,United States,Newark,New Jersey,4,40.73566,-74.17237
+United States_Tallahassee_Florida,United States,Tallahassee,Florida,4,30.43826,-84.28073
+United States_West Palm Beach_Florida,United States,West Palm Beach,Florida,4,26.71534,-80.05337
+United States_Newport_Rhode Island,United States,Newport,Rhode Island,4,41.4901,-71.31283
+United States_Kerrville_Texas,United States,Kerrville,Texas,4,30.04743,-99.14032
+United States_Palm Springs_California,United States,Palm Springs,California,4,33.8303,-116.54529
+Kuwait__,Kuwait,"","",4,29.5,47.75
+Nigeria__,Nigeria,"","",4,10,8
+United States_University Place_Washington,United States,University Place,Washington,4,47.23565,-122.5504
+Brazil_São Paulo_São Paulo,Brazil,São Paulo,São Paulo,4,-23.5475,-46.63611
+Greece_Athens_Attica,Greece,Athens,Attica,4,37.97945,23.71622
+Hungary_Budapest_Budapest,Hungary,Budapest,Budapest,4,47.49801,19.03991
+United States_Cedar Hill_Texas,United States,Cedar Hill,Texas,4,32.58847,-96.95612
+Saudi Arabia_Jeddah_Makkah,Saudi Arabia,Jeddah,Makkah,4,21.51694,39.21917
+United States_City of Jersey City_New Jersey,United States,City of Jersey City,New Jersey,4,40.71162,-74.06482
+United Kingdom_Stratford-upon-Avon_England,United Kingdom,Stratford-upon-Avon,England,4,52.19166,-1.70734
+United States_Warren_Michigan,United States,Warren,Michigan,4,42.47754,-83.0277
+United States__Wyoming,United States,"",Wyoming,4,43.00024,-107.5009
+United States_Des Moines_Iowa,United States,Des Moines,Iowa,4,41.60054,-93.60911
+United States__Kansas,United States,"",Kansas,4,38.50029,-98.50063
+Nigeria__Abuja Federal Capital Territory,Nigeria,"",Abuja Federal Capital Territory,4,8.83333,7.16667
+United States__Idaho,United States,"",Idaho,4,44.5002,-114.25118
+United States_Toms River_New Jersey,United States,Toms River,New Jersey,4,39.95373,-74.19792
+Hong Kong_Hong Kong Special Administrative Region_,Hong Kong,Hong Kong Special Administrative Region,"",4,22.25,114.16667
+Serbia__,Serbia,"","",3,44.81892,20.45998
+United States_Boulder_Colorado,United States,Boulder,Colorado,3,40.01499,-105.27055
+United States_Boca Raton_Florida,United States,Boca Raton,Florida,3,26.35869,-80.0831
+United States__Delaware,United States,"",Delaware,3,39.00039,-75.49992
+Japan_Kyoto_Kyōto,Japan,Kyoto,Kyōto,3,35.02107,135.75385
+United States__Iowa,United States,"",Iowa,3,42.00027,-93.50049
+Italy_Perugia_Umbria,Italy,Perugia,Umbria,3,43.09674,12.38286
+United States__New Hampshire,United States,"",New Hampshire,3,43.66702,-71.4998
+United States_Colorado Springs_Colorado,United States,Colorado Springs,Colorado,3,38.83388,-104.82136
+United States_Portland_Maine,United States,Portland,Maine,3,43.66147,-70.25533
+Canada_Windsor_Ontario,Canada,Windsor,Ontario,3,42.30008,-83.01654
+United Kingdom_Leeds_England,United Kingdom,Leeds,England,3,53.79648,-1.54785
+Afghanistan__,Afghanistan,"","",3,33,66
+Panama_Panamá_Panamá,Panama,Panamá,Panamá,3,8.9936,-79.51973
+Philippines_City of Biñan_Calabarzon,Philippines,City of Biñan,Calabarzon,3,14.30506,121.07654
+Malta__,Malta,"","",3,35.91667,14.43333
+Netherlands_Amsterdam_North Holland,Netherlands,Amsterdam,North Holland,3,52.37403,4.88969
+United States__Nebraska,United States,"",Nebraska,3,41.50028,-99.75067
+Mexico__The Federal District,Mexico,"",The Federal District,3,19.25,-99.16667
+Burkina Faso__,Burkina Faso,"","",3,13,-2
+United States_Essex_Maryland,United States,Essex,Maryland,3,39.30927,-76.47496
+United States_Eugene_Oregon,United States,Eugene,Oregon,3,44.05207,-123.08675
+United States_Providence_Rhode Island,United States,Providence,Rhode Island,3,41.82399,-71.41283
+United States__Hawaii,United States,"",Hawaii,3,20.75028,-156.50028
+United States_Irvine_California,United States,Irvine,California,3,33.66946,-117.82311
+United Kingdom_Virginia Water_England,United Kingdom,Virginia Water,England,3,51.40343,-0.56651
+Paraguay__,Paraguay,"","",3,-22.99333,-57.99639
+Canada_Victoria_British Columbia,Canada,Victoria,British Columbia,3,48.43294,-123.3693
+Colombia_Cali_Valle del Cauca,Colombia,Cali,Valle del Cauca,3,3.43722,-76.5225
+Jamaica__,Jamaica,"","",3,18.25,-77.5
+Brazil_Porto Alegre_Rio Grande do Sul,Brazil,Porto Alegre,Rio Grande do Sul,3,-30.03306,-51.23
+United States_Brentwood_California,United States,Brentwood,California,3,37.92687,-121.72577
+Islamic Republic of Iran__,Islamic Republic of Iran,"","",3,32,53
+Mexico__Veracruz-Llave,Mexico,"",Veracruz-Llave,3,19.33333,-96.66667
+United States_Hollywood_Florida,United States,Hollywood,Florida,3,26.0112,-80.14949
+Mexico_Ciudad Nezahualcóyotl_México,Mexico,Ciudad Nezahualcóyotl,México,3,19.40061,-99.01483
+United States_Redondo Beach_California,United States,Redondo Beach,California,3,33.84918,-118.38841
+Spain_Nerja_Andalusia,Spain,Nerja,Andalusia,3,36.75278,-3.8744
+Canada_Winnipeg_Manitoba,Canada,Winnipeg,Manitoba,3,49.8844,-97.14704
+Norway__,Norway,"","",3,62,10
+United States_North Fort Myers_Florida,United States,North Fort Myers,Florida,3,26.66729,-81.88009
+United States_Hamilton Square_New Jersey,United States,Hamilton Square,New Jersey,3,40.22733,-74.65321
+Brazil_Rio de Janeiro_Rio de Janeiro,Brazil,Rio de Janeiro,Rio de Janeiro,3,-22.90278,-43.2075
+United States_Charlottesville_Virginia,United States,Charlottesville,Virginia,3,38.02931,-78.47668
+Germany__Free and Hanseatic City of Hamburg,Germany,"",Free and Hanseatic City of Hamburg,3,53.58333,10
+United States__Wisconsin,United States,"",Wisconsin,3,44.50024,-90.00041
+Malaysia_Kota Kinabalu_Sabah,Malaysia,Kota Kinabalu,Sabah,3,5.9749,116.0724
+Djibouti__,Djibouti,"","",3,11.5,42.5
+Norway_Bergen_Hordaland,Norway,Bergen,Hordaland,3,60.39299,5.32415
+Lebanon_Beirut_Beyrouth,Lebanon,Beirut,Beyrouth,3,33.88894,35.49442
+Mexico_Tijuana_Baja California,Mexico,Tijuana,Baja California,3,32.5027,-117.00371
+United Kingdom_Liverpool_England,United Kingdom,Liverpool,England,3,53.41058,-2.97794
+United States_Lancaster_Pennsylvania,United States,Lancaster,Pennsylvania,3,40.03788,-76.30551
+Nigeria__Lagos,Nigeria,"",Lagos,3,6.58333,3.75
+United States_El Paso_Texas,United States,El Paso,Texas,3,31.75872,-106.48693
+United States_Everett_Washington,United States,Everett,Washington,3,47.97898,-122.20208
+United States_Beverly Hills_Michigan,United States,Beverly Hills,Michigan,3,42.52392,-83.22326
+United States_Bay Shore_New York,United States,Bay Shore,New York,3,40.7251,-73.24539
+United States_Chester_Virginia,United States,Chester,Virginia,3,37.35682,-77.44165
+United States_Athens_Ohio,United States,Athens,Ohio,3,39.32924,-82.10126
+Andorra__,Andorra,"","",3,42.5,1.5
+Australia_Gold Coast_Queensland,Australia,Gold Coast,Queensland,3,-28.00029,153.43088
+Australia_Adelaide_South Australia,Australia,Adelaide,South Australia,3,-34.92866,138.59863
+United States_San Marcos_Texas,United States,San Marcos,Texas,3,29.88327,-97.94139
+Spain_Las Palmas de Gran Canaria_Canary Islands,Spain,Las Palmas de Gran Canaria,Canary Islands,3,28.09973,-15.41343
+United States_Westport_Connecticut,United States,Westport,Connecticut,3,41.14149,-73.3579
+United States_Grand Rapids_Michigan,United States,Grand Rapids,Michigan,3,42.96336,-85.66809
+Bolivarian Republic of Venezuela_Valencia_Estado Carabobo,Bolivarian Republic of Venezuela,Valencia,Estado Carabobo,3,10.16202,-68.00765
+United States_Princeton_New Jersey,United States,Princeton,New Jersey,3,40.34872,-74.65905
+Guinea-Bissau__,Guinea-Bissau,"","",3,12,-15
+Cameroon__,Cameroon,"","",3,6,12
+United Kingdom_Hastings_England,United Kingdom,Hastings,England,3,50.85519,0.57292
+Dominican Republic_Santo Domingo_Distrito Nacional,Dominican Republic,Santo Domingo,Distrito Nacional,3,18.50012,-69.98857
+United States_Milton_Wisconsin,United States,Milton,Wisconsin,3,42.77556,-88.944
+United Kingdom_Dunfermline_Scotland,United Kingdom,Dunfermline,Scotland,3,56.07156,-3.45887
+United States_North Hollywood_California,United States,North Hollywood,California,3,34.17223,-118.37897
+United Kingdom__Wales,United Kingdom,"",Wales,2,52.5,-3.5
+United Kingdom_Belfast_N Ireland,United Kingdom,Belfast,N Ireland,2,54.58333,-5.93333
+United States_Mocksville_North Carolina,United States,Mocksville,North Carolina,2,35.89403,-80.56145
+United States_Beaumont_Texas,United States,Beaumont,Texas,2,30.08605,-94.10185
+United States_Belmont_Massachusetts,United States,Belmont,Massachusetts,2,42.39593,-71.17867
+United States_Conover_North Carolina,United States,Conover,North Carolina,2,35.70652,-81.21869
+United States_Conway_Arkansas,United States,Conway,Arkansas,2,35.0887,-92.4421
+United States_Laguna Beach_California,United States,Laguna Beach,California,2,33.54225,-117.78311
+Canada_Amherstburg_Ontario,Canada,Amherstburg,Ontario,2,42.11679,-83.04985
+United Kingdom_Cardiff_Wales,United Kingdom,Cardiff,Wales,2,51.48,-3.18
+Lao People`s Democratic Republic__,Lao People`s Democratic Republic,"","",2,18,105
+United States_Naples_Florida,United States,Naples,Florida,2,26.14204,-81.79481
+Argentina__Buenos Aires F.D.,Argentina,"",Buenos Aires F.D.,2,-34.6,-58.45
+United States_New Haven_Connecticut,United States,New Haven,Connecticut,2,41.30815,-72.92816
+Jamaica_Runaway Bay_Saint Ann,Jamaica,Runaway Bay,Saint Ann,2,18.45962,-77.3357
+France_Sainte-Lizaigne_Centre,France,Sainte-Lizaigne,Centre,2,47.00695,2.02266
+Martinique_Martinique_,Martinique,Martinique,"",2,14.66667,-61
+United States_City of Cedar Hills_Utah,United States,City of Cedar Hills,Utah,2,40.41665,-111.76379
+United States_Jackson_Mississippi,United States,Jackson,Mississippi,2,32.29876,-90.18481
+India_New Delhi_NCT,India,New Delhi,NCT,2,28.63576,77.22445
+United States_South Plainfield_New Jersey,United States,South Plainfield,New Jersey,2,40.57927,-74.41154
+Uruguay__Montevideo,Uruguay,"",Montevideo,2,-34.86528,-56.18194
+United States_Berkeley_California,United States,Berkeley,California,2,37.87159,-122.27275
+United States_City of Cohoes_New York,United States,City of Cohoes,New York,2,42.77328,-73.70774
+United Kingdom_Inverness_Scotland,United Kingdom,Inverness,Scotland,2,57.47908,-4.22398
+Madagascar__,Madagascar,"","",2,-20,47
+United States_Bear_Delaware,United States,Bear,Delaware,2,39.62928,-75.65826
+Italy_Roma Capitale_Latium,Italy,Roma Capitale,Latium,2,41.90036,12.49575
+United States_Riverton_Wyoming,United States,Riverton,Wyoming,2,43.02496,-108.3801
+French Southern Territories__,French Southern Territories,"","",2,-43,67
+United Arab Emirates_Abu Dhabi_Abu Dhabi,United Arab Emirates,Abu Dhabi,Abu Dhabi,2,24.46667,54.36667
+United States_McLean_Virginia,United States,McLean,Virginia,2,38.93428,-77.17748
+United States_Norman_Oklahoma,United States,Norman,Oklahoma,2,35.22257,-97.43948
+United Kingdom_Lancaster_England,United Kingdom,Lancaster,England,2,54.06667,-2.83333
+Guatemala__,Guatemala,"","",2,15.5,-90.25
+United States_Fort Collins_Colorado,United States,Fort Collins,Colorado,2,40.58526,-105.08442
+United States_The Rock_Georgia,United States,The Rock,Georgia,2,32.96402,-84.24103
+United Kingdom_Leicester_England,United Kingdom,Leicester,England,2,52.6386,-1.13169
+United States__Oregon,United States,"",Oregon,2,44.00013,-120.50139
+Democratic People`s Republic of Korea__,Democratic People`s Republic of Korea,"","",2,40,127
+United States_Rockville Centre_New York,United States,Rockville Centre,New York,2,40.65871,-73.64124
+Bulgaria_Sofia_Sofia-Capital,Bulgaria,Sofia,Sofia-Capital,2,42.69751,23.32415
+United States_Lincolnshire_Illinois,United States,Lincolnshire,Illinois,2,42.19002,-87.9084
+Mexico__Puebla,Mexico,"",Puebla,2,18.83333,-98
+Indonesia_Surabaya_East Java,Indonesia,Surabaya,East Java,2,-7.24917,112.75083
+Brazil__Minas Gerais,Brazil,"",Minas Gerais,2,-18,-44
+United States_Wilmington_Delaware,United States,Wilmington,Delaware,2,39.74595,-75.54659
+Argentina_Mar del Plata_Buenos Aires,Argentina,Mar del Plata,Buenos Aires,2,-38.00228,-57.55754
+Canada_Hamilton_Ontario,Canada,Hamilton,Ontario,2,43.25011,-79.84963
+United States_Castro Valley_California,United States,Castro Valley,California,2,37.6941,-122.08635
+United States_Santa Barbara_California,United States,Santa Barbara,California,2,34.42083,-119.69819
+United States_Ames_Iowa,United States,Ames,Iowa,2,42.03471,-93.61994
+United States_Oakland_California,United States,Oakland,California,2,37.80437,-122.2708
+Ukraine__,Ukraine,"","",2,49,32
+Hungary__Bács-Kiskun,Hungary,"",Bács-Kiskun,2,46.5,19.41667
+United States_Rolling Hills_California,United States,Rolling Hills,California,2,33.75696,-118.35396
+Australia_Brisbane_Queensland,Australia,Brisbane,Queensland,2,-27.46794,153.02809
+United States_Long Beach_California,United States,Long Beach,California,2,33.76696,-118.18923
+Barbados__,Barbados,"","",2,13.16667,-59.53333
+Mexico__Querétaro,Mexico,"",Querétaro,2,21,-99.91667
+United States_Wolf Trap_Virginia,United States,Wolf Trap,Virginia,2,38.93983,-77.28609
+United States_East Lansing_Michigan,United States,East Lansing,Michigan,2,42.73698,-84.48387
+France_Boissise-le-Roi_Île-de-France,France,Boissise-le-Roi,Île-de-France,2,48.5248,2.56971
+United States__Washington,United States,"",Washington,2,47.50012,-120.50147
+United States_San Tan Valley_Arizona,United States,San Tan Valley,Arizona,2,33.1911,-111.528
+United Kingdom_Kilmarnock_Scotland,United Kingdom,Kilmarnock,Scotland,2,55.61171,-4.49581
+United States__Illinois,United States,"",Illinois,2,40.00032,-89.25037
+Argentina__Córdoba,Argentina,"",Córdoba,2,-32,-64
+India_Mumbai_Mahārāshtra,India,Mumbai,Mahārāshtra,2,19.07283,72.88261
+United States__Montana,United States,"",Montana,2,47.00025,-109.75102
+United States_Elon_North Carolina,United States,Elon,North Carolina,2,36.10291,-79.50669
+United Kingdom_Sheffield_England,United Kingdom,Sheffield,England,2,53.38297,-1.4659
+United States_Little Rock_Arkansas,United States,Little Rock,Arkansas,2,34.74648,-92.28959
+Jamaica_Negril_Westmoreland,Jamaica,Negril,Westmoreland,2,18.27818,-78.3518
+United States_Henderson_Nevada,United States,Henderson,Nevada,2,36.0397,-114.98194
+Jamaica_Montego Bay_Saint James,Jamaica,Montego Bay,Saint James,2,18.47116,-77.91883
+United States_Bentonville_Arkansas,United States,Bentonville,Arkansas,2,36.37285,-94.20882
+United States_Santa Fe_New Mexico,United States,Santa Fe,New Mexico,2,35.68698,-105.9378
+United States_New Castle_Delaware,United States,New Castle,Delaware,2,39.66206,-75.56631
+Bangladesh_Dhaka_Dhaka,Bangladesh,Dhaka,Dhaka,2,23.7104,90.40744
+United States_Half Moon Bay_California,United States,Half Moon Bay,California,2,37.46355,-122.42859
+United States_Vernon Hills_Illinois,United States,Vernon Hills,Illinois,2,42.21809,-87.96513
+United States_Wyomissing_Pennsylvania,United States,Wyomissing,Pennsylvania,2,40.32954,-75.96521
+Czech Republic__,Czech Republic,"","",2,49.75,15
+United States_Goldens Bridge_New York,United States,Goldens Bridge,New York,2,41.29343,-73.6768
+United States_Huntington Beach_California,United States,Huntington Beach,California,2,33.6603,-117.99923
+Japan_Kagoshima-shi_Kagoshima,Japan,Kagoshima-shi,Kagoshima,2,31.56018,130.55814
+United States_Sarasota_Florida,United States,Sarasota,Florida,2,27.33643,-82.53065
+Canada_Surrey_British Columbia,Canada,Surrey,British Columbia,2,49.10635,-122.82509
+Poland_Warsaw_Masovian Voivodeship,Poland,Warsaw,Masovian Voivodeship,2,52.22977,21.01178
+United States_Burbank_California,United States,Burbank,California,2,34.18084,-118.30897
+United States_Temecula_California,United States,Temecula,California,2,33.49364,-117.14836
+United States_Stamford_Connecticut,United States,Stamford,Connecticut,2,41.05343,-73.53873
+United States_State College_Pennsylvania,United States,State College,Pennsylvania,2,40.7934,-77.86
+United States_Corvallis_Oregon,United States,Corvallis,Oregon,2,44.56457,-123.26204
+United States__Vermont,United States,"",Vermont,2,44.00034,-72.74983
+Italy_Bari_Apulia,Italy,Bari,Apulia,2,41.11773,16.85118
+United States_Pasadena_California,United States,Pasadena,California,2,34.14778,-118.14452
+United States_Greensboro_North Carolina,United States,Greensboro,North Carolina,2,36.07264,-79.79198
+United States__Mississippi,United States,"",Mississippi,2,32.75041,-89.75036
+United States_Lansing_Michigan,United States,Lansing,Michigan,2,42.73254,-84.55553
+Bolivarian Republic of Venezuela_Caracas_Distrito Federal,Bolivarian Republic of Venezuela,Caracas,Distrito Federal,2,10.48801,-66.87919
+Afghanistan__Herat,Afghanistan,"",Herat,2,34.5,62
+Greece_Dimos Thessaloniki_Central Macedonia,Greece,Dimos Thessaloniki,Central Macedonia,2,40.62334,22.95369
+Netherlands_The Hague_South Holland,Netherlands,The Hague,South Holland,2,52.07667,4.29861
+United Kingdom_Oxford_England,United Kingdom,Oxford,England,2,51.75222,-1.25596
+United States__South Dakota,United States,"",South Dakota,2,44.50026,-100.25069
+Brazil_Brasília_Federal District,Brazil,Brasília,Federal District,2,-15.77972,-47.92972
+United States__Arkansas,United States,"",Arkansas,2,34.75037,-92.50044
+United States_Fort Wayne_Indiana,United States,Fort Wayne,Indiana,2,41.1306,-85.12886
+United States_Madison_Wisconsin,United States,Madison,Wisconsin,2,43.07305,-89.40123
+Italy_Piacenza_Emilia-Romagna,Italy,Piacenza,Emilia-Romagna,2,45.04676,9.69937
+Greece__East Macedonia and Thrace,Greece,"",East Macedonia and Thrace,2,40.94671,25.33447
+Thailand_Bangkok_Bangkok,Thailand,Bangkok,Bangkok,2,13.75398,100.50144
+United States_Waco_Texas,United States,Waco,Texas,2,31.54933,-97.14667
+Spain__Murcia,Spain,"",Murcia,2,38,-1.5
+Russian Federation_Moscow_Moscow,Russian Federation,Moscow,Moscow,2,55.75222,37.61556
+United States_Nanuet_New York,United States,Nanuet,New York,2,41.08871,-74.01347
+Mexico__Yucatán,Mexico,"",Yucatán,2,20.83333,-89
+United States_Manhattan Beach_California,United States,Manhattan Beach,California,2,33.88474,-118.41091
+United States_Omaha_Nebraska,United States,Omaha,Nebraska,2,41.25861,-95.93779
+United States_Salinas_California,United States,Salinas,California,2,36.67774,-121.6555
+United States_Costa Mesa_California,United States,Costa Mesa,California,2,33.64113,-117.91867
+United States_Home Gardens_California,United States,Home Gardens,California,1,33.87807,-117.52088
+United States_Fort Mill_South Carolina,United States,Fort Mill,South Carolina,1,35.00737,-80.94508
+Azerbaijan_Baku_Baki,Azerbaijan,Baku,Baki,1,40.37767,49.89201
+Canada_Kitchener_Ontario,Canada,Kitchener,Ontario,1,43.42537,-80.5112
+United States_Shreveport_Louisiana,United States,Shreveport,Louisiana,1,32.52515,-93.75018
+United States_Hattiesburg_Mississippi,United States,Hattiesburg,Mississippi,1,31.32712,-89.29034
+United States_Maumelle_Arkansas,United States,Maumelle,Arkansas,1,34.86676,-92.40432
+Dominican Republic__Santiago Rodríguez,Dominican Republic,"",Santiago Rodríguez,1,19.41667,-71.33333
+United States_Visalia_California,United States,Visalia,California,1,36.33023,-119.29206
+United States_Columbia_South Carolina,United States,Columbia,South Carolina,1,34.00071,-81.03481
+Peru_Cusco_Cusco,Peru,Cusco,Cusco,1,-13.52264,-71.96734
+United States_Yonkers_New York,United States,Yonkers,New York,1,40.93121,-73.89875
+United States_River Falls_Wisconsin,United States,River Falls,Wisconsin,1,44.86136,-92.62381
+Spain_Pontevedra_Galicia,Spain,Pontevedra,Galicia,1,42.431,-8.64435
+Spain__Valencia,Spain,"",Valencia,1,39.5,-0.75
+United States_Cary_North Carolina,United States,Cary,North Carolina,1,35.79154,-78.78112
+Portugal_Lisbon_Lisbon,Portugal,Lisbon,Lisbon,1,38.71667,-9.13333
+United States_Sherman Oaks_California,United States,Sherman Oaks,California,1,34.15112,-118.44925
+Switzerland__Saint Gallen,Switzerland,"",Saint Gallen,1,47.25,9.25
+United States_Ontario_California,United States,Ontario,California,1,34.06334,-117.65089
+United States_Bryans Road_Maryland,United States,Bryans Road,Maryland,1,38.62706,-77.07303
+United States_Paia_Hawaii,United States,Paia,Hawaii,1,20.90333,-156.36944
+Kenya__,Kenya,"","",1,1,38
+Bolivarian Republic of Venezuela_Barquisimeto_Estado Lara,Bolivarian Republic of Venezuela,Barquisimeto,Estado Lara,1,10.07389,-69.32278
+Italy__Trentino-Alto Adige,Italy,"",Trentino-Alto Adige,1,46.5,11.33333
+Nigeria__Ogun,Nigeria,"",Ogun,1,7,3.58333
+United States_Columbus_Georgia,United States,Columbus,Georgia,1,32.46098,-84.98771
+United States_Charleston_West Virginia,United States,Charleston,West Virginia,1,38.34982,-81.63262
+United States__Nevada,United States,"",Nevada,1,39.25021,-116.75119
+United States_Lyons_Colorado,United States,Lyons,Colorado,1,40.22471,-105.27138
+United States_Wichita Falls_Texas,United States,Wichita Falls,Texas,1,33.91371,-98.49339
+United States_Fort Myers_Florida,United States,Fort Myers,Florida,1,26.62168,-81.84059
+United States_Town of Howell_New Jersey,United States,Town of Howell,New Jersey,1,40.19178,-74.19959
+Puerto Rico_Carolina_Carolina,Puerto Rico,Carolina,Carolina,1,18.38078,-65.95739
+United Kingdom_Brighton_England,United Kingdom,Brighton,England,1,50.82838,-0.13947
+United States_North Smithfield_Rhode Island,United States,North Smithfield,Rhode Island,1,41.96677,-71.54951
+United States_Athena_Oregon,United States,Athena,Oregon,1,45.8118,-118.49053
+United States_Dulles Town Center_Virginia,United States,Dulles Town Center,Virginia,1,39.03761,-77.41582
+United States_East Cleveland_Tennessee,United States,East Cleveland,Tennessee,1,35.16091,-84.85772
+United States_Telluride_Colorado,United States,Telluride,Colorado,1,37.93749,-107.81229
+United States_Knoxville_Iowa,United States,Knoxville,Iowa,1,41.32083,-93.10937
+United States__North Dakota,United States,"",North Dakota,1,47.50027,-100.00068
+United States_Durant_Oklahoma,United States,Durant,Oklahoma,1,33.99399,-96.37082
+United States_Akron_Ohio,United States,Akron,Ohio,1,41.08144,-81.51901
+Mozambique__Maputo,Mozambique,"",Maputo,1,-25.5,32.33333
+Brazil__Paraná,Brazil,"",Paraná,1,-24,-51
+United States_Roseville_California,United States,Roseville,California,1,38.75212,-121.28801
+United States_Flagstaff_Arizona,United States,Flagstaff,Arizona,1,35.19807,-111.65127
+Indonesia_Malang_East Java,Indonesia,Malang,East Java,1,-7.9797,112.6304
+United States_Cranford_New Jersey,United States,Cranford,New Jersey,1,40.65844,-74.29959
+Bulgaria__,Bulgaria,"","",1,43,25
+United Kingdom_High Peak_England,United Kingdom,High Peak,England,1,53.36797,-1.84536
+United States_Ogden_Utah,United States,Ogden,Utah,1,41.223,-111.97383
+New Zealand_Nelson_Nelson,New Zealand,Nelson,Nelson,1,-41.27078,173.28404
+United States_Cambridge_Massachusetts,United States,Cambridge,Massachusetts,1,42.3751,-71.10561
+United States_Beachwood_Ohio,United States,Beachwood,Ohio,1,41.4645,-81.50873
+United States_Southwest Ranches_Florida,United States,Southwest Ranches,Florida,1,26.0587,-80.33727
+Italy_Ascoli Piceno_The Marches,Italy,Ascoli Piceno,The Marches,1,42.85893,13.57395
+Israel__,Israel,"","",1,31.5,34.75
+United States_Allentown_Pennsylvania,United States,Allentown,Pennsylvania,1,40.60843,-75.49018
+Canada_Carleton Place_Ontario,Canada,Carleton Place,Ontario,1,45.13341,-76.14938
+Nicaragua__,Nicaragua,"","",1,13,-85
+Japan_Atsugi_Kanagawa,Japan,Atsugi,Kanagawa,1,35.43889,139.35972
+United States_Lincoln_Nebraska,United States,Lincoln,Nebraska,1,40.8,-96.66696
+United States_Ossining_New York,United States,Ossining,New York,1,41.16287,-73.86152
+Turkey_Antioch_Hatay,Turkey,Antioch,Hatay,1,36.20655,36.15722
+United States_Arlington Heights_Illinois,United States,Arlington Heights,Illinois,1,42.08836,-87.98063
+United States_Huntington_Indiana,United States,Huntington,Indiana,1,40.8831,-85.49748
+United States_Hillsboro_Oregon,United States,Hillsboro,Oregon,1,45.52289,-122.98983
+United States_Ellensburg_Washington,United States,Ellensburg,Washington,1,46.99651,-120.54785
+United States_Bay Saint Louis_Mississippi,United States,Bay Saint Louis,Mississippi,1,30.30881,-89.33005
+United States_Red Bank_New Jersey,United States,Red Bank,New Jersey,1,40.34705,-74.06431
+Antigua and Barbuda__,Antigua and Barbuda,"","",1,17.05,-61.8
+Argentina__Tucumán,Argentina,"",Tucumán,1,-27,-65.5
+United States_Fort Hill Census Designated Place_Oregon,United States,Fort Hill Census Designated Place,Oregon,1,45.06067,-123.55539
+United States_City of Fulton_New York,United States,City of Fulton,New York,1,43.31675,-76.4161
+Peru_Piura_Piura,Peru,Piura,Piura,1,-5.19449,-80.63282
+Hungary__,Hungary,"","",1,47,20
+Brazil_Canoas_Rio Grande do Sul,Brazil,Canoas,Rio Grande do Sul,1,-29.91778,-51.18361
+Spain_Málaga_Andalusia,Spain,Málaga,Andalusia,1,36.72016,-4.42034
+United States_San Luis Obispo_California,United States,San Luis Obispo,California,1,35.28275,-120.65962
+Cape Verde_Praia_Praia,Cape Verde,Praia,Praia,1,14.93152,-23.51254
+United States_Bay Harbor Islands_Florida,United States,Bay Harbor Islands,Florida,1,25.88759,-80.13116
+Spain_Bilbao_Basque Country,Spain,Bilbao,Basque Country,1,43.26271,-2.92528
+United States_Reisterstown_Maryland,United States,Reisterstown,Maryland,1,39.46955,-76.82942
+United Kingdom_Nottingham_England,United Kingdom,Nottingham,England,1,52.9536,-1.15047
+United States_Metairie_Louisiana,United States,Metairie,Louisiana,1,29.98409,-90.15285
+United Kingdom_Larkhall_Scotland,United Kingdom,Larkhall,Scotland,1,55.73333,-3.96667
+Puerto Rico_Guaynabo_Guaynabo,Puerto Rico,Guaynabo,Guaynabo,1,18.35745,-66.111
+United States_Morgantown_West Virginia,United States,Morgantown,West Virginia,1,39.62953,-79.9559
+Germany_Bonn_North Rhine-Westphalia,Germany,Bonn,North Rhine-Westphalia,1,50.73616,7.1002
+United States_Butler_Pennsylvania,United States,Butler,Pennsylvania,1,40.86118,-79.89533
+Brazil_Fortaleza_Ceará,Brazil,Fortaleza,Ceará,1,-3.71722,-38.54306
+Poland__,Poland,"","",1,52,20
+New Zealand__Auckland,New Zealand,"",Auckland,1,-36.85,174.78333
+United States_North Andover_Massachusetts,United States,North Andover,Massachusetts,1,42.6987,-71.13506
+Lebanon__,Lebanon,"","",1,33.83333,35.83333
+Colombia__La Guajira,Colombia,"",La Guajira,1,11.5,-72.5
+United States_Avondale_Arizona,United States,Avondale,Arizona,1,33.4356,-112.3496
+United States_Little Falls_New Jersey,United States,Little Falls,New Jersey,1,40.86899,-74.2082
+United States_Lake Orion_Michigan,United States,Lake Orion,Michigan,1,42.78448,-83.23966
+Argentina__Mendoza,Argentina,"",Mendoza,1,-34.5,-68.5
+Canada_Cambridge_Ontario,Canada,Cambridge,Ontario,1,43.3601,-80.31269
+United Kingdom_Stourbridge_England,United Kingdom,Stourbridge,England,1,52.45608,-2.14317
+United States_Iowa City_Iowa,United States,Iowa City,Iowa,1,41.66113,-91.53017
+United States_Mount Vernon_Ohio,United States,Mount Vernon,Ohio,1,40.3934,-82.48572
+United States_Fenton_Michigan,United States,Fenton,Michigan,1,42.79781,-83.70495
+United States_Pompton Lakes_New Jersey,United States,Pompton Lakes,New Jersey,1,41.00538,-74.2907
+Colombia_Sincelejo_Sucre,Colombia,Sincelejo,Sucre,1,9.30472,-75.39778
+United States_Shelton_Connecticut,United States,Shelton,Connecticut,1,41.31649,-73.09316
+United States_Woodland Park_New Jersey,United States,Woodland Park,New Jersey,1,40.88982,-74.19487
+United States_Goshen_Indiana,United States,Goshen,Indiana,1,41.58227,-85.83444
+United States_Carle Place_New York,United States,Carle Place,New York,1,40.7526,-73.61041
+United States_Warwick_Rhode Island,United States,Warwick,Rhode Island,1,41.7001,-71.41617
+Cyprus_Nicosia_Lefkosia,Cyprus,Nicosia,Lefkosia,1,35.16667,33.36667
+Spain_Gasteiz / Vitoria_Basque Country,Spain,Gasteiz / Vitoria,Basque Country,1,42.84998,-2.67268
+Indonesia_Wooden House_Riau,Indonesia,Wooden House,Riau,1,1.13284,103.95889
+Italy_Taranto_Apulia,Italy,Taranto,Apulia,1,40.47611,17.22972
+Netherlands_Kerkrade_Limburg,Netherlands,Kerkrade,Limburg,1,50.86583,6.0625
+United States_New Albany_Indiana,United States,New Albany,Indiana,1,38.28562,-85.82413
+United States_Banning_California,United States,Banning,California,1,33.92557,-116.87641
+United States_Clearwater_Florida,United States,Clearwater,Florida,1,27.96585,-82.8001
+United States_Sunny Isles Beach_Florida,United States,Sunny Isles Beach,Florida,1,25.95065,-80.12282
+United States_Keizer_Oregon,United States,Keizer,Oregon,1,44.99012,-123.02621
+Mexico__Nuevo León,Mexico,"",Nuevo León,1,25.66667,-100
+United States_Kernersville_North Carolina,United States,Kernersville,North Carolina,1,36.11986,-80.07365
+United States_Jonesboro_Georgia,United States,Jonesboro,Georgia,1,33.5215,-84.35381
+Philippines_Montalban_Calabarzon,Philippines,Montalban,Calabarzon,1,14.78333,121.23333
+United States_Troy_Michigan,United States,Troy,Michigan,1,42.60559,-83.14993
+Netherlands__Utrecht,Netherlands,"",Utrecht,1,52,5.25
+Brazil_Ribeirão Preto_São Paulo,Brazil,Ribeirão Preto,São Paulo,1,-21.1775,-47.81028
+Philippines_Bulacan_Central Luzon,Philippines,Bulacan,Central Luzon,1,14.79278,120.87889
+United States_Poulsbo_Washington,United States,Poulsbo,Washington,1,47.73593,-122.64654
+France_Sartrouville_Île-de-France,France,Sartrouville,Île-de-France,1,48.9482,2.19169
+Canada__British Columbia,Canada,"",British Columbia,1,53.99983,-125.0032
+Ghana_Kumasi_Ashanti,Ghana,Kumasi,Ashanti,1,6.68848,-1.62443
+Russian Federation_Saint Petersburg_St.-Petersburg,Russian Federation,Saint Petersburg,St.-Petersburg,1,59.89444,30.26417
+United States_Las Cruces_New Mexico,United States,Las Cruces,New Mexico,1,32.31232,-106.77834
+United States_Hillsdale_Michigan,United States,Hillsdale,Michigan,1,41.92005,-84.63051
+United Kingdom_Gloucester_England,United Kingdom,Gloucester,England,1,51.86568,-2.2431
+United Kingdom_Newcastle under Lyme_England,United Kingdom,Newcastle under Lyme,England,1,53,-2.23333
+United Kingdom_Birmingham_England,United Kingdom,Birmingham,England,1,52.48142,-1.89983
+Japan_Kawasaki_Kanagawa,Japan,Kawasaki,Kanagawa,1,35.52056,139.71722
+Ukraine_Kiev_Kyiv City,Ukraine,Kiev,Kyiv City,1,50.45466,30.5238
+Indonesia_Surakarta_Central Java,Indonesia,Surakarta,Central Java,1,-7.55611,110.83167
+United Kingdom_Weybridge_England,United Kingdom,Weybridge,England,1,51.37216,-0.45297
+United States_Anaheim_California,United States,Anaheim,California,1,33.83529,-117.9145
+United States_Carolina Beach_North Carolina,United States,Carolina Beach,North Carolina,1,34.03517,-77.8936
+United States_Parsippany_New Jersey,United States,Parsippany,New Jersey,1,40.85788,-74.42599
+United States_Newport Beach_California,United States,Newport Beach,California,1,33.61891,-117.92895
+Mexico_Saltillo_Coahuila,Mexico,Saltillo,Coahuila,1,25.41667,-101
+United States_Longview_Texas,United States,Longview,Texas,1,32.5007,-94.74049
+United States_Clarence Center_New York,United States,Clarence Center,New York,1,43.01061,-78.63753
+Republic of Korea__,Republic of Korea,"","",1,37,127.5
+United States_Hilo_Hawaii,United States,Hilo,Hawaii,1,19.72972,-155.09
+United States_Santa Cruz_California,United States,Santa Cruz,California,1,36.97412,-122.0308
+United States_Oak Forest_Illinois,United States,Oak Forest,Illinois,1,41.60281,-87.74394
+United States_Bedford_Massachusetts,United States,Bedford,Massachusetts,1,42.49065,-71.27617
+United States_Harrisburg_Pennsylvania,United States,Harrisburg,Pennsylvania,1,40.2737,-76.88442
+United States_Haddonfield_New Jersey,United States,Haddonfield,New Jersey,1,39.8915,-75.03767
+Indonesia_Makassar_South Sulawesi,Indonesia,Makassar,South Sulawesi,1,-5.14,119.4221
+Rwanda_Kigali_Kigali Province,Rwanda,Kigali,Kigali Province,1,-1.94995,30.05885
+United States_Great Falls_Virginia,United States,Great Falls,Virginia,1,38.99817,-77.28832
+United States_Daytona Beach_Florida,United States,Daytona Beach,Florida,1,29.21081,-81.02283
+United States_Southampton_New York,United States,Southampton,New York,1,40.88427,-72.38953
+United States_Lino Lakes_Minnesota,United States,Lino Lakes,Minnesota,1,45.16024,-93.08883
+Saint Kitts and Nevis__,Saint Kitts and Nevis,"","",1,17.33333,-62.75
+United States_Kissimmee_Florida,United States,Kissimmee,Florida,1,28.30468,-81.41667
+Costa Rica_Cartago_Cartago,Costa Rica,Cartago,Cartago,1,9.86444,-83.91944
+United States_Salem_Oregon,United States,Salem,Oregon,1,44.9429,-123.0351
+France_Le Masnau-Massuguiès_Midi-Pyrénées,France,Le Masnau-Massuguiès,Midi-Pyrénées,1,43.77791,2.55271
+United States_Norfolk_Virginia,United States,Norfolk,Virginia,1,36.84681,-76.28522
+United States_La Jolla_California,United States,La Jolla,California,1,32.84727,-117.2742
+Spain__Asturias,Spain,"",Asturias,1,43.33333,-6
+Japan_Ōsaka-shi_Ōsaka,Japan,Ōsaka-shi,Ōsaka,1,34.69374,135.50218
+Germany__Bremen,Germany,"",Bremen,1,53.08333,8.83333
+Mexico_Cancún_Quintana Roo,Mexico,Cancún,Quintana Roo,1,21.17429,-86.84656
+Colombia_Medellín_Departamento de Antioquia,Colombia,Medellín,Departamento de Antioquia,1,6.25184,-75.56359
+Indonesia_Manado_North Sulawesi,Indonesia,Manado,North Sulawesi,1,1.487,124.8455
+Sri Lanka_Colombo_Western,Sri Lanka,Colombo,Western,1,6.93194,79.84778
+United States_Glen Carbon_Illinois,United States,Glen Carbon,Illinois,1,38.74838,-89.98316
+Tuvalu__,Tuvalu,"","",1,-8.51719,179.14478
+India__Gujarāt,India,"",Gujarāt,1,23,72
+United States_Albany_Georgia,United States,Albany,Georgia,1,31.57851,-84.15574
+Canada__Alberta,Canada,"",Alberta,1,52.28333,-117.469
+Netherlands_Maarssen_Utrecht,Netherlands,Maarssen,Utrecht,1,52.13917,5.04167
+United States_Spartanburg_South Carolina,United States,Spartanburg,South Carolina,1,34.94957,-81.93205
+Guadeloupe__Guadeloupe,Guadeloupe,"",Guadeloupe,1,16.25011,-61.58369
+United States_Whitehouse Station_New Jersey,United States,Whitehouse Station,New Jersey,1,40.61538,-74.77044
+Malaysia_Kuala Selangor_Selangor,Malaysia,Kuala Selangor,Selangor,1,3.35,101.25
+United States_Simi Valley_California,United States,Simi Valley,California,1,34.26945,-118.78148
+United States_San Bruno_California,United States,San Bruno,California,1,37.63049,-122.41108
+Spain__Catalonia,Spain,"",Catalonia,1,41.82046,1.86768
+Austria__,Austria,"","",1,47.33333,13.33333
+India_Madurai_Tamil Nādu,India,Madurai,Tamil Nādu,1,9.91735,78.11962
+Ghana__,Ghana,"","",1,8.1,-1.2
+United States_Winter Park_Florida,United States,Winter Park,Florida,1,28.6,-81.33924
+United Kingdom_Beverley_England,United Kingdom,Beverley,England,1,53.84587,-0.42332
+United States_Old Bridge_New Jersey,United States,Old Bridge,New Jersey,1,40.41483,-74.36543
+Niger__,Niger,"","",1,18,9
+United States_Kent_Washington,United States,Kent,Washington,1,47.38093,-122.23484
+Mexico_Playa del Carmen_Quintana Roo,Mexico,Playa del Carmen,Quintana Roo,1,20.6274,-87.07987
+United States_Syosset_New York,United States,Syosset,New York,1,40.82621,-73.50207
+United States_Binghamton_New York,United States,Binghamton,New York,1,42.09869,-75.91797
+United States_Cumberland_Maryland,United States,Cumberland,Maryland,1,39.65287,-78.76252
+United States_Kansas City_Kansas,United States,Kansas City,Kansas,1,39.11417,-94.62746
+Spain_Valencia_Valencia,Spain,Valencia,Valencia,1,39.46975,-0.37739
+United States_Corpus Christi_Texas,United States,Corpus Christi,Texas,1,27.80058,-97.39638
+Mexico_Ensenada_Baja California,Mexico,Ensenada,Baja California,1,31.86612,-116.59972
+United States_Buena Park_California,United States,Buena Park,California,1,33.86751,-117.99812
+Indonesia__South Kalimantan,Indonesia,"",South Kalimantan,1,-2.5,115.5
+United States_Brookline_Massachusetts,United States,Brookline,Massachusetts,1,42.33176,-71.12116
+United States_Boulder City_Nevada,United States,Boulder City,Nevada,1,35.97859,-114.83249
+Guyana__,Guyana,"","",1,5,-59
+United States_Hauppauge_New York,United States,Hauppauge,New York,1,40.82565,-73.20261
+United States_Ridgewood_New Jersey,United States,Ridgewood,New Jersey,1,40.97926,-74.11653
+Ecuador_Santo Domingo de los Colorados_Santo Domingo de los Tsáchilas,Ecuador,Santo Domingo de los Colorados,Santo Domingo de los Tsáchilas,1,-0.25302,-79.17509
+United States_Trevose_Pennsylvania,United States,Trevose,Pennsylvania,1,40.13928,-74.981
+Viet Nam__,Viet Nam,"","",1,16.16667,107.83333
+United States_Beaverton_Oregon,United States,Beaverton,Oregon,1,45.48706,-122.80371
+Bolivarian Republic of Venezuela_Ciudad Bolívar_Estado Bolívar,Bolivarian Republic of Venezuela,Ciudad Bolívar,Estado Bolívar,1,8.12923,-63.54086
+Indonesia__Bali,Indonesia,"",Bali,1,-8.5,115
+Latvia_Dobele_Dobeles Rajons,Latvia,Dobele,Dobeles Rajons,1,56.625,23.27861
+United States_Chandler_Arizona,United States,Chandler,Arizona,1,33.30616,-111.84125
+United States_Milford_Connecticut,United States,Milford,Connecticut,1,41.22232,-73.0565
+United States_Galveston_Texas,United States,Galveston,Texas,1,29.30135,-94.7977
+United States_Fairfield_California,United States,Fairfield,California,1,38.24936,-122.03997
+Russian Federation_Anapa_Krasnodarskiy,Russian Federation,Anapa,Krasnodarskiy,1,44.89084,37.3239
+United States_Lemoore_California,United States,Lemoore,California,1,36.30078,-119.78291
+Spain_A Coruña_Galicia,Spain,A Coruña,Galicia,1,43.37135,-8.396
+United Kingdom_Darvel_Scotland,United Kingdom,Darvel,Scotland,1,55.60976,-4.28142
+Australia_West Perth_Western Australia,Australia,West Perth,Western Australia,1,-31.94896,115.84199
+United States_Mount Pleasant_Michigan,United States,Mount Pleasant,Michigan,1,43.59781,-84.76751
+United States_Dayton_Texas,United States,Dayton,Texas,1,30.04661,-94.8852
+United States_Portsmouth_Virginia,United States,Portsmouth,Virginia,1,36.83543,-76.29827
+Indonesia_Semarang_Central Java,Indonesia,Semarang,Central Java,1,-6.9932,110.4203
+United Kingdom_Swansea_Wales,United Kingdom,Swansea,Wales,1,51.62079,-3.94323
+Slovakia__,Slovakia,"","",1,48.66667,19.5
+Switzerland__Zurich,Switzerland,"",Zurich,1,47.41667,8.66667
+Ghana__Greater Accra,Ghana,"",Greater Accra,1,5.75,0
+United States_Norcross_Georgia,United States,Norcross,Georgia,1,33.94121,-84.21353
+United States_Lakeland_Florida,United States,Lakeland,Florida,1,28.03947,-81.9498
+United States_East Hampton_New York,United States,East Hampton,New York,1,40.96343,-72.1848
+United States_Roanoke_Virginia,United States,Roanoke,Virginia,1,37.27097,-79.94143
+France_Annecy_Rhône-Alpes,France,Annecy,Rhône-Alpes,1,45.9,6.11667
+United States_Nantucket_Massachusetts,United States,Nantucket,Massachusetts,1,41.28346,-70.09946
+United States_Salem_New Hampshire,United States,Salem,New Hampshire,1,42.78842,-71.20089
+Canada_Niagara Falls_Ontario,Canada,Niagara Falls,Ontario,1,43.10012,-79.06627
+Philippines__Cagayan Valley,Philippines,"",Cagayan Valley,1,17.65667,121.73333
+Croatia_Zagreb_Grad Zagreb,Croatia,Zagreb,Grad Zagreb,1,45.81444,15.97798
+United States_Duluth_Minnesota,United States,Duluth,Minnesota,1,46.78327,-92.10658
+South Africa__Gauteng,South Africa,"",Gauteng,1,-26.08333,28.25
+Spain_Benalúa de Guadix_Andalusia,Spain,Benalúa de Guadix,Andalusia,1,37.3519,-3.16404
+United States_Antelope_California,United States,Antelope,California,1,38.70824,-121.32995
+United States_Brownsville_Texas,United States,Brownsville,Texas,1,25.90175,-97.49748
+United States_Kenmore_New York,United States,Kenmore,New York,1,42.96589,-78.87004
+United States_Cedar Falls_Iowa,United States,Cedar Falls,Iowa,1,42.52776,-92.44547
+Ireland_Monaghan_Ulster,Ireland,Monaghan,Ulster,1,54.25,-6.96667
+South Africa_Sandton_Gauteng,South Africa,Sandton,Gauteng,1,-26.05447,28.05891
+United States_Toledo_Ohio,United States,Toledo,Ohio,1,41.66394,-83.55521
+United States_Kure Beach_North Carolina,United States,Kure Beach,North Carolina,1,33.99684,-77.90721
+United Kingdom_Derby_England,United Kingdom,Derby,England,1,52.92277,-1.47663
+Brazil_Recife_Pernambuco,Brazil,Recife,Pernambuco,1,-8.05389,-34.88111
+China_Changzhou_Jiangsu Sheng,China,Changzhou,Jiangsu Sheng,1,31.77358,119.95401
+Canada__Ontario,Canada,"",Ontario,1,49.25014,-84.49983
+Italy_Capri_Campania,Italy,Capri,Campania,1,40.55073,14.24263
+Italy_Bergamo_Lombardy,Italy,Bergamo,Lombardy,1,45.69798,9.66895
+South Africa_Port Elizabeth_Eastern Cape,South Africa,Port Elizabeth,Eastern Cape,1,-33.91799,25.57007
+United States_Saint Cloud_Florida,United States,Saint Cloud,Florida,1,28.2489,-81.28118
+United States_New Rochelle_New York,United States,New Rochelle,New York,1,40.91149,-73.78235
+Norway_Trondheim_Sør-Trøndelag,Norway,Trondheim,Sør-Trøndelag,1,63.43049,10.39506
+Colombia_Cartagena_Bolívar,Colombia,Cartagena,Bolívar,1,10.39972,-75.51444
+Russian Federation_Irkutsk_Irkutsk,Russian Federation,Irkutsk,Irkutsk,1,52.29778,104.29639
+United States_Surprise_Arizona,United States,Surprise,Arizona,1,33.63059,-112.33322
+Australia_South Melbourne_Victoria,Australia,South Melbourne,Victoria,1,-37.83333,144.96667
+Syrian Arab Republic__,Syrian Arab Republic,"","",1,35,38
+Spain__Ceuta,Spain,"",Ceuta,1,35.89028,-5.3075
+United States_Lake Saint Louis_Missouri,United States,Lake Saint Louis,Missouri,1,38.79755,-90.78568
+United States_Washington Heights_New York,United States,Washington Heights,New York,1,41.47009,-74.41571
+Italy_Nola_Campania,Italy,Nola,Campania,1,40.92201,14.53294
+United States_Greenville_Texas,United States,Greenville,Texas,1,33.13845,-96.11081
+New Zealand_Wellington_Wellington,New Zealand,Wellington,Wellington,1,-41.28664,174.77557
+United States_Southfield_Michigan,United States,Southfield,Michigan,1,42.47337,-83.22187
+United Kingdom_High Wycombe_England,United Kingdom,High Wycombe,England,1,51.62907,-0.74934
+Netherlands_Amersfoort_Utrecht,Netherlands,Amersfoort,Utrecht,1,52.155,5.3875
+Italy_Rimini_Emilia-Romagna,Italy,Rimini,Emilia-Romagna,1,44.06333,12.58083
+Japan_Shibuya-ku_Tōkyō,Japan,Shibuya-ku,Tōkyō,1,35.66404,139.69821
+United States_Pacific_Washington,United States,Pacific,Washington,1,47.26455,-122.25012
+United States_Bloomington_Minnesota,United States,Bloomington,Minnesota,1,44.8408,-93.29828
+United States_Libertyville_Illinois,United States,Libertyville,Illinois,1,42.28308,-87.95313
+United States_Marietta_Georgia,United States,Marietta,Georgia,1,33.9526,-84.54993
+United Kingdom_Bexhill-on-Sea_England,United Kingdom,Bexhill-on-Sea,England,1,50.85023,0.47095
+Italy_Treviso_Veneto,Italy,Treviso,Veneto,1,45.6714,12.24121
+United States_Strausstown_Pennsylvania,United States,Strausstown,Pennsylvania,1,40.49231,-76.183
+United States_East Point_Georgia,United States,East Point,Georgia,1,33.67955,-84.43937
+United States_Bedford_Indiana,United States,Bedford,Indiana,1,38.86116,-86.48721
+United Kingdom_Edinburgh_Scotland,United Kingdom,Edinburgh,Scotland,1,55.95206,-3.19648
+Germany_Wilhelmsdorf_Bavaria,Germany,Wilhelmsdorf,Bavaria,1,49.56419,10.73716
+United States_Franklin_Tennessee,United States,Franklin,Tennessee,1,35.92506,-86.86889
+United States_Overland Park_Kansas,United States,Overland Park,Kansas,1,38.98223,-94.67079
+United States_Tucson_Arizona,United States,Tucson,Arizona,1,32.22174,-110.92648
+Australia_Darlinghurst_New South Wales,Australia,Darlinghurst,New South Wales,1,-33.87939,151.21925
+Mexico_Morelia_Michoacán,Mexico,Morelia,Michoacán,1,19.70078,-101.18443
+Germany_München_Bavaria,Germany,München,Bavaria,1,48.13743,11.57549
+United States_Durango_Colorado,United States,Durango,Colorado,1,37.27528,-107.88007
+Chile_Concepción_Biobío,Chile,Concepción,Biobío,1,-36.82699,-73.04977
+United States_Oak Park_Illinois,United States,Oak Park,Illinois,1,41.88503,-87.7845
+Canada_Mississauga_Ontario,Canada,Mississauga,Ontario,1,43.5789,-79.6583
+United States_Huntsville_Alabama,United States,Huntsville,Alabama,1,34.73037,-86.5861
+United States_San Pedro_California,United States,San Pedro,California,1,33.73585,-118.29229
+New Zealand__Wellington,New Zealand,"",Wellington,1,-41.28333,174.76667
+United States_Tyler_Texas,United States,Tyler,Texas,1,32.35126,-95.30106
+Serbia_Belgrade_Central Serbia,Serbia,Belgrade,Central Serbia,1,44.80401,20.46513
+India__Rajasthan,India,"",Rajasthan,1,26,74
+Sao Tome and Principe__,Sao Tome and Principe,"","",1,1,7
+United States_Rexburg_Idaho,United States,Rexburg,Idaho,1,43.82602,-111.78969
+France__Brittany,France,"",Brittany,1,48,-3
+United States_Sanger_California,United States,Sanger,California,1,36.70801,-119.55597
+United States_Chino Hills_California,United States,Chino Hills,California,1,33.9938,-117.75888
+Mexico_Villahermosa_Tabasco,Mexico,Villahermosa,Tabasco,1,17.98333,-92.91667
+United States_Ocean Gate_New Jersey,United States,Ocean Gate,New Jersey,1,39.92679,-74.13375
+United States_Melbourne_Florida,United States,Melbourne,Florida,1,28.08363,-80.60811
+United States_Louisville_Colorado,United States,Louisville,Colorado,1,39.97776,-105.13193
+Spain_Zaragoza_Aragon,Spain,Zaragoza,Aragon,1,41.65606,-0.87734
+Norway_Oslo_Oslo County,Norway,Oslo,Oslo County,1,59.91273,10.74609
+Brazil_Belo Horizonte_Minas Gerais,Brazil,Belo Horizonte,Minas Gerais,1,-19.92083,-43.93778
+Nigeria_Port Harcourt_Rivers,Nigeria,Port Harcourt,Rivers,1,4.77742,7.0134
+United States_Ponchatoula_Louisiana,United States,Ponchatoula,Louisiana,1,30.4388,-90.44148
+United States_Rosita South_Texas,United States,Rosita South,Texas,1,28.62375,-100.42837
+United States_Henryville_Indiana,United States,Henryville,Indiana,1,38.54173,-85.76774
+United States_Mesa_Arizona,United States,Mesa,Arizona,1,33.42227,-111.82264
+United States_Medina_Washington,United States,Medina,Washington,1,47.62093,-122.22762
+United States_Wild Peach Village_Texas,United States,Wild Peach Village,Texas,1,29.08358,-95.63384
+Portugal_Cascais_Lisbon,Portugal,Cascais,Lisbon,1,38.6979,-9.42146
+United States_Huntington_New York,United States,Huntington,New York,1,40.86815,-73.42568
+United States_Mercer Island_Washington,United States,Mercer Island,Washington,1,47.57065,-122.22207
+Canada_Halifax_Nova Scotia,Canada,Halifax,Nova Scotia,1,44.64533,-63.57239
+United States_Paso Robles_California,United States,Paso Robles,California,1,35.62664,-120.691
+Spain_el Far d`Empordà_Catalonia,Spain,el Far d`Empordà,Catalonia,1,42.25054,2.99704
+United States_Lenexa_Kansas,United States,Lenexa,Kansas,1,38.95362,-94.73357
+United States_Davis_California,United States,Davis,California,1,38.54491,-121.74052
+United States_Manasquan_New Jersey,United States,Manasquan,New Jersey,1,40.12623,-74.0493
+Brazil_Campinas_São Paulo,Brazil,Campinas,São Paulo,1,-22.90556,-47.06083
+United States_Valley Stream_New York,United States,Valley Stream,New York,1,40.66427,-73.70846
+United Kingdom_Darlington_England,United Kingdom,Darlington,England,1,54.52429,-1.55039
+Italy__Lombardy,Italy,"",Lombardy,1,45.66667,9.5
+United States_Dothan_Alabama,United States,Dothan,Alabama,1,31.22323,-85.39049
+Canada_Saint John_New Brunswick,Canada,Saint John,New Brunswick,1,45.27271,-66.06766
+Brazil__Federal District,Brazil,"",Federal District,1,-15.75,-47.75
+United States_Edina_Minnesota,United States,Edina,Minnesota,1,44.88969,-93.34995
+United States_East Ithaca_New York,United States,East Ithaca,New York,1,42.43952,-76.47855
+South Africa_Stellenbosch_Western Cape,South Africa,Stellenbosch,Western Cape,1,-33.93462,18.86676
+United States_Clarksdale_Mississippi,United States,Clarksdale,Mississippi,1,34.20011,-90.57093
+United States_Lima_Ohio,United States,Lima,Ohio,1,40.74255,-84.10523
+Egypt_Alexandria_Alexandria,Egypt,Alexandria,Alexandria,1,31.21564,29.95527
+Germany_Düsseldorf_North Rhine-Westphalia,Germany,Düsseldorf,North Rhine-Westphalia,1,51.22492,6.77425
+El Salvador_Santa Tecla_La Libertad,El Salvador,Santa Tecla,La Libertad,1,13.67694,-89.27972
+United States_Enfield_New Hampshire,United States,Enfield,New Hampshire,1,43.64063,-72.14398
+United Kingdom_Royal Tunbridge Wells_England,United Kingdom,Royal Tunbridge Wells,England,1,51.13245,0.26333
+Indonesia_Medan_North Sumatra,Indonesia,Medan,North Sumatra,1,3.58333,98.66667
+United Kingdom_Southampton_England,United Kingdom,Southampton,England,1,50.90395,-1.40428
+United States_Hesperia_California,United States,Hesperia,California,1,34.42639,-117.30088

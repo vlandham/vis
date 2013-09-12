@@ -1,1 +1,103 @@
+body {
+  background: #fcfcfa;
+}
 
+#vis {
+  width:940;
+  height: 600;
+}
+
+.hashtag {
+  color: rgb(22, 162, 122);
+}
+
+
+.stroke {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+#sphere {
+  stroke-width: 1px;
+}
+
+.fill {
+  fill: #fff;
+}
+
+.graticule {
+  fill: none;
+  stroke: #777;
+  stroke-width: .5px;
+  stroke-opacity: .5;
+}
+
+rect {
+  fill: none;
+  /* pointer-events: all; */
+}
+
+.cover {
+  fill: none;
+  /* pointer-events: all; */
+}
+
+.land {
+  fill: #bbb;
+}
+
+.symbol {
+  fill: steelblue;
+  fill-opacity: .8;
+  stroke: #fff;
+  pointer-events: none;
+  
+}
+
+.hidden_symbol {
+  /* fill: none; */
+  fill-opacity: 0;
+}
+
+.boundary {
+  fill: none;
+  stroke: #fff;
+  stroke-width: .5px;
+}
+
+.points circle {
+  /* fill: #fff; */
+  /* stroke: red; */
+  stroke-width: 2px;
+}
+
+.points {
+  fill-opacity: 0.6;
+}
+
+.points text {
+  font: 11px sans-serif;
+  text-anchor: middle;
+  text-shadow: 0 1px 0 #fff, 0 -1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff;
+}
+
+.route {
+  fill: none;
+  stroke: red;
+  /* stroke-width: 3px; */
+}
+
+.bubble {
+  /* padding-left: 20px; */
+  width: 200px;
+  height: 300px;
+  float:left;
+  /* background-color: #ddd; */
+  /* border: solid 1px black; */
+  position: relative;
+}
+
+.bubble h2 {
+  text-align: center;
+}
