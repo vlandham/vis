@@ -2,11 +2,11 @@
 root = exports ? this
 
 WorldPlot = () ->
-  width = 940
-  height = 600
+  width = 960
+  height = 500
   radius = 240
   origin = [-71, 42]
-  rotate = [10,0]
+  rotate = [100,-45]
   velocity = [.013, 0.000]
   time = Date.now()
   data = []
@@ -16,26 +16,26 @@ WorldPlot = () ->
 
   mworld = null
 
-  projection = d3.geo.orthographic()
-    .scale(radius)
-    .translate([width / 2, height / 2])
-    .clipAngle(90 + 1e-6)
-    .precision(.1)
+  projection = d3.geo.azimuthalEqualArea()
+    # .scale(radius)
+    .rotate([100, -45])
+    .scale(1050)
+    .translate([width / 2 - 40, height / 2 - 110])
+    # .clipAngle(90 + 1e-6)
+    # .precision(.1)
 
   path = d3.geo.path()
     .projection(projection)
-    .pointRadius(1.5)
+    # .pointRadius(1.5)
 
   graticule = d3.geo.graticule()
-
-
+    .extent([[-140, 20], [-60, 60]])
+    .step([2, 2])
 
   click = (d) ->
     o1 = projection.invert(d3.mouse(this))
     lat = o1[0]
     lon = o1[1]
-
-
 
 
   redraw = () ->
@@ -126,10 +126,10 @@ WorldPlot = () ->
         .attr("class", "land")
         .attr("d", path)
 
-      # g.append("path")
-      #   .datum(graticule)
-      #   .attr("class", "graticule")
-      #   .attr("d", path)
+      g.append("path")
+        .datum(graticule)
+        .attr("class", "graticule")
+        .attr("d", path)
       # g.insert("path", ".graticule")
       #   .datum(topojson.mesh(mworld, mworld.objects.countries, (a, b) -> a != b))
       #   .attr("class", "boundary")
@@ -137,7 +137,7 @@ WorldPlot = () ->
 
       feature = svg.selectAll("path")
 
-      d3.timer(redraw)
+      # d3.timer(redraw)
 
       d3.timer(addData, 200)
 
@@ -145,7 +145,6 @@ WorldPlot = () ->
       # g = svg.select("g")
 
       points = g.append("g").attr("id", "vis_points")
-      # update()
 
 
   chart.height = (_) ->
@@ -188,6 +187,6 @@ $ ->
 
 
   queue()
-    .defer(d3.json, "data/world-110m.json")
+    .defer(d3.json, "data/us.json")
     .await(display)
 

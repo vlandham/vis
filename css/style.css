@@ -20,27 +20,23 @@ path {
 
 .sphere,
 .graticule {
-  stroke: #777;
+  stroke: white;
 }
 
 .graticule {
   fill: none;
   /* stroke: none; */
-  stroke-width: 1.5px;
-  stroke-opacity: 1;
+  stroke-width: .5px;
+  stroke-opacity: 0.3;
   stroke-dasharray: 2 2;
 }
 
 
-.equator {
-  stroke: red;
-  stroke-width: 2px;
-}
 
 .land {
   fill: #2A3F68;
   stroke: white;
-  stroke-width: 1px;
+  stroke-width: 2px;
 }
 
 .symbol {
