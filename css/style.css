@@ -1,1 +1,67 @@
 
+.cover {
+  fill: #111111;
+}
+
+circle,
+path {
+  fill: none;
+  stroke: #000;
+}
+
+circle {
+  stroke-width: 2px;
+}
+
+path {
+  fill: none;
+  stroke-linejoin: round;
+}
+
+.sphere,
+.graticule {
+  stroke: #777;
+}
+
+.graticule {
+  fill: none;
+  /* stroke: none; */
+  stroke-width: 1.5px;
+  stroke-opacity: 1;
+  stroke-dasharray: 2 2;
+}
+
+
+.equator {
+  stroke: red;
+  stroke-width: 2px;
+}
+
+.land {
+  fill: #2A3F68;
+  stroke: white;
+  stroke-width: 1px;
+}
+
+.symbol {
+  /* fill: rgb(22, 162, 122); */
+  fill: rgb(255, 111, 64);
+  
+  /* fill: steelblue; */
+  fill-opacity: .7;
+  stroke: #fff;
+  pointer-events: none;
+  
+}
+
+.temp_symbol {
+  /* fill: rgb(22, 162, 122); */
+  fill: none;
+  
+  stroke: #fff;
+  stroke-width: 3;
+  pointer-events: none;
+  
+}
+
+
