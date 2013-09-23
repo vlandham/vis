@@ -1,155 +1,112 @@
 
-root = exports ? this
+defaultColor = "#f00"
+colors = [{color1:defaultColor, color2:defaultColor}]
+domains = {rgb:[0,442], lab:[0,100]}
+scales = {}
 
-sin30 = Math.pow(3,1/2)/2
-cos30 = 0.5
+diffs = []
 
+maxWidth = 200
 
-  
-Plot = () ->
-  width = 800
-  height = 800
-  paddingY = width * 0.01
-  topR = height * 0.2
-  midR = (topR * 2) * 0.25
-  tiers = [{id: 1, x: width / 2, y: height / 5 + topR / 4, r: topR, index: 0},
-           {id: 2, x: (midR * 3  - midR / 2 - 10), y: (height / 5 ) + topR + (topR / 4) + paddingY, r: midR, index:0},
-           {id: 3, x: (midR * 2 - midR / 2 ), y: (height / 5) + topR + (topR / 4) + (midR * 1.60) + paddingY, r: midR, index:0}]
-  data = []
-  points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
+svg = null
 
-  tier = (d,i) ->
-    if i == 0
-      t = tiers[0]
-    else if i > 0 and i < 6
-      t = tiers[1]
-    else
-      t = tiers[2]
-    t
-
-  coords = (d,i,flip) ->
-    t = tier(d,i)
-    t.index = t.index + 1
-    c = {id:t.id, x:t.x, y:t.y, r: t.r}
-    if c.id > 1
-      c.x = (t.x) + ((midR - (midR / 8))  * t.index)
-      if flip
-        c.y = c.y - midR / 2
-    c
-
-  trianglePath = (x, y, r, flip) ->
-    if flip
-      "M#{x - r * sin30} #{y - r * cos30} L #{x + r * sin30} #{y - r * cos30} L #{x} #{y + r} Z"
-    else
-      "M#{x} #{y - r} L #{x - r * sin30} #{y + r * cos30} L #{x + r * sin30} #{y + r * cos30} Z"
-
-  createPath = (d,i) ->
-    d.attr "d", (d, i) ->
-      flip = false
-      if i > 5
-        flip = (i % 2 == 1)
-      else if i > 0
-        flip = (i % 2 == 0)
-      # flip = (i > 0 and (i % 2 == 0)) or (i > 5 and (i % 2 == 1))
-      c = coords(d,i,flip)
-      trianglePath(c.x, c.y, c.r, flip)
-
-  triangle = (root, x, y, r) ->
-    root.append("path")
-      .attr("d", trianglePath(x,y,r))
+setup = () ->
+  svg = d3.select("#vis")
+    .append("svg")
 
 
-  mouseover = (d,i) ->
-    t = d3.select(this)
-    t.attr("fill", (d) -> d3.hsl(t.attr("fill")).darker(1))
+  scales['rgb'] = d3.scale.linear().domain(domains['rgb']).range([0,maxWidth])
+  scales['lab'] = d3.scale.linear().domain(domains['lab']).range([0,maxWidth])
 
-  mouseout = (d,i) ->
-    t = d3.select(this)
-    t.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
-
-  chart = (selection) ->
-    selection.each (rawData) ->
-
-      data = rawData.filter (d) -> d.cust_skey == rawData[0].cust_skey
-      # data = data.sort (a,b) -> +a.rank - +b.rank
-      data = data.filter (d,i) -> i < 13
-
-      svg = d3.select(this).selectAll("svg").data([data])
-      gEnter = svg.enter().append("svg").append("g")
-      
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
-
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
-
-      g.append("rect")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("stroke-fill", "none")
-        .attr("fill", "none")
-
-      points = g.append("g").attr("id", "vis_points")
-
-      points.selectAll(".triangle")
-        .data(data).enter()
-        .append("path")
-        .attr("class", "triangle")
-        .call(createPath)
-        .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
-        .on("mouseover", mouseover)
-        .on("mouseout", mouseout)
-
-  chart.height = (_) ->
-    if !arguments.length
-      return height
-    height = _
-    chart
-
-  chart.width = (_) ->
-    if !arguments.length
-      return width
-    width = _
-    chart
-
-  chart.margin = (_) ->
-    if !arguments.length
-      return margin
-    margin = _
-    chart
-
-  chart.x = (_) ->
-    if !arguments.length
-      return xValue
-    xValue = _
-    chart
-
-  chart.y = (_) ->
-    if !arguments.length
-      return yValue
-    yValue = _
-    chart
-
-  return chart
+euclideanDistance = (a, b) ->
+  d = Math.sqrt(Math.pow((b[0] - a[0]), 2) + Math.pow((b[1] - a[1]), 2) + Math.pow((b[2] - a[2]), 2))
+  d
 
 
+rgbDiff = (c) ->
+  rgb1 = d3.rgb( c.color1)
+  rgb2 = d3.rgb( c.color2)
+  rgb1Array = [rgb1.r, rgb1.g, rgb1.b]
+  rgb2Array = [rgb2.r, rgb2.g, rgb2.b]
+  d = euclideanDistance(rgb1Array, rgb2Array)
+  d
 
-root.Plot = Plot
+labDiff = (c) ->
+  lab1 = d3.lab( c.color1)
+  lab2 = d3.lab( c.color2)
+  lab1Array = [lab1.l, lab1.a, lab1.b]
+  lab2Array = [lab2.l, lab2.a, lab2.b]
+  d = euclideanDistance(lab1Array, lab2Array)
+  d
 
-root.plotData = (selector, data, plot) ->
-  d3.select(selector)
-    .datum(data)
-    .call(plot)
+computeDiffs = () ->
+  diffs = []
+  colors.forEach (c) ->
+    d = {}
+    d['color1'] = c.color1
+    d['color2'] = c.color2
+    d['rgb'] = rgbDiff(c)
+    d['lab'] = labDiff(c)
+    diffs.push(d)
+  diffs
 
+
+displayDiffs = () ->
+  diff = svg.selectAll(".diff")
+    .data(diffs)
+
+  rectSize = 50
+
+  svg
+    .attr("height", ((diffs.length + 1) * (rectSize + 20)))
+
+
+  g = diff.enter()
+    .append("g")
+  g.append("rect")
+    .attr("width", rectSize)
+    .attr("height", rectSize)
+    .attr("x", rectSize / 3)
+    .attr("y", (d,i) -> 10 + ((rectSize + 10) * i))
+    .attr("fill", (d) -> d.color1)
+  g.append("rect")
+    .attr("width", rectSize)
+    .attr("height", rectSize)
+    .attr("x", rectSize / 3 + rectSize + 10)
+    .attr("y", (d,i) -> 10 + ((rectSize + 10) * i))
+    .attr("fill", (d) -> d.color2)
+
+  g.append("rect")
+    .attr("width", (d) -> scales['rgb'](d.rgb))
+    .attr("height", rectSize / 2)
+    .attr("x", rectSize / 3 + (rectSize + 10) * 2)
+    .attr("y", (d,i) -> 10 + ((rectSize + 10) * i))
+    .attr("fill", (d) -> 'steelblue')
+
+  g.append("rect")
+    .attr("width", (d) -> scales['lab'](d.lab))
+    .attr("height", rectSize / 2)
+    .attr("x", rectSize / 3 + (rectSize + 10) * 2 + ( maxWidth + 20))
+    .attr("y", (d,i) -> 10 + ((rectSize + 10) * i))
+    .attr("fill", (d) -> 'steelblue')
+
+colorChange = (color) ->
+  el = $(this)
+  id = el.attr("id")
+  colors[id] = color.toHexString()
+  c = {color1:$("#color1").spectrum("get").toHexString(), color2:$("#color2").spectrum("get").toHexString()}
+  colors.push(c)
+
+  computeDiffs()
+  displayDiffs()
 
 $ ->
 
-  plot = Plot()
-  display = (error, data) ->
-    plotData("#vis", data, plot)
+  $('.color').spectrum({
+    color: "#{defaultColor}",
+    checkoutFiresChange: true,
+    change: colorChange
+   })
 
-  queue()
-    .defer(d3.tsv, "data/color_palettes_rgb.txt")
-    .await(display)
+  setup()
 

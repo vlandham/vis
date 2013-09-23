@@ -15,6 +15,7 @@
 
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/spectrum.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
@@ -25,9 +26,17 @@
 
   <div id="container" class="container">
     <header>
-
+      <h1>Color Diffs</h1>
     </header>
     <div id="main" role="main">
+      <div class="row">
+        <div class="span4">
+          <input type='text' id='color1' class='color'/>
+        </div>
+        <div class="span4">
+          <input type='text' id='color2' class='color'/>
+        </div>
+      </div>
       <div id="vis"></div>
     </div>
     <footer>
@@ -44,6 +53,7 @@
   <script defer src="js/script.js"></script>
   <script src="js/libs/coffee-script.js"></script>
   <script src="js/libs/d3.v3.js"></script>
+  <script src="js/libs/spectrum.js"></script>
   <script src="js/libs/queue.min.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
