@@ -68,10 +68,9 @@ Squares = () ->
 
   chart = (selection) ->
     selection.each (rawData) ->
+
       allData = rawData
       data = filterData(allData)
-
-      # data = data.sort (a,b) -> +a.rank - +b.rank
 
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
@@ -89,11 +88,6 @@ Squares = () ->
 
       points = g.append("g").attr("id", "vis_squares")
       update()
-
-        # .on("mouseover", mouseover)
-        # .on("mouseout", mouseout)
-        #
-
 
   update = () ->
     height = Math.ceil((data.length / squaresPerRow)) * (squareSize + (squarePadding * 2))
@@ -247,9 +241,14 @@ Triangles = () ->
 
   update = () ->
     data = filterData(allData, user_id)
-    points.selectAll(".triangle")
+    p = points.selectAll(".triangle")
+      .attr("fill", (d) -> "rgb(#{22},#{22},#{22})")
+
+    p = points.selectAll(".triangle")
       .data(data)
-      .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+
+    p.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+
 
   chart.updateDisplay = (_) ->
     console.log('update' + _)
