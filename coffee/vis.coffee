@@ -5,19 +5,121 @@ sin30 = Math.pow(3,1/2)/2
 cos30 = 0.5
 
 
-  
-Plot = () ->
+
+euclideanDistance = (a, b) ->
+  d = Math.sqrt(Math.pow((b[0] - a[0]), 2) + Math.pow((b[1] - a[1]), 2) + Math.pow((b[2] - a[2]), 2))
+  d
+
+
+rgbDiff = (c) ->
+  rgb1 = d3.rgb( c.color1)
+  rgb2 = d3.rgb( c.color2)
+  rgb1Array = [rgb1.r, rgb1.g, rgb1.b]
+  rgb2Array = [rgb2.r, rgb2.g, rgb2.b]
+  d = euclideanDistance(rgb1Array, rgb2Array)
+  d
+
+labDiff = (c) ->
+  lab1 = d3.lab( c.color1)
+  lab2 = d3.lab( c.color2)
+  lab1Array = [lab1.l, lab1.a, lab1.b]
+  lab2Array = [lab2.l, lab2.a, lab2.b]
+  d = euclideanDistance(lab1Array, lab2Array)
+  d
+
+
+labValue = (d) ->
+  lab = d3.lab("rgb(#{d.r},#{d.g},#{d.b})")
+  lab.l + lab.a + lab.b
+
+bubbleSort = (a, callback) ->
+  sorted = true
+  for i in [0..a.length] by i
+    if callback(a[i]) > callback(a[i + 1])
+      temp = a[i]
+      a[i] = a[i + 1]
+      a[i + 1] = temp
+      sorted = false
+  sorted
+
+Squares = () ->
   width = 800
-  height = 800
+  height = 500
+  margin = {top: 5, right: 20, bottom: 5, left: 160}
+  squareSize = 50
+  squaresPerRow = 10
+  squarePadding = 1
+
+  chart = (selection) ->
+    selection.each (rawData) ->
+
+      data = rawData.filter (d) -> d.cust_skey == rawData[0].cust_skey
+
+      data = data.sort (a,b) ->
+        labValue(b) - labValue(a)
+
+      console.log(data.length)
+
+      # data = data.sort (a,b) -> +a.rank - +b.rank
+
+      svg = d3.select(this).selectAll("svg").data([data])
+      gEnter = svg.enter().append("svg").append("g")
+      
+      svg.attr("width", width + margin.left + margin.right )
+      svg.attr("height", height + margin.top + margin.bottom )
+
+      g = svg.select("g")
+        .attr("transform", "translate(#{margin.left},#{margin.top})")
+
+      g.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("stroke-fill", "none")
+        .attr("fill", "none")
+
+      points = g.append("g").attr("id", "vis_squares")
+
+      points.selectAll(".square")
+        .data(data).enter()
+        .append("rect")
+        .attr("class", "square")
+        .attr("width", squareSize)
+        .attr("height", squareSize)
+        .attr "y", (d,i) ->
+          row = (Math.ceil((i + 1) / squaresPerRow) - 1)
+          row * (squareSize + squarePadding)
+        .attr "x", (d,i) ->
+          row = Math.ceil((i + 1) / squaresPerRow)
+          col = i - ((row - 1) * squaresPerRow)
+          col * (squareSize + squarePadding)
+        .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+        # .on("mouseover", mouseover)
+        # .on("mouseout", mouseout)
+        #
+    $('svg .square').tipsy({
+      gravity:'w'
+      html:true
+      title: () ->
+        d = this.__data__
+        "<strong>#{d.color_name}</strong> - rgb(#{d.r},#{d.g},#{d.b})"
+    })
+      
+
+  return chart
+
+
+Triangles = () ->
+  width = 800
+  height = 550
   paddingY = width * 0.01
-  topR = height * 0.2
+  topR = width * 0.2
   midR = (topR * 2) * 0.25
   tiers = [{id: 1, x: width / 2, y: height / 5 + topR / 4, r: topR, index: 0},
            {id: 2, x: (midR * 3  - midR / 2 - 10), y: (height / 5 ) + topR + (topR / 4) + paddingY, r: midR, index:0},
            {id: 3, x: (midR * 2 - midR / 2 ), y: (height / 5) + topR + (topR / 4) + (midR * 1.60) + paddingY, r: midR, index:0}]
   data = []
   points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
+  margin = {top: 25, right: 20, bottom: 0, left: 20}
 
   tier = (d,i) ->
     if i == 0
@@ -135,7 +237,7 @@ Plot = () ->
 
 
 
-root.Plot = Plot
+root.Triangles = Triangles
 
 root.plotData = (selector, data, plot) ->
   d3.select(selector)
@@ -145,9 +247,11 @@ root.plotData = (selector, data, plot) ->
 
 $ ->
 
-  plot = Plot()
+  plot = Triangles()
+  square_plot = Squares()
   display = (error, data) ->
     plotData("#vis", data, plot)
+    plotData("#squares", data, square_plot)
 
   queue()
     .defer(d3.tsv, "data/color_palettes_rgb.txt")
