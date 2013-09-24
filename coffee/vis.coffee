@@ -10,7 +10,6 @@ euclideanDistance = (a, b) ->
   d = Math.sqrt(Math.pow((b[0] - a[0]), 2) + Math.pow((b[1] - a[1]), 2) + Math.pow((b[2] - a[2]), 2))
   d
 
-
 rgbDiff = (c) ->
   rgb1 = d3.rgb( c.color1)
   rgb2 = d3.rgb( c.color2)
@@ -58,12 +57,13 @@ Squares = () ->
 
   filterData = (rawData) ->
     if user_id < 0
-      user_id = rawData[0].cust_skey
-    data = rawData.filter (d) -> d.cust_skey == user_id
+      user_id = rawData[0].id
+    data = rawData.filter (d) -> d.id == user_id
+    data = data[0]
 
-    data = data.sort (a,b) ->
-      labValue(b) - labValue(a)
-
+    data = data.colors.sort (a,b) ->
+      b.count - a.count
+      # labValue(b) - labValue(a)
     data
 
   chart = (selection) ->
@@ -106,18 +106,18 @@ Squares = () ->
         row = Math.ceil((i + 1) / squaresPerRow)
         col = i - ((row - 1) * squaresPerRow)
         col * (squareSize + squarePadding)
-      .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+      .attr("fill", (d) -> d.rgb_string)
 
     p.exit().remove()
 
-    p.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+    p.attr("fill", (d) -> d.rgb_string)
       
     $('svg .square').tipsy({
       gravity:'w'
       html:true
       title: () ->
         d = this.__data__
-        "<strong>#{d.color_name}</strong> - rgb(#{d.r},#{d.g},#{d.b})"
+        "<strong>#{d.name}</strong> - #{d.rgb_string} - count: #{d.count} - weighted: #{d.weighted_count}"
     })
 
   chart.updateDisplay = (_) ->
@@ -197,14 +197,15 @@ Triangles = () ->
 
   mouseout = (d,i) ->
     t = d3.select(this)
-    t.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+    t.attr("fill", (d) -> d.rgb_string)
 
   filterData = (rawData, user_id) ->
     if user_id < 0
-      user_id = rawData[0].cust_skey
-    data = allData.filter (d) -> d.cust_skey == user_id
+      user_id = rawData[0].id
+    data = allData.filter (d) -> d.id == user_id
+    data = data[0]
     # data = data.sort (a,b) -> +a.rank - +b.rank
-    data = data.filter (d,i) -> i < 13
+    data = data.colors.filter (d,i) -> i < 13
     data
 
   chart = (selection) ->
@@ -235,19 +236,19 @@ Triangles = () ->
         .append("path")
         .attr("class", "triangle")
         .call(createPath)
-        .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+        .attr("fill", (d) -> d.rgb_string)
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
 
   update = () ->
     data = filterData(allData, user_id)
     p = points.selectAll(".triangle")
-      .attr("fill", (d) -> "rgb(#{22},#{22},#{22})")
+      .attr("fill", (d) -> d.rgb_string)
 
     p = points.selectAll(".triangle")
       .data(data)
 
-    p.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+    p.attr("fill", (d) -> d.rgb_string)
 
 
   chart.updateDisplay = (_) ->
@@ -318,7 +319,7 @@ changeUser = (user) ->
 setupSearch = (all) ->
   root.all = d3.map()
   all.forEach (a,i) ->
-    root.all.set(a.cust_skey, a.cust_skey)
+    root.all.set(a.id, a.id)
 
   users = root.all.keys()
   # console.log(users)
@@ -345,7 +346,8 @@ $ ->
     plotData("#squares", data, square_plot)
 
   queue()
-    .defer(d3.tsv, "data/color_palettes_rgb.txt")
+    # .defer(d3.tsv, "data/color_palettes_rgb.txt")
+    .defer(d3.json, "data/user_colors.json")
     .await(display)
 
   updateActive = (new_id) ->
