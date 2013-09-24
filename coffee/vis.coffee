@@ -46,19 +46,30 @@ Squares = () ->
   width = 800
   height = 500
   margin = {top: 5, right: 20, bottom: 5, left: 160}
+  points = null
+  svg = null
+
+  allData = []
+  data = []
   squareSize = 50
   squaresPerRow = 10
   squarePadding = 1
+  user_id = -1
+
+  filterData = (rawData) ->
+    if user_id < 0
+      user_id = rawData[0].cust_skey
+    data = rawData.filter (d) -> d.cust_skey == user_id
+
+    data = data.sort (a,b) ->
+      labValue(b) - labValue(a)
+
+    data
 
   chart = (selection) ->
     selection.each (rawData) ->
-
-      data = rawData.filter (d) -> d.cust_skey == rawData[0].cust_skey
-
-      data = data.sort (a,b) ->
-        labValue(b) - labValue(a)
-
-      console.log(data.length)
+      allData = rawData
+      data = filterData(allData)
 
       # data = data.sort (a,b) -> +a.rank - +b.rank
 
@@ -66,7 +77,6 @@ Squares = () ->
       gEnter = svg.enter().append("svg").append("g")
       
       svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
 
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
@@ -78,24 +88,36 @@ Squares = () ->
         .attr("fill", "none")
 
       points = g.append("g").attr("id", "vis_squares")
+      update()
 
-      points.selectAll(".square")
-        .data(data).enter()
-        .append("rect")
-        .attr("class", "square")
-        .attr("width", squareSize)
-        .attr("height", squareSize)
-        .attr "y", (d,i) ->
-          row = (Math.ceil((i + 1) / squaresPerRow) - 1)
-          row * (squareSize + squarePadding)
-        .attr "x", (d,i) ->
-          row = Math.ceil((i + 1) / squaresPerRow)
-          col = i - ((row - 1) * squaresPerRow)
-          col * (squareSize + squarePadding)
-        .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
         # .on("mouseover", mouseover)
         # .on("mouseout", mouseout)
         #
+
+
+  update = () ->
+    height = Math.ceil((data.length / squaresPerRow)) * (squareSize + (squarePadding * 2))
+    svg.attr("height", height + margin.top + margin.bottom )
+    p = points.selectAll(".square")
+      .data(data)
+    p.enter()
+      .append("rect")
+      .attr("class", "square")
+      .attr("width", squareSize)
+      .attr("height", squareSize)
+      .attr "y", (d,i) ->
+        row = (Math.ceil((i + 1) / squaresPerRow) - 1)
+        row * (squareSize + squarePadding)
+      .attr "x", (d,i) ->
+        row = Math.ceil((i + 1) / squaresPerRow)
+        col = i - ((row - 1) * squaresPerRow)
+        col * (squareSize + squarePadding)
+      .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+
+    p.exit().remove()
+
+    p.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+      
     $('svg .square').tipsy({
       gravity:'w'
       html:true
@@ -103,7 +125,18 @@ Squares = () ->
         d = this.__data__
         "<strong>#{d.color_name}</strong> - rgb(#{d.r},#{d.g},#{d.b})"
     })
-      
+
+  chart.updateDisplay = (_) ->
+    user_id = _
+    data = filterData(allData)
+    update()
+    chart
+
+  chart.id = (_) ->
+    if !arguments.length
+      return user_id
+    user_id = _
+    chart
 
   return chart
 
@@ -111,6 +144,7 @@ Squares = () ->
 Triangles = () ->
   width = 800
   height = 550
+  user_id = -1
   paddingY = width * 0.01
   topR = width * 0.2
   midR = (topR * 2) * 0.25
@@ -118,6 +152,7 @@ Triangles = () ->
            {id: 2, x: (midR * 3  - midR / 2 - 10), y: (height / 5 ) + topR + (topR / 4) + paddingY, r: midR, index:0},
            {id: 3, x: (midR * 2 - midR / 2 ), y: (height / 5) + topR + (topR / 4) + (midR * 1.60) + paddingY, r: midR, index:0}]
   data = []
+  allData = []
   points = null
   margin = {top: 25, right: 20, bottom: 0, left: 20}
 
@@ -170,12 +205,19 @@ Triangles = () ->
     t = d3.select(this)
     t.attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
 
+  filterData = (rawData, user_id) ->
+    if user_id < 0
+      user_id = rawData[0].cust_skey
+    data = allData.filter (d) -> d.cust_skey == user_id
+    # data = data.sort (a,b) -> +a.rank - +b.rank
+    data = data.filter (d,i) -> i < 13
+    data
+
   chart = (selection) ->
     selection.each (rawData) ->
 
-      data = rawData.filter (d) -> d.cust_skey == rawData[0].cust_skey
-      # data = data.sort (a,b) -> +a.rank - +b.rank
-      data = data.filter (d,i) -> i < 13
+      allData = rawData
+      data = filterData(allData, user_id)
 
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
@@ -202,6 +244,24 @@ Triangles = () ->
         .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
         .on("mouseover", mouseover)
         .on("mouseout", mouseout)
+
+  update = () ->
+    data = filterData(allData, user_id)
+    points.selectAll(".triangle")
+      .data(data)
+      .attr("fill", (d) -> "rgb(#{d.r},#{d.g},#{d.b})")
+
+  chart.updateDisplay = (_) ->
+    console.log('update' + _)
+    user_id = _
+    update()
+    chart
+
+  chart.id = (_) ->
+    if !arguments.length
+      return user_id
+    user_id = _
+    chart
 
   chart.height = (_) ->
     if !arguments.length
@@ -235,21 +295,53 @@ Triangles = () ->
 
   return chart
 
-
-
-root.Triangles = Triangles
-
 root.plotData = (selector, data, plot) ->
   d3.select(selector)
     .datum(data)
     .call(plot)
 
+openSearch = (e) ->
+  $('#search_user').show('slide').select()
+  $('#change_nav_link').hide()
+  d3.event.preventDefault()
+
+hideSearch = () ->
+  $('#search_user').hide()
+  $('#change_nav_link').show()
+
+changeUser = (user) ->
+  id = root.all.get(user)
+  if id
+    location.replace("#" + encodeURIComponent(id))
+  # d3.event.preventDefault()
+  return user
+
+setupSearch = (all) ->
+  root.all = d3.map()
+  all.forEach (a,i) ->
+    root.all.set(a.cust_skey, a.cust_skey)
+
+  users = root.all.keys()
+  # console.log(users)
+  $('#search_user').typeahead({source:users, updater:changeUser})
 
 $ ->
+  d3.select("#change_nav_link")
+    .on("click", openSearch)
+
+  user_id = decodeURIComponent(location.hash.substring(1)).trim()
+
+  if !user_id
+    user_id = -1
+
 
   plot = Triangles()
+  plot.id(user_id)
   square_plot = Squares()
+  square_plot.id(user_id)
+
   display = (error, data) ->
+    setupSearch(data)
     plotData("#vis", data, plot)
     plotData("#squares", data, square_plot)
 
@@ -257,3 +349,16 @@ $ ->
     .defer(d3.tsv, "data/color_palettes_rgb.txt")
     .await(display)
 
+  updateActive = (new_id) ->
+    user_id = new_id
+    plot.updateDisplay(user_id)
+    square_plot.updateDisplay(user_id)
+
+  hashchange = () ->
+    console.log('hashchange')
+    id = decodeURIComponent(location.hash.substring(1)).trim()
+    updateActive(id)
+
+
+  d3.select(window)
+    .on("hashchange", hashchange)
