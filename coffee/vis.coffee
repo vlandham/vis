@@ -41,6 +41,399 @@ bubbleSort = (a, callback) ->
       sorted = false
   sorted
 
+
+VoronoiColorTreeMap = () ->
+  width = 500
+  height = 500
+  margin = {top: 5, right: 20, bottom: 5, left: 160}
+  user_id = -1
+  vis = null
+  svg = null
+  allData = []
+  data = []
+
+  voronize = true
+
+  voronoi = d3.geom.voronoi()
+    .clipExtent([[0, 0], [width, height]])
+    .x((d) -> d.midX)
+    .y((d) -> d.midY)
+
+  treemap = d3.layout.treemap()
+    .sort((a,b) -> a.value - b.value)
+    .mode('squarify')
+
+  filterData = (rawData) ->
+    if user_id < 0
+      user_id = rawData[0].id
+    data = rawData.filter (d) -> d.id == user_id
+    data = data[0]
+    
+  arrangeData = (data) ->
+    fakeHierarchy = {'name':'all', 'children':[]}
+    data.forEach (d,i) ->
+      fakeHierarchy.children.push({'name': d.name, 'color': d.rgb_string, 'value': d.count})
+    fakeHierarchy
+
+  chart = (selection) ->
+    selection.each (rawData) ->
+      allData = rawData
+      svg = d3.select(this).selectAll("svg").data([data])
+      gEnter = svg.enter().append("svg").append("g")
+      
+      svg.attr("width", width + margin.left + margin.right )
+      svg.attr("height", height + margin.top + margin.bottom )
+
+      g = svg.select("g")
+        .attr("transform", "translate(#{margin.left},#{margin.top})")
+
+      # vis = d3.select(this)
+      #   .style("position", "relative")
+      #   .style("width", (width + margin.left + margin.right) + "px")
+      #   .style("height", (height + margin.top + margin.bottom) + "px")
+      #   .style("left", margin.left + "px")
+      #   .style("top", margin.top + "px")
+      # g.append("rect")
+      #   .attr("width", width)
+      #   .attr("height", height)
+      #   .attr("stroke-fill", "none")
+      #   .attr("fill", "none")
+
+      vis = g.append("g").attr("class", "vis_treemap")
+      update()
+
+  polygon = (d) ->
+    "M" + d.join("L") + "Z"
+
+  midpoints = (dd) ->
+    mids = []
+    treemap(dd).forEach (d,i) ->
+      d.midX = d.x + (d.dx / 2)
+      d.midY = d.y + (d.dy / 2)
+      if i > 0
+        mids.push(d)
+    mids
+
+  position = (d) ->
+    this.style("left", (d) -> d.x + "px")
+      .style("top", (d) -> d.y + "px")
+      .style("width", (d) -> Math.max(0, d.dx - 1) + "px")
+      .style("height", (d) -> Math.max(0, d.dy - 1) + "px")
+
+  update = () ->
+    treemap.size([width, height])
+    data = filterData(allData)
+    data = arrangeData(data.colors)
+    data = midpoints(data)
+
+    v = vis.selectAll('.node')
+      .data(voronoi(data))
+    v.enter()
+      # .append("rect")
+      .append("path")
+      .attr("class", "node")
+
+    v.exit().remove()
+
+    v.attr("d", polygon)
+      .attr("fill", (d,i) -> data[i].color)
+    # ps = vis.selectAll(".mid")
+    #   .data(data)
+    #   .enter()
+    #   .append("circle")
+    #   .attr("cx", (d) -> d.midX)
+    #   .attr("cy", (d) -> d.midY)
+    #   .attr('r', 3)
+    #   .attr("fill", 'white')
+    #   .style("fill", (d) -> d.color)
+    # v.attr("x", (d) -> d.x)
+    #   .attr("y", (d) -> d.y)
+    #   .attr("width", (d) -> d.dx)
+    #   .attr("height", (d) -> d.dy)
+    #   .style("fill", (d) -> d.color)
+
+  chart.updateDisplay = (_) ->
+    user_id = _
+    update()
+    chart
+
+  chart.id = (_) ->
+    if !arguments.length
+      return user_id
+    user_id = _
+    chart
+
+  chart.weight = (_) ->
+    if !arguments.length
+      return weight
+    weight = _
+    chart
+
+  chart.height = (_) ->
+    if !arguments.length
+      return height
+    height = _
+    chart
+
+  chart.width = (_) ->
+    if !arguments.length
+      return width
+    width = _
+    chart
+
+  chart.margin = (_) ->
+    if !arguments.length
+      return margin
+    margin = _
+    chart
+
+  return chart
+
+
+ColorTreeMap = () ->
+  width = 500
+  height = 500
+  margin = {top: 5, right: 20, bottom: 5, left: 160}
+  user_id = -1
+  vis = null
+  svg = null
+  allData = []
+  data = []
+
+  treemap = d3.layout.treemap()
+    .sort((a,b) -> a.value - b.value)
+    .mode('squarify')
+
+  filterData = (rawData) ->
+    if user_id < 0
+      user_id = rawData[0].id
+    data = rawData.filter (d) -> d.id == user_id
+    data = data[0]
+    
+  arrangeData = (data) ->
+    fakeHierarchy = {'name':'all', 'children':[]}
+    data.forEach (d,i) ->
+      fakeHierarchy.children.push({'name': d.name, 'color': d.rgb_string, 'value': d.count})
+    fakeHierarchy
+
+  chart = (selection) ->
+    selection.each (rawData) ->
+      allData = rawData
+      # svg = d3.select(this).selectAll("svg").data([data])
+      # gEnter = svg.enter().append("svg").append("g")
+      
+      # svg.attr("width", width + margin.left + margin.right )
+      # svg.attr("height", height + margin.top + margin.bottom )
+
+      # g = svg.select("g")
+        # .attr("transform", "translate(#{margin.left},#{margin.top})")
+
+      vis = d3.select(this)
+        .style("position", "relative")
+        .style("width", (width + margin.left + margin.right) + "px")
+        .style("height", (height + margin.top + margin.bottom) + "px")
+        .style("left", margin.left + "px")
+        .style("top", margin.top + "px")
+      # g.append("rect")
+      #   .attr("width", width)
+      #   .attr("height", height)
+      #   .attr("stroke-fill", "none")
+      #   .attr("fill", "none")
+
+      # vis = g.append("g").attr("class", "vis_treemap")
+      update()
+
+  position = (d) ->
+    this.style("left", (d) -> d.x + "px")
+      .style("top", (d) -> d.y + "px")
+      .style("width", (d) -> Math.max(0, d.dx - 1) + "px")
+      .style("height", (d) -> Math.max(0, d.dy - 1) + "px")
+
+
+  update = () ->
+    treemap.size([width, height])
+    data = filterData(allData)
+    data = arrangeData(data.colors)
+
+    v = vis.selectAll('.node')
+      .data(treemap(data))
+    v.enter()
+      .append("div")
+      .attr("class", "node")
+    v.exit().remove()
+    v.call(position)
+      .style("position", 'absolute')
+      .style("background", (d) -> d.color)
+
+  chart.updateDisplay = (_) ->
+    user_id = _
+    update()
+    chart
+
+  chart.id = (_) ->
+    if !arguments.length
+      return user_id
+    user_id = _
+    chart
+
+  chart.weight = (_) ->
+    if !arguments.length
+      return weight
+    weight = _
+    chart
+
+  chart.height = (_) ->
+    if !arguments.length
+      return height
+    height = _
+    chart
+
+  chart.width = (_) ->
+    if !arguments.length
+      return width
+    width = _
+    chart
+
+  chart.margin = (_) ->
+    if !arguments.length
+      return margin
+    margin = _
+    chart
+
+  return chart
+
+StackedArea = () ->
+  width = 200
+  height = 500
+  margin = {top: 5, right: 20, bottom: 5, left: 160}
+  user_id = -1
+  vis = null
+  svg = null
+  allData = []
+  data = []
+
+  h = d3.scale.linear()
+    .range([0, height])
+
+  weight = (d) -> d.count
+  maxColors = 20
+  maxWeight = 0.85
+
+  filterData = (rawData) ->
+    if user_id < 0
+      user_id = rawData[0].id
+    data = rawData.filter (d) -> d.id == user_id
+    data = data[0]
+
+  restrictData = (filteredData) ->
+    sortedData = filteredData.sort((a,b) -> weight(b) - weight(a))
+    restricted = sortedData
+    restricted = []
+    totalWeight = sortedData.map((d) -> weight(d)).reduce((p,c) -> p + c)
+    console.log(totalWeight)
+    curWeight = 0
+
+    for d in sortedData
+      curWeight += weight(d)
+      restricted.push(d)
+      if (curWeight / totalWeight) >= maxWeight
+        break
+
+    h.domain([0, curWeight])
+
+    if restricted.length > maxColors
+      console.log('still too big ' + restricted.length)
+      console.log("removed  #{sortedData.length - restricted.length}")
+    restricted
+
+  chart = (selection) ->
+    selection.each (rawData) ->
+
+      console.log('stacked')
+      allData = rawData
+
+      svg = d3.select(this).selectAll("svg").data([data])
+      gEnter = svg.enter().append("svg").append("g")
+      
+      svg.attr("width", width + margin.left + margin.right )
+
+      g = svg.select("g")
+        .attr("transform", "translate(#{margin.left},#{margin.top})")
+
+      g.append("rect")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("stroke-fill", "none")
+        .attr("fill", "none")
+
+      vis = g.append("g").attr("class", "vis_stacked")
+      update()
+
+
+  update = () ->
+    data = filterData(allData)
+    data = restrictData(data.colors)
+    # vis.selectAll(".stack").data([]).exit().remove()
+    
+    v = vis.selectAll(".stack")
+      .data(data)
+
+    v.enter().append("rect")
+      .attr("width", width)
+      .attr("x", 0)
+      .attr("class", "stack")
+
+    totalHeight = 0.0
+    v.attr "y", (d,i) ->
+        height = h(weight(d))
+        myY = totalHeight
+        totalHeight += height
+        myY
+      .attr "height", (d,i) ->
+        height = h(weight(d))
+        height
+      .attr("fill", (d) -> d.rgb_string)
+
+    v.exit().remove()
+      
+
+  chart.updateDisplay = (_) ->
+    user_id = _
+    update()
+    chart
+
+  chart.id = (_) ->
+    if !arguments.length
+      return user_id
+    user_id = _
+    chart
+
+  chart.weight = (_) ->
+    if !arguments.length
+      return weight
+    weight = _
+    chart
+
+  chart.height = (_) ->
+    if !arguments.length
+      return height
+    height = _
+    chart
+
+  chart.width = (_) ->
+    if !arguments.length
+      return width
+    width = _
+    chart
+
+  chart.margin = (_) ->
+    if !arguments.length
+      return margin
+    margin = _
+    chart
+
+  return chart
+
 Squares = () ->
   width = 800
   height = 500
@@ -252,7 +645,6 @@ Triangles = () ->
 
 
   chart.updateDisplay = (_) ->
-    console.log('update' + _)
     user_id = _
     update()
     chart
@@ -337,13 +729,28 @@ $ ->
 
   plot = Triangles()
   plot.id(user_id)
+
   square_plot = Squares()
   square_plot.id(user_id)
+
+  stacked_count = StackedArea()
+  stacked_count.id(user_id)
+
+  stacked_weight = StackedArea()
+  stacked_weight.id(user_id)
+  stacked_weight.weight((d) -> d.weighted_count)
+
+  treemap = VoronoiColorTreeMap()
+  treemap.id(user_id)
+
 
   display = (error, data) ->
     setupSearch(data)
     plotData("#vis", data, plot)
     plotData("#squares", data, square_plot)
+    plotData("#stacked_count", data, stacked_count)
+    plotData("#stacked_weight", data, stacked_weight)
+    plotData("#treemap", data, treemap)
 
   queue()
     # .defer(d3.tsv, "data/color_palettes_rgb.txt")
@@ -354,6 +761,9 @@ $ ->
     user_id = new_id
     plot.updateDisplay(user_id)
     square_plot.updateDisplay(user_id)
+    stacked_count.updateDisplay(user_id)
+    stacked_weight.updateDisplay(user_id)
+    treemap.updateDisplay(user_id)
 
   hashchange = () ->
     console.log('hashchange')

@@ -27,7 +27,6 @@ StackedArea = () ->
     restricted = sortedData
     restricted = []
     totalWeight = sortedData.map((d) -> weight(d)).reduce((p,c) -> p + c)
-    console.log(totalWeight)
     curWeight = 0
 
     for d in sortedData
@@ -46,7 +45,6 @@ StackedArea = () ->
   chart = (selection) ->
     selection.each (rawData) ->
 
-      console.log('stacked')
       allData = rawData
 
       svg = d3.select(this).selectAll("svg").data([data])
@@ -65,11 +63,14 @@ StackedArea = () ->
         .attr("fill", "none")
 
       vis = g.append("g").attr("class", "vis_stacked")
-      g.append("rect")
+      g.append("a")
+        .attr("xlink:href", "http://0.0.0.0:3000/##{user_id}")
+        .attr("target", "_blank")
+        .append("rect")
         .attr("width", width)
         .attr("height", height)
         .attr("fill-opacity", 0)
-        .on('click', () -> console.log(user_id))
+        # .on('click', () -> console.log(user_id))
       
       update()
 
@@ -78,7 +79,6 @@ StackedArea = () ->
     h.range([0, height])
     data = filterData(allData)
     data = restrictData(data.colors)
-    console.log(data.length)
     # vis.selectAll(".stack").data([]).exit().remove()
     
     v = vis.selectAll(".stack")
@@ -151,7 +151,6 @@ $ ->
    shuffle(data)
    data = data[0..1000]
    data.forEach (d,i) ->
-     console.log(d)
      stacked_weight = StackedArea()
      stacked_weight.id(d.id)
      stacked_weight.weight((e) -> e.weighted_count)
