@@ -715,7 +715,7 @@ setupSearch = (all) ->
 
   users = root.all.keys()
   # console.log(users)
-  $('#search_user').typeahead({source:users, updater:changeUser})
+  $('#search_user').typeahead({local:users, updater:changeUser})
 
 $ ->
   d3.select("#change_nav_link")
@@ -770,6 +770,9 @@ $ ->
     id = decodeURIComponent(location.hash.substring(1)).trim()
     updateActive(id)
 
+
+  d3.select(window)
+    .on('typeahead:selected', (d) -> console.log('type'))
 
   d3.select(window)
     .on("hashchange", hashchange)
