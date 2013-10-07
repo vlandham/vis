@@ -1,1 +1,52 @@
+#g-menu-container {
+  width: 710px;
+  margin: 0 auto;
+  display: table;
+  border-spacing: 3px;
+  line-height: 1;
+  text-align: center;
+}
 
+.g-menu-button:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+.g-menu-button:last-child {
+  border-radius: 0 7px 7px 0;
+}
+
+.g-menu-button {
+  font-family: "nyt-franklin", Arial, Sans-Serif;
+  color: #999;
+  padding: 8px 16px 8px 16px;
+  width: 25%;
+  background-color: #F0F2F3;
+  display: inline-block;
+  display: table-cell;
+  vertical-align: middle;
+  margin-top: 5px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.g-menu-button-selected {
+  background-color: #E6E6E6;
+  font-weight: 700;
+  color: #000;
+}
+
+.g-menu-button:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.triangle {
+  cursor: pointer;
+}
+
+#vis_details line, #vis_details path {
+  fill: none;
+  stroke: #444;
+  stroke-width: 1.2;
+  pointer-events: none;
+}

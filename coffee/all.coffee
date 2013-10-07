@@ -64,7 +64,7 @@ StackedArea = () ->
 
       vis = g.append("g").attr("class", "vis_stacked")
       g.append("a")
-        .attr("xlink:href", "http://0.0.0.0:3000/##{user_id}")
+        .attr("xlink:href", "http://localhost:3000/##{user_id}")
         .attr("target", "_blank")
         .append("rect")
         .attr("width", width)
