@@ -110,15 +110,15 @@ Triangles = () ->
   points = null
   details = null
   width = 800
-  height = 550
+  height = 500
   aspect = (width) / (height)
   user_id = -1
   paddingY = width * 0.01
   topR = width * 0.2
   midR = (topR * 2) * 0.25
-  tiers = [{id: 1, x: width / 2, y: height / 5 + (topR / 4 + (paddingY * 2)), r: topR, index: 0},
-           {id: 2, x: (midR * 3  - midR / 2 - 10), y: (height / 5 ) + (topR + (topR / 4) + (paddingY * 2)) + paddingY, r: midR, index:0},
-           {id: 3, x: (midR * 2 - midR / 2 ), y: (height / 5) + (topR + (topR / 4) + (paddingY * 2)) + (midR * 1.60) + paddingY, r: midR, index:0}]
+  tiers = [{id: 1, x: width / 2, y: height / 5 + (topR / 4 + (paddingY * 3)), r: topR, index: 0},
+           {id: 2, x: (midR * 3  - midR / 2 - 10), y: (height / 5 ) + (topR + (topR / 4) + (paddingY * 3)) + paddingY, r: midR, index:0},
+           {id: 3, x: (midR * 2 - midR / 2 ), y: (height / 5) + (topR + (topR / 4) + (paddingY * 3)) + (midR * 1.60) + paddingY, r: midR, index:0}]
   data = []
   allData = []
 
@@ -242,9 +242,6 @@ Triangles = () ->
       svg.attr("preserveAspectRatio", "xMidYMid")
       
       chart.resize()
-
-      # svg.attr("width", width)
-      # svg.attr("height", height)
 
       g = svg.select("g")
 

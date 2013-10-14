@@ -50,3 +50,7 @@
   stroke-width: 1.2;
   pointer-events: none;
 }
+
+#share_row {
+  text-align: center;
+}
