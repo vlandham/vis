@@ -109,6 +109,7 @@ Triangles = () ->
   svg = null
   points = null
   details = null
+  comps = null
   width = 800
   height = 520
   aspect = (width) / (height)
@@ -119,8 +120,11 @@ Triangles = () ->
   tiers = [{id: 1, x: width / 2, y: height / 5 + (topR / 4 + (paddingY * 3)), r: topR, index: 0},
            {id: 2, x: (midR * 3  - midR / 2 - 10), y: (height / 5 ) + (topR + (topR / 4) + (paddingY * 3)) + paddingY, r: midR, index:0},
            {id: 3, x: (midR * 2 - midR / 2 ), y: (height / 5) + (topR + (topR / 4) + (paddingY * 3)) + (midR * 1.60) + paddingY, r: midR, index:0}]
+
+  compCord = {x: (width / 4), y: height / 5 , r: midR / 2}
   data = []
   allData = []
+  compColors = []
 
   minRadius = 8
   maxRadius = topR - 20
@@ -158,6 +162,14 @@ Triangles = () ->
     else
       "M#{x} #{y - r} L #{x - r * sin30} #{y + r * cos30} L #{x + r * sin30} #{y + r * cos30} Z"
 
+  compPath = (r, flip) ->
+    x = 0
+    y = 0
+    if flip
+      "M#{x} #{y} L #{x - r} #{y} L #{x} #{y + r} Z"
+    else
+      "M#{x} #{y} L #{x - r} #{y}  L #{x} #{y - r} Z"
+
   flipFor = (d,i) ->
     flip = false
     if i > 5
@@ -174,6 +186,7 @@ Triangles = () ->
       .attr("y", d.coords.y)
       .attr("dy", 5)
       .attr("opacity", 1e-6)
+      .attr("fill" ,() -> d3.hsl(d.rgb_string).darker(1))
       .attr("text-anchor", "end")
       .text(d.name)
       .each((d) -> xcord = this.getBBox().x)
@@ -207,18 +220,23 @@ Triangles = () ->
       .attr("stroke-width", 0)
     hideDetails(d)
 
-  filterData = (rawData, user_id) ->
-    if user_id < 0
-      user_id = rawData[0].id
-    data = allData.filter (d) -> d.id == user_id
+  getUser = (rawData, userId) ->
+    if userId < 0
+      userId = rawData[0].id
+    data = allData.filter (d) -> d.id == userId
     data = data[0]
+    data
+
+  filterData = (rawData) ->
+    console.log(rawData)
     # data = data.sort (a,b) -> +a.rank - +b.rank
-    data = data.colors.filter (d,i) -> i < 13
+    data = rawData.colors.sort (a,b) -> b.weighted_count - a.weighted_count
+    data = data.filter (d,i) -> i < 13
+    # data = data.sort (a,b) -> b.count - a.count
     data
 
 
   setupData = (data) ->
-    data = data.sort (a,b) -> b.weighted_count - a.weighted_count
     rScale.domain(d3.extent(data, (d) -> d.weighted_count))
     data.forEach (d,i) ->
       d.flip = flipFor(d,i)
@@ -226,12 +244,36 @@ Triangles = () ->
       d.coords = coords(i, d.flip)
       d.amount_r = rScale(d.weighted_count)
 
+  getComps = (rawData) ->
+    comps = rawData.complementary_colors
+    # comps = comps.filter (c,i) -> i < 5
+    comps.forEach (c, i) ->
+      c.coords = {'x':compCord.x, 'y':compCord.y, 'r': compCord.r}
+      if i == 0
+        # c.coords.x = c.coords.x - c.coords.r
+        c.flip = true
+      if i == 1
+        # c.coords.x = c.coords.x + c.coords.r
+        c.flip = false
+      if i == 2
+        # c.coords.x = c.coords.x + c.coords.r
+        # c.coords.y = c.coords.y + c.coords.r
+        c.flip = false
+      if i == 3
+        # c.coords.x = c.coords.x - c.coords.r
+        # c.coords.y = c.coords.y + c.coords.r
+        c.flip = false
+
+    comps
+
   chart = (selection) ->
     selection.each (rawData) ->
 
       allData = rawData
-      data = filterData(allData, user_id)
-      data = setupData(data)
+      rawData = getUser(allData, user_id)
+      compColors = getComps(rawData)
+      data = filterData(rawData)
+      setupData(data)
 
       parent = $(this)
       svg = d3.select(this).selectAll("svg").data([data])
@@ -252,16 +294,45 @@ Triangles = () ->
         .attr("fill", "none")
 
       points = g.append("g").attr("id", "vis_triangles")
+      comps = g.append("g").attr("id", "vis_comps")
       details = g.append("g").attr("id", "vis_details")
+      comps.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", compCord.x)
+        .attr("y", compCord.y)
+        .attr("dy", -50)
+        .text("Complementary Colors")
+
       update()
 
 
-  updateCenters = (artists) ->
-    groupCenters = RadialPlacement().center({"x":width/2, "y":height / 2 - 100})
-      .radius(300).increment(18).keys(artists)
+  # updateCenters = (artists) ->
+  #   groupCenters = RadialPlacement().center({"x":width/2, "y":height / 2 - 100})
+  #     .radius(300).increment(18).keys(artists)
+
+
+  updateComps = () ->
+    p = comps.selectAll(".triangle")
+      .data(compColors, (d) -> d.name)
+
+    gEnter = p.enter()
+      .append("g")
+      .attr("class", "triangle")
+      .attr("transform", (d,i) -> "translate(#{d.coords.x},#{d.coords.y})rotate(#{90 + (90 * i)} #{0} #{d.coords.r / 2})")
+      # .attr("transform", (d,i) -> "translate(#{d.coords.x},#{d.coords.y})")
+      .on("mouseover", mouseover)
+      .on("mouseout", mouseout)
+
+    t = gEnter.append("path")
+      .attr("class", "triangle_path")
+      .attr("d", (d, i) -> compPath(d.coords.r, true))
+    t.attr("fill", (d) -> d.rgb_string)
 
   update = () ->
-    data = filterData(allData, user_id)
+    # data = filterData(allData, user_id)
+
+
+    updateComps()
 
     p = points.selectAll(".triangle")
       .data(data, (d) -> d.name)
