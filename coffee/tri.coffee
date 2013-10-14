@@ -176,17 +176,23 @@ Triangles = () ->
 
   showDetails = (d) ->
     xcord = 0
-    details.append("text")
+    text = details.append("text")
       .attr("class", "detail_text")
       .attr("x", width - 40)
       .attr("y", d.coords.y)
       .attr("dy", 5)
+      .attr("opacity", 1e-6)
       .attr("text-anchor", "end")
       .text(d.name)
       .each((d) -> xcord = this.getBBox().x)
 
-    details.append("path")
+    path = details.append("path")
+      .attr("d", "M #{d.coords.x} #{d.coords.y} L #{d.coords.x} #{d.coords.y}")
+    path.transition().duration(200)
       .attr("d", "M #{d.coords.x} #{d.coords.y} L #{xcord - 10} #{d.coords.y}")
+    text.transition().duration(200)
+      .delay(100)
+      .attr("opacity", 1)
 
 
   hideDetails = (d) ->
