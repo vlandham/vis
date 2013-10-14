@@ -52,5 +52,10 @@
 }
 
 #share_row {
+  /* margin-top: 25px; */
   text-align: center;
+}
+
+#recommend_content {
+  min-height: 200px;
 }

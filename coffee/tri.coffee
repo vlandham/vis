@@ -110,7 +110,7 @@ Triangles = () ->
   points = null
   details = null
   width = 800
-  height = 500
+  height = 520
   aspect = (width) / (height)
   user_id = -1
   paddingY = width * 0.01
@@ -149,14 +149,6 @@ Triangles = () ->
       if flip
         c.y = c.y - midR / 2
     c
-
-  # trianglePath = (x, y, r, flip) ->
-  #   x = 0
-  #   y = 0
-  #   if flip
-  #     "M#{x - r * sin30} #{y - r * cos30} L #{x + r * sin30} #{y - r * cos30} L #{x} #{y + r} Z"
-  #   else
-  #     "M#{x} #{y - r} L #{x - r * sin30} #{y + r * cos30} L #{x + r * sin30} #{y + r * cos30} Z"
 
   trianglePath = (r, flip) ->
     x = 0
@@ -200,13 +192,19 @@ Triangles = () ->
     details.select("text").remove()
 
   mouseover = (d,i) ->
-    t = d3.select(this)
-    t.attr("fill", (d) -> d3.hsl(t.attr("fill")).darker(1))
+    triG = d3.select(this)
+    triG.moveToFront()
+    tri = triG.select(".triangle_path")
+    tri
+      .attr("stroke-width", 3)
+      .attr("stroke", (d) -> d3.hsl(tri.attr("fill")).darker(1))
     showDetails(d)
 
   mouseout = (d,i) ->
-    t = d3.select(this)
-    t.attr("fill", (d) -> d.rgb_string)
+    triG = d3.select(this)
+    tri = triG.select(".triangle_path")
+    tri
+      .attr("stroke-width", 0)
     hideDetails(d)
 
   filterData = (rawData, user_id) ->
@@ -220,6 +218,7 @@ Triangles = () ->
 
 
   setupData = (data) ->
+    data = data.sort (a,b) -> b.weighted_count - a.weighted_count
     rScale.domain(d3.extent(data, (d) -> d.weighted_count))
     data.forEach (d,i) ->
       d.flip = flipFor(d,i)
@@ -238,6 +237,7 @@ Triangles = () ->
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
 
+      # help to maintain size in mobile.
       svg.attr("viewBox", "0 0 #{width} #{height}")
       svg.attr("preserveAspectRatio", "xMidYMid")
       
@@ -264,17 +264,17 @@ Triangles = () ->
     data = filterData(allData, user_id)
 
     p = points.selectAll(".triangle")
-      .data(data)
+      .data(data, (d) -> d.name)
 
     gEnter = p.enter()
       .append("g")
       .attr("class", "triangle")
       .attr("transform", (d) -> "translate(#{d.coords.x},#{d.coords.y})")
+      .on("mouseover", mouseover)
+      .on("mouseout", mouseout)
 
     t = gEnter.append("path")
       .attr("class", "triangle_path")
-      .on("mouseover", mouseover)
-      .on("mouseout", mouseout)
       .attr("d", (d, i) -> trianglePath(d.coords.r, d.flip))
 
     t.attr("fill", (d) -> d.rgb_string)
