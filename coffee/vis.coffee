@@ -740,7 +740,10 @@ $ ->
   stacked_weight.id(user_id)
   stacked_weight.weight((d) -> d.weighted_count)
 
-  treemap = VoronoiColorTreeMap()
+  vtreemap = VoronoiColorTreeMap()
+  vtreemap.id(user_id)
+
+  treemap = ColorTreeMap()
   treemap.id(user_id)
 
 
@@ -750,6 +753,7 @@ $ ->
     plotData("#squares", data, square_plot)
     plotData("#stacked_count", data, stacked_count)
     plotData("#stacked_weight", data, stacked_weight)
+    plotData("#vtreemap", data, vtreemap)
     plotData("#treemap", data, treemap)
 
   queue()

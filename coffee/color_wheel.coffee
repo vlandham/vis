@@ -182,7 +182,7 @@ setupSearch = (all) ->
 
   users = root.all.keys()
   # console.log(users)
-  $('#search_user').typeahead({source:users, updater:changeUser})
+  $('#search_user').typeahead({local:users, updater:changeUser})
 
 root.plotData = (selector, data, plot) ->
   d3.select(selector)
