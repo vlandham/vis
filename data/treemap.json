@@ -1,4 +1,4 @@
-[{"name":"us",
+[{"name":"the united states",
   "id":1,
   "size":"big",
   "known":90,
@@ -12,5 +12,38 @@
     {"name":"lut","percent":4.14},
     {"name":"chr","percent":4.14},
     {"name":"oth","percent":8.96}
-  ]}
+  ]},
+  {"name":"alabama",
+   "id":2,
+   "size":"little",
+   "known":90,
+   "churches":[
+    {"name":"me", "percent":34.8276},
+    {"name":"bap", "percent":28.96},
+    {"name":"pres", "percent":9.65},
+    {"name":"epi", "percent":2.758},
+    {"name":"oth", "percent":4.48}
+   ]},
+  {"name":"arkansas",
+   "id":3,
+   "size":"little",
+   "known":90,
+   "churches":[
+    {"name":"bap", "percent":38.77},
+    {"name":"me", "percent":35.51},
+    {"name":"pres", "percent":12.24},
+    {"name":"chr", "percent":4.48},
+    {"name":"oth", "percent":10.20}
+   ]},
+  {"name":"california",
+   "id":4,
+   "size":"little",
+   "known":65,
+   "churches":[
+    {"name":"cat", "percent":34.759},
+    {"name":"me", "percent":20.85},
+    {"name":"pres", "percent":10.69},
+    {"name":"bap", "percent":8.02},
+    {"name":"oth", "percent":28.34}
+   ]}
 ]

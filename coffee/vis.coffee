@@ -3,11 +3,11 @@ root = exports ? this
 
 Plot = () ->
   # colors = {"me":"#8D040C","bap":"#322209","pres":"#3D605C","cat":"#2E050B","con":"#4B6655","epi":"#C84914","lut":"#C6581B","chr":"#87090D","oth":"#300809"}
-  colors = {"me":"url(#lines_red)","bap":"#322209","pres":"#3D605C","cat":"#2E050B","con":"url(#lines_blue)","epi":"#C84914","lut":"#C6581B","chr":"#87090D","oth":"#300809"}
-  width = 800
+  colors = {"me":"url(#lines_red)","bap":"#3e290e","pres":"#3a5b57","cat":"#30050c","con":"url(#lines_blue)","epi":"#c0410f","lut":"#C6581B","chr":"#85090d","oth":"#310909"}
+  width = 1100
   height = 900
-  bigSize = 400
-  littleSize = 200
+  bigSize = 250
+  littleSize = 100
   data = []
   points = null
   margin = {top: 20, right: 20, bottom: 20, left: 20}
@@ -106,12 +106,13 @@ Plot = () ->
     tree = points.selectAll('.tree')
       .data(data).enter().append("g")
       .attr("class","tree")
+      .attr("transform", (d,i) -> "translate(#{i * (bigSize + 10)},0)")
     tree.append("rect")
       .attr("width", bigSize)
       .attr("height", bigSize)
       .attr("x", 0)
       .attr('y', 0)
-      .attr('fill', '#524235')
+      .attr('fill', '#6d5d4f')
 
     treeG = tree.append("g")
       .attr "transform", (d) ->
