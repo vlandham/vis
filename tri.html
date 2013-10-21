@@ -7,7 +7,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title>vis</title>
+  <title>My Color Trends - Nordstrom Data Lab</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -25,14 +25,20 @@
 </head>
 
 <body>
-
   <div id="container" class="container">
-    <div id="change_nav">
-      <a id="change_nav_link" href="#">user</a>
-      <input class="typeahead" id="search_user" type="text" autocomplete="off">
-    </div>
-    <div id="logo">
-      <img src="img/logo.png" alt="my color trends"/>
+    <div class='row'>
+      <div class="col-md-6">
+        <div id="logo">
+          <img src="img/logo.png" alt="my color trends"/>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="description">
+          <p>What describes your personal color palette?<br/>What are 'your' colors?<br/>
+          Introducing your very own <strong>color trends</strong> analysis.<br/>Here we showcase the top colors from your Nordstrom purchases. 
+          </p>
+        </div>
+      </div>
     </div>
     <div id="g-menu-container">
       <div class="g-menu-button g-menu-button-selected" id="g-button-top">
@@ -45,11 +51,15 @@
     <div id="main" role="main">
       <div id="vis"></div>
       <div id="share_row">
-        <p><strong>Share Your Color Trends:</strong> Twitter | Facebook | Pintrest</p>
+        <p><strong>Share Your Color Trends:</strong> <a href="#">Twitter</a> | <a href="#">Facebook</a> | <a href="#">Pintrest</a></p>
       </div>
       <h3>Recommended For You:</h3>
       <div id="recommend_content">
       </div>
+      <h3>Interesting</h3>
+      <a href="http://localhost:3000/tri.html#3705937192">reds</a><br/>
+      <a href="http://localhost:3000/tri.html#10965075385">orange</a><br/>
+      <a href="http://localhost:3000/tri.html#10645668733">cutoff</a><br/>
     </div>
   </div> <!--! end of #container -->
 

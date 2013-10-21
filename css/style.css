@@ -59,3 +59,12 @@
 #recommend_content {
   min-height: 200px;
 }
+
+.comp_title {
+  font-size: 10px;
+}
+
+
+#description {
+  padding-top:10px;
+}
