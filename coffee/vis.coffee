@@ -6,7 +6,7 @@ Plot = () ->
   colors = {"me":"url(#lines_red)","bap":"#3e290e","pres":"#3a5b57","cat":"#30050c","con":"url(#lines_blue)","epi":"#c0410f","lut":"#C6581B","chr":"#85090d","oth":"#310909"}
   width = 1100
   height = 900
-  bigSize = 280
+  bigSize = 300
   littleSize = 130
   padding = 40
   data = []
@@ -113,9 +113,6 @@ Plot = () ->
       .attr("class","tree")
       .attr "transform", (d,i) ->
         top = d.row * (padding + littleSize)
-        if d.size == 'big'
-          top = padding / 2
-
         "translate(#{(d.col) * (littleSize + padding)},#{top})"
     tree.append("rect")
       .attr("width", (d) -> d.realSize)
