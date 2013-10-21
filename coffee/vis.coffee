@@ -6,8 +6,9 @@ Plot = () ->
   colors = {"me":"url(#lines_red)","bap":"#3e290e","pres":"#3a5b57","cat":"#30050c","con":"url(#lines_blue)","epi":"#c0410f","lut":"#C6581B","chr":"#85090d","oth":"#310909"}
   width = 1100
   height = 900
-  bigSize = 250
-  littleSize = 100
+  bigSize = 280
+  littleSize = 130
+  padding = 40
   data = []
   points = null
   margin = {top: 20, right: 20, bottom: 20, left: 20}
@@ -15,7 +16,7 @@ Plot = () ->
   yScale = d3.scale.linear().domain([0,10]).range([0,height])
   xValue = (d) -> parseFloat(d.x)
   yValue = (d) -> parseFloat(d.y)
-  treeScale = d3.scale.linear().domain([0,100]).range([0,bigSize])
+  treeScale = d3.scale.linear().domain([0,100]).range([0,littleSize])
   treemap = d3.layout.treemap()
     .sort((a,b) -> b.index - a.index)
     .children((d) -> d.churches)
@@ -23,10 +24,15 @@ Plot = () ->
     .mode('slice')
 
   processData = (rawData) ->
-    rawData.forEach (treemap) ->
+    rawData.forEach (tre,i) ->
+      # the big square takes up two little squares
+      tre.index = if tre.size == 'little' then i + 1 else i
+      tre.row = if tre.size == 'little' then Math.floor(tre.index / 6) + 1 else 0
+      tre.col = tre.index % 6
+      tre.realSize = if tre.size == 'little' then littleSize else bigSize
       # this is to keep them in order
       # cause i'm too lazy to use stack
-      treemap.churches.forEach (c,i) ->
+      tre.churches.forEach (c,i) ->
         c.index = i
     rawData
 
@@ -102,27 +108,39 @@ Plot = () ->
 
   update = () ->
 
-    treemap.size([bigSize, bigSize])
     tree = points.selectAll('.tree')
       .data(data).enter().append("g")
       .attr("class","tree")
-      .attr("transform", (d,i) -> "translate(#{i * (bigSize + 10)},0)")
+      .attr "transform", (d,i) ->
+        top = d.row * (padding + littleSize)
+        if d.size == 'big'
+          top = padding / 2
+
+        "translate(#{(d.col) * (littleSize + padding)},#{top})"
     tree.append("rect")
-      .attr("width", bigSize)
-      .attr("height", bigSize)
+      .attr("width", (d) -> d.realSize)
+      .attr("height", (d) -> d.realSize)
       .attr("x", 0)
       .attr('y', 0)
       .attr('fill', '#6d5d4f')
 
+    tree.append("text")
+      .attr("text-anchor", "middle")
+      .attr("x", (d) -> d.realSize / 2)
+      .attr("y", (d) -> d.realSize)
+      .attr('dy', 14)
+      .text((d) -> d.name.toUpperCase())
+
+
     treeG = tree.append("g")
       .attr "transform", (d) ->
         scale = d.known / 100.0
-        trans = (bigSize - (bigSize * scale)) / 2
+        trans = (d.realSize - (d.realSize * scale)) / 2
         console.log(trans)
         "translate(#{trans},#{trans})scale(#{scale})"
 
     treeG.selectAll(".slice")
-      .data((d) -> treemap(d)).enter()
+      .data((d) -> treemap.size([d.realSize, d.realSize])(d)).enter()
       .append("rect")
       .attr('class', (d) -> "slice #{d.name}")
       .attr("x", (d) -> d.x)
@@ -130,6 +148,8 @@ Plot = () ->
       .attr("width", (d) -> Math.max(0, d.dx))
       .attr("height", (d) -> Math.max(0, d.dy))
       .attr("fill", (d) -> colors[d.name])
+
+
 
   chart.height = (_) ->
     if !arguments.length

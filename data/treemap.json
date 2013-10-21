@@ -45,5 +45,38 @@
     {"name":"pres", "percent":10.69},
     {"name":"bap", "percent":8.02},
     {"name":"oth", "percent":28.34}
+   ]},
+  {"name":"connecticut",
+   "id":5,
+   "size":"little",
+   "known":90,
+   "churches":[
+    {"name":"con", "percent":40.0},
+    {"name":"me", "percent":18.8},
+    {"name":"epi", "percent":10.0},
+    {"name":"bap", "percent":14.8},
+    {"name":"oth", "percent":14.0}
+   ]},
+  {"name":"delaware",
+   "id":6,
+   "size":"little",
+   "known":98,
+   "churches":[
+    {"name":"me", "percent":57.30},
+    {"name":"pres", "percent":15.0},
+    {"name":"epi", "percent":12.0},
+    {"name":"cat", "percent":7.5},
+    {"name":"oth", "percent":8.6}
+   ]},
+  {"name":"florida",
+   "id":7,
+   "size":"little",
+   "known":80,
+   "churches":[
+    {"name":"me", "percent":52.1},
+    {"name":"bap", "percent":28.0},
+    {"name":"pres", "percent":7.44},
+    {"name":"epi", "percent":6.51},
+    {"name":"oth", "percent":7.0}
    ]}
 ]
