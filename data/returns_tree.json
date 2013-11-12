@@ -1,0 +1,10 @@
+{"name":"total", "title":"Customers with a purchase in the last year", "amount":11416748, "children":
+  [{"name":"online", "title":"Customers with an online purchase in the last year", "amount":5365101, "children":
+    [{"name":"sale", "title":"Customers with at least one sale and one return", "amount":1819450, "children":
+      [{"name":"div_sens_rr", "title":"Division Sensitive by RR", "amount":1401003, "note":"* RR = Return Rate"}, 
+      {"name":"multi_div", "title":"Division Sensitive by Sigma", "amount":563949, "na":731917, "note":"* requires customers to have shopped in 2+ divisions"},
+      {"name":"one_return_two_keeps", "title":"Price Sensitive", "amount":359153, "na": 772259, "note":"* requires customers to have 1+ returned item and 2+ kept"}
+      ]
+    }]
+  }]
+}

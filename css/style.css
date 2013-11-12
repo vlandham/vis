@@ -1,1 +1,34 @@
 
+.continue {
+  fill:#2ca02c;
+}
+
+.exit {
+  fill:#bdbdbd;
+}
+
+.na {
+  fill:#fd8d3c;
+}
+
+.percent {
+  fill: white;
+  font-style: bold;
+}
+
+.title {
+  font-size: 22px;
+}
+
+.num {
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.note {
+  font-size: 11px;
+}
