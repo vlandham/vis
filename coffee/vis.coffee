@@ -2,7 +2,7 @@
 root = exports ? this
 
 Plot = () ->
-  width = 600
+  width = 900
   height = 600
   data = []
   points = null
@@ -11,23 +11,46 @@ Plot = () ->
   yScale = d3.scale.linear().domain([0,10]).range([0,height])
   xValue = (d) -> parseFloat(d.x)
   yValue = (d) -> parseFloat(d.y)
+  color = d3.scale.linear()
+    .domain([9,50])
+    .range(['steelblue', 'brown'])
+    .interpolate(d3.interpolateLab)
+
+  prepareData = (data) ->
+    # data = data.filter (d) -> true
+    data.forEach (d) ->
+      d3.keys(d).forEach (k) ->
+        d[k] = parseInt(d[k])
+
+    data
 
   chart = (selection) ->
     selection.each (rawData) ->
 
-      data = rawData
+      data = prepareData(rawData)
+      console.log(data)
+      pcs = d3.parcoords()("#vis")
+        .data(data)
+        .alpha(0.4)
+        .color("#000")
+        .margin({ top: 24, left: 10, bottom: 12, right: 10 })
+        .mode("queue")
+        .render()
+        .brushable()
+        # .reorderable()
 
-      svg = d3.select(this).selectAll("svg").data([data])
-      gEnter = svg.enter().append("svg").append("g")
+
+      # svg = d3.select(this).selectAll("svg").data([data])
+      # gEnter = svg.enter().append("svg").append("g")
       
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
+      # svg.attr("width", width + margin.left + margin.right )
+      # svg.attr("height", height + margin.top + margin.bottom )
 
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
+      # g = svg.select("g")
+        # .attr("transform", "translate(#{margin.left},#{margin.top})")
 
-      points = g.append("g").attr("id", "vis_points")
-      update()
+      # points = g.append("g").attr("id", "vis_points")
+      # update()
 
   update = () ->
     points.selectAll(".point")
@@ -85,6 +108,6 @@ $ ->
     plotData("#vis", data, plot)
 
   queue()
-    .defer(d3.csv, "data/test.csv")
+    .defer(d3.csv, "data/all2.csv")
     .await(display)
 
