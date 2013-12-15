@@ -78,13 +78,62 @@ root.plotData = (selector, data, plot) ->
     .call(plot)
 
 
+
 $ ->
 
-  plot = Plot()
-  display = (error, data) ->
-    plotData("#vis", data, plot)
+  apiKey = "088d3df822cb4b33b9d95e9cedf889a5"
+  seattle = [47.60620950083183, -122.3320707975654]
+  seattle = [47.66, -122.3320707975654]
+
+  map = L.map('map').setView(seattle, 12)
+  L.tileLayer('http://{s}.tile.cloudmade.com/' + apiKey + '/998/256/{z}/{x}/{y}.png', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
+  }).addTo(map)
+
+  svg = d3.select(map.getPanes().overlayPane).append("svg")
+  g = svg.append("g").attr("class", "leaflet-zoom-hide")
+  feature = null
+  bounds = null
+  path = null
+
+  projectPoint = (x, y) ->
+    point = map.latLngToLayerPoint(new L.LatLng(y, x))
+    this.stream.point(point.x, point.y)
+
+  reset = () ->
+    topLeft = bounds[0]
+    bottomRight = bounds[1]
+
+    svg.attr("width", bottomRight[0] - topLeft[0])
+      .attr("height", bottomRight[1] - topLeft[1])
+      .style("left", topLeft[0] + "px")
+      .style("top", topLeft[1] + "px")
+
+    g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")")
+    feature.attr("d", path)
+    
+  
+
+  # plot = Plot()
+  display = (error, collection) ->
+
+    transform = d3.geo.transform({point: projectPoint})
+    path = d3.geo.path().projection(transform)
+    bounds = path.bounds(collection)
+
+    feature = g.selectAll("path")
+      .data(collection.features)
+      .enter().append("path")
+
+    feature.attr("d", path)
+
+    map.on("viewreset", reset)
+    reset()
+
+    
+  #   plotData("#map", data, plot)
 
   queue()
-    .defer(d3.csv, "data/test.csv")
+    .defer(d3.json, "data/hoods.json")
     .await(display)
 

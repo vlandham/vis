@@ -13,6 +13,9 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="js/libs/leaflet/leaflet.css" />
+  
+
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -26,7 +29,7 @@
 
   <div class="container">
     <div id="main" role="main">
-      <div id="vis"></div>
+      <div id="map"></div>
     </div>
   </div> <!--! end of #container -->
 
@@ -38,6 +41,7 @@
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script src="js/libs/coffee-script.js"></script>
+  <script src="js/libs/leaflet/leaflet.js"></script>
   <script src="js/libs/d3.v3.js"></script>
   <script src="js/libs/queue.min.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
