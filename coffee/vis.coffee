@@ -86,7 +86,7 @@ $ ->
   seattle = [47.66, -122.3320707975654]
 
   map = L.map('map').setView(seattle, 12)
-  L.tileLayer('http://{s}.tile.cloudmade.com/' + apiKey + '/998/256/{z}/{x}/{y}.png', {
+  L.tileLayer('http://{s}.tile.cloudmade.com/' + apiKey + '/116624/256/{z}/{x}/{y}.png', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>'
   }).addTo(map)
 
