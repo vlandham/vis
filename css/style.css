@@ -6,8 +6,9 @@ svg {
 }
 
 path {
-  fill: #000;
-  fill-opacity: .2;
+  /* fill: #FA6900; */
+  /* fill-opacity: .5; */
+  /* fill-opacity: .2; */
   stroke: #fff;
   stroke-width: 1.5px;
 }

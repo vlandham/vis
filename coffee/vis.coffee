@@ -78,6 +78,7 @@ root.plotData = (selector, data, plot) ->
     .call(plot)
 
 
+inHoods = {'MAGNOLIA': 1, 'BALLARD': 1, 'INTERBAY':1, 'QUEEN ANNE':1, 'DOWNTOWN':1}
 
 $ ->
 
@@ -116,6 +117,7 @@ $ ->
 
   # plot = Plot()
   display = (error, collection) ->
+    # collection = collection.features.filter (d) ->
 
     transform = d3.geo.transform({point: projectPoint})
     path = d3.geo.path().projection(transform)
@@ -124,6 +126,9 @@ $ ->
     feature = g.selectAll("path")
       .data(collection.features)
       .enter().append("path")
+      .attr("fill", (d) -> if inHoods[d.properties['L_HOOD']] == 1 then "#FA6900" else "#fff")
+      .attr("fill-opacity", (d) -> if inHoods[d.properties['L_HOOD']] == 1 then 0.5 else 0.0)
+      .on("mouseover", (d) -> console.log(d3.geo.centroid(d)))
 
     feature.attr("d", path)
 
