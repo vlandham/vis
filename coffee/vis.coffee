@@ -29,14 +29,26 @@ Plot = () ->
       points = g.append("g").attr("id", "vis_points")
       update()
 
+  animate = () ->
+    d3.select(this).transition()
+      .duration(1000)
+      .attr('r', 30)
+      .transition()
+      .duration(1000)
+      .attr('r', 4)
+      .each('end', animate)
+
   update = () ->
-    points.selectAll(".point")
-      .data(data).enter()
+    p = points.selectAll(".point")
+      .data(data)
+    p.enter()
       .append("circle")
       .attr("cx", (d) -> xScale(xValue(d)))
       .attr("cy", (d) -> yScale(yValue(d)))
       .attr("r", 4)
       .attr("fill", "steelblue")
+    p.each(animate)
+
 
   chart.height = (_) ->
     if !arguments.length
