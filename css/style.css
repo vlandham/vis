@@ -1,1 +1,8 @@
 
+body {
+  font-family: "Ariel", sans-serif;
+}
+
+.container {
+  width: 1300px;
+}
