@@ -2,41 +2,93 @@
 root = exports ? this
 
 Plot = () ->
-  width = 600
+  width = 900
   height = 600
+  topHeight = 300
   data = []
-  points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
+  locs = null
+  map = null
+  margin = {top: 20, right: 20, bottom: 20, left: 140}
   xScale = d3.scale.linear().domain([0,10]).range([0,width])
-  yScale = d3.scale.linear().domain([0,10]).range([0,height])
-  xValue = (d) -> parseFloat(d.x)
-  yValue = (d) -> parseFloat(d.y)
+  # yScale = d3.scale.linear().domain([0,10]).range([0,height])
+  yScale = d3.scale.ordinal().rangeRoundBands([0,height], 0.1)
+  mapScale = d3.scale.ordinal().rangeRoundBands([0,width], 0.1)
+
+  color = d3.scale.category10()
+
+  # parseTime = d3.time.format("%Y-%m-%d").parse
+  iso = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse
+
+  parseData = (raw) ->
+    raw.forEach (d) ->
+      d.time = iso(d.timestamp)
+      d.type = if d.rfid_tag_id.slice(0,4) == "ABBA" then "person" else "item"
+    raw = raw.filter (d) -> d.type == "person"
+    timeExtent = d3.extent(raw, (d) -> d.time)
+    xScale.domain(timeExtent)
+    nest = d3.nest()
+      .key((d) -> d.location)
+      .entries(raw)
+    yScale.domain(nest.map((d,i) -> i))
+    mapScale.domain(nest.map((d,i) -> i))
+    console.log(yScale.domain())
+    nest
 
   chart = (selection) ->
     selection.each (rawData) ->
 
-      data = rawData
+      data = parseData(rawData)
+      console.log(data)
 
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
       
       svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
+      svg.attr("height", height + topHeight + margin.top + margin.bottom )
 
       g = svg.select("g")
         .attr("transform", "translate(#{margin.left},#{margin.top})")
 
-      points = g.append("g").attr("id", "vis_points")
+      locs = g.append("g").attr("id", "vis_points")
+        .attr("transform", "translate(0,#{topHeight})")
+
+      map = g.append("g").attr("id", "vis_map")
       update()
 
+  updateMap = () ->
+    map.selectAll(".dot")
+
   update = () ->
-    points.selectAll(".point")
-      .data(data).enter()
-      .append("circle")
-      .attr("cx", (d) -> xScale(xValue(d)))
-      .attr("cy", (d) -> yScale(yValue(d)))
-      .attr("r", 4)
-      .attr("fill", "steelblue")
+    locations = locs.selectAll(".location")
+      .data(data)
+
+    locations.exit().remove()
+    locsE = locations.enter()
+      .append("g")
+      .attr("transform", (d,i) -> "translate(0,#{yScale(i)})")
+    locsE.append("text")
+      .attr("text-anchor", "end")
+      .attr("dx", -6)
+      .attr("dy", 6)
+      .attr("y", yScale.rangeBand() / 2)
+      .attr("fill", (d) -> color(d.key))
+      .text((d) -> d.key)
+
+    checks = locsE.selectAll(".check")
+      .data(((d) -> d.values),((d) -> d.time))
+
+    checks.exit().remove()
+
+    checksE = checks.enter()
+      .append("g")
+      .attr("class", "check")
+      .attr("transform", (d) -> "translate(#{xScale(d.time)})")
+      .append("rect")
+      .attr("height", yScale.rangeBand())
+      .attr("width", 4)
+      .attr("fill", (d) -> color(d.location))
+      .attr("fill-opacity", 0.4)
+    
 
   chart.height = (_) ->
     if !arguments.length
@@ -85,6 +137,6 @@ $ ->
     plotData("#vis", data, plot)
 
   queue()
-    .defer(d3.csv, "data/test.csv")
+    .defer(d3.csv, "data/rfid.csv")
     .await(display)
 
