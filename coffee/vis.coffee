@@ -20,10 +20,12 @@ Plot = () ->
   iso = d3.time.format.utc("%Y-%m-%dT%H:%M:%S.%LZ").parse
 
   parseData = (raw) ->
+    startTimestamp = "2014-01-29T02:02:32.000Z"
+    startTime = iso(startTimestamp)
     raw.forEach (d) ->
       d.time = iso(d.timestamp)
       d.type = if d.rfid_tag_id.slice(0,4) == "ABBA" then "person" else "item"
-    raw = raw.filter (d) -> d.type == "person"
+    raw = raw.filter (d) -> d.type == "person" and d.time > startTime
     timeExtent = d3.extent(raw, (d) -> d.time)
     xScale.domain(timeExtent)
     nest = d3.nest()
@@ -88,6 +90,7 @@ Plot = () ->
       .attr("width", 4)
       .attr("fill", (d) -> color(d.location))
       .attr("fill-opacity", 0.4)
+      .on("click", (d) -> console.log(d))
     
 
   chart.height = (_) ->
