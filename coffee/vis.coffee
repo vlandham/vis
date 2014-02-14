@@ -31,14 +31,25 @@ $ ->
   
 
   beachToLayer = (feature, latlng) ->
-    console.log(latlng)
     L.circleMarker(latlng, geojsonMarkerOptions)
+
+  beachToText = (feature, latlng) ->
+    console.log(latlng)
+    latlng.lat += 0.0006
+    if feature.properties.name == 'Sand Island'
+      latlng.lng -= 0.17
+    if feature.properties.name == 'Waikiki'
+      latlng.lat += 0.04
+    L.circleMarker(latlng, geojsonMarkerOptions)
+    icon = L.divIcon({className:'label', html:feature.properties.name})
+    L.marker(latlng, {icon: icon})
 
   bindBeach = (feature, layer) ->
     a = 1
 
   showBeaches = (err, json) ->
     L.geoJson(json, {pointToLayer:beachToLayer, onEachFeature:bindBeach}).addTo(beachMap)
+    L.geoJson(json, {pointToLayer:beachToText, onEachFeature:bindBeach}).addTo(beachMap)
 
   showOahu = (err, json) ->
     L.geoJson(json, {style:hoodStyle}).addTo(hawaiiMap)
