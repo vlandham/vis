@@ -1,1 +1,9 @@
 
+.map {
+  width: 100%;
+  height: 380px;
+}
+
+.leaflet-control-attribution, .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  display:none;
+}

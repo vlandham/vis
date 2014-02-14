@@ -16,6 +16,7 @@
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="js/libs/leaflet/leaflet.css">
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
 
@@ -26,7 +27,14 @@
 
   <div class="container">
     <div id="main" role="main">
+      <h2>Flight</h2>
+      <p>Our flight from Seattle to Hawaii took 6 hours and 20 minutes. We flew over 2,6000 miles over the Pacific Ocean to reach the islands. This is nearly the same distance as travelling across the entire continental United States.</p>
+      <p>We spent all our time this trip on the Island of Oahu.</p>
+      <div id="hawaiiMap" class='map'></div>
       <div id="vis"></div>
+      <h2>Beaches</h2>
+      <p>We visited 6 beaches while on Oahu. All were in the southern region of the island - near Honolulu.</p>
+      <div id="beachMap" class='map'></div>
     </div>
   </div> <!--! end of #container -->
 
@@ -40,6 +48,8 @@
   <script src="js/libs/coffee-script.js"></script>
   <script src="js/libs/d3.v3.js"></script>
   <script src="js/libs/queue.min.js"></script>
+  <script src="js/libs/leaflet/leaflet.js"></script>
+  <script type="text/javascript" src='js/libs/leaflet/tile.stamen.js?v1.2.4'></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
     $(document).ready(function() {

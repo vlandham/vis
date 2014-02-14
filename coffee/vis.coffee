@@ -1,90 +1,49 @@
 
-root = exports ? this
-
-Plot = () ->
-  width = 600
-  height = 600
-  data = []
-  points = null
-  margin = {top: 20, right: 20, bottom: 20, left: 20}
-  xScale = d3.scale.linear().domain([0,10]).range([0,width])
-  yScale = d3.scale.linear().domain([0,10]).range([0,height])
-  xValue = (d) -> parseFloat(d.x)
-  yValue = (d) -> parseFloat(d.y)
-
-  chart = (selection) ->
-    selection.each (rawData) ->
-
-      data = rawData
-
-      svg = d3.select(this).selectAll("svg").data([data])
-      gEnter = svg.enter().append("svg").append("g")
-      
-      svg.attr("width", width + margin.left + margin.right )
-      svg.attr("height", height + margin.top + margin.bottom )
-
-      g = svg.select("g")
-        .attr("transform", "translate(#{margin.left},#{margin.top})")
-
-      points = g.append("g").attr("id", "vis_points")
-      update()
-
-  update = () ->
-    points.selectAll(".point")
-      .data(data).enter()
-      .append("circle")
-      .attr("cx", (d) -> xScale(xValue(d)))
-      .attr("cy", (d) -> yScale(yValue(d)))
-      .attr("r", 4)
-      .attr("fill", "steelblue")
-
-  chart.height = (_) ->
-    if !arguments.length
-      return height
-    height = _
-    chart
-
-  chart.width = (_) ->
-    if !arguments.length
-      return width
-    width = _
-    chart
-
-  chart.margin = (_) ->
-    if !arguments.length
-      return margin
-    margin = _
-    chart
-
-  chart.x = (_) ->
-    if !arguments.length
-      return xValue
-    xValue = _
-    chart
-
-  chart.y = (_) ->
-    if !arguments.length
-      return yValue
-    yValue = _
-    chart
-
-  return chart
-
-root.Plot = Plot
-
-root.plotData = (selector, data, plot) ->
-  d3.select(selector)
-    .datum(data)
-    .call(plot)
-
-
 $ ->
 
-  plot = Plot()
-  display = (error, data) ->
-    plotData("#vis", data, plot)
+  base = new L.StamenTileLayer("watercolor")
+  # map = new L.map("map1", {center: new L.LatLng(21.33258377832232, -157.90501690877136), zoom:10})
 
-  queue()
-    .defer(d3.csv, "data/test.csv")
-    .await(display)
+  hawaiiMap = new L.map("hawaiiMap", {center: new L.LatLng(21.571478713345897, -157.42299176228698), zoom:6, zoomControl:false})
+  hawaiiMap.addLayer(base)
+
+  base = new L.StamenTileLayer("watercolor")
+  beachMap = new L.map("beachMap", {center: new L.LatLng(21.468116134814252, -158.02586651814636), zoom:10, zoomControl:false})
+  beachMap.addLayer(base)
+
+  fillColor = "#ff7800"
+  geojsonMarkerOptions = {
+    radius: 10,
+    fillColor: fillColor,
+    color: "#fff",
+    weight: 3,
+    opacity: 1,
+    fillOpacity: 0.8
+  }
+
+  hoodStyle = {
+    "color": "#fff",
+    fillColor: fillColor,
+    "weight": 3,
+    "opacity": 0.9,
+    fillOpacity: 0.8
+  }
+  
+
+  beachToLayer = (feature, latlng) ->
+    console.log(latlng)
+    L.circleMarker(latlng, geojsonMarkerOptions)
+
+  bindBeach = (feature, layer) ->
+    a = 1
+
+  showBeaches = (err, json) ->
+    L.geoJson(json, {pointToLayer:beachToLayer, onEachFeature:bindBeach}).addTo(beachMap)
+
+  showOahu = (err, json) ->
+    L.geoJson(json, {style:hoodStyle}).addTo(hawaiiMap)
+
+  d3.json('data/beaches.geojson', showBeaches)
+  d3.json('data/oahu.geojson', showOahu)
+
 
