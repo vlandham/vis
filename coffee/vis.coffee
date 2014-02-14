@@ -8,7 +8,7 @@ $ ->
   hawaiiMap.addLayer(base)
 
   base = new L.StamenTileLayer("watercolor")
-  beachMap = new L.map("beachMap", {center: new L.LatLng(21.468116134814252, -158.02586651814636), zoom:10, zoomControl:false})
+  beachMap = new L.map("beachMap", {center: new L.LatLng(21.33258377832232, -157.90501690877136), zoom:11, zoomControl:false})
   beachMap.addLayer(base)
 
   fillColor = "#ff7800"
@@ -35,11 +35,15 @@ $ ->
 
   beachToText = (feature, latlng) ->
     console.log(latlng)
-    latlng.lat += 0.0006
+    latlng.lat += 0.0009
+    latlng.lng += 0.004
+    if feature.properties.name == 'Ala Moana'
+      latlng.lat += 0.01
     if feature.properties.name == 'Sand Island'
-      latlng.lng -= 0.17
+      latlng.lng -= 0.09
     if feature.properties.name == 'Waikiki'
-      latlng.lat += 0.04
+      latlng.lat -= 0.004
+      # latlng.lng -= 0.01
     L.circleMarker(latlng, geojsonMarkerOptions)
     icon = L.divIcon({className:'label', html:feature.properties.name})
     L.marker(latlng, {icon: icon})
@@ -54,7 +58,11 @@ $ ->
   showOahu = (err, json) ->
     L.geoJson(json, {style:hoodStyle}).addTo(hawaiiMap)
 
+  showHawaii = (err, json) ->
+    L.geoJson(json, {pointToLayer:beachToText}).addTo(hawaiiMap)
+
   d3.json('data/beaches.geojson', showBeaches)
   d3.json('data/oahu.geojson', showOahu)
+  d3.json('data/hawaii.geojson', showHawaii)
 
 
