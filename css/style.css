@@ -1,1 +1,9 @@
 
+body, input, textarea {
+  font-family: Georgia, "Times New Roman", Serif;
+}
+
+#main p {
+  font-size: 30px;
+  line-height: 50px;
+}
