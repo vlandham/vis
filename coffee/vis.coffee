@@ -11,6 +11,14 @@ $ ->
   beachMap = new L.map("beachMap", {center: new L.LatLng(21.33258377832232, -157.90501690877136), zoom:11, zoomControl:false})
   beachMap.addLayer(base)
 
+  base = new L.StamenTileLayer("watercolor")
+  sightsMap = new L.map("sightsMap", {center: new L.LatLng(21.29455015581269, -157.84399128926452), zoom:13, zoomControl:false})
+  sightsMap.addLayer(base)
+
+  base = new L.StamenTileLayer("watercolor")
+  homeMap = new L.map("homeMap", {center: new L.LatLng(21.33258377832232, -157.90501690877136), zoom:11, zoomControl:false})
+  homeMap.addLayer(base)
+
   fillColor = "#ff7800"
   geojsonMarkerOptions = {
     radius: 10,
@@ -61,8 +69,18 @@ $ ->
   showHawaii = (err, json) ->
     L.geoJson(json, {pointToLayer:beachToText}).addTo(hawaiiMap)
 
+  showSights = (err, json) ->
+    L.geoJson(json, {pointToLayer:beachToLayer}).addTo(sightsMap)
+    L.geoJson(json, {pointToLayer:beachToText}).addTo(sightsMap)
+
+  showStaying = (err, json) ->
+    L.geoJson(json, {pointToLayer:beachToLayer}).addTo(homeMap)
+    L.geoJson(json, {pointToLayer:beachToText}).addTo(homeMap)
+
   d3.json('data/beaches.geojson', showBeaches)
   d3.json('data/oahu.geojson', showOahu)
   d3.json('data/hawaii.geojson', showHawaii)
+  d3.json('data/sights.geojson', showSights)
+  d3.json('data/staying.geojson', showStaying)
 
 
