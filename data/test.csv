@@ -1,5 +1,8 @@
-x,y
-1,1
-3,5
-7,3
-2,9
+node,dim,sub,all,fill
+1,"Accessories","Belts",45,40
+1,"Accessories","Watches",45,44
+1,"Dresses","Luxury Dress",10,10
+1,"Dresses","Ugly Dress",20,15
+2,"Dresses","Ugly Dress",20,20
+2,"Accessories","Belts",45,44
+2,"Accessories","Watches",45,30
