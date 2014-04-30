@@ -7,3 +7,12 @@ body, input, textarea {
   font-size: 30px;
   line-height: 50px;
 }
+
+#main {
+  padding-top: 20px;
+}
+
+.node {
+  float:left;
+  padding-right: 14px;
+}
