@@ -27,11 +27,26 @@ joinPath = (parsed) ->
     path = path.concat(c)
   path
 
+randomIntFromInterval = (min,max) ->
+  Math.floor(Math.random()*(max-min+1)+min)
+
+jackPath = (parsed, mult) ->
+  jacked = []
+  parsed.forEach (section) ->
+    jackedSection = []
+    section.forEach (s, i) ->
+      if i > 0
+        jackedSection.push(s + (randomIntFromInterval(0,1) * mult))
+      else
+        jackedSection.push(s)
+    jacked.push(jackedSection)
+  jacked
+
   
 $ ->
   d3.xml 'data/bike.svg', 'image/svg+xml', (error, data) ->
     console.log(error)
-    nodes = [1..2]
+    nodes = [1..200]
 
     svg = data.documentElement
 
@@ -43,17 +58,13 @@ $ ->
       .each((d) -> this.appendChild(svg.cloneNode(true)))
       .selectAll("path")
       .attr("fill", "steelblue")
-      .each (d) ->
+      .each (d,i) ->
         t = d3.select(this)
         path = t.attr("d")
-        pp = (parse(path))
+        mod = if (i % 10) < 5 then -2 else 2
+        console.log(i)
+        pp = jackPath(parse(path), mod)
         t.attr("d", join(pp))
         
-
-        console.log(path)
-        console.log(join(pp))
-        console.log("---")
-
-      
 
 
