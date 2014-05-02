@@ -36,11 +36,21 @@ jackPath = (parsed, mult) ->
     jackedSection = []
     section.forEach (s, i) ->
       if i > 0
-        jackedSection.push(s + (randomIntFromInterval(0,1) * mult))
+        jackedSection.push(s + (randomIntFromInterval(-1,1)))
       else
         jackedSection.push(s)
     jacked.push(jackedSection)
   jacked
+
+updateBikes = () ->
+  d3.select("#vis").selectAll("path")
+    .transition().duration(300)
+    .delay((d,i) -> 10 * i)
+    .attr "d", (d) ->
+      t = d3.select(this)
+      path = t.attr("d")
+      join(jackPath(parse(path), 1))
+
 
   
 $ ->
@@ -63,8 +73,14 @@ $ ->
         path = t.attr("d")
         mod = if (i % 10) < 5 then -2 else 2
         console.log(i)
-        pp = jackPath(parse(path), mod)
-        t.attr("d", join(pp))
+        # pp = jackPath(parse(path), mod)
+        # t.attr("d", join(pp))
+
+    intervalId = setInterval(() ->
+      updateBikes()
+    , 2200)
+
+
         
 
 
