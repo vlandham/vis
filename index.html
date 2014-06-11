@@ -17,6 +17,32 @@
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme.min.css">
   <link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.background {
+  fill: none;
+  pointer-events: all;
+}
+
+.feature {
+  fill: #ccc;
+  cursor: pointer;
+}
+
+.feature.active {
+  fill: orange;
+}
+
+.mesh {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+</style>
+  
   <!-- end CSS-->
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
@@ -38,7 +64,8 @@
   <script defer src="js/plugins.js"></script>
   <script defer src="js/script.js"></script>
   <script src="js/libs/coffee-script.js"></script>
-  <script src="js/libs/d3.v3.js"></script>
+  <script src="js/libs/d3.js"></script>
+  <script src="js/libs/topojson.js"></script>
   <script src="js/libs/queue.min.js"></script>
   <script type="text/coffeescript" src="coffee/vis.coffee"></script>
   <script type="text/javascript">
