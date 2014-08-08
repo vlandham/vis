@@ -68,25 +68,13 @@ h2. Contents
 
 h3. Twitter Bootstrap
 
-* 2.2.1
-
 h3. d3.js
-
-* 3.0.2
 
 h3. Raphael
 
-* 2.1.0
-
 h3. coffee-script.js
-
-* 1.4.0
 
 h3. jQuery
 
-* 1.7.2
-
 h3. Leaflet
-
-* 0.4 beta
 
