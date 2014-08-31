@@ -103,7 +103,7 @@ Plot = () ->
       .attr("class", "event")
       .attr("cx", (d) -> xScale(xValue(d)))
       .attr("cy", yScale.rangeBand() / 2 )
-      .attr("r", 6)
+      .attr("r", (d) -> if d.type == "story" then 8 else 5)
       .attr("fill", "#777")
       .on("mouseover", mouseover)
 

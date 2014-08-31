@@ -2,31 +2,32 @@
 	{"name":"Captain Z", "events":[
 		{"title":"Birth", "date":"01/01/1700"},
 		{"title":"Starts Orphanage", "date":"07/01/1703"},
-		{"title":"Starts Star School", "date":"08/01/1708"},
+		{"title":"Starts Star School", "date":"08/01/1708", "type":"story"},
 		{"title":"Starts Ship Job", "date":"08/01/1711"},
 		{"title":"Joins Pirates", "date":"02/01/1712"},
 		{"title":"Joins Wind Drinker", "date":"06/01/1715"},
+    {"title":"Hears about Castle Island", "date":"07/11/1719", "desc":"Begins her hunt then", "type":"story"},
 		{"title":"Captain of WD", "date":"10/01/1720", "desc":"Inherits Wind Drinker from previous captain"},
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]},
   {"name":"Doctor Star", "events":[
     {"title": "Birth", "date":"01/04/1683"},
-    {"title": "Start School", "date":"08/01/1708"},
+    {"title": "Start School", "date":"08/01/1708", "type":"story"},
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]},
   {"name":"Nova", "events":[
     {"title":"Birth", "date":"03/13/1713"},
-    {"title":"Start Star School", "date":"08/01/1720"},
+    {"title":"Start Star School", "date":"08/01/1720", "type":"story"},
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]},
   {"name":"Orion", "events":[
     {"title":"Birth", "date":"07/02/1714"},
-    {"title":"Start Star School", "date":"08/01/1720"},
+    {"title":"Start Star School", "date":"08/01/1720", "type":"story"},
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]},
   {"name":"Lucy", "events":[
     {"title":"Birth", "date":"01/01/1717"},
-    {"title":"Start Star School", "date":"08/01/1721"},
+    {"title":"Start Star School", "date":"08/01/1721", "type":"story"},
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]}
 ]
