@@ -10,6 +10,7 @@
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]},
   {"name":"Doctor Star", "events":[
+    {"title": "Birth", "date":"01/04/1683"},
     {"title": "Start School", "date":"08/01/1708"},
     {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
   ]},

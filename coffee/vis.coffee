@@ -35,7 +35,10 @@ Plot = () ->
     console.log(d.title)
     person = d3.select(this.parentNode).datum()
     age = getAge(person.events[0].date, d.date)
-    console.log(age)
+    console.log("time since event[0]: " + age)
+    last_index = if i == 0 then 0 else i - 1
+    age = getAge(person.events[last_index].date, d.date)
+    console.log("time since last event: " + age)
 
   chart = (selection) ->
     selection.each (rawData) ->
