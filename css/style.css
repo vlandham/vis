@@ -7,3 +7,21 @@ body, input, textarea {
   font-size: 30px;
   line-height: 50px;
 }
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis text {
+  font: 18px sans-serif;
+  fill: #777;
+}
+
+.x.axis line {
+  stroke: #ddd;
+  stroke-opacity: 0.6;
+}
+
+.x.axis path {
+  display: none;
+}
