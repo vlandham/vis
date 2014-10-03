@@ -1,6 +1,37 @@
 
 root = exports ? this
 
+
+Fake = () ->
+  width = 600
+  height = 600
+  data = []
+  margin = {top: 20, right: 20, bottom: 20, left: 20}
+  chart = (selection) ->
+    selection.each (rawData) ->
+      svg = d3.select(this).selectAll("svg").data([data])
+      gEnter = svg.enter().append("svg").append("g")
+      
+      svg.attr("width", width + margin.left + margin.right )
+      svg.attr("height", height + margin.top + margin.bottom )
+
+      g = svg.select("g")
+        .attr("transform", "translate(#{margin.left},#{margin.top})")
+
+  chart.height = (_) ->
+    if !arguments.length
+      return height
+    height = _
+    chart
+
+  chart.width = (_) ->
+    if !arguments.length
+      return width
+    width = _
+    chart
+
+  chart
+
 Plot = () ->
   width = 600
   height = 600
