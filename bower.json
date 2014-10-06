@@ -1,0 +1,13 @@
+{
+  "name": "Vis Starter",
+    "version": "0.0.5",
+    "dependencies": {
+      "jquery": "1.9",
+      "d3":"3.4.11",
+      "coffee-script":null,
+      "requirejs": null,
+      "require-cs": null,
+      "modernizr":null
+    }
+}
+
