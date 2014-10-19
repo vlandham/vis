@@ -77,32 +77,6 @@ CustSparks = () ->
   # "2014-10-01 13:55:56.0"
   format = d3.time.format("%Y-%m-%d %X.0")
 
-  setupDataOld = (rawData) ->
-    data = []
-    d3.map(rawData).forEach (k,v) ->
-      cust = {}
-      cust['session_id'] = k
-      v.forEach (e) ->
-        e.datetime = format.parse(e.time)
-      v.sort (a,b) -> d3.ascending(a.datetime, b.datetime)
-      cust['start_time'] = v[0].datetime
-      v.forEach (e,i) ->
-        e.time_diff = e.datetime - cust.start_time
-
-
-      cust['views'] = v
-      cust['view_count'] = v.length
-      data.push(cust)
-    data = data.sort (a,b) -> d3.descending(a.view_count, b.view_count)
-    timeMin = d3.min(data, (d) -> d3.min(d.views, (v) -> v.datetime))
-    timeMax = d3.max(data, (d) -> d3.max(d.views, (v) -> v.datetime))
-    maxDiff = d3.max(data, (d) -> d3.max(d.views, (v) -> v.time_diff))
-    console.log(maxDiff)
-
-    xScaleAbs.domain([timeMin, timeMax])
-    xScaleDiff.domain([0, maxDiff])
-    data
-
   setupData = (data) ->
     data.forEach (cust) ->
       cust['views'].forEach (e) ->
