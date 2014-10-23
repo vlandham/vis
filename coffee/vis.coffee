@@ -88,6 +88,12 @@ CustSparks = () ->
 
 
       cust['view_count'] = cust.views.length
+
+      cats = cust['views'].filter (v) -> v.type == 'category'
+      by_group = d3.nest()
+        .key((d) -> d.id)
+        .entries(cats)
+      cust['nest_groups'] = by_group
     data = data.sort (a,b) -> d3.descending(a.view_count, b.view_count)
     timeMin = d3.min(data, (d) -> d3.min(d.views, (v) -> v.datetime))
     timeMax = d3.max(data, (d) -> d3.max(d.views, (v) -> v.datetime))
@@ -104,7 +110,8 @@ CustSparks = () ->
       
       data = setupData(rawData)
       data = data.slice(0,100)
-      # console.log(data)
+      
+      console.log(data)
 
       height = (lineHeight + lineMargin) * data.length
 
@@ -205,6 +212,7 @@ CustSparks = () ->
       .style("pointer-events", "all")
       .on("mousemove", mousemove)
       .on("mouseout", mouseout)
+      .on("click", (d) -> console.log(d))
   
 
       
@@ -308,6 +316,6 @@ $ ->
     plotData("#vis", data, plot)
 
   queue()
-    .defer(d3.json, "data/sessions.json")
+    .defer(d3.json, "data/sessions_low_views.json")
     .await(display)
 
