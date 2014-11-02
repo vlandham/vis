@@ -25,3 +25,7 @@ body, input, textarea {
 .x.axis path {
   display: none;
 }
+
+.title {
+  font-size: 11px;
+}

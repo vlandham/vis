@@ -1,6 +1,9 @@
 
 root = exports ? this
 
+datePrint = (date) ->
+  date.toJSON().slice(0,10)
+
 Plot = () ->
   width = 800
   height = 400
@@ -106,6 +109,27 @@ Plot = () ->
       .attr("r", (d) -> if d.type == "story" then 8 else 5)
       .attr("fill", "#777")
       .on("mouseover", mouseover)
+
+    personsE.selectAll("text")
+      .data(((d) -> d.events), ((d) -> d.title))
+      .enter().append("text")
+      .attr("class", "title")
+      .text((d) -> d.title)
+      .attr("x", (d) -> xScale(xValue(d)))
+      .attr("y", yScale.rangeBand() / 2)
+      .attr("dy", (d,i) -> if (i % 2 == 0) then -20 else -40)
+      .attr("text-anchor", "middle")
+
+    $('svg .event').tipsy({
+      gravity:'n'
+      html:true
+      title: () ->
+        d = this.__data__
+        person = d3.select(this.parentNode).datum()
+        age = getAge(person.events[0].date, d.date)
+        "<strong>#{d.title}</strong><br/>#{datePrint(d.date)}<br/>age: #{age}"
+    })
+    
 
   chart.height = (_) ->
     if !arguments.length
