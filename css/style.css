@@ -28,6 +28,8 @@ body, input, textarea {
 
 .title {
   font-size: 11px;
+  /* stroke: black; */
+  /* stroke-width:3px; */
 }
 
 .line {

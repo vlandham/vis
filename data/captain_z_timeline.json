@@ -13,21 +13,21 @@
   {"name":"Doctor Star", "events":[
     {"title": "Birth", "date":"01/04/1683"},
     {"title": "Start School", "date":"08/01/1708", "type":"story"},
-    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
+    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story", "show":false}
   ]},
   {"name":"Nova", "events":[
     {"title":"Birth", "date":"03/13/1713"},
     {"title":"Start Star School", "date":"08/01/1720", "type":"story"},
-    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
+    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story", "show":false}
   ]},
   {"name":"Orion", "events":[
     {"title":"Birth", "date":"07/02/1714"},
     {"title":"Start Star School", "date":"08/01/1720", "type":"story"},
-    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
+    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story","show":false}
   ]},
   {"name":"Lucy", "events":[
     {"title":"Birth", "date":"01/01/1717"},
     {"title":"Start Star School", "date":"08/01/1721", "type":"story"},
-    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story"}
+    {"title":"Steals Map", "date":"07/11/1722", "desc":"The start of the story", "show":false}
   ]}
 ]

@@ -98,11 +98,12 @@ Plot = () ->
       
 
     events = personsE.selectAll(".event")
-      .data(((d) -> d.events), ((d) -> d.title))
+      .data(((d) -> d.events.filter((e) -> if e.hasOwnProperty('show') then e.show else true)), ((d) -> d.title))
 
     eventsE = events.enter()
+    eventsG = eventsE.append("g")
 
-    eventsE.append("circle")
+    eventsG.append("circle")
       .attr("class", "event")
       .attr("cx", (d) -> xScale(xValue(d)))
       .attr("cy", yScale.rangeBand() / 2 )
@@ -110,9 +111,8 @@ Plot = () ->
       .attr("fill", "#777")
       .on("mouseover", mouseover)
 
-    personsE.selectAll("line")
-      .data(((d) -> d.events), ((d) -> d.title))
-      .enter().append("line")
+    eventsG
+      .append("line")
       .attr("class", "line")
       .attr("x1", (d) -> xScale(xValue(d)))
       .attr("x2", (d) -> xScale(xValue(d)))
@@ -120,9 +120,7 @@ Plot = () ->
       .attr("y2", (d,i) ->  (yScale.rangeBand() / 2) - 10)
 
 
-    personsE.selectAll("text")
-      .data(((d) -> d.events), ((d) -> d.title))
-      .enter().append("text")
+    eventsG.append("text")
       .attr("class", "title")
       .text((d) -> d.title)
       .attr("x", (d) -> xScale(xValue(d)))
