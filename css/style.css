@@ -29,3 +29,9 @@ body, input, textarea {
 .title {
   font-size: 11px;
 }
+
+.line {
+  stroke: #777;
+  fill:none;
+  stroke-width: 1.2
+}

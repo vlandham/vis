@@ -110,6 +110,16 @@ Plot = () ->
       .attr("fill", "#777")
       .on("mouseover", mouseover)
 
+    personsE.selectAll("line")
+      .data(((d) -> d.events), ((d) -> d.title))
+      .enter().append("line")
+      .attr("class", "line")
+      .attr("x1", (d) -> xScale(xValue(d)))
+      .attr("x2", (d) -> xScale(xValue(d)))
+      .attr("y1", (d,i) -> if (i % 2 == 0) then (yScale.rangeBand() / 2) - 15 else (yScale.rangeBand() / 2) - 35)
+      .attr("y2", (d,i) ->  (yScale.rangeBand() / 2) - 10)
+
+
     personsE.selectAll("text")
       .data(((d) -> d.events), ((d) -> d.title))
       .enter().append("text")
