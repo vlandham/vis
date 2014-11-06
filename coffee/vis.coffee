@@ -109,6 +109,15 @@ root.plotData = (selector, data, plot) ->
     .call(plot)
 
 
+lastScrollTop = 0
+$(window).scroll (e) ->
+  st = $(this).scrollTop()
+  # console.log(e)
+  # console.log(st)
+  scrollDiff = (st - lastScrollTop)
+  console.log(scrollDiff)
+  lastScrollTop = st
+
 $ ->
 
   plot = Plot()
