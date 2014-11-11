@@ -8,14 +8,18 @@ function scrollMap() {
 
   var lastScrollTop = 0;
 
-  function e() {
+  function s() {
     setupDimensions();
     // $(document).on('mousewheel DOMMouseScroll MozMousePixelScroll', onScroll);
-    setupDiv();
-    scrollEl.on('mousewheel', onScroll);
+    // setupDiv();
+    // scrollEl.on('mousewheel', onScroll);
 
-    $(wrapperElId).on('mousewheel', fakeScroll);
+    // $(wrapperElId).on('mousewheel', fakeScroll);
     // $(scrollElId).forwardevents();
+    
+    // window.onscroll = onScroll;
+    // $(document).on("mousewheel", onScroll);
+    document.addEventListener("wheel", onScroll, true);
   }
 
   setupDimensions = function() {
@@ -49,41 +53,50 @@ function scrollMap() {
     var scrollDiff = (st - lastScrollTop);
     console.log(scrollDiff);
     lastScrollTop = st;
+    var delta = e.wheelDeltaY;
+
+    // console.log(scrollDiff - delta);
+
+    console.log(e.clientY);
+
+
+
 
     // var scrollTo= (e.wheelDelta*-1) + $(wrapperElId).scrollTop();
     // $(wrapperElId).scrollTop(scrollTo);
     // console.log(e);
-    var newEvent = $.extend($.Event(e.type), {
-    which: 1,
-    originalEvent: e.originalEvent,
-    clientX: e.clientX,
-    clientY: e.clientY,
-    pageX: e.pageX,
-    pageY: e.pageY,
-    screenX: e.screenX,
-    screenY: e.screenY,
-    wheelDelta: e.wheelDelta
-    });
+    // var newEvent = $.extend($.Event(e.type), {
+    // which: 1,
+    // originalEvent: e.originalEvent,
+    // clientX: e.clientX,
+    // clientY: e.clientY,
+    // pageX: e.pageX,
+    // pageY: e.pageY,
+    // screenX: e.screenX,
+    // screenY: e.screenY,
+    // wheelDelta: e.wheelDelta
+    // });
 
-    e.preventDefault();
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    $(wrapperElId).trigger(newEvent);
+    // e.preventDefault();
+    // e.stopPropagation();
+    // e.stopImmediatePropagation();
+    // $(wrapperElId).trigger(newEvent);
   }
 
-  return e;
+  return s;
 }
 
 $(document).ready(function() {
-  var s = scrollMap();
-  s();
 
   $("#blank_square").on("mousewheel", function(e) {
-    console.log("box");
+    // console.log("box");
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();
   });
+
+  var s = scrollMap();
+  s();
 
 });
 
