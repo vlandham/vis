@@ -3,12 +3,25 @@ root = exports ? this
 
 
 Fake = () ->
-  width = 600
-  height = 600
+  width = 900
+  height = 900
   data = []
+  extents = {}
   margin = {top: 20, right: 20, bottom: 20, left: 20}
+
+  parseData = (rawData) ->
+    rawData.forEach (d) ->
+      d.date = new Date(d.time)
+    extents.ratio = d3.extent(rawData, (d) -> Math.abs(d.ratio))
+    extents.top = d3.extent(rawData, (d) -> d.scrollTop)
+    extents.date = d3.extent(rawData, (d) -> d.date)
+
   chart = (selection) ->
     selection.each (rawData) ->
+
+      data = parseData(rawData)
+      console.log(extents)
+
       svg = d3.select(this).selectAll("svg").data([data])
       gEnter = svg.enter().append("svg").append("g")
       
@@ -120,11 +133,11 @@ $(window).scroll (e) ->
 
 $ ->
 
-  plot = Plot()
+  plot = Fake()
   display = (error, data) ->
     plotData("#vis", data, plot)
 
   queue()
-    .defer(d3.csv, "data/test.csv")
+    .defer(d3.json, "data/scroll_data.json")
     .await(display)
 

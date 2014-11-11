@@ -1,10 +1,40 @@
 
+(function(console){
+
+console.save = function(data, filename){
+
+    if(!data) {
+        console.error('Console.save: No data')
+        return;
+    }
+
+    if(!filename) filename = 'console.json'
+
+    if(typeof data === "object"){
+        data = JSON.stringify(data, undefined, 2)
+    }
+
+    var blob = new Blob([data], {type: 'text/json'}),
+        e    = document.createEvent('MouseEvents'),
+        a    = document.createElement('a')
+
+    a.download = filename
+    a.href = window.URL.createObjectURL(blob)
+    a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':')
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null)
+    a.dispatchEvent(e)
+ }
+})(console)
+
+
 function scrollMap() {
   var scrollElId = '#scroll-map-capture';
   var wrapperElId = "#scroll-map-wrapper";
   var scrollEl;
   var windowH, windowW;
   var docH, docW;
+
+  var allData = [];
 
   var lastScrollTop = 0;
 
@@ -19,6 +49,7 @@ function scrollMap() {
     
     // window.onscroll = onScroll;
     // $(document).on("mousewheel", onScroll);
+    setupLog();
     document.addEventListener("wheel", onScroll, true);
   }
 
@@ -29,6 +60,24 @@ function scrollMap() {
     docH = $(document).height();
     docW = $(document).width();
     // scrollEl.css("pointer-events", "none");
+  }
+
+  saveData = function() {
+    console.log('save');
+    console.save(allData, "scroll_data.json");
+  }
+
+  setupLog = function(argument) {
+    $('body').prepend('<div id="scroll-map-log"></div>');
+    scrollEl = $('#scroll-map-log');
+    scrollEl.css("position", "fixed");
+    scrollEl.css("left", "0");
+    scrollEl.css("top", "0");
+    scrollEl.css("width", "60px");
+    scrollEl.css("background-color", "grey");
+
+    scrollEl.on("click", saveData);
+
   }
 
   setupDiv = function() {
@@ -44,20 +93,33 @@ function scrollMap() {
     scrollEl.css("z-index", "1000000");
   }
 
-  fakeScroll = function(e) {
-    console.log(e.isDefaultPrevented());
-  }
+  // fakeScroll = function(e) {
+  //   console.log(e.isDefaultPrevented());
+  // }
 
   onScroll = function(e) {
-    var st = $(window).scrollTop();
-    var scrollDiff = (st - lastScrollTop);
-    console.log(scrollDiff);
-    lastScrollTop = st;
-    var delta = e.wheelDeltaY;
+    var data = new Object();
+    data.windowHeight = $(window).height();
+    data.windowWidth = $(window).width();
+    data.mouseX = e.clientX;
+    data.mouseY = e.clientY;
+    data.scrollTop = $(window).scrollTop();
+    data.scrollDiff = (data.scrollTop - lastScrollTop);
+    // hack to prevent infinity
+    if(data.scrollDiff == 0) {
+      data.scrollDiff = 1;
+    }
+    lastScrollTop = data.scrollTop;
+    data.delta = e.wheelDeltaY;
 
-    // console.log(scrollDiff - delta);
+    data.ratio = Math.round((data.delta) / (data.scrollDiff));
 
-    console.log(e.clientY);
+    data.time = Date.now();
+
+    // console.log(e.clientY);
+    scrollEl.html(data.ratio);
+
+    allData.push(data);
 
 
 
