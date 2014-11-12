@@ -54,6 +54,7 @@ Fake = () ->
       .data(data).enter()
       .append("circle")
       .attr("cx", (d) -> xScale(xValue(d)))
+      # .attr("cx", (d) -> width / 2)
       .attr("cy", (d) -> yScale(yValue(d)))
       .attr("r", (d) -> rScale(rValue(d)))
       .attr("fill", "steelblue")
