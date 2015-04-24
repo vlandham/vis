@@ -4,6 +4,17 @@ body, input, textarea {
 }
 
 #main p {
-  font-size: 30px;
   line-height: 50px;
+}
+
+.pill {
+  /* stroke: black; */
+  /* stroke-width: 2; */
+  stroke-linejoin: round;
+}
+
+.pill-outer {
+  /* stroke: black; */
+  /* stroke-width: 2; */
+  stroke-linejoin: round;
 }
