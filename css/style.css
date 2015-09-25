@@ -1,7 +1,7 @@
 
 body, input, textarea {
   font-family: Georgia, "Times New Roman", Serif;
-  /*background-color: black;*/
+  background-color: black;
   color: white;
 }
 
@@ -11,10 +11,17 @@ body, input, textarea {
   line-height: 50px;
 }
 
+.line {
+  stroke:white;
+  stroke-width:1;
+  fill:none;
+
+}
+
 #vis {
   /*font-size: 2px;*/
 }
 
 #vis .word {
-  opacity: 0.4;
+  /*opacity: 0.4;*/
 }

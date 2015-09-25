@@ -20,22 +20,42 @@ var getWords = function(text) {
   // text = text.replace(/[.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
   text = text.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,"");
   text = text.replace(/\s{2,}/g," ");
-  var allWords = text.split(" ");
+  var allWords = text.split(" ").map(function(w) { return {"w": w};});
+  var wordCenters = radialPlacement().width(450).height(250).center({"x":1200 / 2, "y":700 / 2 });
+  wordCenters(allWords);
+
   var wordsLen = allWords.length;
   var words = d3.map();
   for(i = 0;i < wordsLen;i++) {
     var word = allWords[i];
     var wordList = [];
-    if(words.has(word)) {
-      wordList = words.get(word);
+    if(words.has(word.w)) {
+      wordList = words.get(word.w);
     }
 
-    wordList.push({"word":word, "index":i, "pos":i / wordsLen});
-    words.set(word, wordList);
-
+    wordList.push({"word":word.w, "index":i, "pos":i / wordsLen, "x":word.x, "y":word.y, "angle":word.angle});
+    if(word.w == "Alice") {
+      console.log(wordList.length);
+    }
+    words.set(word.w, wordList);
   }
+
+  var wordMap = [];
+  words.forEach(function(word, positions) {
+    var w = {"key":word};
+    w.x = d3.sum(positions.map(function(p) { return p.x; })) / positions.length;
+    w.y = d3.sum(positions.map(function(p) { return p.y; })) / positions.length;
+    w.positions = positions;
+    if(word == "Alice") {
+      console.log(positions);
+    }
+    w.count = positions.length;
+    wordMap.push(w);
+  });
+
   // .map(function(w) {return {"word":w};});
-  return words.entries().sort(function(a,b) { return a.value[0].index - b.value[0].index; });
+  // return words.entries().sort(function(a,b) { return a.value[0].index - b.value[0].index; });
+  return wordMap;
 };
 
 var radialPlacement = function() {
@@ -156,7 +176,7 @@ var chart = function() {
       sentenceCenters(sentences);
 
       var words = rawData.words;
-      wordCenters(words);
+      // wordCenters(words);
 
       var svg = d3.select(this).selectAll("svg").data([data]);
       var gEnter = svg.enter().append("svg").append("g");
@@ -173,6 +193,8 @@ var chart = function() {
         .attr("x",  function(d) { return d.x; })
         .attr("y",  function(d) { return d.y; })
         .attr("text-anchor", function(d) { return d.angle > 90 ? "end" : "start"; })
+        .attr("fill", "#ddd")
+        .attr("opacity", 0.4)
         .attr("font-size", "2px")
         .text(function(d) { return d.sentence; });
 
@@ -183,13 +205,38 @@ var chart = function() {
         .attr("x",  function(d) { return d.x; })
         .attr("y",  function(d) { return d.y; })
         .attr("text-anchor", "middle")
-        .attr("font-size", function(d) { return (Math.min(d.value.length, 12)) + "px";})
-        .text(function(d) { return d.key; });
+        // .attr("font-size", function(d) { return (Math.min(d.count, 12)) + "px";})
+        .attr("font-size", "8px")
+        // .attr("fill", "#ddd")
+        // .attr("opacity", function(d) { return Math.min(d.count / 20, 0.5); })
+        // .attr("opacity", function(d) { return d.count > 30 ? 0.9 : 0.4; })
+        .attr("fill", function(d) { return d.count > 30 ? "#ddd": "#555"; })
+        .text(function(d) { return d.key; })
+        .on("mouseover", mouseover)
+        .on("mouseout", mouseout);
     });
   };
+  function mouseover(d,i) {
+    g.selectAll(".line")
+    .data(d.positions)
+    .enter()
+    .append("line")
+    .attr("class", "line")
+    .attr("x1", d.x)
+    .attr("y1", d.y)
+    .attr("x2", function(p) { return p.x; })
+    .attr("y2", function(p) { return p.y; });
+  }
+
+  function mouseout(d,i) {
+
+    g.selectAll(".line").remove();
+
+  }
 
   return chart;
 };
+
 
 function plotData(selector, data, plot) {
   d3.select(selector)
