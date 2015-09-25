@@ -21,7 +21,7 @@ var getWords = function(text) {
   text = text.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g,"");
   text = text.replace(/\s{2,}/g," ");
   var allWords = text.split(" ").map(function(w) { return {"w": w};});
-  var wordCenters = radialPlacement().width(450).height(250).center({"x":1200 / 2, "y":700 / 2 });
+  var wordCenters = radialPlacement().width(480).height(280).center({"x":1200 / 2, "y":700 / 2 });
   wordCenters(allWords);
 
   var wordsLen = allWords.length;
@@ -34,9 +34,9 @@ var getWords = function(text) {
     }
 
     wordList.push({"word":word.w, "index":i, "pos":i / wordsLen, "x":word.x, "y":word.y, "angle":word.angle});
-    if(word.w == "Alice") {
-      console.log(wordList.length);
-    }
+    // if(word.w == "Alice") {
+    //   console.log(wordList.length);
+    // }
     words.set(word.w, wordList);
   }
 
@@ -46,16 +46,16 @@ var getWords = function(text) {
     w.x = d3.sum(positions.map(function(p) { return p.x; })) / positions.length;
     w.y = d3.sum(positions.map(function(p) { return p.y; })) / positions.length;
     w.positions = positions;
-    if(word == "Alice") {
-      console.log(positions);
-    }
+    // if(word == "Alice") {
+    //   console.log(positions);
+    // }
     w.count = positions.length;
     wordMap.push(w);
   });
 
   // .map(function(w) {return {"word":w};});
   // return words.entries().sort(function(a,b) { return a.value[0].index - b.value[0].index; });
-  return wordMap;
+  return wordMap.sort(function(a,b) { return a.count - b.count; });
 };
 
 var radialPlacement = function() {
@@ -205,6 +205,7 @@ var chart = function() {
         .attr("x",  function(d) { return d.x; })
         .attr("y",  function(d) { return d.y; })
         .attr("text-anchor", "middle")
+        .attr("text-anchor", function(d) { return d.x > (width / 2) ? "end" : "start"; })
         // .attr("font-size", function(d) { return (Math.min(d.count, 12)) + "px";})
         .attr("font-size", "8px")
         // .attr("fill", "#ddd")
@@ -226,6 +227,9 @@ var chart = function() {
     .attr("y1", d.y)
     .attr("x2", function(p) { return p.x; })
     .attr("y2", function(p) { return p.y; });
+
+    console.log(d.key);
+    d3.select("#word").html(d.key);
   }
 
   function mouseout(d,i) {

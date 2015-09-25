@@ -11,6 +11,11 @@ body, input, textarea {
   line-height: 50px;
 }
 
+#word {
+  font-size:20px;
+  color: "white";
+}
+
 .line {
   stroke:white;
   stroke-width:1;
