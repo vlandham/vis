@@ -1,9 +1,20 @@
 
 body, input, textarea {
   font-family: Georgia, "Times New Roman", Serif;
+  /*background-color: black;*/
+  color: white;
 }
 
 #main p {
   font-size: 30px;
+  color: white;
   line-height: 50px;
+}
+
+#vis {
+  /*font-size: 2px;*/
+}
+
+#vis .word {
+  opacity: 0.4;
 }
