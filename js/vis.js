@@ -1,4 +1,5 @@
 
+
 function removePunctuation(string) {
   return string.replace(/['!"#$%&\\'()\*+,\-\.\/:;<=>?@\[\\\]\^_`{|}~']/g," ").replace(/\s{2,}/g," ");
 }
@@ -10,19 +11,19 @@ function stringToWords(string) {
 
 var concordancePlot = function() {
   var width = 500;
-  var height = 200;
+  var height = 120;
   var margin = {top: 20, right: 20, bottom: 20, left: 20};
   var g = null;
   var drop = null;
   var sentence = null;
   var data = [];
   var wordScale = d3.scale.linear();
+  var currentWord = '';
 
   var chart = function(selection) {
-    selection.each(function(rawData) {
-
-
-      var svg = d3.select(this).append("svg");
+    selection.each(function() {
+      var div = d3.select(this).append("div");
+      var svg = div.append("svg");
       var gEnter = svg.append("g");
 
       svg.attr("width", width + margin.left + margin.right );
@@ -35,16 +36,20 @@ var concordancePlot = function() {
         .attr("width", width)
         .attr("height", height);
 
-      drop = d3.select(this).append("div");
+      drop = div.append("div");
 
       drop.attr("class", "drop")
         .attr("draggable", true)
         .style("margin-top", margin.top + "px")
         .style("margin-left", margin.left + "px")
-        .style("width", 300 + "px");
+        .style("width", 300 + "px")
+        .style("height", height + "px");
 
       drop.append("p").attr("class", 'info')
-        .text("Drop a text (.txt) file here");
+        .text("Drag & Drop a text (.txt) file here");
+
+      drop.append("p").attr("class", 'details')
+        .text("");
 
       drop.on("dragover", function() {
         d3.event.preventDefault();
@@ -78,11 +83,19 @@ var concordancePlot = function() {
   };
 
   function update(searchTerm) {
+    currentWord = searchTerm;
+
     wordScale.domain([0, data.length]).range([0, width]);
+
     selectedWords = data.filter(function(d) { return d.w == searchTerm; });
+
+    updateDetails(data, selectedWords, searchTerm);
+
     var words = g.selectAll('.word')
-      .data(selectedWords, function(d) { return d.i;});
+      .data(selectedWords, function(d) { return d.i; });
+
     words.exit().remove();
+
     words.enter()
       .append('line')
       .attr("class", "word")
@@ -95,6 +108,20 @@ var concordancePlot = function() {
       .on("mouseover", showSentence);
   }
 
+  function updateDetails(allData, selectedWords, searchTerm) {
+    var details = drop.select(".details")
+    details.text("");
+    if (allData.length > 0) {
+      if(searchTerm && searchTerm.length > 0) {
+        details.text(searchTerm + " was found " + selectedWords.length + " times.");
+
+      } else {
+        details.text(allData.length + ' words found.');
+      }
+
+    }
+  }
+
   function showSentence(d) {
     console.log(d);
   }
@@ -104,11 +131,11 @@ var concordancePlot = function() {
     data = data.map(function(d,i) { return {w:d, i:i}; });
   }
 
-  function loadText(file, text) {
+  function loadText(name, text) {
     processData(text);
-    console.log(file.name);
-    drop.select(".info").text(file.name);
-    update('');
+    console.log(name);
+    drop.select(".info").text(name);
+    update(currentWord);
   }
 
   // Read the contents of a file.
@@ -119,7 +146,7 @@ var concordancePlot = function() {
     reader.onloadend = function(e) {
       if (e.target.readyState == FileReader.DONE) {
         var content = reader.result;
-        loadText(file, content);
+        loadText(file.name, content);
       }
     };
 
@@ -140,6 +167,10 @@ var concordancePlot = function() {
     return chart;
   };
 
+  chart.setText = function(name, text) {
+    loadText(name, text);
+  };
+
 
 return chart;
 };
@@ -153,7 +184,6 @@ function plotData(selector, data, plot) {
 var plots = [];
 
 $(document).ready(function() {
-  var plot = concordancePlot();
   plots.push(concordancePlot());
   plots.push(concordancePlot());
 
@@ -162,7 +192,7 @@ $(document).ready(function() {
   });
 
   function display(error, data) {
-    // plots[0].text(data);
+    plots[0].setText("alice_in_wonderland.txt", data);
   }
 
   queue()
@@ -174,6 +204,14 @@ $(document).ready(function() {
     plots.forEach(function(plot) {
 
       plot.search(word);
-    })
+    });
+  });
+
+  d3.select("#add").on('click', function() {
+    d3.event.preventDefault();
+    var plot = concordancePlot();
+    plotData("#vis", " ", plot);
+    plots.push(plot);
+    return false;
   });
 });

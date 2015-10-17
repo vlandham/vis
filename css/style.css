@@ -2,6 +2,9 @@
 body, input, textarea {
   /*font-family: Georgia, "Times New Roman", Serif;*/
   /*font-size: 16px;*/
+}
+
+#main {
   padding-top:15px;
 }
 
@@ -19,15 +22,16 @@ body, input, textarea {
   border: 3px dashed #ccc;
   padding: 10px;
   background: #fff;
-  min-height: 200px;
   min-width: 100px;
   float:right;
 }
 
-.drop .info {
+.drop p {
   font-size: 16px;
-  padding-top:15px;
   color: #999;
   text-align: center;
-  padding-top: 40px;
+}
+
+.drop .info {
+  padding-top:15px;
 }
