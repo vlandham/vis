@@ -1,9 +1,33 @@
 
 body, input, textarea {
-  font-family: Georgia, "Times New Roman", Serif;
+  /*font-family: Georgia, "Times New Roman", Serif;*/
+  /*font-size: 16px;*/
+  padding-top:15px;
 }
 
-#main p {
-  font-size: 30px;
-  line-height: 50px;
+.word {
+  stroke: steelblue;
+}
+
+.background {
+  stroke: #ddd;
+  stroke-width: 3;
+  fill: none;
+}
+
+.drop {
+  border: 3px dashed #ccc;
+  padding: 10px;
+  background: #fff;
+  min-height: 200px;
+  min-width: 100px;
+  float:right;
+}
+
+.drop .info {
+  font-size: 16px;
+  padding-top:15px;
+  color: #999;
+  text-align: center;
+  padding-top: 40px;
 }
