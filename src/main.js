@@ -16,5 +16,5 @@ function display(error, data) {
 }
 
 queue()
-  .defer(d3.csv, "data/test.csv")
+  .defer(d3.csv, "data/conf_speakers.csv")
   .await(display);

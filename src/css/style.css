@@ -7,3 +7,27 @@ body, input, textarea {
   font-size: 30px;
   line-height: 50px;
 }
+
+.visualized line {
+  stroke: pink;
+}
+
+.visualized text {
+  fill: pink;
+}
+
+.eyeo line {
+  stroke: green;
+}
+
+.eyeo text {
+  fill: green;
+}
+
+.openvis line {
+  stroke: steelblue;
+}
+
+.openvis text {
+  fill: steelblue;
+}
