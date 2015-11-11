@@ -1,5 +1,6 @@
 {
   "curly": true,
+  "esnext": true,
   "browserify": true,
   "eqeqeq": true,
   "immed": true,
