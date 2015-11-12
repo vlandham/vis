@@ -9632,6 +9632,8 @@
 })();
 
 },{}],3:[function(require,module,exports){
+'use strict';
+
 var queue = require('queue-async');
 var d3 = require('d3');
 var createPlot = require('./vis');
@@ -9649,6 +9651,7 @@ function display(error, data) {
 queue().defer(d3.csv, "data/test.csv").await(display);
 
 },{"./vis":4,"d3":1,"queue-async":2}],4:[function(require,module,exports){
+"use strict";
 
 var d3 = require('d3');
 
@@ -9659,7 +9662,7 @@ module.exports = function createChart() {
   var g = null;
   var data = [];
 
-  var chart = function (selection) {
+  var chart = function chart(selection) {
     selection.each(function (rawData) {
 
       console.log(rawData);
