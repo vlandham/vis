@@ -7,7 +7,7 @@ module.exports = function(grunt) {
           transform: [["babelify"]]
         },
         files: {
-          "build/bundle.js": "src/main.js"
+          "bundle.js": "src/main.js"
         }
       }
     },
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
           "expand": true,
           "cwd": "src/",
           "src": ["**/*.html"],
-          "dest": "build/",
+          "dest": "",
           "ext": ".html"
         }]
       }
@@ -30,15 +30,15 @@ module.exports = function(grunt) {
       server: {
         options: {
           port: 8080,
-          base: 'build'
+          base: ''
         }
       },
     },
     copy: {
       main: {
         files: [
-          {expand: true, cwd: 'src/css', src: ['*.css'], dest: 'build/css'},
-          {expand: true, cwd: 'data', src: ['*'], dest: 'build/data'}
+          {expand: true, cwd: 'src/css', src: ['*.css'], dest: 'css'}
+          // {expand: true, cwd: 'data', src: ['*'], dest: 'build/data'}
         ]
       }
     },
