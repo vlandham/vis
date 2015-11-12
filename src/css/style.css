@@ -31,3 +31,7 @@ body, input, textarea {
 .openvis text {
   fill: steelblue;
 }
+
+.highlight {
+  fill: yellow;
+}
