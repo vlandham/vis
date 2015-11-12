@@ -23,8 +23,11 @@ function prepareData(rawData) {
     return d;
   });
 
+  var order = ['visualized', 'eyeo', 'tapestry', 'openvis'];
+
   var nest = d3.nest()
     .key(d => d.conf)
+    .sortKeys((a,b) => order.indexOf(a) - order.indexOf(b))
     .key(d => d.year)
     .sortKeys(d3.ascending)
     .entries(data);
@@ -32,20 +35,21 @@ function prepareData(rawData) {
   return nest;
 }
 
-function findLinks(nest) {
+function groupByPeople(nest) {
   var allFolks = [];
   nest.forEach((conf) => {
     conf.values.forEach((year) => {
       allFolks = allFolks.concat(year.values);
       // = d3.map(year.values, d => d.id);
-
-
     });
   });
   var byFolk = d3.nest()
     .key(d => d.id)
     .entries(allFolks);
+  return byFolk;
+}
 
+function generateLinks(byFolk) {
   var pairs = [];
   byFolk.filter(d => d.values.length > 1).forEach((d) => {
     pairs = pairs.concat(getPairs(d.values));
@@ -56,20 +60,27 @@ function findLinks(nest) {
 module.exports = function createChart() {
   var width = 900;
   var height = 500;
-  var margin = {top: 80, right: 20, bottom: 20, left: 80};
+  var margin = {top: 70, right: 90, bottom: 20, left: 80};
   var g = null;
   var data = [];
+  var folks = {};
   var links = [];
   var conf,year,node;
 
+  var radius = 6;
+  var space = 1;
+  var rowCount = 22;
+
   var yearScale = d3.scale.ordinal()
-    .domain([2013, 2014, 2015, 2016])
+    .domain([2013, 2014, 2015])
     .rangeRoundBands([0, width]);
 
   var chart = function(selection) {
     selection.each(function(rawData) {
       data = prepareData(rawData);
-      links = findLinks(data);
+      folks = groupByPeople(data);
+      links = generateLinks(folks);
+      folks = d3.map(folks, (d) => d.key);
 
       var svg = d3.select(this).selectAll("svg").data([data]);
       svg.enter().append("svg").append("g");
@@ -95,14 +106,17 @@ module.exports = function createChart() {
 
     conf.append("text")
       .text(d => d.key)
-      .attr("text-anchor", "end");
+      .attr("text-anchor", "end")
+      .attr("dx", -12)
+      .attr("dy", 4);
 
     conf.append("line")
       .attr("x1", 0)
       .attr("x2", width)
       .attr("y1", 0)
       .attr("y2", 0)
-      .style("stroke-width", "2");
+      .attr("opacity", 0.2)
+      .style("stroke-width", 1);
 
     year = conf.selectAll(".year")
       .data(d => d.values)
@@ -119,12 +133,22 @@ module.exports = function createChart() {
       .data(d => d.values)
       .enter()
       .append('g')
+      .each((d,i) => {
+        d.row = Math.floor(i / rowCount);
+        d.col = (i % rowCount);
+        d.count = folks.get(d.id).values.length;
+      })
       .attr("class", "node")
-      .attr("transform", (d,i) => `translate(${i * yearScale.rangeBand() / 20},0)`);
+      .attr("transform", (d,i) => {
+        var x = d.col * (radius * 2 + space);
+        var y = d.row * (radius * 2 + space);
+        return `translate(${x},${y})`;
+      });
     node.append("circle")
-      .attr("r", 6)
+      .attr("r", radius)
       .attr("cx", 0)
-      .attr("cy", 0);
+      .attr("cy", 0)
+      .attr("opacity", (d) => 0.2 + (0.2 * d.count));
     node.on("mouseover", showName);
     node.on("mouseout", hideName);
 
@@ -145,7 +169,18 @@ module.exports = function createChart() {
   }
 
   function addLinks() {
+    // var line = d3.svg.line()
+    //   .x(function(d) { return d.loc.x - margin.left; })
+    //   .y(function(d) { return d.loc.y - margin.top; })
+    //   .interpolate("cardinal");
+
+    var diag = d3.svg.diagonal()
+      .source((d) => d[0].loc)
+      .target((d) => d[1].loc)
+      .projection((d) => [d.x - margin.left, d.y - margin.top]);
+
     var svgNode = d3.select("svg").node();
+
     links.forEach((p) => {
       var source = node.filter(e => p[0].conf_id === e.conf_id && p[0].id === e.id);
       var convert = makeAbsoluteContext(source.node(), svgNode);
@@ -159,16 +194,27 @@ module.exports = function createChart() {
 
     });
     g.select("#links").selectAll('.link')
-      .data(links)
+      .data(links.filter(d => d[0].conf !== d[1].conf))
       .enter()
-      .append("line")
-      .attr("x1", (d) => d[0].loc.x - margin.left)
-      .attr("x2", (d) => d[1].loc.x - margin.left)
-      .attr("y1", (d) => d[0].loc.y - margin.top)
-      .attr("y2", (d) => d[1].loc.y - margin.top)
+      .append("path")
+      .attr("class", "link")
       .attr("stroke", "#ddd")
+      .attr("fill", "none")
       .attr("stroke-width", 1)
-      .attr("pointer-events", "none");
+      .attr("pointer-events", "none")
+      .attr("d", diag);
+
+    // g.select("#links").selectAll('.link')
+    //   .data(links)
+    //   .enter()
+    //   .append("line")
+    //   .attr("x1", (d) => d[0].loc.x - margin.left)
+    //   .attr("x2", (d) => d[1].loc.x - margin.left)
+    //   .attr("y1", (d) => d[0].loc.y - margin.top)
+    //   .attr("y2", (d) => d[1].loc.y - margin.top)
+    //   .attr("stroke", "#ddd")
+    //   .attr("stroke-width", 1)
+    //   .attr("pointer-events", "none");
   }
 
   function showName(d,i) {
@@ -176,8 +222,14 @@ module.exports = function createChart() {
     n.append("text")
       .text(() => d.name)
       .attr("text-anchor", "middle")
-      .attr("dy", 20);
+      .attr("y", (e) => e.row * (radius * 2) * -1)
+      .attr("dy", -10);
     n.select("circle")
+      .classed("highlight", true);
+    g.select("#links").selectAll(".link").filter(e => {
+      return e[0].id === d.id;
+    })
+      .each(e => console.log(e))
       .classed("highlight", true);
   }
 
@@ -186,6 +238,8 @@ module.exports = function createChart() {
       .remove();
     node
       .select("circle")
+      .classed("highlight", false);
+    g.select("#links").selectAll(".link")
       .classed("highlight", false);
   }
 
