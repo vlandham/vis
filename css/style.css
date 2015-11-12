@@ -1,9 +1,45 @@
 
 body, input, textarea {
-  font-family: Georgia, "Times New Roman", Serif;
+  /*font-family: Georgia, "Times New Roman", Serif;*/
 }
 
-#main p {
-  font-size: 30px;
-  line-height: 50px;
+.visualized line {
+  stroke: #EE2A7B;
+}
+
+.visualized text, .visualized circle {
+  fill: #EE2A7B;
+}
+
+.eyeo line {
+  stroke: #99CB51;
+}
+
+.eyeo text, .eyeo circle {
+  fill: #99CB51;
+}
+
+.openvis line {
+  stroke: #485EB6;
+}
+
+.openvis text, .openvis circle {
+  fill: #485EB6;
+}
+
+.tapestry line {
+  stroke: #55888C;
+}
+
+.tapestry text, .tapestry circle {
+  fill: #55888C;
+}
+
+circle.highlight {
+  fill: #FC9D05;
+}
+
+.link.highlight {
+  stroke: black;
+  opacity: 0.8;
 }
