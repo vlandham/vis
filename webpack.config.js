@@ -9,9 +9,12 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /\.\/src\/\.js?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: 'babel'
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015']
+        }
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
@@ -24,6 +27,10 @@ module.exports = {
         test: /\.html$/,
         loader: "file?name=[name].[ext]"
       },
+      {
+        test: /\.scss$/,
+        loader: 'style!css!sass'
+      }
     ]
   }
 };

@@ -36,8 +36,9 @@ module.exports = function createChart() {
       .attr("x", d => d.x * 10)
       .attr("y", d => d.y * 10)
       .attr("width", 10)
-      .attr("height", 10);
-      // .on("mouseover", d => d3.select(this).attr("fill", "orange"));
+      .attr("height", 10)
+      .on("mouseover", function(d) { d3.select(this).attr("fill", "orange"); })
+      .on("mouseout", function(d) { d3.select(this).attr("fill", "steelblue"); });
   }
 
   return chart;
