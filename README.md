@@ -1,4 +1,8 @@
-# A simple way to get started with data visualizations using d3 and coffeescript
+# An increasingly complicated way to get started with data visualizations using D3
+
+Originally this repo used coffeescript and no build systems.
+
+Now it uses webpack and es6 via Babel to generate the project. This might be overkill.
 
 ## Usage
 
@@ -25,11 +29,17 @@ npm install
 
 ### Build and Serve
 
-Use `grunt` to get things built
+Use `webpack` to get things built
 
 ```
-grunt
+webpack
 ```
+
+You can also use `npm run` to run `webpack` commands:
+
+`npm run watch`
+
+`npm run build`
 
 Now visit http://localhost:8080 and open the console to see some output.
 
@@ -37,4 +47,4 @@ Now visit http://localhost:8080 and open the console to see some output.
 
 The main vis code is in `src/vis.js` and the data loading is in `src/main.js`.
 
-I am using babel and browserify - so you can use es6 and `require` as you see fit.
+I am using the webpack babel loader so you can use es6 syntax as you like!
