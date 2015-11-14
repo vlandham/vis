@@ -1,3 +1,5 @@
+// require('./style.css');
+
 var queue = require('queue-async');
 var d3 = require('d3');
 var createPlot = require('./vis');

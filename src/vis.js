@@ -13,6 +13,8 @@ module.exports = function createChart() {
 
       console.log(rawData);
 
+      data = rawData;
+
       var svg = d3.select(this).selectAll("svg").data([data]);
       svg.enter().append("svg").append("g");
 
@@ -20,8 +22,23 @@ module.exports = function createChart() {
       svg.attr("height", height + margin.top + margin.bottom );
       g = svg.select("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      update();
     });
   };
+
+  function update() {
+    g.selectAll(".rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "rect")
+      .attr("fill", "steelblue")
+      .attr("x", d => d.x * 10)
+      .attr("y", d => d.y * 10)
+      .attr("width", 10)
+      .attr("height", 10);
+      // .on("mouseover", d => d3.select(this).attr("fill", "orange"));
+  }
 
   return chart;
 };
