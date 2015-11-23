@@ -2,19 +2,22 @@ require('./scss/style.scss');
 
 var queue = require('queue-async');
 var d3 = require('d3');
-var createPlot = require('./vis');
+
+var createScene = require('./scene');
 
 
-var plot = createPlot();
 
-function plotData(selector, data, plot) {
-  d3.select(selector)
-    .datum(data)
-    .call(plot);
-}
+// function plotData(selector, data, plot) {
+//   d3.select(selector)
+//     .datum(data)
+//     .call(plot);
+// }
+
+var scene = createScene();
+scene.setup();
 
 function display(error, data) {
-  plotData("#vis",  data, plot);
+  scene.data(data);
 }
 
 queue()

@@ -5,6 +5,8 @@ $font_2: Serif;
 
 body {
   font-family: $font_0, $font_1, $font_2;
+  margin: 0;
+  overflow: hidden;
 }
 
 input {
@@ -13,4 +15,11 @@ input {
 
 textarea {
   font-family: $font_0, $font_1, $font_2;
+}
+
+#canvas {
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: -10;
 }
