@@ -23,3 +23,15 @@ textarea {
   left:0;
   z-index: -10;
 }
+
+#menu {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  width: 8em;
+  margin-top: -2.5em;
+}
+
+#menu li {
+  list-style-type: none;
+}

@@ -5,6 +5,8 @@ var THREE = require('three.js');
 var createBarChart = require('./barchart');
 var Routine = require('./routine');
 
+var createGrid = require('./grid');
+
 module.exports = function() {
 
   var s = {};
@@ -21,16 +23,23 @@ module.exports = function() {
   var height = window.innerHeight;
   var scene = new THREE.Scene();
 
-  var barchart = createBarChart()
+  var dispatch;
+
+  var barchart = createBarChart();
     // .width(width)
     // .height(height);
+
+  var grid = createGrid()
+    .width(width)
+    .height(height)
+    .dispatch(dispatch);
 
   // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
   // var raycaster = new THREE.Raycaster;
   var camera = new THREE.PerspectiveCamera(60);
   camera.near = 0.1;
   camera.far = 250;
-  var light = new THREE.DirectionalLight(16777215, 0.85);
+  var light = new THREE.DirectionalLight(0xffffff);
   // var backdrop = new THREE.Plane(new THREE.Vector3(0, 0, 1));
 
   var renderer = new THREE.WebGLRenderer();
@@ -45,12 +54,19 @@ module.exports = function() {
     window.addEventListener("mousemove", mousemove, false);
     window.addEventListener("mouseout", mouseout, false);
 
-    light.position.set(1, 1, 1).normalize();
+    light.position.set(0, 1, 1).normalize();
     renderer.setClearColor(16777215);
     scene.add(light);
 
     camera.position.z = camera.far / 2;
     camera.lookAt(new THREE.Vector3);
+
+    grid.dispatch(dispatch);
+
+//     var flashlight = new THREE.SpotLight(0xffffff,4,40);
+// camera.add(flashlight);
+// flashlight.position.set(0,0,1);
+// flashlight.target = camera;
 
     resize();
 
@@ -128,6 +144,7 @@ module.exports = function() {
     //     }
     // }
     barchart.animate();
+    grid.update();
     renderer.render(scene, camera);
 }
 
@@ -152,9 +169,19 @@ module.exports = function() {
 
   s.data = function (data) {
 
-    barchart(scene, data);
-
+    // barchart(scene, data);
+    grid(scene, data);
+    return s;
   };
+
+  s.dispatch = function(_) {
+  if (!arguments.length) {
+    return dispatch;
+  }
+  dispatch = _;
+  return s;
+};
+
 
   return s;
 };
