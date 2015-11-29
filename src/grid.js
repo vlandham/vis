@@ -1,5 +1,4 @@
 
-var d3 = require('d3');
 var THREE = require('three.js');
 var TWEEN = require('tween.js');
 

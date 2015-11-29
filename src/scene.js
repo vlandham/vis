@@ -2,6 +2,11 @@
 /*jshint -W058 */
 
 var THREE = require('three.js');
+require('./post/EffectComposer');
+require('./post/RenderPass');
+require('./post/DotScreenShader');
+require('./post/RGBShiftShader');
+
 var createSpin = require('./spin');
 
 module.exports = function() {
@@ -45,6 +50,7 @@ module.exports = function() {
   var ambientLight = new THREE.AmbientLight( 0x000000 );
 
   var renderer = new THREE.WebGLRenderer();
+  var composer;
   renderer.setSize(width,height);
   var el = document.getElementById("canvas");
   el.appendChild( renderer.domElement );
@@ -77,6 +83,18 @@ module.exports = function() {
 
     camera.position.z = camera.far / 2;
     camera.lookAt(new THREE.Vector3);
+
+    composer = new THREE.EffectComposer( renderer );
+
+    composer.addPass( new THREE.RenderPass( scene, camera ) );
+    var effect = new THREE.ShaderPass( THREE.DotScreenShader );
+    effect.uniforms[ 'scale' ].value = 4;
+    composer.addPass( effect );
+    effect.renderToScreen = true;
+    // var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
+    // effect.uniforms[ 'amount' ].value = 0.0015;
+    // effect.renderToScreen = true;
+    // composer.addPass( effect );
 
     resize();
 
@@ -151,7 +169,9 @@ module.exports = function() {
     //         intersected = null
     //     }
     // }
-    renderer.render(scene, camera);
+
+    // renderer.render(scene, camera);
+    composer.render();
 }
 
   function resize() {
