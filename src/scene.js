@@ -9,8 +9,7 @@ module.exports = function() {
   var s = {};
 
   var OFFSCREEN = new THREE.Vector2(-2, -2);
-  var routines = [];
-  var clock = new THREE.Clock;
+  // var clock = new THREE.Clock;
   var mouse = (new THREE.Vector2).copy(OFFSCREEN);
   // var dispatch = new THREE.EventDispatcher();
   // mouse.stop = debounce(function() {
@@ -30,11 +29,20 @@ module.exports = function() {
 
   // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
   // var raycaster = new THREE.Raycaster;
-  var camera = new THREE.PerspectiveCamera(60);
-  camera.near = 0.1;
-  camera.far = 250;
-  var light = new THREE.DirectionalLight(0xffffff);
+  // var camera = new THREE.PerspectiveCamera(60);
+  // camera.near = 0.1;
+  // camera.far = 250;
+
+  var aspect = window.innerWidth / window.innerHeight;
+  var d = 40;
+  var camera = new THREE.OrthographicCamera( - d * aspect, d * aspect, d, - d, 1, 1000 );
+
+  camera.position.set( 40, 40, 40 ); // all components equal
+
+  // var light = new THREE.DirectionalLight(0xffffff);
   // var backdrop = new THREE.Plane(new THREE.Vector3(0, 0, 1));
+
+  var ambientLight = new THREE.AmbientLight( 0x000000 );
 
   var renderer = new THREE.WebGLRenderer();
   renderer.setSize(width,height);
@@ -44,17 +52,28 @@ module.exports = function() {
 
   s.setup = function setup(data) {
 
-    console.log('setup')
-
     spin.dispatch(dispatch);
 
     window.addEventListener('resize', resize);
     window.addEventListener("mousemove", mousemove, false);
     window.addEventListener("mouseout", mouseout, false);
 
-    light.position.set(0, 1, 1).normalize();
+    // light.position.set(0, 1, 1).normalize();
+    scene.add(ambientLight);
+    var lights = [];
+    lights[0] = new THREE.PointLight( 0xffffff, 1, 0 );
+    lights[1] = new THREE.PointLight( 0xffffff, 1, 0 );
+    lights[2] = new THREE.PointLight( 0xffffff, 1, 0 );
+
+    lights[0].position.set( 0, 200, 0 );
+    lights[1].position.set( 100, 200, 100 );
+    lights[2].position.set( -100, -200, -100 );
+
+    scene.add( lights[0] );
+    scene.add( lights[1] );
+    scene.add( lights[2] );
+
     renderer.setClearColor(16777215);
-    scene.add(light);
 
     camera.position.z = camera.far / 2;
     camera.lookAt(new THREE.Vector3);
@@ -120,7 +139,7 @@ module.exports = function() {
     //     clock.elapsedTime = 0;
     // }
 
-    
+
     // if (mouse.moving) {
     //     var intersections = raycaster.intersectObjects(routines, true);
     //     if (intersections.length > 0) {

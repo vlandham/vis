@@ -1,6 +1,7 @@
 
 var Shape = require('./shape');
 var TWEEN = require('tween.js');
+var THREE = require('three.js');
 
 module.exports = function createSpin() {
   var width, height;
@@ -9,8 +10,15 @@ module.exports = function createSpin() {
 
   var s = function setup(scene, data) {
     dispatch.addEventListener('spin', spin);
+    var padding = 15;
+
+    var pos = new THREE.Vector3(-Shape.width - padding, 0, 0);
     data.forEach(function(i) {
-      var shape = new Shape(i);
+
+      var shape = new Shape(pos, i);
+      pos.x += Shape.width + padding;
+      // pos.z += Shape.width + padding;
+
       shapes.push(shape);
       scene.add(shape);
     });
@@ -26,8 +34,8 @@ module.exports = function createSpin() {
 
   function spin() {
 
-    shapes.forEach(function(shape){
-      shape.spin();
+    shapes.forEach(function(shape, i){
+      shape.spin(i * 200);
     });
   }
 

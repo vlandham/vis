@@ -1,4 +1,5 @@
 var THREE = require('three.js');
+var utl = require('./utility');
 
 module.exports = function() {
 
@@ -42,10 +43,24 @@ module.exports = function() {
     return a;
   })();
 
+  function makeDiamond(size) {
+    var a = new THREE.CylinderGeometry(0, size / 2, size / 2, 4, 1, false, 3.1);
+    var b = new THREE.CylinderGeometry(size / 2, 0, size / 2, 4, 1, false, 3.1);
+    for (var i = 0; i < a.vertices.length; i++) {
+      a.vertices[i].y += size * 0.25;
+      b.vertices[i].y -= size * 0.25;
+    }
+    a.merge(b);
+    a.rotateZ(utl.toRad(-45));
+    // a.rotateX(utl.toRad(90));
+    return a;
+  }
+
   return {
     diamond: diamond,
     star: star,
-    box: box
+    box: box,
+    makeDiamond: makeDiamond
   };
 
 };
