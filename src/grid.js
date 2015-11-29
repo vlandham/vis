@@ -117,12 +117,12 @@ module.exports = function createGrid() {
   };
 
   chart.dispatch = function(_) {
-  if (!arguments.length) {
-    return dispatch;
-  }
-  dispatch = _;
-  return chart;
-};
+    if (!arguments.length) {
+      return dispatch;
+    }
+    dispatch = _;
+    return chart;
+  };
 
   return chart;
 };

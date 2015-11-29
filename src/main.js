@@ -31,7 +31,7 @@ queue()
   .await(display);
 
 d3.select("#menu a").on("click", function() {
-  dispatch.dispatchEvent({type: 'grid'})
+  dispatch.dispatchEvent({type: 'spin'});
   d3.event.preventDefault();
 
 });

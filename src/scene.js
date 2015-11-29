@@ -2,10 +2,7 @@
 /*jshint -W058 */
 
 var THREE = require('three.js');
-var createBarChart = require('./barchart');
-var Routine = require('./routine');
-
-var createGrid = require('./grid');
+var createSpin = require('./spin');
 
 module.exports = function() {
 
@@ -23,16 +20,13 @@ module.exports = function() {
   var height = window.innerHeight;
   var scene = new THREE.Scene();
 
+
   var dispatch;
 
-  var barchart = createBarChart();
-    // .width(width)
-    // .height(height);
-
-  var grid = createGrid()
+  var spin = createSpin()
+    .dispatch(dispatch)
     .width(width)
-    .height(height)
-    .dispatch(dispatch);
+    .height(height);
 
   // var camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
   // var raycaster = new THREE.Raycaster;
@@ -47,9 +41,13 @@ module.exports = function() {
   var el = document.getElementById("canvas");
   el.appendChild( renderer.domElement );
 
-  var cube;
 
-  s.setup = function setup() {
+  s.setup = function setup(data) {
+
+    console.log('setup')
+
+    spin.dispatch(dispatch);
+
     window.addEventListener('resize', resize);
     window.addEventListener("mousemove", mousemove, false);
     window.addEventListener("mouseout", mouseout, false);
@@ -61,47 +59,36 @@ module.exports = function() {
     camera.position.z = camera.far / 2;
     camera.lookAt(new THREE.Vector3);
 
-    grid.dispatch(dispatch);
-
-//     var flashlight = new THREE.SpotLight(0xffffff,4,40);
-// camera.add(flashlight);
-// flashlight.position.set(0,0,1);
-// flashlight.target = camera;
-
     resize();
 
-    var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-    var material = new THREE.MeshBasicMaterial( { color: 0x004400 } );
-    cube = new THREE.Mesh( geometry, material );
-    scene.add( cube );
 
 
     // camera.position.z = 5;
 
-    var amount = 10;
-
-    for (var i = 0; i < amount; i++) {
-        var routine = new Routine;
-        var h, w, d;
-        if (i < 6) {
-            h = camera.far / 2;
-            w = camera.far / 2;
-            d = camera.far / 16;
-            routine.position.set(Math.random() * h - h / 2, Math.random() * w - w / 2, Math.random() * d - d / 2);
-        } else {
-            h = camera.far;
-            w = camera.far;
-            d = camera.far;
-            routine.position.set(camera.position.x + Math.random() * h - h / 2, camera.position.y + Math.random() * w - w / 2, camera.position.z + Math.random() * d - d / 2);
-        }
-        routine.position.velocity = new THREE.Vector3(Math.random() / 5 - 1 / 10, Math.random() / 5 - 1 / 10, Math.random() / 5 - 1 / 10);
-        routine.rotation.destination = new THREE.Object3D;
-        routine.rotation.velocity = new THREE.Vector3(Math.random() / 100 - 1 / 200, Math.random() / 100 - 1 / 200, Math.random() / 100 - 1 / 200);
-        routine.scale.set(3, 3, 3);
-        routine.reconfigure(true);
-        routines.push(routine);
-        scene.add(routine);
-    }
+    // var amount = 10;
+    //
+    // for (var i = 0; i < amount; i++) {
+    //     var routine = new Routine;
+    //     var h, w, d;
+    //     if (i < 6) {
+    //         h = camera.far / 2;
+    //         w = camera.far / 2;
+    //         d = camera.far / 16;
+    //         routine.position.set(Math.random() * h - h / 2, Math.random() * w - w / 2, Math.random() * d - d / 2);
+    //     } else {
+    //         h = camera.far;
+    //         w = camera.far;
+    //         d = camera.far;
+    //         routine.position.set(camera.position.x + Math.random() * h - h / 2, camera.position.y + Math.random() * w - w / 2, camera.position.z + Math.random() * d - d / 2);
+    //     }
+    //     routine.position.velocity = new THREE.Vector3(Math.random() / 5 - 1 / 10, Math.random() / 5 - 1 / 10, Math.random() / 5 - 1 / 10);
+    //     routine.rotation.destination = new THREE.Object3D;
+    //     routine.rotation.velocity = new THREE.Vector3(Math.random() / 100 - 1 / 200, Math.random() / 100 - 1 / 200, Math.random() / 100 - 1 / 200);
+    //     routine.scale.set(3, 3, 3);
+    //     routine.reconfigure(true);
+    //     routines.push(routine);
+    //     scene.add(routine);
+    // }
 
     loop();
   };
@@ -109,29 +96,31 @@ module.exports = function() {
   function loop() {
     requestAnimationFrame(loop);
 
-    cube.rotation.x += 0.01;
-    cube.rotation.y += 0.01;
+    spin.update();
+
     // raycaster.setFromCamera(mouse, camera);
     var dist = camera.far / 2;
     dist *= dist;
-    for (var i = 0; i < routines.length; i++) {
-        var routine = routines[i];
-        routine.rotation.x += routine.rotation.velocity.x;
-        routine.rotation.y += routine.rotation.velocity.y;
-        routine.rotation.z += routine.rotation.velocity.z;
-        routine.position.x += routine.position.velocity.x;
-        routine.position.y += routine.position.velocity.y;
-        routine.position.z += routine.position.velocity.z;
-        if (routine.position.lengthSq() > dist) {
-            routine.position.velocity.multiplyScalar(-1);
-        }
-        routine.update();
-    }
-    if (clock.getElapsedTime() > 0.5 && !mouse.moving) {
-        routines[Math.floor(Math.random() * routines.length)].reconfigure();
-        clock.start();
-        clock.elapsedTime = 0;
-    }
+    // for (var i = 0; i < routines.length; i++) {
+    //     var routine = routines[i];
+    //     routine.rotation.x += routine.rotation.velocity.x;
+    //     routine.rotation.y += routine.rotation.velocity.y;
+    //     routine.rotation.z += routine.rotation.velocity.z;
+    //     routine.position.x += routine.position.velocity.x;
+    //     routine.position.y += routine.position.velocity.y;
+    //     routine.position.z += routine.position.velocity.z;
+    //     if (routine.position.lengthSq() > dist) {
+    //         routine.position.velocity.multiplyScalar(-1);
+    //     }
+    //     routine.update();
+    // }
+    // if (clock.getElapsedTime() > 0.5 && !mouse.moving) {
+    //     routines[Math.floor(Math.random() * routines.length)].reconfigure();
+    //     clock.start();
+    //     clock.elapsedTime = 0;
+    // }
+
+    
     // if (mouse.moving) {
     //     var intersections = raycaster.intersectObjects(routines, true);
     //     if (intersections.length > 0) {
@@ -143,8 +132,6 @@ module.exports = function() {
     //         intersected = null
     //     }
     // }
-    barchart.animate();
-    grid.update();
     renderer.render(scene, camera);
 }
 
@@ -167,10 +154,8 @@ module.exports = function() {
     mouse.copy(OFFSCREEN);
   }
 
-  s.data = function (data) {
-
-    // barchart(scene, data);
-    grid(scene, data);
+  s.data = function (d) {
+    spin(scene, d);
     return s;
   };
 
