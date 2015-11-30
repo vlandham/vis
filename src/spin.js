@@ -33,6 +33,17 @@ module.exports = function createSpin() {
   };
 
   function spin() {
+    //
+    // var gif = new GIF({
+    //   workers: 2,
+    //   quality: 10
+    // });
+    // var canvasElement = document.getElementsByTagName('canvas')[0];
+    // gif.addFrame(canvasElement, {delay: 200});
+    // gif.on('finished', function(blob) {
+    //   window.open(URL.createObjectURL(blob));
+    // });
+    // gif.render();
 
     shapes.forEach(function(shape, i){
       shape.spin(i * 200);

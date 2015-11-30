@@ -2,6 +2,7 @@
 /*jshint -W058 */
 
 var THREE = require('three.js');
+require('./TrackballControls');
 require('./post/EffectComposer');
 require('./post/RenderPass');
 require('./post/DotScreenShader');
@@ -13,9 +14,9 @@ module.exports = function() {
 
   var s = {};
 
-  var OFFSCREEN = new THREE.Vector2(-2, -2);
+  // var OFFSCREEN = new THREE.Vector2(-2, -2);
   // var clock = new THREE.Clock;
-  var mouse = (new THREE.Vector2).copy(OFFSCREEN);
+  // var mouse = (new THREE.Vector2).copy(OFFSCREEN);
   // var dispatch = new THREE.EventDispatcher();
   // mouse.stop = debounce(function() {
   //   mouse.moving = false
@@ -24,6 +25,8 @@ module.exports = function() {
   var height = window.innerHeight;
   var scene = new THREE.Scene();
 
+
+  var clock = new THREE.Clock();
 
   var dispatch;
 
@@ -44,62 +47,119 @@ module.exports = function() {
 
   camera.position.set( 40, 40, 40 ); // all components equal
 
+  var controls;
+
   // var light = new THREE.DirectionalLight(0xffffff);
   // var backdrop = new THREE.Plane(new THREE.Vector3(0, 0, 1));
 
-  var ambientLight = new THREE.AmbientLight( 0x000000 );
 
   var renderer = new THREE.WebGLRenderer();
-  var composer;
+  renderer.shadowMap.enabled = true;
+  // var composer;
   renderer.setSize(width,height);
+
   var el = document.getElementById("canvas");
   el.appendChild( renderer.domElement );
-
 
   s.setup = function setup(data) {
 
     spin.dispatch(dispatch);
+    // camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 100 );
+    // camera.position.z = 500;
+
 
     window.addEventListener('resize', resize);
-    window.addEventListener("mousemove", mousemove, false);
-    window.addEventListener("mouseout", mouseout, false);
+    // window.addEventListener("mousemove", mousemove, false);
+    // window.addEventListener("mouseout", mouseout, false);
+    var light = new THREE.DirectionalLight( 0xffffff, 1.0 );
+    light.position.set( 0, 1, 0 );
+    light.castShadow = true;
+    scene.add( light );
+    //
+    // light = new THREE.DirectionalLight( 0xffffff, 1.0 );
+    // light.position.set( 1, 0, 0 );
+    // scene.add( light );
+    //
+    light = new THREE.DirectionalLight( 0xffffff, 1.0 );
+    light.castShadow = true;
+    light.shadowDarkness = 0.5;
+    light.shadowCameraVisible = true;
+    light.shadowCameraRight=30
+    light.shadowCameraLeft=-30
+    light.shadowCameraTop = 30;
+    light.shadowCameraBottom = -30;
+    light.position.set( 0, 0, 1 );
+    scene.add( light );
 
+    var geometry = new THREE.PlaneGeometry( 200, 30, 1 );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    var plane = new THREE.Mesh( geometry, material );
+    plane.position.setZ(-15);
+    scene.add( plane );
+    //
+    // light = new THREE.DirectionalLight( 0xffffff, 1.0 );
+    // light.position.set(1, -1, 0 );
+    // scene.add( light );
+
+    // light = new THREE.AmbientLight( 0x222222 );
+    // scene.add( light );
     // light.position.set(0, 1, 1).normalize();
-    scene.add(ambientLight);
-    var lights = [];
-    lights[0] = new THREE.PointLight( 0xffffff, 1, 0 );
-    lights[1] = new THREE.PointLight( 0xffffff, 1, 0 );
-    lights[2] = new THREE.PointLight( 0xffffff, 1, 0 );
-
-    lights[0].position.set( 0, 200, 0 );
-    lights[1].position.set( 100, 200, 100 );
-    lights[2].position.set( -100, -200, -100 );
-
-    scene.add( lights[0] );
-    scene.add( lights[1] );
-    scene.add( lights[2] );
+    // var ambientLight = new THREE.AmbientLight( 0x000000 );
+    // scene.add(ambientLight);
+    // var lights = [];
+    // lights[0] = new THREE.PointLight( 0xffffff, 1, 0 );
+    // lights[1] = new THREE.PointLight( 0xffffff, 1, 0 );
+    // lights[2] = new THREE.PointLight( 0xffffff, 1, 0 );
+    //
+    // lights[0].position.set( 0, 200, 0 );
+    // lights[1].position.set( 100, 200, 100 );
+    // lights[2].position.set( -100, -200, -100 );
+    // //
+    // scene.add( lights[0] );
+    // scene.add( lights[1] );
+    // scene.add( lights[2] );
+    //
+    // var sphereSize = 1;
+    // var pointLightHelper = new THREE.PointLightHelper( lights[0], sphereSize );
+    // scene.add( pointLightHelper );
 
     renderer.setClearColor(16777215);
 
     camera.position.z = camera.far / 2;
     camera.lookAt(new THREE.Vector3);
 
-    composer = new THREE.EffectComposer( renderer );
-
-    composer.addPass( new THREE.RenderPass( scene, camera ) );
-    var effect = new THREE.ShaderPass( THREE.DotScreenShader );
-    effect.uniforms[ 'scale' ].value = 4;
-    composer.addPass( effect );
-    effect.renderToScreen = true;
+    // composer = new THREE.EffectComposer( renderer );
+    //
+    // composer.addPass( new THREE.RenderPass( scene, camera ) );
+    // var effect = new THREE.ShaderPass( THREE.DotScreenShader );
+    // effect.uniforms[ 'scale' ].value = 4;
+    // composer.addPass( effect );
+    // effect.renderToScreen = true;
     // var effect = new THREE.ShaderPass( THREE.RGBShiftShader );
     // effect.uniforms[ 'amount' ].value = 0.0015;
     // effect.renderToScreen = true;
     // composer.addPass( effect );
 
+
+
+    controls = new THREE.TrackballControls( camera, renderer.domElement  );
+    controls.target.set(0, 0, 0);
+
+    // controls.rotateSpeed = 1.0;
+    // controls.zoomSpeed = 1.2;
+    // controls.panSpeed = 0.8;
+
+    // controls.noZoom = false;
+    // controls.noPan = false;
+
+    // controls.staticMoving = true;
+    // controls.dynamicDampingFactor = 0.3;
+
+    // controls.keys = [ 65, 83, 68 ];
+
+    // controls.addEventListener( 'change', loop );
+
     resize();
-
-
-
     // camera.position.z = 5;
 
     // var amount = 10;
@@ -131,6 +191,7 @@ module.exports = function() {
   };
 
   function loop() {
+    var delta = clock.getDelta();
     requestAnimationFrame(loop);
 
     spin.update();
@@ -170,8 +231,9 @@ module.exports = function() {
     //     }
     // }
 
-    // renderer.render(scene, camera);
-    composer.render();
+    controls.update(delta);
+    renderer.render(scene, camera);
+    // composer.render();
 }
 
   function resize() {
@@ -180,19 +242,20 @@ module.exports = function() {
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
+    controls.handleResize();
   }
 
-  function mousemove(e) {
-    mouse.x = 2 * e.clientX / width - 1;
-    mouse.y = -2 * e.clientY / height + 1;
-    mouse.moving = true;
-    // mouse.stop();
-  }
-
-  function mouseout(e) {
-    mouse.copy(OFFSCREEN);
-  }
-
+  // function mousemove(e) {
+  //   mouse.x = 2 * e.clientX / width - 1;
+  //   mouse.y = -2 * e.clientY / height + 1;
+  //   mouse.moving = true;
+  //   // mouse.stop();
+  // }
+  //
+  // function mouseout(e) {
+  //   mouse.copy(OFFSCREEN);
+  // }
+  //
   s.data = function (d) {
     spin(scene, d);
     return s;

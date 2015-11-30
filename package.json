@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "d3": "^3.5.8",
+    "gif.js": "^0.1.6",
     "lodash": "^3.10.1",
     "queue-async": "^1.0.7",
     "subunit": "^0.2.9",
