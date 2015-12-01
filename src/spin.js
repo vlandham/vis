@@ -2,25 +2,48 @@
 var Shape = require('./shape');
 var TWEEN = require('tween.js');
 var THREE = require('three.js');
+var utl = require('./utility');
+var d3 = require('d3');
 
 module.exports = function createSpin() {
   var width, height;
   var dispatch;
   var shapes = [];
 
-  var s = function setup(scene, data) {
+  function prepareData(rdata) {
+    var data = utl.textToSentences(rdata).map(function(s) { return utl.stringToWords(utl.removePunctuation(s)); });
+
+    return data;
+  }
+
+  var s = function setup(scene, rdata) {
+    var data = prepareData(rdata);
+    data = data.slice(1,20);
+    var maxLength = d3.max(data, function(s) { return s.length; });
     dispatch.addEventListener('spin', spin);
     var padding = 15;
 
-    var pos = new THREE.Vector3(-Shape.width - padding, 0, 0);
-    data.forEach(function(i) {
+    var sizeScale = d3.scale.sqrt().range([5, 40])
+      .domain([0,15]);
 
-      var shape = new Shape(pos, i);
-      pos.x += Shape.width + padding;
-      // pos.z += Shape.width + padding;
+    var startX = -1 * ((maxLength / 2) * (Shape.width + padding));
+    var startY = (data.length / 2) * (Shape.height + padding);
+    var pos = new THREE.Vector3(startX, startY, 0);
+    data.forEach(function(sentence, yi) {
+      sentence.forEach(function(word, xi) {
 
-      shapes.push(shape);
-      scene.add(shape);
+        var d = {"word":word, "size":sizeScale(word.length), xi: xi, yi:yi};
+
+        var shape = new Shape(pos, d);
+        pos.x += Shape.width + padding;
+        // pos.z += Shape.width + padding;
+
+        shapes.push(shape);
+        scene.add(shape);
+
+      });
+      pos.x = startX;
+      pos.y -= Shape.height + padding;
     });
 
   };
@@ -46,7 +69,7 @@ module.exports = function createSpin() {
     // gif.render();
 
     shapes.forEach(function(shape, i){
-      shape.spin(i * 200);
+      shape.spin(shape.data.xi * 200);
     });
   }
 

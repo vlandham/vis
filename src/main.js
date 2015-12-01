@@ -27,7 +27,7 @@ function display(error, data) {
 }
 
 queue()
-  .defer(d3.csv, "data/test.csv")
+  .defer(d3.text, "data/alice.txt")
   .await(display);
 
 d3.select("#menu a").on("click", function() {

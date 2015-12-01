@@ -2,7 +2,8 @@
 /*jshint -W058 */
 
 var THREE = require('three.js');
-require('./TrackballControls');
+// require('./TrackballControls');
+require('./OrbitControls');
 require('./post/EffectComposer');
 require('./post/RenderPass');
 require('./post/DotScreenShader');
@@ -92,7 +93,7 @@ module.exports = function() {
     scene.add( light );
 
     var geometry = new THREE.PlaneGeometry( 200, 30, 1 );
-    var material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
+    var material = new THREE.MeshBasicMaterial( {color: 0xffffff, side: THREE.DoubleSide} );
     var plane = new THREE.Mesh( geometry, material );
     plane.position.setZ(-15);
     scene.add( plane );
@@ -126,6 +127,7 @@ module.exports = function() {
     renderer.setClearColor(16777215);
 
     camera.position.z = camera.far / 2;
+    camera.zoom = 0.2;
     camera.lookAt(new THREE.Vector3);
 
     // composer = new THREE.EffectComposer( renderer );
@@ -142,7 +144,7 @@ module.exports = function() {
 
 
 
-    controls = new THREE.TrackballControls( camera, renderer.domElement  );
+    controls = new THREE.OrbitControls( camera, renderer.domElement  );
     controls.target.set(0, 0, 0);
 
     // controls.rotateSpeed = 1.0;
@@ -194,6 +196,7 @@ module.exports = function() {
     var delta = clock.getDelta();
     requestAnimationFrame(loop);
 
+
     spin.update();
 
     // raycaster.setFromCamera(mouse, camera);
@@ -242,7 +245,7 @@ module.exports = function() {
     renderer.setSize(width, height);
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
-    controls.handleResize();
+    // controls.handleResize();
   }
 
   // function mousemove(e) {

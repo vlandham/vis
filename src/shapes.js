@@ -52,7 +52,6 @@ module.exports = function() {
     }
     a.merge(b);
     a.rotateZ(utl.toRad(-45));
-    // a.rotateX(utl.toRad(90));
     return a;
   }
 

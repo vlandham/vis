@@ -19,7 +19,7 @@ var Shape = function(pos, data) {
   this.rotation.velocity = new THREE.Vector3();
 
   // var geometry = new THREE.BoxGeometry(Shape.width, Shape.height, Shape.depth);
-  var geometry = shapes.makeDiamond(Shape.width);
+  var geometry = shapes.makeDiamond(data.size);
 
   // var material = new THREE.MeshBasicMaterial( { color: 0x004400 } );
   // var material = new THREE.MeshPhongMaterial( {
