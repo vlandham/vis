@@ -1,3 +1,18 @@
+var path = require("path");
+var webpack = require('webpack');
+
+var minimize = process.argv.indexOf('--minimize') === -1 ? false : true;
+
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var plugins = [];
+
+plugins.push(new ExtractTextPlugin("app.css"));
+
+if(minimize) {
+  plugins.push(new webpack.optimize.UglifyJsPlugin());
+}
+
+
 module.exports = {
   entry: {
     javascript: './src/main.js',
@@ -6,15 +21,22 @@ module.exports = {
   output: {
     filename: 'bundle.js'
   },
+  debug: true,
+  devtool: 'source-map',
+  // for modules
+  resolve: {
+    fallback: [path.join(__dirname, 'node_modules')]
+  },
+  // same issue, for loaders like babel
+  resolveLoader: {
+    fallback: [path.join(__dirname, 'node_modules')]
+  },
   module: {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-          presets: ['es2015']
-        }
+        include: /src/,
+        loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime']
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
@@ -32,5 +54,6 @@ module.exports = {
         loader: 'style!css!sass'
       }
     ]
-  }
+  },
+  plugins: plugins
 };
