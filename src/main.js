@@ -1,9 +1,9 @@
-
+require('../index.html');
+require('./style');
 var queue = require('queue-async');
 var d3 = require('d3');
 var createPlot = require('./vis');
 
-require('./style');
 
 var plot = createPlot();
 

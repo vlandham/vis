@@ -12,14 +12,12 @@ if(minimize) {
   plugins.push(new webpack.optimize.UglifyJsPlugin());
 }
 
-
 module.exports = {
   entry: {
-    javascript: './src/main.js',
-    html: './src/index.html'
+    javascript: './src/main.js'
   },
   output: {
-    filename: 'bundle.js'
+    filename: 'app.js'
   },
   debug: true,
   devtool: 'source-map',
@@ -51,7 +49,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style!css!sass'
+        loader: ExtractTextPlugin.extract("style","css!sass")
       }
     ]
   },
