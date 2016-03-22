@@ -61,6 +61,7 @@ module.exports = function createChart() {
     var techE = techG.enter()
       .append("tr")
       .attr("class", "tech")
+      .style('font-size', (d) => fScale(999) + 'px')
       .append("td")
       .text((d) => d.name)
       .style('font-family', 'Avenir')
@@ -87,6 +88,7 @@ module.exports = function createChart() {
     //   .attr("x", 0)
     //   .attr("y", d => yScale(d.name))
     //   .text((d) => d.name)
+    // mousemove();
   }
 
   function mouseover(d,i) {
@@ -94,10 +96,9 @@ module.exports = function createChart() {
   }
 
   function click(d,i) {
-    d.clicked = true;
+    d.clicked = d.clicked ? false : true;
     d3.select(this)
-      .style('color', 'red')
-
+      .style('color', d.clicked ? 'orange' : '#F4F1F1' )
   }
 
   function mousemove() {
@@ -105,7 +106,7 @@ module.exports = function createChart() {
 
     var c = d3.mouse(d3.select('body').node());
 
-    if(c[0] > 200) { c[1] = 99999; }
+    if(c[0] > 300) { c[1] = 99999; }
 
     var tS = table.selectAll('.tech')
       .each(function(d, i) {
