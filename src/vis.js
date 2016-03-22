@@ -1,11 +1,11 @@
 
 var d3 = require('d3');
 
-// var fish = require('../lib/fisheye');
-//
-// var fisheye = d3.fisheye.circular()
-//     .radius(200)
-//     .distortion(2);
+var fish = require('../lib/fisheye');
+
+var fisheye = d3.fisheye.circular()
+    .radius(200)
+    .distortion(2);
 
 module.exports = function createChart() {
   var width = 500;
@@ -84,6 +84,8 @@ module.exports = function createChart() {
 
     var c = d3.mouse(g.node());
 
+    fisheye.focus(d3.mouse(g.node()));
+
     var tS = g.selectAll('.tech')
       .each((d, i) => {
         var y = yScale(d.name);
@@ -93,6 +95,8 @@ module.exports = function createChart() {
         d.w = wScale(dist);
         d.h = hScale(dist);
         d.y = dy > 0 ? y + (d.h / 2) : y - (d.h / 2) ;
+        // d.fisheye = fisheye(d);
+
       })
       tS.select('rect')
         .attr('y', (d) => d.y)

@@ -3,9 +3,10 @@ require('./style');
 var queue = require('queue-async');
 var d3 = require('d3');
 var createPlot = require('./vis');
+var createTable = require('./table');
 
 
-var plot = createPlot();
+var plot = createTable();
 
 function plotData(selector, data, plot) {
   d3.select(selector)

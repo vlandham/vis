@@ -4,5 +4,11 @@ $font_1: Times New Roman;
 $font_2: Serif;
 
 body {
-  font-family: $font_0, $font_1, $font_2;
+  // font-family: $font_0, $font_1, $font_2;
+  font-family: Avenir;
+  background-color: #484747;
+}
+
+.container {
+  padding: 30px;
 }
