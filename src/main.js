@@ -13,10 +13,16 @@ function plotData(selector, data, plot) {
     .call(plot);
 }
 
+function processData(data) {
+  data.forEach((d) => d.count = +d.count)
+  return data;
+}
+
 function display(error, data) {
+  data = processData(data)
   plotData("#vis",  data, plot);
 }
 
 queue()
-  .defer(d3.csv, "data/test.csv")
+  .defer(d3.csv, "data/segments.csv")
   .await(display);
