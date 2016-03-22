@@ -1,41 +1,41 @@
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
-
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
-
+/******/
 /******/ 		// Check if module is in cache
 /******/ 		if(installedModules[moduleId])
 /******/ 			return installedModules[moduleId].exports;
-
+/******/
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			exports: {},
 /******/ 			id: moduleId,
 /******/ 			loaded: false
 /******/ 		};
-
+/******/
 /******/ 		// Execute the module function
 /******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-
-
+/******/
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = modules;
-
+/******/
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
-
+/******/
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
-
+/******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(0);
 /******/ })
@@ -45,382 +45,77 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-
+	
 	__webpack_require__(1);
-
-	var queue = __webpack_require__(5);
-	var d3 = __webpack_require__(6);
-	var createPlot = __webpack_require__(7);
-
-	var plot = createPlot();
-
+	__webpack_require__(2);
+	var queue = __webpack_require__(14);
+	var d3 = __webpack_require__(15);
+	var createPlot = __webpack_require__(16);
+	var createTable = __webpack_require__(18);
+	
+	var plot = createTable();
+	
 	function plotData(selector, data, plot) {
 	  d3.select(selector).datum(data).call(plot);
 	}
-
+	
+	function processData(data) {
+	  data.forEach(function (d) {
+	    return d.count = +d.count;
+	  });
+	  return data;
+	}
+	
 	function display(error, data) {
+	  data = processData(data);
 	  plotData("#vis", data, plot);
 	}
-
-	queue().defer(d3.csv, "data/test.csv").await(display);
+	
+	queue().defer(d3.csv, "data/segments.csv").await(display);
 
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	// style-loader: Adds some css to the DOM by adding a <style> tag
-
-	// load the styles
-	var content = __webpack_require__(2);
-	if(typeof content === 'string') content = [[module.id, content, '']];
-	// add the styles to the DOM
-	var update = __webpack_require__(4)(content, {});
-	if(content.locals) module.exports = content.locals;
-	// Hot Module Replacement
-	if(false) {
-		// When the styles change, update the <style> tags
-		if(!content.locals) {
-			module.hot.accept("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss", function() {
-				var newContent = require("!!./../../node_modules/css-loader/index.js!./../../node_modules/sass-loader/index.js!./style.scss");
-				if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-				update(newContent);
-			});
-		}
-		// When the module is disposed, remove the <style> tags
-		module.hot.dispose(function() { update(); });
-	}
+	module.exports = __webpack_require__.p + "index.html"
 
 /***/ },
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(3)();
-	// imports
-
-
-	// module
-	exports.push([module.id, "body {\n  font-family: Georgia, Times New Roman, Serif; }\n\ninput {\n  font-family: Georgia, Times New Roman, Serif; }\n\ntextarea {\n  font-family: Georgia, Times New Roman, Serif; }\n", ""]);
-
-	// exports
-
+	'use strict';
+	
+	__webpack_require__(3);
+	__webpack_require__(12);
 
 /***/ },
 /* 3 */
 /***/ function(module, exports) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	// css base code, injected by the css-loader
-	module.exports = function() {
-		var list = [];
-
-		// return the list of modules as css string
-		list.toString = function toString() {
-			var result = [];
-			for(var i = 0; i < this.length; i++) {
-				var item = this[i];
-				if(item[2]) {
-					result.push("@media " + item[2] + "{" + item[1] + "}");
-				} else {
-					result.push(item[1]);
-				}
-			}
-			return result.join("");
-		};
-
-		// import a list of modules into the list
-		list.i = function(modules, mediaQuery) {
-			if(typeof modules === "string")
-				modules = [[null, modules, ""]];
-			var alreadyImportedModules = {};
-			for(var i = 0; i < this.length; i++) {
-				var id = this[i][0];
-				if(typeof id === "number")
-					alreadyImportedModules[id] = true;
-			}
-			for(i = 0; i < modules.length; i++) {
-				var item = modules[i];
-				// skip already imported module
-				// this implementation is not 100% perfect for weird media query combinations
-				//  when a module is imported multiple times with different media queries.
-				//  I hope this will never occur (Hey this way we have smaller bundles)
-				if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-					if(mediaQuery && !item[2]) {
-						item[2] = mediaQuery;
-					} else if(mediaQuery) {
-						item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-					}
-					list.push(item);
-				}
-			}
-		};
-		return list;
-	};
-
+	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */,
+/* 11 */,
+/* 12 */
+/***/ function(module, exports) {
 
-	/*
-		MIT License http://www.opensource.org/licenses/mit-license.php
-		Author Tobias Koppers @sokra
-	*/
-	var stylesInDom = {},
-		memoize = function(fn) {
-			var memo;
-			return function () {
-				if (typeof memo === "undefined") memo = fn.apply(this, arguments);
-				return memo;
-			};
-		},
-		isOldIE = memoize(function() {
-			return /msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase());
-		}),
-		getHeadElement = memoize(function () {
-			return document.head || document.getElementsByTagName("head")[0];
-		}),
-		singletonElement = null,
-		singletonCounter = 0,
-		styleElementsInsertedAtTop = [];
-
-	module.exports = function(list, options) {
-		if(false) {
-			if(typeof document !== "object") throw new Error("The style-loader cannot be used in a non-browser environment");
-		}
-
-		options = options || {};
-		// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
-		// tags it will allow on a page
-		if (typeof options.singleton === "undefined") options.singleton = isOldIE();
-
-		// By default, add <style> tags to the bottom of <head>.
-		if (typeof options.insertAt === "undefined") options.insertAt = "bottom";
-
-		var styles = listToStyles(list);
-		addStylesToDom(styles, options);
-
-		return function update(newList) {
-			var mayRemove = [];
-			for(var i = 0; i < styles.length; i++) {
-				var item = styles[i];
-				var domStyle = stylesInDom[item.id];
-				domStyle.refs--;
-				mayRemove.push(domStyle);
-			}
-			if(newList) {
-				var newStyles = listToStyles(newList);
-				addStylesToDom(newStyles, options);
-			}
-			for(var i = 0; i < mayRemove.length; i++) {
-				var domStyle = mayRemove[i];
-				if(domStyle.refs === 0) {
-					for(var j = 0; j < domStyle.parts.length; j++)
-						domStyle.parts[j]();
-					delete stylesInDom[domStyle.id];
-				}
-			}
-		};
-	}
-
-	function addStylesToDom(styles, options) {
-		for(var i = 0; i < styles.length; i++) {
-			var item = styles[i];
-			var domStyle = stylesInDom[item.id];
-			if(domStyle) {
-				domStyle.refs++;
-				for(var j = 0; j < domStyle.parts.length; j++) {
-					domStyle.parts[j](item.parts[j]);
-				}
-				for(; j < item.parts.length; j++) {
-					domStyle.parts.push(addStyle(item.parts[j], options));
-				}
-			} else {
-				var parts = [];
-				for(var j = 0; j < item.parts.length; j++) {
-					parts.push(addStyle(item.parts[j], options));
-				}
-				stylesInDom[item.id] = {id: item.id, refs: 1, parts: parts};
-			}
-		}
-	}
-
-	function listToStyles(list) {
-		var styles = [];
-		var newStyles = {};
-		for(var i = 0; i < list.length; i++) {
-			var item = list[i];
-			var id = item[0];
-			var css = item[1];
-			var media = item[2];
-			var sourceMap = item[3];
-			var part = {css: css, media: media, sourceMap: sourceMap};
-			if(!newStyles[id])
-				styles.push(newStyles[id] = {id: id, parts: [part]});
-			else
-				newStyles[id].parts.push(part);
-		}
-		return styles;
-	}
-
-	function insertStyleElement(options, styleElement) {
-		var head = getHeadElement();
-		var lastStyleElementInsertedAtTop = styleElementsInsertedAtTop[styleElementsInsertedAtTop.length - 1];
-		if (options.insertAt === "top") {
-			if(!lastStyleElementInsertedAtTop) {
-				head.insertBefore(styleElement, head.firstChild);
-			} else if(lastStyleElementInsertedAtTop.nextSibling) {
-				head.insertBefore(styleElement, lastStyleElementInsertedAtTop.nextSibling);
-			} else {
-				head.appendChild(styleElement);
-			}
-			styleElementsInsertedAtTop.push(styleElement);
-		} else if (options.insertAt === "bottom") {
-			head.appendChild(styleElement);
-		} else {
-			throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");
-		}
-	}
-
-	function removeStyleElement(styleElement) {
-		styleElement.parentNode.removeChild(styleElement);
-		var idx = styleElementsInsertedAtTop.indexOf(styleElement);
-		if(idx >= 0) {
-			styleElementsInsertedAtTop.splice(idx, 1);
-		}
-	}
-
-	function createStyleElement(options) {
-		var styleElement = document.createElement("style");
-		styleElement.type = "text/css";
-		insertStyleElement(options, styleElement);
-		return styleElement;
-	}
-
-	function createLinkElement(options) {
-		var linkElement = document.createElement("link");
-		linkElement.rel = "stylesheet";
-		insertStyleElement(options, linkElement);
-		return linkElement;
-	}
-
-	function addStyle(obj, options) {
-		var styleElement, update, remove;
-
-		if (options.singleton) {
-			var styleIndex = singletonCounter++;
-			styleElement = singletonElement || (singletonElement = createStyleElement(options));
-			update = applyToSingletonTag.bind(null, styleElement, styleIndex, false);
-			remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true);
-		} else if(obj.sourceMap &&
-			typeof URL === "function" &&
-			typeof URL.createObjectURL === "function" &&
-			typeof URL.revokeObjectURL === "function" &&
-			typeof Blob === "function" &&
-			typeof btoa === "function") {
-			styleElement = createLinkElement(options);
-			update = updateLink.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-				if(styleElement.href)
-					URL.revokeObjectURL(styleElement.href);
-			};
-		} else {
-			styleElement = createStyleElement(options);
-			update = applyToTag.bind(null, styleElement);
-			remove = function() {
-				removeStyleElement(styleElement);
-			};
-		}
-
-		update(obj);
-
-		return function updateStyle(newObj) {
-			if(newObj) {
-				if(newObj.css === obj.css && newObj.media === obj.media && newObj.sourceMap === obj.sourceMap)
-					return;
-				update(obj = newObj);
-			} else {
-				remove();
-			}
-		};
-	}
-
-	var replaceText = (function () {
-		var textStore = [];
-
-		return function (index, replacement) {
-			textStore[index] = replacement;
-			return textStore.filter(Boolean).join('\n');
-		};
-	})();
-
-	function applyToSingletonTag(styleElement, index, remove, obj) {
-		var css = remove ? "" : obj.css;
-
-		if (styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = replaceText(index, css);
-		} else {
-			var cssNode = document.createTextNode(css);
-			var childNodes = styleElement.childNodes;
-			if (childNodes[index]) styleElement.removeChild(childNodes[index]);
-			if (childNodes.length) {
-				styleElement.insertBefore(cssNode, childNodes[index]);
-			} else {
-				styleElement.appendChild(cssNode);
-			}
-		}
-	}
-
-	function applyToTag(styleElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if(media) {
-			styleElement.setAttribute("media", media)
-		}
-
-		if(styleElement.styleSheet) {
-			styleElement.styleSheet.cssText = css;
-		} else {
-			while(styleElement.firstChild) {
-				styleElement.removeChild(styleElement.firstChild);
-			}
-			styleElement.appendChild(document.createTextNode(css));
-		}
-	}
-
-	function updateLink(linkElement, obj) {
-		var css = obj.css;
-		var media = obj.media;
-		var sourceMap = obj.sourceMap;
-
-		if(sourceMap) {
-			// http://stackoverflow.com/a/26603875
-			css += "\n/*# sourceMappingURL=data:application/json;base64," + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + " */";
-		}
-
-		var blob = new Blob([css], { type: "text/css" });
-
-		var oldSrc = linkElement.href;
-
-		linkElement.href = URL.createObjectURL(blob);
-
-		if(oldSrc)
-			URL.revokeObjectURL(oldSrc);
-	}
-
+	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 5 */
+/* 13 */,
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;(function() {
 	  var slice = [].slice;
-
+	
 	  function queue(parallelism) {
 	    var q,
 	        tasks = [],
@@ -431,9 +126,9 @@
 	        error = null,
 	        await = noop,
 	        all;
-
+	
 	    if (!parallelism) parallelism = Infinity;
-
+	
 	    function pop() {
 	      while (popping = started < tasks.length && active < parallelism) {
 	        var i = started++,
@@ -444,7 +139,7 @@
 	        t[0].apply(null, a);
 	      }
 	    }
-
+	
 	    function callback(i) {
 	      return function(e, r) {
 	        --active;
@@ -460,13 +155,13 @@
 	        }
 	      };
 	    }
-
+	
 	    function notify() {
 	      if (error != null) await(error);
 	      else if (all) await(error, tasks);
 	      else await.apply(null, [error].concat(tasks));
 	    }
-
+	
 	    return q = {
 	      defer: function() {
 	        if (!error) {
@@ -490,9 +185,9 @@
 	      }
 	    };
 	  }
-
+	
 	  function noop() {}
-
+	
 	  queue.version = "1.0.7";
 	  if (true) !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return queue; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
 	  else if (typeof module === "object" && module.exports) module.exports = queue;
@@ -501,12 +196,12 @@
 
 
 /***/ },
-/* 6 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function() {
 	  var d3 = {
-	    version: "3.5.8"
+	    version: "3.5.9"
 	  };
 	  var d3_arraySlice = [].slice, d3_array = function(list) {
 	    return d3_arraySlice.call(list);
@@ -1738,7 +1433,7 @@
 	        function ended() {
 	          if (!position(parent, dragId)) return;
 	          dragSubject.on(move + dragName, null).on(end + dragName, null);
-	          dragRestore(dragged && d3.event.target === target);
+	          dragRestore(dragged);
 	          dispatch({
 	            type: "dragend"
 	          });
@@ -1976,7 +1671,7 @@
 	      }), center0 = null;
 	    }
 	    function mousedowned() {
-	      var that = this, target = d3.event.target, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
+	      var that = this, dispatch = event.of(that, arguments), dragged = 0, subject = d3.select(d3_window(that)).on(mousemove, moved).on(mouseup, ended), location0 = location(d3.mouse(that)), dragRestore = d3_event_dragSuppress(that);
 	      d3_selection_interrupt.call(that);
 	      zoomstarted(dispatch);
 	      function moved() {
@@ -1986,7 +1681,7 @@
 	      }
 	      function ended() {
 	        subject.on(mousemove, null).on(mouseup, null);
-	        dragRestore(dragged && d3.event.target === target);
+	        dragRestore(dragged);
 	        zoomended(dispatch);
 	      }
 	    }
@@ -2217,7 +1912,7 @@
 	        {
 	          return hsl(parseFloat(m2[0]), parseFloat(m2[1]) / 100, parseFloat(m2[2]) / 100);
 	        }
-
+	
 	       case "rgb":
 	        {
 	          return rgb(d3_rgb_parseNumber(m2[0]), d3_rgb_parseNumber(m2[1]), d3_rgb_parseNumber(m2[2]));
@@ -2737,33 +2432,33 @@
 	        comma = true;
 	        type = "g";
 	        break;
-
+	
 	       case "%":
 	        scale = 100;
 	        suffix = "%";
 	        type = "f";
 	        break;
-
+	
 	       case "p":
 	        scale = 100;
 	        suffix = "%";
 	        type = "r";
 	        break;
-
+	
 	       case "b":
 	       case "o":
 	       case "x":
 	       case "X":
 	        if (symbol === "#") prefix = "0" + type.toLowerCase();
-
+	
 	       case "c":
 	        exponent = false;
-
+	
 	       case "d":
 	        integer = true;
 	        precision = 0;
 	        break;
-
+	
 	       case "s":
 	        scale = -1;
 	        type = "r";
@@ -6202,15 +5897,15 @@
 	         case 0:
 	          find(node, x1, y1, xm, ym);
 	          break;
-
+	
 	         case 1:
 	          find(node, xm, y1, x2, ym);
 	          break;
-
+	
 	         case 2:
 	          find(node, x1, ym, xm, y2);
 	          break;
-
+	
 	         case 3:
 	          find(node, xm, ym, x2, y2);
 	          break;
@@ -9433,6 +9128,14 @@
 	          delete lock[cancelId];
 	        }
 	      }
+	      timer.c = tick;
+	      d3_timer(function() {
+	        if (timer.c && tick(elapsed || 1)) {
+	          timer.c = null;
+	          timer.t = NaN;
+	        }
+	        return 1;
+	      }, 0, time);
 	      lock.active = id;
 	      transition.event && transition.event.start.call(node, node.__data__, i);
 	      tweens = [];
@@ -9443,14 +9146,6 @@
 	      });
 	      ease = transition.ease;
 	      duration = transition.duration;
-	      timer.c = tick;
-	      d3_timer(function() {
-	        if (timer.c && tick(elapsed || 1)) {
-	          timer.c = null;
-	          timer.t = NaN;
-	        }
-	        return 1;
-	      }, 0, time);
 	    }
 	    function tick(elapsed) {
 	      var t = elapsed / duration, e = ease(t), n = tweens.length;
@@ -10052,52 +9747,358 @@
 	  d3.xml = d3_xhrType(function(request) {
 	    return request.responseXML;
 	  });
-	  if (true) !(__WEBPACK_AMD_DEFINE_FACTORY__ = (this.d3 = d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
+	  if (true) this.d3 = d3, !(__WEBPACK_AMD_DEFINE_FACTORY__ = (d3), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)); else if (typeof module === "object" && module.exports) module.exports = d3; else this.d3 = d3;
 	}();
 
 /***/ },
-/* 7 */
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var d3 = __webpack_require__(15);
+	
+	var fish = __webpack_require__(17);
+	
+	var fisheye = d3.fisheye.circular().radius(200).distortion(2);
+	
+	module.exports = function createChart() {
+	  var width = 500;
+	  var height = 1000;
+	  var g = null;
+	  var data = [];
+	
+	  var yScale = d3.scale.ordinal();
+	
+	  var wScale = d3.scale.pow().exponent(0.3).domain([0, 100]).range([400, 5]).clamp(true);
+	
+	  var fScale = d3.scale.pow().exponent(0.3).domain([0, 100]).range([20, 0]).clamp(true);
+	
+	  var hScale = d3.scale.pow().exponent(0.3).domain([0, 100]).range([20, 5]).clamp(true);
+	
+	  var chart = function chart(selection) {
+	    selection.each(function (rawData) {
+	
+	      console.log(rawData);
+	
+	      data = rawData;
+	
+	      var svg = d3.select(this).selectAll("svg").data([data]);
+	      svg.enter().append("svg").append("g");
+	
+	      svg.attr("width", width);
+	      svg.attr("height", height);
+	      g = svg.select("g");
+	
+	      yScale.domain(data.map(function (d) {
+	        return d.name;
+	      })).rangeBands([30, height]);
+	
+	      update();
+	      d3.select('body').on('mousemove', mousemove);
+	    });
+	  };
+	
+	  function update() {
+	    var techG = g.selectAll(".tech").data(data);
+	
+	    var techE = techG.enter().append("g").attr("class", "tech");
+	    // .attr('transform', (d) => 'translate('+ 0 +','+ yScale(d.name) + ')')
+	
+	    techE.append('rect').attr("fill", "steelblue").attr("x", 0).attr("y", function (d) {
+	      return yScale(d.name);
+	    }).attr("width", 10).attr("height", yScale.rangeBand()).on("mouseover", function (d) {
+	      d3.select(this).attr("fill", "orange");
+	    }).on("mouseout", function (d) {
+	      d3.select(this).attr("fill", "steelblue");
+	    });
+	
+	    techE.append('text').attr('dx', 5).attr('dy', yScale.rangeBand() / 2).style('font-size', 5).attr('pointer-events', 'none').attr("x", 0).attr("y", function (d) {
+	      return yScale(d.name);
+	    }).text(function (d) {
+	      return d.name;
+	    });
+	  }
+	
+	  function mouseover(d, i) {}
+	
+	  function mousemove() {
+	    // var e = d3.event;
+	
+	    var c = d3.mouse(g.node());
+	
+	    fisheye.focus(d3.mouse(g.node()));
+	
+	    var tS = g.selectAll('.tech').each(function (d, i) {
+	      var y = yScale(d.name);
+	      var dy = y - c[1];
+	      var dist = Math.abs(dy);
+	      d.dist = dist;
+	      d.w = wScale(dist);
+	      d.h = hScale(dist);
+	      d.y = dy > 0 ? y + d.h / 2 : y - d.h / 2;
+	      // d.fisheye = fisheye(d);
+	    });
+	    tS.select('rect').attr('y', function (d) {
+	      return d.y;
+	    }).attr('width', function (d) {
+	      return d.w;
+	    }).attr('height', function (d) {
+	      return d.h;
+	    });
+	
+	    tS.select('text').style('font-size', function (d) {
+	      return fScale(d.dist);
+	    }).attr('y', function (d) {
+	      return d.y;
+	    }).attr('dy', function (d) {
+	      return d.h / 2;
+	    });
+	
+	    console.log(c);
+	  }
+	
+	  return chart;
+	};
+
+/***/ },
+/* 17 */
+/***/ function(module, exports) {
+
+	(function() {
+	  d3.fisheye = {
+	    scale: function(scaleType) {
+	      return d3_fisheye_scale(scaleType(), 3, 0);
+	    },
+	    circular: function() {
+	      var radius = 200,
+	          distortion = 2,
+	          k0,
+	          k1,
+	          focus = [0, 0];
+	
+	      function fisheye(d) {
+	        var dx = d.x - focus[0],
+	            dy = d.y - focus[1],
+	            dd = Math.sqrt(dx * dx + dy * dy);
+	        if (!dd || dd >= radius) return {x: d.x, y: d.y, z: dd >= radius ? 1 : 10};
+	        var k = k0 * (1 - Math.exp(-dd * k1)) / dd * .75 + .25;
+	        return {x: focus[0] + dx * k, y: focus[1] + dy * k, z: Math.min(k, 10)};
+	      }
+	
+	      function rescale() {
+	        k0 = Math.exp(distortion);
+	        k0 = k0 / (k0 - 1) * radius;
+	        k1 = distortion / radius;
+	        return fisheye;
+	      }
+	
+	      fisheye.radius = function(_) {
+	        if (!arguments.length) return radius;
+	        radius = +_;
+	        return rescale();
+	      };
+	
+	      fisheye.distortion = function(_) {
+	        if (!arguments.length) return distortion;
+	        distortion = +_;
+	        return rescale();
+	      };
+	
+	      fisheye.focus = function(_) {
+	        if (!arguments.length) return focus;
+	        focus = _;
+	        return fisheye;
+	      };
+	
+	      return rescale();
+	    }
+	  };
+	
+	  function d3_fisheye_scale(scale, d, a) {
+	
+	    function fisheye(_) {
+	      var x = scale(_),
+	          left = x < a,
+	          range = d3.extent(scale.range()),
+	          min = range[0],
+	          max = range[1],
+	          m = left ? a - min : max - a;
+	      if (m == 0) m = max - min;
+	      return (left ? -1 : 1) * m * (d + 1) / (d + (m / Math.abs(x - a))) + a;
+	    }
+	
+	    fisheye.distortion = function(_) {
+	      if (!arguments.length) return d;
+	      d = +_;
+	      return fisheye;
+	    };
+	
+	    fisheye.focus = function(_) {
+	      if (!arguments.length) return a;
+	      a = +_;
+	      return fisheye;
+	    };
+	
+	    fisheye.copy = function() {
+	      return d3_fisheye_scale(scale.copy(), d, a);
+	    };
+	
+	    fisheye.nice = scale.nice;
+	    fisheye.ticks = scale.ticks;
+	    fisheye.tickFormat = scale.tickFormat;
+	    return d3.rebind(fisheye, scale, "domain", "range");
+	  }
+	})();
+
+
+/***/ },
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
-
-	var d3 = __webpack_require__(6);
-
+	
+	var d3 = __webpack_require__(15);
+	
 	module.exports = function createChart() {
 	  var width = 500;
-	  var height = 500;
-	  var margin = { top: 20, right: 20, bottom: 20, left: 20 };
-	  var g = null;
+	  var height = 800;
+	  var table = null;
 	  var data = [];
-
+	
+	  var yScale = d3.scale.ordinal();
+	
+	  var fScale = d3.scale.pow().exponent(0.5).domain([0, 100]).range([30, 5]).clamp(true);
+	
+	  var restScale = d3.scale.linear().range([5, 10]);
+	
 	  var chart = function chart(selection) {
 	    selection.each(function (rawData) {
-
+	
 	      console.log(rawData);
-
-	      data = rawData;
-
-	      var svg = d3.select(this).selectAll("svg").data([data]);
-	      svg.enter().append("svg").append("g");
-
-	      svg.attr("width", width + margin.left + margin.right);
-	      svg.attr("height", height + margin.top + margin.bottom);
-	      g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+	
+	      data = rawData.filter(function (d, i) {
+	        return i < 100;
+	      });
+	
+	      data = data.sort(function (a, b) {
+	        return d3.ascending(a.name, b.name);
+	      });
+	
+	      // var svg = d3.select(this).append('svg')
+	      // svg.attr("width", width);
+	      // svg.attr("height", height);
+	      // var fo = svg.append('foreignObject')
+	      // fo.attr("width", width);
+	      // fo.attr("height", height);
+	      // fo.attr('x', 0)
+	      // fo.attr('y', 0)
+	      // fo = fo.append('xhtml:body');
+	      // fo.attr("xmlns", "http://www.w3.org/1999/xhtml")
+	
+	      table = d3.select(this).selectAll("table").data([data]);
+	      table.enter().append("table");
+	      // table.attr('width', '100%')
+	
+	      // g = svg.select("g");
+	
+	      yScale.domain(data.map(function (d) {
+	        return d.name;
+	      })).rangeBands([30, height]);
+	
+	      restScale.domain(d3.extent(data, function (d) {
+	        return d.count;
+	      }));
+	
 	      update();
+	      d3.select('body').on('mousemove', mousemove);
 	    });
 	  };
-
+	
 	  function update() {
-	    g.selectAll(".rect").data(data).enter().append("rect").attr("class", "rect").attr("fill", "steelblue").attr("x", function (d) {
-	      return d.x * 10;
-	    }).attr("y", function (d) {
-	      return d.y * 10;
-	    }).attr("width", 10).attr("height", 10);
-	    // .on("mouseover", d => d3.select(this).attr("fill", "orange"));
+	    var techG = table.selectAll(".tech").data(data);
+	
+	    var techE = techG.enter().append("tr").attr("class", "tech").style('font-size', function (d) {
+	      return fScale(999) + 'px';
+	    }).append("td").text(function (d) {
+	      return d.name;
+	    }).style('font-family', 'Avenir').style('color', '#F4F1F1').on('click', click);
+	    // .style('background-color', 'steelblue')
+	
+	    // .attr('transform', (d) => 'translate('+ 0 +','+ yScale(d.name) + ')')
+	
+	    // techE.append('td')
+	    // .attr("fill", "steelblue")
+	    // .attr("x", 0)
+	    // .attr("y", d => yScale(d.name))
+	    // .attr("width", 10)
+	    // .attr("height", yScale.rangeBand())
+	    // .on("mouseover", function(d) { d3.select(this).attr("fill", "orange"); })
+	    // .on("mouseout", function(d) { d3.select(this).attr("fill", "steelblue"); });
+	
+	    // techE.append('text')
+	    //   .attr('dx', 5)
+	    //   .attr('dy', (yScale.rangeBand() / 2))
+	    //   .style('font-size', 5)
+	    //   .attr('pointer-events', 'none')
+	    //   .attr("x", 0)
+	    //   .attr("y", d => yScale(d.name))
+	    //   .text((d) => d.name)
+	    // mousemove();
 	  }
-
+	
+	  function mouseover(d, i) {}
+	
+	  function click(d, i) {
+	    d.clicked = d.clicked ? false : true;
+	    d3.select(this).style('color', d.clicked ? 'orange' : '#F4F1F1');
+	  }
+	
+	  function mousemove() {
+	    // var e = d3.event;
+	
+	    var c = d3.mouse(d3.select('body').node());
+	
+	    if (c[0] > 300) {
+	      c[1] = 99999;
+	    }
+	
+	    var tS = table.selectAll('.tech').each(function (d, i) {
+	
+	      var box = d3.select(this).node().getBoundingClientRect();
+	
+	      // if(i === 0) {
+	      //   console.log(box)
+	      // }
+	      var y = box.top + box.height / 2;
+	      var dist = Math.abs(y - c[1]);
+	      d.dist = dist;
+	      var f = fScale(d.dist);
+	      f = f < 2.1 ? restScale(d.count) : f;
+	      f = d.clicked ? Math.max(14, f) : f;
+	      d.font = f;
+	
+	      // d.w = wScale(dist);
+	      // d.h = hScale(dist);
+	      // d.y = dy > 0 ? y + (d.h / 2) : y - (d.h / 2) ;
+	    }).style('font-size', function (d) {
+	      return d.font + 'px';
+	    });
+	    // tS.select('rect')
+	    //   .attr('y', (d) => d.y)
+	    //   .attr('width', (d) => d.w)
+	    //   .attr('height', (d) => d.h);
+	
+	    // tS.select('td')
+	    // .attr('y', (d) => d.y)
+	    // .attr('dy', (d) => d.h / 2)
+	
+	    // console.log(c);
+	  }
+	
 	  return chart;
 	};
 
 /***/ }
 /******/ ]);
+//# sourceMappingURL=app.js.map
