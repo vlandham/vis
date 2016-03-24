@@ -9,6 +9,9 @@ var createPlot = require('./vis');
 var createSideTable = require('./sidetable');
 var createTable = require('./table');
 var createBarTable = require('./bartable');
+var createGlyphTable = require('./glyphtable');
+var createDots = require('./dots');
+var createSquare = require('./squares');
 
 
 function plotData(selector, data, plot) {
@@ -33,6 +36,12 @@ function display(error, data) {
   } else if(plotType === '#bar') {
     plot = createBarTable();
 
+  } else if(plotType === '#glyph') {
+    plot = createGlyphTable();
+  } else if(plotType === '#dots') {
+    plot = createDots();
+  } else if(plotType === '#box') {
+    plot = createSquare();
   } else {
     plot = createTable();
   }

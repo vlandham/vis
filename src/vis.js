@@ -5,7 +5,7 @@ var fish = require('../lib/fisheye');
 
 var fisheye = d3.fisheye.circular()
     .radius(200)
-    .distortion(2);
+    .distortion(3);
 
 module.exports = function createChart() {
   var width = 500;
@@ -44,6 +44,7 @@ module.exports = function createChart() {
 
       update();
       d3.select('body').on('mousemove', mousemove);
+      // svg.on("mousemove", mousemove);
     });
   };
 
