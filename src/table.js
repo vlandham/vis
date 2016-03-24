@@ -96,9 +96,10 @@ module.exports = function createChart() {
   }
 
   function click(d,i) {
-    d.clicked = d.clicked ? false : true;
-    d3.select(this)
-      .style('color', d.clicked ? 'orange' : '#F4F1F1' )
+    d3.selectAll('.tech').each((t) => t.clicked = false)
+    d.clicked = true
+    d3.selectAll('.tech').selectAll('td')
+      .style('color', (e) => e.clicked ? 'orange' : '#F4F1F1' )
   }
 
   function mousemove() {

@@ -12,6 +12,7 @@ var createBarTable = require('./bartable');
 var createGlyphTable = require('./glyphtable');
 var createDots = require('./dots');
 var createSquare = require('./squares');
+var createColorGlyph = require('./glyphcolortable');
 
 
 function plotData(selector, data, plot) {
@@ -42,6 +43,8 @@ function display(error, data) {
     plot = createDots();
   } else if(plotType === '#box') {
     plot = createSquare();
+  } else if(plotType === '#glyphcolor') {
+    plot = createColorGlyph();
   } else {
     plot = createTable();
   }

@@ -1,5 +1,5 @@
 
-require('../scss/glyphtable.scss');
+require('../scss/glyphcolortable.scss');
 var d3 = require('d3');
 
 module.exports = function createChart() {
@@ -18,6 +18,14 @@ module.exports = function createChart() {
     .domain([0, 100]).range([1.0, 0]).clamp(true);
 
   var restScale = d3.scale.linear().range([5, 10])
+
+  var colorScale = d3.scale.quantize()
+    // .range(['#ffffe0', '#ffe0a9', '#ffbe84', '#ff986d', '#f47361', '#e35056', '#cb2f44', '#ae112a', '#8b0000'])
+    .range(['#ffa500', '#ff8941', '#f86f53', '#ed5557', '#de3f53', '#cd2a47', '#b81736', '#a2051f', '#8b0000'])
+    .range(['#ffa500', '#e28101', '#c55e01', '#a83802', '#8b0000'])
+
+  var colorScale = d3.scale.linear()
+    .range(['orange', 'darkred'])
 
 
   var chart = function(selection) {
@@ -48,12 +56,13 @@ module.exports = function createChart() {
 
       table = d3.select(this).selectAll("table").data([data]);
       table.enter().append("table")
-        .classed('glyphtable', true);
+        .classed('glyphcolortable', true)
 
       yScale.domain(data.map((d) => d.name))
         .rangeBands([30, height]);
 
       restScale.domain(d3.extent(data, (d) => d.count));
+      colorScale.domain([0, d3.max(data, (d) => d.count)])
 
       update();
       d3.select('body').on('mousemove', mousemove);
@@ -68,7 +77,18 @@ module.exports = function createChart() {
       .append("tr")
       .attr("class", "tech")
       .style('font-size', (d) => fScale(999) + 'px')
-      .append("td")
+    techE.append("td")
+      // .style('width', '10px')
+      // .style('height', '10px')
+      // .style('margin-bottom', '5px')
+      .append('div')
+      .classed("box", true)
+      .style('width', '6px')
+      .style('height', '10px')
+      .style('background-color', (d) => colorScale(d.count))
+      .style('margin-right', '5px')
+      // .style('padding-right', '8px')
+    techE.append("td")
       .text((d) => d.glyph)
       .style('font-family', 'Courier')
       .style('color', '#F4F1F1')
@@ -110,9 +130,11 @@ module.exports = function createChart() {
     //   .style('color', d.clicked ? 'orange' : '#F4F1F1' )
 
     d3.selectAll('.tech').each((t) => t.clicked = false)
+    d3.selectAll('.box').style('opacity', 1.0)
     d.clicked = true
     d3.selectAll('.tech').selectAll('td')
       .style('color', (e) => e.clicked ? 'orange' : '#F4F1F1' )
+    d3.selectAll('.box').style('opacity', (e) => e.clicked ? 1.0 : 0.3)
 
   }
 
