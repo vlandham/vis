@@ -5827,6 +5827,9 @@ body {
   padding-top: 15px; }
   .menu a {
     margin-right: 10px; }
+
+.active {
+  fill: 'steelblue'; }
 .sidetable {
   margin-top: 80px;
   margin-bottom: 400px; }
@@ -5846,5 +5849,7 @@ body {
 
 .bartable span.bar {
   display: inline-block; }
+.glyphtable {
+  font-family: Courier; }
 
 /*# sourceMappingURL=app.css.map*/
