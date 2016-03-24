@@ -48,12 +48,15 @@
 	
 	__webpack_require__(1);
 	__webpack_require__(2);
-	var queue = __webpack_require__(14);
-	var d3 = __webpack_require__(15);
-	var createPlot = __webpack_require__(16);
-	var createTable = __webpack_require__(18);
 	
-	var plot = createTable();
+	__webpack_require__(14);
+	
+	var queue = __webpack_require__(16);
+	var d3 = __webpack_require__(15);
+	var createPlot = __webpack_require__(17);
+	var createSideTable = __webpack_require__(19);
+	var createTable = __webpack_require__(22);
+	var createBarTable = __webpack_require__(23);
 	
 	function plotData(selector, data, plot) {
 	  d3.select(selector).datum(data).call(plot);
@@ -66,8 +69,18 @@
 	  return data;
 	}
 	
+	var plotType = window.location.hash || '#default';
 	function display(error, data) {
 	  data = processData(data);
+	
+	  var plot;
+	  if (plotType === '#top') {
+	    plot = createSideTable();
+	  } else if (plotType === '#bar') {
+	    plot = createBarTable();
+	  } else {
+	    plot = createTable();
+	  }
 	  plotData("#vis", data, plot);
 	}
 	
@@ -113,87 +126,26 @@
 /* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var __WEBPACK_AMD_DEFINE_RESULT__;(function() {
-	  var slice = [].slice;
+	'use strict';
 	
-	  function queue(parallelism) {
-	    var q,
-	        tasks = [],
-	        started = 0, // number of tasks that have been started (and perhaps finished)
-	        active = 0, // number of tasks currently being executed (started but not finished)
-	        remaining = 0, // number of tasks not yet finished
-	        popping, // inside a synchronous task callback?
-	        error = null,
-	        await = noop,
-	        all;
+	var d3 = __webpack_require__(15);
 	
-	    if (!parallelism) parallelism = Infinity;
+	var m = d3.select('.menu');
 	
-	    function pop() {
-	      while (popping = started < tasks.length && active < parallelism) {
-	        var i = started++,
-	            t = tasks[i],
-	            a = slice.call(t, 1);
-	        a.push(callback(i));
-	        ++active;
-	        t[0].apply(null, a);
-	      }
-	    }
+	var options = [['default', 'Side Names'], ['bar', 'Side Bars'], ['top', 'Horizontal Names']];
 	
-	    function callback(i) {
-	      return function(e, r) {
-	        --active;
-	        if (error != null) return;
-	        if (e != null) {
-	          error = e; // ignore new tasks and squelch active callbacks
-	          started = remaining = NaN; // stop queued tasks from starting
-	          notify();
-	        } else {
-	          tasks[i] = r;
-	          if (--remaining) popping || pop();
-	          else notify();
-	        }
-	      };
-	    }
+	m.selectAll('a').data(options).enter().append('a').attr('href', function (d) {
+	  return '#' + d[0];
+	}).text(function (d) {
+	  return d[1];
+	}).on('click', menuClick).classed('btn btn-default', true);
 	
-	    function notify() {
-	      if (error != null) await(error);
-	      else if (all) await(error, tasks);
-	      else await.apply(null, [error].concat(tasks));
-	    }
+	function menuClick(d) {
+	  window.location.hash = '#' + d[0];
+	  window.location.reload();
+	}
 	
-	    return q = {
-	      defer: function() {
-	        if (!error) {
-	          tasks.push(arguments);
-	          ++remaining;
-	          pop();
-	        }
-	        return q;
-	      },
-	      await: function(f) {
-	        await = f;
-	        all = false;
-	        if (!remaining) notify();
-	        return q;
-	      },
-	      awaitAll: function(f) {
-	        await = f;
-	        all = true;
-	        if (!remaining) notify();
-	        return q;
-	      }
-	    };
-	  }
-	
-	  function noop() {}
-	
-	  queue.version = "1.0.7";
-	  if (true) !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return queue; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	  else if (typeof module === "object" && module.exports) module.exports = queue;
-	  else this.queue = queue;
-	})();
-
+	// m.append('a').attr('href', '/#default').text('side scroll')
 
 /***/ },
 /* 15 */
@@ -9754,11 +9706,97 @@
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var __WEBPACK_AMD_DEFINE_RESULT__;(function() {
+	  var slice = [].slice;
+	
+	  function queue(parallelism) {
+	    var q,
+	        tasks = [],
+	        started = 0, // number of tasks that have been started (and perhaps finished)
+	        active = 0, // number of tasks currently being executed (started but not finished)
+	        remaining = 0, // number of tasks not yet finished
+	        popping, // inside a synchronous task callback?
+	        error = null,
+	        await = noop,
+	        all;
+	
+	    if (!parallelism) parallelism = Infinity;
+	
+	    function pop() {
+	      while (popping = started < tasks.length && active < parallelism) {
+	        var i = started++,
+	            t = tasks[i],
+	            a = slice.call(t, 1);
+	        a.push(callback(i));
+	        ++active;
+	        t[0].apply(null, a);
+	      }
+	    }
+	
+	    function callback(i) {
+	      return function(e, r) {
+	        --active;
+	        if (error != null) return;
+	        if (e != null) {
+	          error = e; // ignore new tasks and squelch active callbacks
+	          started = remaining = NaN; // stop queued tasks from starting
+	          notify();
+	        } else {
+	          tasks[i] = r;
+	          if (--remaining) popping || pop();
+	          else notify();
+	        }
+	      };
+	    }
+	
+	    function notify() {
+	      if (error != null) await(error);
+	      else if (all) await(error, tasks);
+	      else await.apply(null, [error].concat(tasks));
+	    }
+	
+	    return q = {
+	      defer: function() {
+	        if (!error) {
+	          tasks.push(arguments);
+	          ++remaining;
+	          pop();
+	        }
+	        return q;
+	      },
+	      await: function(f) {
+	        await = f;
+	        all = false;
+	        if (!remaining) notify();
+	        return q;
+	      },
+	      awaitAll: function(f) {
+	        await = f;
+	        all = true;
+	        if (!remaining) notify();
+	        return q;
+	      }
+	    };
+	  }
+	
+	  function noop() {}
+	
+	  queue.version = "1.0.7";
+	  if (true) !(__WEBPACK_AMD_DEFINE_RESULT__ = function() { return queue; }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  else if (typeof module === "object" && module.exports) module.exports = queue;
+	  else this.queue = queue;
+	})();
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	var d3 = __webpack_require__(15);
 	
-	var fish = __webpack_require__(17);
+	var fish = __webpack_require__(18);
 	
 	var fisheye = d3.fisheye.circular().radius(200).distortion(2);
 	
@@ -9862,7 +9900,7 @@
 	};
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	(function() {
@@ -9953,7 +9991,167 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(20);
+	var d3 = __webpack_require__(15);
+	
+	module.exports = function createChart() {
+	  var width = 500;
+	  var height = 800;
+	  var table = null;
+	  var data = [];
+	
+	  var yScale = d3.scale.ordinal();
+	
+	  var fScale = d3.scale.pow().exponent(0.5).domain([0, 100]).range([30, 5]).clamp(true);
+	
+	  var restScale = d3.scale.linear().range([5, 10]);
+	
+	  var chart = function chart(selection) {
+	    selection.each(function (rawData) {
+	
+	      console.log(rawData);
+	
+	      data = rawData.filter(function (d, i) {
+	        return i < 100;
+	      });
+	
+	      data = data.sort(function (a, b) {
+	        return d3.ascending(a.name, b.name);
+	      });
+	
+	      // var svg = d3.select(this).append('svg')
+	      // svg.attr("width", width);
+	      // svg.attr("height", height);
+	      // var fo = svg.append('foreignObject')
+	      // fo.attr("width", width);
+	      // fo.attr("height", height);
+	      // fo.attr('x', 0)
+	      // fo.attr('y', 0)
+	      // fo = fo.append('xhtml:body');
+	      // fo.attr("xmlns", "http://www.w3.org/1999/xhtml")
+	
+	      table = d3.select(this).selectAll("table").data([data]);
+	      table.enter().append("table").classed('sidetable', true);
+	      // table.attr('width', '100%')
+	
+	      // g = svg.select("g");
+	
+	      yScale.domain(data.map(function (d) {
+	        return d.name;
+	      })).rangeBands([30, height]);
+	
+	      restScale.domain(d3.extent(data, function (d) {
+	        return d.count;
+	      }));
+	
+	      update();
+	      d3.select('body').on('mousemove', mousemove);
+	    });
+	  };
+	
+	  function update() {
+	    var techG = table.selectAll(".tech").data(data);
+	
+	    var techE = techG.enter().append("th").append("div").attr("class", "tech").text(function (d) {
+	      return d.name;
+	    }).style('font-size', function (d) {
+	      return fScale(999) + 'px';
+	    }).style('font-family', 'Avenir').style('color', '#F4F1F1').on('click', click);
+	    // .style('background-color', 'steelblue')
+	
+	    // .attr('transform', (d) => 'translate('+ 0 +','+ yScale(d.name) + ')')
+	
+	    // techE.append('td')
+	    // .attr("fill", "steelblue")
+	    // .attr("x", 0)
+	    // .attr("y", d => yScale(d.name))
+	    // .attr("width", 10)
+	    // .attr("height", yScale.rangeBand())
+	    // .on("mouseover", function(d) { d3.select(this).attr("fill", "orange"); })
+	    // .on("mouseout", function(d) { d3.select(this).attr("fill", "steelblue"); });
+	
+	    // techE.append('text')
+	    //   .attr('dx', 5)
+	    //   .attr('dy', (yScale.rangeBand() / 2))
+	    //   .style('font-size', 5)
+	    //   .attr('pointer-events', 'none')
+	    //   .attr("x", 0)
+	    //   .attr("y", d => yScale(d.name))
+	    //   .text((d) => d.name)
+	    // mousemove();
+	  }
+	
+	  function mouseover(d, i) {}
+	
+	  function click(d, i) {
+	    table.selectAll('.tech').each(function (d) {
+	      return d.clicked = false;
+	    }).style('color', '#F4F1F1');
+	
+	    d.clicked = d.clicked ? false : true;
+	    d3.select(this).style('color', d.clicked ? 'orange' : '#F4F1F1');
+	  }
+	
+	  function mousemove() {
+	    // var e = d3.event;
+	
+	    var c = d3.mouse(d3.select('body').node());
+	
+	    // if(c[0] > 300) { c[1] = 99999; }
+	
+	    var tS = table.selectAll('.tech').each(function (d, i) {
+	
+	      var box = d3.select(this).node().getBoundingClientRect();
+	
+	      // if(i === 0) {
+	      //   console.log(box)
+	      // }
+	      // var y = box.top + (box.height / 2);
+	      var x = box.left + box.width / 2;
+	      var dist = Math.abs(x - c[0]);
+	      d.dist = dist;
+	      var f = fScale(d.dist);
+	      f = f < 2.1 ? restScale(d.count) : f;
+	      f = d.clicked ? Math.max(14, f) : f;
+	      d.font = f;
+	
+	      // d.w = wScale(dist);
+	      // d.h = hScale(dist);
+	      // d.y = dy > 0 ? y + (d.h / 2) : y - (d.h / 2) ;
+	    }).style('font-size', function (d) {
+	      return d.font + 'px';
+	    }).style('padding-left', function (d) {
+	      return d.font + 'px';
+	    }).style('padding-right', function (d) {
+	      return d.font + 'px';
+	    });
+	    // tS.select('rect')
+	    //   .attr('y', (d) => d.y)
+	    //   .attr('width', (d) => d.w)
+	    //   .attr('height', (d) => d.h);
+	
+	    // tS.select('td')
+	    // .attr('y', (d) => d.y)
+	    // .attr('dy', (d) => d.h / 2)
+	  }
+	
+	  return chart;
+	};
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
+
+/***/ },
+/* 21 */,
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -10059,6 +10257,8 @@
 	
 	    var c = d3.mouse(d3.select('body').node());
 	
+	    var scrollY = window.scrollY;
+	
 	    if (c[0] > 300) {
 	      c[1] = 99999;
 	    }
@@ -10070,7 +10270,7 @@
 	      // if(i === 0) {
 	      //   console.log(box)
 	      // }
-	      var y = box.top + box.height / 2;
+	      var y = box.top + box.height / 2 + scrollY;
 	      var dist = Math.abs(y - c[1]);
 	      d.dist = dist;
 	      var f = fScale(d.dist);
@@ -10098,6 +10298,181 @@
 	
 	  return chart;
 	};
+
+/***/ },
+/* 23 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	__webpack_require__(24);
+	var d3 = __webpack_require__(15);
+	
+	module.exports = function createChart() {
+	  var width = 500;
+	  var height = 800;
+	  var table = null;
+	  var data = [];
+	
+	  // var yScale = d3.scale.ordinal();
+	
+	  var fScale = d3.scale.pow().exponent(0.5).domain([0, 100]).range([30, 5]).clamp(true);
+	
+	  var alphaScale = d3.scale.pow().exponent(0.5).domain([0, 100]).range([1.0, 0]).clamp(true);
+	
+	  // var restScale = d3.scale.linear().range([5, 10]);
+	
+	  var barScale = d3.scale.linear().range([0, 160]);
+	
+	  var chart = function chart(selection) {
+	    selection.each(function (rawData) {
+	
+	      console.log(rawData);
+	
+	      data = rawData.filter(function (d, i) {
+	        return i < 100;
+	      });
+	
+	      data = data.sort(function (a, b) {
+	        return d3.ascending(a.name, b.name);
+	      });
+	
+	      // var svg = d3.select(this).append('svg')
+	      // svg.attr("width", width);
+	      // svg.attr("height", height);
+	      // var fo = svg.append('foreignObject')
+	      // fo.attr("width", width);
+	      // fo.attr("height", height);
+	      // fo.attr('x', 0)
+	      // fo.attr('y', 0)
+	      // fo = fo.append('xhtml:body');
+	      // fo.attr("xmlns", "http://www.w3.org/1999/xhtml")
+	
+	      table = d3.select(this).selectAll("table").data([data]);
+	      table.enter().append("table").classed('bartable', true);
+	      // table.attr('width', '100%')
+	
+	      // g = svg.select("g");
+	
+	      // yScale.domain(data.map((d) => d.name))
+	      //   .rangeBands([30, height]);
+	
+	      // restScale.domain(d3.extent(data, (d) => d.count));
+	
+	      barScale.domain([0, d3.max(data, function (d) {
+	        return d.count;
+	      })]);
+	
+	      update();
+	      d3.select('body').on('mousemove', mousemove);
+	    });
+	  };
+	
+	  function update() {
+	    var techG = table.selectAll(".tech").data(data);
+	
+	    var techE = techG.enter().append("tr").append("td").append("div").attr("class", "tech").style('position', 'relative');
+	
+	    techE.append("span").attr("class", "bar").style("background-color", "rgba(101,122,136,1.0)").style("width", function (d) {
+	      return barScale(d.count) + "px";
+	    }).style({ 'position': 'absolute', 'left': '0px', 'top': '0px' }).style("height", "10px").style('margin-top', "8px");
+	
+	    techE.append("span").attr("class", "text").style('font-size', function (d) {
+	      return fScale(999) + 'px';
+	    }).text(function (d) {
+	      return d.name;
+	    }).style('font-family', 'Avenir').style('color', '#F4F1F1').style('opacity', '0.0');
+	    // .on('click', click)
+	    // .style('background-color', 'steelblue')
+	
+	    // .attr('transform', (d) => 'translate('+ 0 +','+ yScale(d.name) + ')')
+	
+	    // techE.append('td')
+	    // .attr("fill", "steelblue")
+	    // .attr("x", 0)
+	    // .attr("y", d => yScale(d.name))
+	    // .attr("width", 10)
+	    // .attr("height", yScale.rangeBand())
+	    // .on("mouseover", function(d) { d3.select(this).attr("fill", "orange"); })
+	    // .on("mouseout", function(d) { d3.select(this).attr("fill", "steelblue"); });
+	
+	    // techE.append('text')
+	    //   .attr('dx', 5)
+	    //   .attr('dy', (yScale.rangeBand() / 2))
+	    //   .style('font-size', 5)
+	    //   .attr('pointer-events', 'none')
+	    //   .attr("x", 0)
+	    //   .attr("y", d => yScale(d.name))
+	    //   .text((d) => d.name)
+	    // mousemove();
+	  }
+	
+	  function mouseover(d, i) {}
+	
+	  function click(d, i) {
+	    d.clicked = d.clicked ? false : true;
+	    d3.select(this).style('color', d.clicked ? 'orange' : '#F4F1F1');
+	  }
+	
+	  function mousemove() {
+	    // var e = d3.event;
+	
+	    var c = d3.mouse(d3.select('body').node());
+	
+	    var scrollY = window.scrollY;
+	
+	    if (c[0] > 300) {
+	      c[1] = 99999;
+	    }
+	
+	    var tS = table.selectAll('.tech').each(function (d, i) {
+	
+	      var box = d3.select(this).node().getBoundingClientRect();
+	
+	      // if(i === 0) {
+	      //   console.log(box)
+	      // }
+	      var y = box.top + box.height / 2 + scrollY;
+	      var dist = Math.abs(y - c[1]);
+	      d.dist = dist;
+	      var f = fScale(d.dist);
+	      // f = f < 2.1 ? restScale(d.count) : f;
+	      f = d.clicked ? Math.max(14, f) : f;
+	      d.font = f;
+	
+	      // d.w = wScale(dist);
+	      // d.h = hScale(dist);
+	      // d.y = dy > 0 ? y + (d.h / 2) : y - (d.h / 2) ;
+	    }).selectAll('.text').style('font-size', function (d) {
+	      return d.font + 'px';
+	    }).style('opacity', function (d) {
+	      return d.clicked ? 1.0 : alphaScale(d.dist);
+	    });
+	    table.selectAll('.tech').selectAll('.bar')
+	    // .style('background-color', 'red')
+	    .style('background-color', function (d) {
+	      return d.clicked ? "rgba(101,122,136,0.0)" : "rgba(101,122,136, " + (1 - alphaScale(d.dist)) + ")";
+	    });
+	    // tS.select('rect')
+	    //   .attr('y', (d) => d.y)
+	    //   .attr('width', (d) => d.w)
+	    //   .attr('height', (d) => d.h);
+	
+	    // tS.select('td')
+	    // .attr('y', (d) => d.y)
+	    // .attr('dy', (d) => d.h / 2)
+	
+	    // console.log(c);
+	  }
+	
+	  return chart;
+	};
+
+/***/ },
+/* 24 */
+/***/ function(module, exports) {
+
+	// removed by extract-text-webpack-plugin
 
 /***/ }
 /******/ ]);

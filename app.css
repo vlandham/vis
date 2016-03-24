@@ -5823,4 +5823,28 @@ body {
 .container {
   padding: 30px; }
 
+.menu {
+  padding-top: 15px; }
+  .menu a {
+    margin-right: 10px; }
+.sidetable {
+  margin-top: 80px;
+  margin-bottom: 400px; }
+  .sidetable th {
+    /* Something you can count on */
+    height: 140px;
+    white-space: nowrap;
+    padding-top: 0; }
+  .sidetable th > div {
+    transform: translate(25px, 51px) rotate(315deg);
+    width: 10px; }
+  .sidetable th > div > span {
+    border-bottom: 1px solid #ccc;
+    padding: 0px 0px; }
+.bartable div {
+  font-size: 0; }
+
+.bartable span.bar {
+  display: inline-block; }
+
 /*# sourceMappingURL=app.css.map*/

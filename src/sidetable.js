@@ -1,4 +1,5 @@
 
+require('../scss/sidetable.scss');
 var d3 = require('d3');
 
 module.exports = function createChart() {
@@ -39,7 +40,8 @@ module.exports = function createChart() {
 
 
       table = d3.select(this).selectAll("table").data([data]);
-      table.enter().append("table");
+      table.enter().append("table")
+        .classed('sidetable', true);
       // table.attr('width', '100%')
 
       // g = svg.select("g");
@@ -59,11 +61,11 @@ module.exports = function createChart() {
       .data(data);
 
     var techE = techG.enter()
-      .append("tr")
+      .append("th")
+      .append("div")
       .attr("class", "tech")
-      .style('font-size', (d) => fScale(999) + 'px')
-      .append("td")
       .text((d) => d.name)
+      .style('font-size', (d) => fScale(999) + 'px')
       .style('font-family', 'Avenir')
       .style('color', '#F4F1F1')
       .on('click', click)
@@ -96,6 +98,10 @@ module.exports = function createChart() {
   }
 
   function click(d,i) {
+    table.selectAll('.tech')
+      .each((d) => d.clicked = false)
+      .style('color', '#F4F1F1');
+
     d.clicked = d.clicked ? false : true;
     d3.select(this)
       .style('color', d.clicked ? 'orange' : '#F4F1F1' )
@@ -106,9 +112,7 @@ module.exports = function createChart() {
 
     var c = d3.mouse(d3.select('body').node());
 
-    var scrollY = window.scrollY;
-
-    if(c[0] > 300) { c[1] = 99999; }
+    // if(c[0] > 300) { c[1] = 99999; }
 
     var tS = table.selectAll('.tech')
       .each(function(d, i) {
@@ -119,8 +123,9 @@ module.exports = function createChart() {
         // if(i === 0) {
         //   console.log(box)
         // }
-        var y = (box.top + (box.height / 2) + scrollY);
-        var dist = Math.abs(y - c[1]);
+        // var y = box.top + (box.height / 2);
+        var x = box.left + (box.width / 2);
+        var dist = Math.abs(x - c[0]);
         d.dist = dist;
         var f = fScale(d.dist);
         f = f < 2.1 ? restScale(d.count) : f;
@@ -133,6 +138,8 @@ module.exports = function createChart() {
 
       })
       .style('font-size', (d) => d.font + 'px')
+      .style('padding-left', (d) => d.font + 'px')
+      .style('padding-right', (d) => d.font + 'px')
       // tS.select('rect')
       //   .attr('y', (d) => d.y)
       //   .attr('width', (d) => d.w)
@@ -142,7 +149,6 @@ module.exports = function createChart() {
         // .attr('y', (d) => d.y)
         // .attr('dy', (d) => d.h / 2)
 
-    // console.log(c);
   }
 
   return chart;

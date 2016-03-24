@@ -1,4 +1,5 @@
 
+require('../scss/bartable.scss');
 var d3 = require('d3');
 
 module.exports = function createChart() {
@@ -8,14 +9,17 @@ module.exports = function createChart() {
   var data = [];
 
 
-  var yScale = d3.scale.ordinal();
+  // var yScale = d3.scale.ordinal();
 
   var fScale = d3.scale.pow().exponent(0.5)
     .domain([0, 100]).range([30, 5]).clamp(true);
 
+  var alphaScale = d3.scale.pow().exponent(0.5)
+    .domain([0, 100]).range([1.0, 0]).clamp(true);
 
-  var restScale = d3.scale.linear().range([5, 10])
+  // var restScale = d3.scale.linear().range([5, 10]);
 
+  var barScale = d3.scale.linear().range([0, 160]);
 
   var chart = function(selection) {
     selection.each(function(rawData) {
@@ -39,15 +43,18 @@ module.exports = function createChart() {
 
 
       table = d3.select(this).selectAll("table").data([data]);
-      table.enter().append("table");
+      table.enter().append("table")
+        .classed('bartable', true);
       // table.attr('width', '100%')
 
       // g = svg.select("g");
 
-      yScale.domain(data.map((d) => d.name))
-        .rangeBands([30, height]);
+      // yScale.domain(data.map((d) => d.name))
+      //   .rangeBands([30, height]);
 
-      restScale.domain(d3.extent(data, (d) => d.count));
+      // restScale.domain(d3.extent(data, (d) => d.count));
+
+      barScale.domain([0, d3.max(data, (d) => d.count)]);
 
       update();
       d3.select('body').on('mousemove', mousemove);
@@ -60,13 +67,27 @@ module.exports = function createChart() {
 
     var techE = techG.enter()
       .append("tr")
-      .attr("class", "tech")
-      .style('font-size', (d) => fScale(999) + 'px')
       .append("td")
+      .append("div")
+      .attr("class", "tech")
+      .style('position', 'relative');
+
+    techE.append("span")
+      .attr("class", "bar")
+      .style("background-color", "rgba(101,122,136,1.0)")
+      .style("width", (d) => barScale(d.count) + "px")
+      .style({'position':'absolute', 'left':'0px', 'top':'0px'})
+      .style("height", "10px")
+      .style('margin-top', "8px")
+
+    techE.append("span")
+      .attr("class", "text")
+      .style('font-size', (d) => fScale(999) + 'px')
       .text((d) => d.name)
       .style('font-family', 'Avenir')
       .style('color', '#F4F1F1')
-      .on('click', click)
+      .style('opacity', '0.0')
+      // .on('click', click)
       // .style('background-color', 'steelblue')
 
       // .attr('transform', (d) => 'translate('+ 0 +','+ yScale(d.name) + ')')
@@ -123,7 +144,7 @@ module.exports = function createChart() {
         var dist = Math.abs(y - c[1]);
         d.dist = dist;
         var f = fScale(d.dist);
-        f = f < 2.1 ? restScale(d.count) : f;
+        // f = f < 2.1 ? restScale(d.count) : f;
         f = d.clicked ? Math.max(14,f) : f;
         d.font = f;
 
@@ -132,7 +153,12 @@ module.exports = function createChart() {
         // d.y = dy > 0 ? y + (d.h / 2) : y - (d.h / 2) ;
 
       })
+      .selectAll('.text')
       .style('font-size', (d) => d.font + 'px')
+      .style('opacity', (d) => d.clicked ? 1.0 : alphaScale(d.dist))
+    table.selectAll('.tech').selectAll('.bar')
+      // .style('background-color', 'red')
+      .style('background-color', (d) => d.clicked ? "rgba(101,122,136,0.0)" : "rgba(101,122,136, "+ (1 - alphaScale(d.dist)) + ")"  )
       // tS.select('rect')
       //   .attr('y', (d) => d.y)
       //   .attr('width', (d) => d.w)
