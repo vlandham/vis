@@ -5824,7 +5824,8 @@ body {
   padding: 30px; }
 
 .menu {
-  padding-top: 15px; }
+  padding-top: 15px;
+  padding-left: 15px; }
   .menu a {
     margin-right: 10px; }
 
@@ -5850,6 +5851,8 @@ body {
 .bartable span.bar {
   display: inline-block; }
 .glyphtable {
+  font-family: Courier; }
+.glyphcolortable {
   font-family: Courier; }
 
 /*# sourceMappingURL=app.css.map*/

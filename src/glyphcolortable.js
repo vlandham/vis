@@ -19,13 +19,16 @@ module.exports = function createChart() {
 
   var restScale = d3.scale.linear().range([5, 10])
 
-  var colorScale = d3.scale.quantize()
+  // var colorScale = d3.scale.quantize()
+    // .range(["#fee5d9","#fcae91","#fb6a4a","#de2d26","#a50f15"])
     // .range(['#ffffe0', '#ffe0a9', '#ffbe84', '#ff986d', '#f47361', '#e35056', '#cb2f44', '#ae112a', '#8b0000'])
-    .range(['#ffa500', '#ff8941', '#f86f53', '#ed5557', '#de3f53', '#cd2a47', '#b81736', '#a2051f', '#8b0000'])
-    .range(['#ffa500', '#e28101', '#c55e01', '#a83802', '#8b0000'])
+    // .range(['#ffa500', '#ff8941', '#f86f53', '#ed5557', '#de3f53', '#cd2a47', '#b81736', '#a2051f', '#8b0000'])
+    // .range(['#ffa500', '#e28101', '#c55e01', '#a83802', '#8b0000'])
 
   var colorScale = d3.scale.linear()
-    .range(['orange', 'darkred'])
+    // .range(["#fee5d9", "#a50f15"])
+    // .range(["#fef0d9", "#b30000"])
+    .range(["#fdd49e", "#b30000"])
 
 
   var chart = function(selection) {
@@ -83,7 +86,7 @@ module.exports = function createChart() {
       // .style('margin-bottom', '5px')
       .append('div')
       .classed("box", true)
-      .style('width', '6px')
+      .style('width', '3px')
       .style('height', '10px')
       .style('background-color', (d) => colorScale(d.count))
       .style('margin-right', '5px')
@@ -134,7 +137,10 @@ module.exports = function createChart() {
     d.clicked = true
     d3.selectAll('.tech').selectAll('td')
       .style('color', (e) => e.clicked ? 'orange' : '#F4F1F1' )
-    d3.selectAll('.box').style('opacity', (e) => e.clicked ? 1.0 : 0.3)
+    // d3.selectAll('.box').style('opacity', (e) => e.clicked ? 1.0 : 0.3)
+    d3.selectAll('.box')
+      // .style('background-color', (e) => e.clicked ? colorScale(e.count) : '#ddd')
+      .style('opacity', (e) => e.clicked ? 1.0 : 0.3)
 
   }
 
