@@ -6,3 +6,56 @@ $font_2: Serif;
 body {
   font-family: $font_0, $font_1, $font_2;
 }
+
+path.hover {
+  stroke:black;
+  fill: none;
+  opacity: 0.0;
+  stroke-width: 8px;
+}
+
+path.main {
+  stroke-width: 3px;
+  stroke:black;
+
+}
+
+path.street {
+  stroke:black;
+  fill: none;
+}
+
+path.highlight {
+  stroke: #1CD7EA;
+  stroke-width: 3px;
+}
+
+path.hovered {
+  stroke: #EA1C31;
+  stroke-width: 3px;
+}
+
+
+.tooltip {
+	position: absolute;
+	top: 100px;
+	left: 100px;
+  -moz-border-radius:5px;
+	border-radius: 5px;
+  border: 2px solid #000;
+  background: #fff;
+	opacity: .9;
+  color: black;
+	padding: 10px;
+	width: 300px;
+	font-size: 12px;
+	z-index: 10;
+}
+
+.tooltip .title {
+	font-size: 13px;
+}
+
+.tooltip .name {
+  font-weight:bold;
+}

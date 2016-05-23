@@ -38,6 +38,7 @@
   "dependencies": {
     "d3": "^3.5.8",
     "lodash": "^3.10.1",
-    "queue-async": "^1.0.7"
+    "queue-async": "^1.0.7",
+    "topojson": "^1.6.26"
   }
 }

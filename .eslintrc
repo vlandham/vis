@@ -1,0 +1,33 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+
+    "globals": {
+      "describe": true,
+      "it": true
+    },
+
+    "plugins": [
+    ],
+    "extends": ["eslint:recommended"],
+
+    parserOptions: {
+      sourceType: "module",
+      ecmaFeatures: {
+        "jsx": true,
+      }
+    },
+
+    "rules": {
+      "camelcase": 2,
+      "curly": 2,
+      "brace-style": [2, "1tbs", { "allowSingleLine": true }],
+      "space-infix-ops": 2,
+      "no-unused-vars": 2,
+      "no-undef": 2,
+      "semi": [2, "always"]
+    }
+}

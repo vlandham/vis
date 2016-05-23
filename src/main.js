@@ -2,10 +2,10 @@ require('../index.html');
 require('./style');
 var queue = require('queue-async');
 var d3 = require('d3');
-var createPlot = require('./vis');
+var createMap = require('./map');
 
 
-var plot = createPlot();
+var map = createMap();
 
 function plotData(selector, data, plot) {
   d3.select(selector)
@@ -14,9 +14,16 @@ function plotData(selector, data, plot) {
 }
 
 function display(error, data) {
-  plotData("#vis",  data, plot);
+  plotData("#vis",  data, map);
 }
 
 queue()
-  .defer(d3.csv, "data/test.csv")
+  .defer(d3.json, "data/ws_topo.json")
   .await(display);
+
+
+d3.select('#search').on('input', function() {
+  console.log(this.value);
+  map.highlight(this.value);
+
+});
