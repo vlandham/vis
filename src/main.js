@@ -1,22 +1,16 @@
+import * as d3 from 'd3';
+
+import createPlot from './vis';
+
 require('../index.html');
 require('./style');
-var queue = require('queue-async');
-var d3 = require('d3');
-var createPlot = require('./vis');
 
-
-var plot = createPlot();
-
-function plotData(selector, data, plot) {
-  d3.select(selector)
-    .datum(data)
-    .call(plot);
-}
+const plot = createPlot();
 
 function display(error, data) {
-  plotData("#vis",  data, plot);
+  plot('#vis', data);
 }
 
-queue()
-  .defer(d3.csv, "data/test.csv")
+d3.queue()
+  .defer(d3.csv, 'data/test.csv')
   .await(display);

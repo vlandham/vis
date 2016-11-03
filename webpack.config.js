@@ -34,7 +34,7 @@ module.exports = {
       {
         test: /\.js$/,
         include: /src/,
-        loaders: ['babel?presets[]=es2015&plugins[]=transform-runtime']
+        loaders: ['babel-loader']
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
