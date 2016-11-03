@@ -1,0 +1,55 @@
+[
+  {"name":"Salmonberry", "details":"",
+    "group": "berry",
+    "color": "#ED9D37",
+    "source": "Parentmap",
+    "url":"https://www.parentmap.com/article/summer-urban-foraging-pick-wild-berries-in-local-parks",
+    "values":[
+    {"time":"4-1", "amount":0.0},
+    {"time":"5-1", "amount":1.0},
+    {"time":"7-1", "amount":1.0},
+    {"time":"8-1", "amount":0.5},
+    {"time":"9-1", "amount":0.0}
+    ]
+  },
+  {"name":"Thimbleberry", "details":"",
+    "group": "berry",
+    "color": "#C02942",
+    "source": "Parentmap",
+    "url":"https://www.parentmap.com/article/summer-urban-foraging-pick-wild-berries-in-local-parks",
+    "values":[
+    {"time":"4-1", "amount":0.0},
+    {"time":"5-20", "amount":0.5},
+    {"time":"7-1", "amount":1.0},
+    {"time":"8-1", "amount":0.6},
+    {"time":"8-20", "amount":0.2},
+    {"time":"9-1", "amount":0.0}
+    ]
+  },
+  {"name":"Blackberry", "details":"",
+    "group": "berry",
+    "color": "#451930",
+    "source": "Parentmap",
+    "url":"https://www.parentmap.com/article/summer-urban-foraging-pick-wild-berries-in-local-parks",
+    "values":[
+    {"time":"6-15", "amount":0.0},
+    {"time":"7-20", "amount":1.0},
+    {"time":"8-30", "amount":1.0},
+    {"time":"9-1", "amount":0.2},
+    {"time":"9-15", "amount":0.0}
+    ]
+  },
+  {"name":"Salal", "details":"",
+    "group": "berry",
+    "color": "#451930",
+    "source": "Parentmap",
+    "url":"https://www.parentmap.com/article/summer-urban-foraging-pick-wild-berries-in-local-parks",
+    "values":[
+    {"time":"6-15", "amount":0.0},
+    {"time":"7-1", "amount":0.5},
+    {"time":"8-1", "amount":1.0},
+    {"time":"11-1", "amount":1.0},
+    {"time":"12-1", "amount":0.0}
+    ]
+  }
+]

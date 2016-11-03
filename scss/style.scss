@@ -1,8 +1,30 @@
 //fonts
-$font_0: Georgia;
+$font_0: Montserrat;
 $font_1: Times New Roman;
 $font_2: Serif;
 
 body {
   font-family: $font_0, $font_1, $font_2;
+}
+
+h1 {
+  padding-bottom: 50px;
+}
+
+.chart {
+  padding-bottom: 20px;
+  padding-right: 20px;
+  float:left;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #777;
+  shape-rendering: crispEdges;
+}
+
+.axis .tick text {
+  font-size: 10px;
+  fill: #777;
 }
