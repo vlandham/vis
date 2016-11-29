@@ -2,8 +2,8 @@ import * as d3 from 'd3';
 
 import createPlot from './vis';
 
-require('../index.html');
-require('./style');
+import '../index.html';
+import './style';
 
 const plot = createPlot();
 

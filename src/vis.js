@@ -3,13 +3,12 @@ import * as d3 from 'd3';
 
 export default function createChart() {
   const width = 500;
-  var height = 500;
-  var margin = { top: 20, right: 20, bottom: 20, left: 20 };
-  var g = null;
-  var data = [];
+  const height = 500;
+  const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  let g = null;
+  let data = [];
 
-  var chart = function(selection, rawData) {
-
+  const chart = function wrapper(selection, rawData) {
     console.log(rawData);
 
     data = rawData;
@@ -19,7 +18,7 @@ export default function createChart() {
       .attr('height', height + margin.top + margin.bottom);
 
     g = svg.append('g')
-      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+      .attr('transform', `translate(${margin.left},${margin.top})`);
     update();
   };
 
