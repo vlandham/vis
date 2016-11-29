@@ -1,11 +1,11 @@
 import * as d3 from 'd3';
 
-import createPlot from './vis';
+import createChart from './chart';
 
 import '../index.html';
 import './style';
 
-const plot = createPlot();
+const plot = createChart();
 
 function display(error, data) {
   plot('#vis', data);
