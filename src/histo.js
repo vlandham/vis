@@ -25,37 +25,47 @@ export default function createChart() {
   };
 
   function updateScales() {
+    const yPadding = 20;
+    const cellWidth = width / data[0].length;
+    const cellHeight = (height - (yPadding * data.length)) / data.length;
+
     const color = d3.scaleLinear()
       .domain(meta.extent)
       .range(['#ffe4c4', '#f9a743']);
 
+    const y = d3.scaleLinear()
+      .domain([0, meta.extent[1]])
+      .range([0, cellHeight]);
+
     return {
       color,
+      y,
+      cellWidth,
+      cellHeight,
+      yPadding,
     };
   }
 
   function update() {
     const scales = updateScales();
-    const cellWidth = width / data[0].length;
-    const cellHeight = height / data.length;
 
     const rowE = g.selectAll('.row')
       .data(data)
       .enter()
       .append('g')
       .classed('row', true)
-      .attr('transform', (d, i) => `translate(${0},${i * cellHeight})`);
+      .attr('transform', (d, i) => `translate(${0},${i * (scales.cellHeight + scales.yPadding)})`);
 
     rowE.selectAll('.rect')
       .data(d => d)
       .enter()
       .append('rect')
       .attr('class', 'rect')
-      .attr('fill', scales.color)
-      .attr('x', (d, i) => i * cellWidth)
-      .attr('y', 0)
-      .attr('width', cellWidth)
-      .attr('height', cellHeight);
+      .attr('fill', '#f9a743')
+      .attr('x', (d, i) => i * scales.cellWidth)
+      .attr('y', d => scales.cellHeight - scales.y(d))
+      .attr('width', scales.cellWidth)
+      .attr('height', d => scales.y(d));
   }
 
   return chart;
