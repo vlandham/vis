@@ -6,3 +6,14 @@ $font_2: Serif;
 body {
   font-family: $font_0, $font_1, $font_2;
 }
+
+.vis {
+  float:left;
+}
+
+.vis canvas {
+}
+
+.toggle-btn {
+  float: left;
+}
