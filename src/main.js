@@ -12,5 +12,5 @@ function display(error, data) {
 }
 
 d3.queue()
-  .defer(d3.csv, 'data/test.csv')
+  .defer(d3.json, 'data/dogs.json')
   .await(display);
