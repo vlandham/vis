@@ -1,7 +1,7 @@
 {
   "name": "vis",
   "version": "1.0.0",
-  "description": "h1. A simple way to get started with data visualizations using d3 and coffeescript",
+  "description": "A simple way to get started with data visualizations using d3 and javascript",
   "main": "index.html",
   "scripts": {
     "start": "webpack-dev-server --progress --colors",
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/vlandham/vis.git"
   },
   "author": "Jim Vallandingham <vlandham@gmail.com> (http://vallandingham.me/)",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/vlandham/vis/issues"
   },
