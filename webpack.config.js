@@ -1,12 +1,12 @@
 var path = require('path');
 var webpack = require('webpack');
 
-var minimize = process.argv.indexOf('--minimize') === -1 ? false : true;
-
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var plugins = [];
 
-plugins.push(new ExtractTextPlugin({ filename: "build/app.css" }));
+plugins.push(new ExtractTextPlugin("build/app.css"));
+
+var minimize = process.argv.indexOf('--minimize') === -1 ? false : true;
 
 if(minimize) {
   plugins.push(new webpack.optimize.UglifyJsPlugin());
