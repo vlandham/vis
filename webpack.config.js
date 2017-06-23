@@ -36,7 +36,10 @@ module.exports = {
         include: /src/,
         loaders: ['babel-loader']
       },
-      { test: /\.css$/, loader: 'style-loader!css-loader' },
+      {
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style","css")
+      },
       {
         test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         exclude: /(node_modules|bower_components)/,
