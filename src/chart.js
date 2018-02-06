@@ -1,87 +1,19 @@
 
 import * as d3 from 'd3';
-import { Graph } from '@dagrejs/graphlib';
 
-function graphlibToD3(graph) {
+// import createLayout from './layout';
+import createLayout from './daLayout';
 
-}
-
-function d3ToGraphlib(data) {
-  const g = new Graph();
-  data.nodes.forEach(n => {
-    g.setNode(n.id, n);
-  });
-
-  data.edges.forEach(e => {
-    g.setEdge(e.source.id, e.target.id, e);
-  });
-
-  return g;
-}
-
-function dist(a, b) { return Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2); }
-
-function gridify(data, width, height) {
-  console.log(data);
-  const gridWidth = width / 10;
-
-  const grid = {};
-  grid.cells = [];
-  grid.init = () => {
-    const cols = width / gridWidth;
-    const rows = height / gridWidth;
-    d3.range(cols).forEach(col => {
-      d3.range(rows).forEach(row => {
-
-        const cell = { x: col * gridWidth, y: row * gridWidth };
-        grid.cells.push(cell);
-
-      });
-    });
-  }
-
-
-  grid.occupy = (node) => {
-    let minDist = 100000;
-    let candidate = null;
-
-    grid.cells.forEach(c => {
-      if (!c.occupied) {
-        const d = dist(node, c);
-        if (d < minDist) {
-          minDist = d;
-          candidate = c;
-        }
-      }
-    });
-
-    if (candidate) {
-      candidate.occupied = true;
-    }
-
-    return candidate;
-  };
-
-  grid.init();
-  data.nodes.forEach(node => {
-    const cell = grid.occupy(node);
-    console.log(cell)
-    node.x = cell.x;
-    node.y = cell.y;
-  })
-  // const g = d3ToGraphlib(data)
-  // console.log(g)
-}
+import { data } from './fakeData';
 
 export default function createChart() {
-  const width = 500;
-  const height = 500;
+  const width = 800;
+  const height = 800;
   const margin = { top: 20, right: 20, bottom: 20, left: 20 };
   let g = null;
-  let data = { nodes: [{id: 'a'}, {id: 'b'}], edges: [{source: 'a', target: 'b'}] };
+  // let data = { nodes: [{id: 'a'}, {id: 'b'}], edges: [{source: 'a', target: 'b'}] };
   let edges = null;
   let nodes = null;
-  let simulation = null;
 
   const chart = function wrapper(selection, rawData) {
     console.log(rawData);
@@ -100,17 +32,54 @@ export default function createChart() {
 
     setup();
     update();
-    simulation.restart();
   };
 
   function setup() {
-    setupSimulation();
+    const layout = createLayout();
+
+    update();
+    layout.on('end', ended);
+    layout.on('tick', updatePos);
+    layout(data, width, height);
+  }
+
+  function ended() {
+    update();
   }
 
   function update() {
+    console.log(data)
     updateNodes();
     updateEdges();
     updatePos();
+  }
+
+  function mouseover(d) {
+    console.log(d)
+  }
+
+  function mouseout(d) {
+  }
+
+  function dragstarted(d) {
+    d.fx = d.x;
+    d.fy = d.y;
+  }
+
+  function dragged(d) {
+    console.log('dragged')
+    d.fx = d3.event.x;
+    d.fy = d3.event.y;
+    d.x = d3.event.x;
+    d.y = d3.event.y;
+
+    updatePos();
+  }
+
+  function dragended(d) {
+    // if (!d3.event.active) simulation.alphaTarget(0);
+    // d.fx = null;
+    // d.fy = null;
   }
 
   function updateNodes() {
@@ -120,7 +89,13 @@ export default function createChart() {
     const nodesE = nodes.enter().append('circle')
       .classed('node', true)
       .attr('cx', d => d.x)
-      .attr('cy', d => d.y);
+      .attr('cy', d => d.y)
+      .on('mouseover', mouseover)
+      .on('mouseout', mouseout)
+      .call(d3.drag()
+          .on('start', dragstarted)
+          .on('drag', dragged)
+          .on('end', dragended));
 
     nodes.exit().remove();
 
@@ -155,41 +130,6 @@ export default function createChart() {
       .attr('y1', d => d.source.y)
       .attr('x2', d => d.target.x)
       .attr('y2', d => d.target.y);
-  }
-
-  function setupSimulation() {
-    simulation = d3.forceSimulation()
-      .velocityDecay(0.2)
-      .alphaMin(0.1)
-      .on('end', ended);
-
-    simulation.stop();
-
-    simulation.nodes(data.nodes);
-
-    const linkForce = d3.forceLink()
-      .distance(100)
-      .strength(1)
-      .links(data.edges)
-      .id(n => n.id);
-
-    simulation.force('links', linkForce);
-    simulation.force('center', d3.forceCenter(width / 2, (height / 2) - 160));
-
-    // setup many body force to have nodes repel one another
-    // increasing the chargePower here to make nodes stand about
-    const chargePower = 1.0;
-    function charge(d) {
-      return -Math.pow(d.radius, 2.0) * chargePower;
-    }
-    simulation.force('charge', d3.forceManyBody().strength(charge).distanceMax(100));
-  }
-
-  function ended() {
-    gridify(data, width, height);
-    console.log(data)
-    updateNodes();
-    updatePos();
   }
 
   return chart;
