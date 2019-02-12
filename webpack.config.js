@@ -1,71 +1,53 @@
-var path = require('path');
-var webpack = require('webpack');
+const path = require('path');
 
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var plugins = [];
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-plugins.push(new ExtractTextPlugin("build/app.css"));
-
-var minimize = process.argv.indexOf('--minimize') === -1 ? false : true;
-
-if(minimize) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin());
-}
+const DIST_DIR = 'dist';
 
 module.exports = {
-  entry: {
-    javascript: './src/main.js'
+  entry: './src/index.js',
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
   },
   output: {
-    filename: 'build/app.js'
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, DIST_DIR),
   },
-  devtool: 'source-map',
-  // for modules
-  resolve: {
-    modules: [path.join(__dirname, 'node_modules')]
-  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Vis',
+      template: 'src/index.html',
+    }),
+    new CleanWebpackPlugin([DIST_DIR]),
+  ],
+
   module: {
     rules: [
       {
-        test: /\.js$/,
-        include: /src/,
-        use: ['babel-loader'],
+        test: /\.m?js$/,
+        exclude: /(node_modules|bower_components)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
       {
         test: /\.css$/,
-        // use: ExtractTextPlugin.extract("style","css")
-        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
+        use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [{
-            loader: "css-loader",
-            options: {
-              sourceMap: true,
-              modules: true,
-              importLoaders: 2,
-            }
-          }, {
-            loader: "sass-loader",
-            options: {
-              sourceMap: true,
-            }
-          }]
-        })
+        test: /\.(png|svg|jpg|gif)$/,
+        use: ['file-loader'],
       },
       {
-        test: /\.(ttf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/,
-        exclude: /(node_modules|bower_components)/,
-        loader: "file-loader?name=build/[name].[ext]"
-        // loader: 'file-loader'
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: ['file-loader'],
       },
-      {
-        test: /\.html$/,
-        loader: "file-loader?name=build/[name].[ext]"
-      }
-    ]
+    ],
   },
-  plugins: plugins
 };
